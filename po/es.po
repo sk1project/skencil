@@ -1,0 +1,2099 @@
+# Mensajes en español para sketch.
+# Copyright (C) 1999, 2000, 2001 Esteban Manchado Velázquez.
+# Esteban Manchado Velázquez <zoso@demiurgo.org>, 1999, 2000, 2001, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sketch 0.6.14pre1\n"
+"POT-Creation-Date: 2005-06-19 01:19+ZONE\n"
+"PO-Revision-Date: 2005-02-09 20:57+0100\n"
+"Last-Translator: Esteban Manchado Velázquez <zoso@demiurgo.org>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: ../Sketch/Base/load.py:286
+msgid "%(message)s (%(count)d times)"
+msgstr "%(message)s (%(count)d veces)"
+
+#: ../Sketch/Base/load.py:352
+msgid "unrecognised file type"
+msgstr "Tipo de fichero no reconocido"
+
+#: ../Sketch/Base/load.py:361
+msgid ""
+"Cannot open %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"No se puede abrir %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/Base/main.py:41
+msgid ""
+"Usage:\tskencil [options] [filename]\n"
+"\n"
+"skencil accepts these options:\n"
+"\n"
+"  -h --help\t\tPrint this help message\n"
+"  -d --display=DISPLAY\tUse DISPLAY a X Display\n"
+"  -g --geometry=WxH+X+Y\tThe geometry of the main window in standard X "
+"fashion\n"
+"  --run-script=script   Execute the file script after startup\n"
+"  --version\t\tPrint the version number to stdout\n"
+"\n"
+"for compatibility with other X software skencil also accepts geometry\n"
+"specifications in the standard X format:\n"
+"\n"
+"  -geometry WxH+X+Y\n"
+"\n"
+msgstr ""
+"Modo de uso:\tskencil [opciones] [ficheros]\n"
+"\n"
+"skencil acepta las siguientes opciones:\n"
+"\n"
+"  -h --help\t\tMuestra este mensaje de ayuda\n"
+"  -d --display=DISPLAY\tUsa DISPLAY como pantalla\n"
+"  -g --geometry=WxH+X+Y\tLa forma y el tamaño de la ventana según la forma "
+"convencional de X\n"
+"  --run-script=script   Ejecuta el programa script al inicializar\n"
+"  --version\t\tMuestra la versión del programa\n"
+"\n"
+"por compatibilidad con otros programas de X, skencil también entiende\n"
+"las especificaciones de geometría en el formato tradicional de X (note\n"
+"la diferencia en el único guión):\n"
+"\n"
+"  -geometry WxH+X+Y\n"
+"\n"
+
+#: ../Sketch/Base/plugins.py:85
+msgid "Cannot load plugin module %s"
+msgstr "No se pudo cargar el módulo extensor %s"
+
+#: ../Sketch/Base/plugins.py:203
+msgid "Cannot load filter %(name)s"
+msgstr "No se puede cargar el filtro %(name)"
+
+#: ../Sketch/Base/plugins.py:268
+msgid "Cannot load plugin %(name)s.%(attr)s"
+msgstr "No se pudo cargar el extensor %(name)s.%(attr)s"
+
+#: ../Sketch/Base/plugins.py:329
+msgid ""
+"Cannot list directory %(filename)s\n"
+"%(message)s"
+msgstr ""
+"No se puede mostrar el directorio %(filename)s\n"
+"%(message)s"
+
+#: ../Sketch/Base/plugins.py:355
+msgid "No plugin-type information in %(filename)s"
+msgstr "No hay información sobre ningún extensor en el fichero %(filename)s"
+
+#: ../Sketch/Base/plugins.py:364
+msgid "can't read configuration information from %(filename)s"
+msgstr "No se puede leer la información de configuración de %(filename)s"
+
+#: ../Sketch/Base/undo.py:207
+msgid "Undo %s"
+msgstr "Deshacer %s"
+
+#: ../Sketch/Base/undo.py:208 ../Sketch/UI/mainwindow.py:1260
+msgid "Undo"
+msgstr "Deshacer"
+
+#: ../Sketch/Base/undo.py:216
+msgid "Redo %s"
+msgstr "Rehacer %s"
+
+#: ../Sketch/Base/undo.py:217 ../Sketch/UI/mainwindow.py:1264
+msgid "Redo"
+msgstr "Rehacer"
+
+#: ../Sketch/Base/warn.py:63
+msgid "Warning"
+msgstr "Aviso"
+
+#: ../Sketch/Base/warn.py:79
+msgid "Print Traceback"
+msgstr "Mostrar traza"
+
+#: ../Script/create_star.py:115 ../Script/create_star_outline.py:54
+#: ../Script/export_raster.py:77 ../Script/simple_separation.py:173
+#: ../Sketch/Base/warn.py:81 ../Sketch/UI/colordlg.py:337
+#: ../Sketch/UI/gradientedit.py:306 ../Sketch/UI/layerdlg.py:376
+#: ../Sketch/UI/optiondlg.py:152 ../Sketch/UI/sketchdlg.py:400
+#: ../Sketch/UI/styledlg.py:160
+msgid "OK"
+msgstr "Aceptar"
+
+#: ../Sketch/Base/warn.py:87
+msgid "Traceback"
+msgstr "Traza"
+
+#: ../Sketch/Graphics/arrow.py:94
+msgid "%s is not an arrow definition file"
+msgstr "%s no es un fichero de definición de flechas"
+
+#: ../Sketch/Graphics/arrow.py:107
+msgid ""
+"Error trying to read arrows from %s\n"
+"Using builtin defaults"
+msgstr ""
+"Error tratando de leer las flechas de %s\n"
+"Se utilizarán las flechas predeterminadas"
+
+#: ../Sketch/Graphics/bezier.py:202
+msgid "PolyBezier (%(nodes)d nodes in %(paths)d paths)"
+msgstr "PoliBezier (%(nodes)d nodos en %(paths)d caminos)"
+
+#: ../Sketch/Graphics/bezier.py:279
+msgid "Create Curve"
+msgstr "Crear curva"
+
+#: ../Sketch/Graphics/bezier.py:352
+msgid "Create Poly-Line"
+msgstr "Crear Polilínea"
+
+#: ../Sketch/Graphics/bezier.py:479
+msgid "Select All Nodes"
+msgstr "Seleccionar todos los nodos"
+
+#: ../Sketch/Graphics/bezier.py:800
+msgid "%d nodes in PolyBezier"
+msgstr "%d nodos en la PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:809
+msgid "PolyBezier"
+msgstr "PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:811
+msgid "First node of PolyBezier"
+msgstr "Primer nodo de la PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:813
+msgid "Last node of PolyBezier"
+msgstr "Último nodo de la PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:815
+msgid "1 node of PolyBezier"
+msgstr "1 nodo de la PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:818
+msgid "Point on curve at position %.2f"
+msgstr "Punto de la curva en la posición %.2f"
+
+#: ../Sketch/Graphics/bezier.py:821
+msgid "No Node of PolyBezier"
+msgstr "Ningún nodo de la PoliBezier"
+
+#: ../Sketch/Graphics/bezier.py:872
+msgid "Cut Curve"
+msgstr "Cortar curva"
+
+#: ../Sketch/Graphics/bezier.py:958
+msgid "Close Nodes"
+msgstr "Cerrar nodos"
+
+#: ../Sketch/Graphics/bezier.py:969
+msgid "Angle"
+msgstr "Ángulo"
+
+#: ../Sketch/Graphics/bezier.py:971
+msgid "Smooth"
+msgstr "Suavizar"
+
+#: ../Sketch/Graphics/bezier.py:973
+msgid "Symmetrical"
+msgstr "Simétrico"
+
+#: ../Sketch/Graphics/bezier.py:990
+msgid "Curve->Line"
+msgstr "Curva->Línea"
+
+#: ../Sketch/Graphics/bezier.py:1007
+msgid "Line->Curve"
+msgstr "Línea->Curva"
+
+#: ../Sketch/Graphics/bezier.py:1030
+msgid "Delete Nodes"
+msgstr "Borrar nodos"
+
+#: ../Sketch/Graphics/bezier.py:1049
+msgid "Insert Nodes"
+msgstr "Insertar nodos"
+
+#: ../Sketch/Graphics/blendgroup.py:124
+msgid "Interpolation with %d steps"
+msgstr "Interpolación con %d pasos"
+
+#: ../Sketch/Graphics/blendgroup.py:346
+msgid "BlendGroup with %d control objects"
+msgstr "Grupo de mezcla con %d objetos de control"
+
+#: ../Sketch/Graphics/color.py:108
+msgid "I can't alloc all needed colors. I'll use a private colormap"
+msgstr ""
+"No se pueden reservar todos los colores necesarios. Se usará un mapa de "
+"color privado"
+
+#: ../Sketch/Graphics/compound.py:252
+msgid "Compound with %d objects"
+msgstr "Grupo con %d objetos"
+
+#: ../Sketch/Graphics/dashes.py:35
+msgid "%s is not dashes file"
+msgstr "%s no es un fichero de tipos de línea"
+
+#: ../Sketch/Graphics/dashes.py:38
+msgid ""
+"Error trying to read dashes from %s\n"
+"Using builtin defaults"
+msgstr ""
+"Error intentando leer los guiones de %s\n"
+"Se utilizarán los guiones predeterminados"
+
+#: ../Sketch/Graphics/document.py:82 ../Sketch/UI/guidedlg.py:39
+msgid "Guide Lines"
+msgstr "Líneas guía"
+
+#: ../Sketch/Graphics/document.py:86
+msgid "Layer 1"
+msgstr "Capa 1"
+
+#: ../Plugins/Filters/ailoader.py:814 ../Sketch/Graphics/document.py:113
+msgid "Layer %d"
+msgstr "Capa %d"
+
+#: ../Sketch/Graphics/document.py:510 ../Sketch/Scripting/wrapper.py:119
+msgid "Create Object"
+msgstr "Crear objeto"
+
+#: ../Sketch/Graphics/document.py:1272
+msgid "Add Style"
+msgstr "Añadir estilo"
+
+#: ../Sketch/Graphics/document.py:1283
+msgid "Set Properties"
+msgstr "Fijar propiedades"
+
+#: ../Sketch/Graphics/document.py:1313 ../Sketch/UI/guidedlg.py:91
+#: ../Sketch/UI/layerdlg.py:291 ../Sketch/UI/mainwindow.py:1169
+#: ../Sketch/UI/styledlg.py:62
+msgid "Delete"
+msgstr "Borrar"
+
+#: ../Sketch/Graphics/document.py:1349
+msgid "Move To Top"
+msgstr "Mover a la cima"
+
+#: ../Sketch/Graphics/document.py:1352
+msgid "Move To Bottom"
+msgstr "Mover al fondo"
+
+#: ../Sketch/Graphics/document.py:1355
+msgid "Lower"
+msgstr "Bajar"
+
+#: ../Sketch/Graphics/document.py:1358
+msgid "Raise"
+msgstr "Subir"
+
+#: ../Sketch/Graphics/document.py:1362
+msgid "Move Selection to `%s'"
+msgstr "Mover selección a `%s'"
+
+#: ../Sketch/Graphics/document.py:1415 ../Sketch/UI/mainwindow.py:1245
+msgid "Cut"
+msgstr "Cortar"
+
+#: ../Sketch/Graphics/document.py:1437 ../Sketch/UI/mainwindow.py:1184
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#: ../Sketch/Graphics/document.py:1471
+msgid "Create Group"
+msgstr "Crear grupo"
+
+#: ../Sketch/Graphics/document.py:1479 ../Sketch/UI/mainwindow.py:1192
+msgid "Ungroup"
+msgstr "Desagrupar"
+
+#: ../Sketch/Graphics/document.py:1500 ../Sketch/UI/mainwindow.py:1225
+msgid "Create Mask Group"
+msgstr "Crear máscara de grupo"
+
+#: ../Sketch/Graphics/document.py:1532
+msgid "Transform"
+msgstr "Transformar"
+
+#: ../Sketch/Graphics/document.py:1535
+msgid "Translate"
+msgstr "Traducir"
+
+#: ../Sketch/Graphics/document.py:1539 ../Sketch/UI/mainwindow.py:1223
+msgid "Remove Transformation"
+msgstr "Eliminar transformación"
+
+#: ../Sketch/Graphics/document.py:1551
+msgid "Align Objects"
+msgstr "Alinear objetos"
+
+#: ../Sketch/Graphics/document.py:1589 ../Sketch/UI/mainwindow.py:1209
+msgid "Abut Horizontal"
+msgstr "Lindar horizontalmente"
+
+#: ../Sketch/Graphics/document.py:1614 ../Sketch/UI/mainwindow.py:1210
+msgid "Abut Vertical"
+msgstr "Lindar verticalmente"
+
+#: ../Sketch/Graphics/document.py:1647 ../Sketch/UI/mainwindow.py:1212
+msgid "Flip Horizontal"
+msgstr "Reflejar horizontalmente"
+
+#: ../Sketch/Graphics/document.py:1654 ../Sketch/UI/mainwindow.py:1215
+msgid "Flip Vertical"
+msgstr "Reflejar verticalmente"
+
+#: ../Sketch/Graphics/document.py:1659
+msgid "Flip Both"
+msgstr "Reflejar ambos"
+
+#: ../Sketch/Graphics/document.py:1736 ../Sketch/UI/blenddlg.py:38
+msgid "Blend"
+msgstr "Mezclar"
+
+#: ../Sketch/Graphics/document.py:1745
+msgid "I can't blend the selected objects"
+msgstr "No puedo mezclar los objetos seleccionados"
+
+#: ../Sketch/Graphics/document.py:1769 ../Sketch/UI/mainwindow.py:1220
+msgid "Cancel Blend"
+msgstr "Cancelar mezcla"
+
+#: ../Sketch/Graphics/document.py:1797 ../Sketch/UI/mainwindow.py:1227
+msgid "Create Path Text"
+msgstr "Crear texto encaminado"
+
+#: ../Sketch/Graphics/document.py:1824 ../Sketch/UI/mainwindow.py:1229
+msgid "Create Clone"
+msgstr "Crear clon"
+
+#: ../Sketch/Graphics/document.py:1855 ../Sketch/UI/mainwindow.py:1200
+msgid "Combine Beziers"
+msgstr "Combinar Beziers"
+
+#: ../Sketch/Graphics/document.py:1876 ../Sketch/UI/mainwindow.py:1203
+msgid "Split Beziers"
+msgstr "Dividir Beziers"
+
+#: ../Sketch/Graphics/document.py:1898 ../Sketch/UI/mainwindow.py:1197
+msgid "Convert To Curve"
+msgstr "Convertir a curva"
+
+#: ../Sketch/Graphics/document.py:1979
+msgid "Select Layer"
+msgstr "Elija capa"
+
+#: ../Sketch/Graphics/document.py:1991
+msgid "Change Layer State"
+msgstr "Cambiar el estado de la capa"
+
+#: ../Sketch/Graphics/document.py:2009
+msgid "Set Layer Outline Color"
+msgstr "Elegir el color del contorno de la capa"
+
+#: ../Sketch/Graphics/document.py:2021
+msgid "Rename Layer"
+msgstr "Renombrar capa"
+
+#: ../Sketch/Graphics/document.py:2033
+msgid "Append Layer"
+msgstr "Añadir capa"
+
+#: ../Sketch/Graphics/document.py:2047 ../Sketch/Graphics/layer.py:40
+msgid "New Layer"
+msgstr "Nueva capa"
+
+#: ../Sketch/Graphics/document.py:2103
+msgid "Move Layer Up"
+msgstr "Mover capa hacia arriba"
+
+#: ../Sketch/Graphics/document.py:2114
+msgid "Move Layer Down"
+msgstr "Mover capa hacia abajo"
+
+#: ../Sketch/Graphics/document.py:2155
+msgid "Delete Layer"
+msgstr "Borrar capa"
+
+#: ../Sketch/Graphics/document.py:2218 ../Sketch/UI/mainwindow.py:1278
+msgid "Update Style"
+msgstr "Actualizar estilo"
+
+#: ../Sketch/Graphics/document.py:2257
+msgid "Create Style %s"
+msgstr "Crear estilo %s"
+
+#: ../Sketch/Graphics/document.py:2273
+msgid "Remove Style %s"
+msgstr "Borrar estilo %s"
+
+#: ../Sketch/Graphics/document.py:2327
+msgid "Change Page Layout"
+msgstr "Cambiar formato de página"
+
+#: ../Sketch/Graphics/document.py:2342
+msgid "Set Grid Geometry"
+msgstr "Fijar la geometría de la rejilla"
+
+#: ../Sketch/Graphics/document.py:2364
+msgid "Add Guide Line"
+msgstr "Añadir línea guía"
+
+#: ../Sketch/Graphics/document.py:2381
+msgid "Delete Guide Line"
+msgstr "Borrar línea guía"
+
+#: ../Sketch/Graphics/document.py:2395
+msgid "Move Guide Line"
+msgstr "Mover línea guía"
+
+#: ../Sketch/Graphics/ellipse.py:113
+msgid "Arc"
+msgstr "Arco"
+
+#: ../Sketch/Graphics/ellipse.py:114
+msgid "Chord"
+msgstr "Cuerda"
+
+#: ../Sketch/Graphics/ellipse.py:115
+msgid "Pie Slice"
+msgstr "Trozo de tarta"
+
+#: ../Sketch/Graphics/ellipse.py:265
+msgid "Circle radius %(radius)[length], center %(center)[position]"
+msgstr "Círculo de radio %(radious)[length] y centro %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:268
+msgid "Ellipse axes %(axes)[size], center %(center)[position]"
+msgstr "Elipse con ejes %(axes)[size] y centro %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:286
+msgid "Create Ellipse"
+msgstr "Crear elipse"
+
+#: ../Sketch/Graphics/ellipse.py:325
+msgid "Circle %(radius)[length], center %(center)[position]"
+msgstr "Círculo de radio %(radius)[length] y centro %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:328
+msgid "Ellipse %(size)[size], center %(center)[position]"
+msgstr "Elipse de tamaño %(size)[size] y centro %(center)[position]"
+
+#: ../Sketch/Graphics/eps.py:147
+msgid "EpsFile `%(filename)s' %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr "Fichero EPS `%(filename)s' %(width)d x %(height)d en (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/font.py:184
+msgid ""
+"I cannot find the metrics for the font %(ps_name)s.\n"
+"The file %(afm)s is not in the font_path.\n"
+"I'll use the metrics for %(fallback)s instead."
+msgstr ""
+"No se pueden encontrar las medidas para el tipo de letra %(ps_name)s.\n"
+"El fichero %(afm)s no está en font_path.\n"
+"Se utilizarán las medidas para la %(fallback)s."
+
+#: ../Sketch/Graphics/font.py:261
+msgid ""
+"Cannot list directory %s:%s\n"
+"ignoring it in font_path"
+msgstr ""
+"No se puede mostrar el directorio %s:%s\n"
+"Se ignorará en font_path"
+
+#: ../Sketch/Graphics/font.py:291
+msgid "Cannot load sfd file %(filename)s:%(message)s;ignoring it"
+msgstr "No se puede cargar el fichero sfd %(filename)s:%(message)s;se ignorará"
+
+#: ../Sketch/Graphics/font.py:417
+msgid "I can't find font %(fontname)s. I'll use %(fallback)s instead"
+msgstr ""
+"No se puede encontrar el tipo de letra %(fontname)s. Se usará %(fallback)s"
+
+#: ../Sketch/Graphics/graphics.py:822
+msgid ""
+"Cannot load %(font)s:\n"
+"%(text)s"
+msgstr ""
+"No se puede cargar %(font)s:\n"
+"%(text)s"
+
+#: ../Sketch/Graphics/graphics.py:997
+msgid "Can't create shared memory image: %s"
+msgstr "No se puede crear la imagen en memoria compartida: %s"
+
+#: ../Sketch/Graphics/group.py:29
+msgid "Group with %d objects"
+msgstr "Grupo con %d objetos"
+
+#: ../Sketch/Graphics/guide.py:90
+msgid "Horizontal Guide Line at %(coord)[length]"
+msgstr "Línea guía horizontal en %(coord)[length]"
+
+#: ../Sketch/Graphics/guide.py:93
+msgid "Vertical Guide Line at %(coord)[length]"
+msgstr "Línea guía vertical en %(coord)[length]"
+
+#: ../Sketch/Graphics/image.py:117
+msgid "Embedded Image %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr "Imagen embebida %(width)d x %(height)d en (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/image.py:121
+msgid "Linked Image `%(filename)s' %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr ""
+"Imagen enlazada `%(filename)s' %(width)d x %(height)d at (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/image.py:135
+msgid "Embed Image"
+msgstr "Imagen embebida"
+
+#: ../Sketch/Graphics/image.py:143
+msgid "Grayscale Image"
+msgstr "Imagen en escala de grises"
+
+#: ../Sketch/Graphics/image.py:145
+msgid "Invert Image"
+msgstr "Invertir imagen"
+
+#: ../Sketch/Graphics/layer.py:231
+msgid "Guides"
+msgstr "Guías"
+
+#: ../Plugins/Filters/skloader.py:139 ../Sketch/Graphics/layer.py:327
+#: ../Sketch/UI/canvas.py:1535 ../Sketch/UI/griddlg.py:34
+msgid "Grid"
+msgstr "Rejilla"
+
+#: ../Sketch/Graphics/maskgroup.py:74
+msgid "MaskGroup with %d objects"
+msgstr "Grupo máscara con %d objetos"
+
+#: ../Sketch/Graphics/maskgroup.py:162
+msgid "Select Mask"
+msgstr "Elegir máscara"
+
+#: ../Sketch/Graphics/plugobj.py:169
+msgid "Unknown Plugin Object `%s'"
+msgstr "Objeto extensor desconocido `%s'"
+
+#: ../Sketch/Graphics/properties.py:397
+msgid "Fill Pattern"
+msgstr "Patrón de relleno"
+
+#: ../Sketch/Graphics/properties.py:397
+msgid "Pattern"
+msgstr "Patrón"
+
+#: ../Sketch/Graphics/properties.py:399
+msgid "Fill Transform Pattern"
+msgstr "Patrón de transformación de relleno"
+
+#: ../Sketch/Graphics/properties.py:400
+msgid "Transform pattern"
+msgstr "Patrón de transformación"
+
+#: ../Sketch/Graphics/properties.py:401
+msgid "Line Pattern"
+msgstr "Patrón de línea"
+
+#: ../Sketch/Graphics/properties.py:403
+msgid "Line Width"
+msgstr "Ancho de línea"
+
+#: ../Sketch/Graphics/properties.py:403 ../Sketch/UI/layoutdlg.py:86
+#: ../Sketch/UI/linedlg.py:152
+msgid "Width"
+msgstr "Ancho"
+
+#: ../Sketch/Graphics/properties.py:405
+msgid "Line Cap"
+msgstr "Punta de flecha"
+
+#: ../Sketch/Graphics/properties.py:405
+msgid "Cap"
+msgstr "Punta"
+
+#: ../Sketch/Graphics/properties.py:407
+msgid "Line Join"
+msgstr "Unión de líneas"
+
+#: ../Sketch/Graphics/properties.py:407
+msgid "Join"
+msgstr "Unión"
+
+#: ../Sketch/Graphics/properties.py:409
+msgid "Line Dashes"
+msgstr "Guiones de linea"
+
+#: ../Sketch/Graphics/properties.py:409
+msgid "Dashes"
+msgstr "Guiones"
+
+#: ../Sketch/Graphics/properties.py:410
+msgid "Line Arrow 1"
+msgstr "Flecha de línea 1"
+
+#: ../Sketch/Graphics/properties.py:410
+msgid "Arrow 1"
+msgstr "Flecha 1"
+
+#: ../Sketch/Graphics/properties.py:412
+msgid "Line Arrow 2"
+msgstr "Flecha de línea 2"
+
+#: ../Sketch/Graphics/properties.py:412
+msgid "Arrow 2"
+msgstr "Flecha 2"
+
+#: ../Sketch/Graphics/properties.py:414
+msgid "Font"
+msgstr "Tipo de letra"
+
+#: ../Sketch/Graphics/properties.py:415
+msgid "Font Size"
+msgstr "Tamaño de letra"
+
+#: ../Plugins/Objects/lcdtext.py:31 ../Sketch/Graphics/properties.py:415
+msgid "Size"
+msgstr "Tamaño"
+
+#: ../Sketch/Graphics/psdevice.py:192
+msgid "Can't embed font '%s': %s"
+msgstr "No puedo incluir el tipo de letra '%s': %s"
+
+#: ../Sketch/Graphics/psdevice.py:199
+msgid "Can't find file for font '%s' for embedding"
+msgstr ""
+"No puedo encontrar el tipo de letra '%s' necesario para incluirla en el "
+"fichero PostScript"
+
+#: ../Sketch/Graphics/rectangle.py:185
+msgid "Rectangle %(size)[size]"
+msgstr "Rectángulo %(size)[size]"
+
+#: ../Sketch/Graphics/rectangle.py:204
+msgid "Create Rectangle"
+msgstr "Crear rectángulo"
+
+#: ../Sketch/Graphics/selection.py:471
+msgid "No Selection"
+msgstr "Selección nula"
+
+#: ../Sketch/Graphics/selection.py:483
+msgid "%s on `%%(layer)s'"
+msgstr "%s en `%%(layer)s'"
+
+#: ../Sketch/Graphics/selection.py:486
+msgid "%(object)s on `%(layer)s'"
+msgstr "%(object)s en `%(layer)s'"
+
+#: ../Sketch/Graphics/selection.py:493
+msgid "%(number)d objects on `%(layer)s'"
+msgstr "%(number)d objetos en `%(layer)s'"
+
+#: ../Sketch/Graphics/selection.py:496
+msgid "%d objects on several layers"
+msgstr "%d objetos en varias capas"
+
+#: ../Sketch/Graphics/selection.py:585
+msgid "Move Objects"
+msgstr "Mover objetos"
+
+#: ../Sketch/Graphics/selection.py:601
+msgid "Resize Objects"
+msgstr "Redimensionar objetos"
+
+#: ../Sketch/Graphics/selection.py:625
+msgid "Scale %(factorx)[factor], %(factory)[factor]"
+msgstr "Escala %(factorx)[factor], %(factory)[factor]"
+
+#: ../Sketch/Graphics/selection.py:629
+msgid "Move %(x)[length], %(y)[length]"
+msgstr "Mover %(x)[length], %(y)[length]"
+
+#: ../Sketch/Graphics/selection.py:827
+msgid "Shear Objects"
+msgstr "Afilar objetos"
+
+#: ../Sketch/Graphics/selection.py:829
+msgid "Rotate Objects"
+msgstr "Rotar objetos"
+
+#: ../Sketch/Graphics/selection.py:834
+msgid "Rotation Center at %(position)[position]"
+msgstr "Eje de rotación en %(position)[position]"
+
+#: ../Sketch/Graphics/selection.py:839
+msgid "Rotate by %(angle)[angle]"
+msgstr "Rotar %(angle)[angle] grados"
+
+#: ../Sketch/Graphics/selection.py:842
+msgid "Horizontal Shear by %(ratio)[factor]"
+msgstr "Afilar horizontalmente %(ratio)[factor]"
+
+#: ../Sketch/Graphics/selection.py:845
+msgid "Vertical Shear by %(ratio)[factor]"
+msgstr "Afilar verticalmente %(ratio)[factor]"
+
+#: ../Sketch/Graphics/selection.py:848
+msgid "Identity Transform"
+msgstr "Transformación identidad"
+
+#: ../Sketch/Graphics/selection.py:1014
+msgid "Edit Object"
+msgstr "Corregir objeto"
+
+#: ../Sketch/Graphics/text.py:318
+msgid "Align Left"
+msgstr "Alinear a la izquierda"
+
+#: ../Sketch/Graphics/text.py:320
+msgid "Align Right"
+msgstr "Alinear a la derecha"
+
+#: ../Sketch/Graphics/text.py:322
+msgid "Align H. Center"
+msgstr "Alinear al centro horizontal"
+
+#: ../Sketch/Graphics/text.py:324
+msgid "Align Top"
+msgstr "Alinear arriba"
+
+#: ../Sketch/Graphics/text.py:326
+msgid "Align V. Center"
+msgstr "Alinear al centro vertical"
+
+#: ../Sketch/Graphics/text.py:328
+msgid "Align Baseline"
+msgstr "Alinear a la linea base"
+
+#: ../Sketch/Graphics/text.py:330
+msgid "Align Bottom"
+msgstr "Alinear abajo"
+
+#: ../Sketch/Graphics/text.py:386
+msgid "Text `%(text)s' at %(position)[position]"
+msgstr "Texto `%(text)s' en %(position)[position]"
+
+#: ../Sketch/Graphics/text.py:450
+msgid "Create Text"
+msgstr "Crear texto"
+
+#: ../Sketch/Graphics/text.py:734
+msgid "Text on Path: `%(text)s'"
+msgstr "Texto encaminado: `%(text)s'"
+
+#: ../Sketch/Graphics/text.py:895
+msgid "Path Text: `%(text)s'"
+msgstr "Texto encaminado: `%(text)s'"
+
+#: ../Sketch/Graphics/text.py:905
+msgid "Select Text"
+msgstr "Seleccionar texto"
+
+#: ../Sketch/Graphics/text.py:909
+msgid "Select Path"
+msgstr "Seleccionar camino"
+
+#: ../Sketch/Graphics/text.py:916
+msgid "Rotate Letters"
+msgstr "Rotar letras"
+
+#: ../Sketch/Graphics/text.py:918
+msgid "Skew Letters"
+msgstr "Erguir letras"
+
+#: ../Sketch/UI/aligndlg.py:45
+msgid "Align"
+msgstr "Alinear"
+
+#: ../Sketch/UI/aligndlg.py:86 ../Sketch/UI/blenddlg.py:50
+#: ../Sketch/UI/layoutdlg.py:113 ../Sketch/UI/sketchdlg.py:208
+#: ../Sketch/UI/styledlg.py:56
+msgid "Apply"
+msgstr "Aplicar"
+
+#: ../Sketch/UI/aligndlg.py:97 ../Sketch/UI/blenddlg.py:56
+#: ../Sketch/UI/curvedlg.py:57 ../Sketch/UI/guidedlg.py:94
+#: ../Sketch/UI/layerdlg.py:182 ../Sketch/UI/layoutdlg.py:116
+#: ../Sketch/UI/printdlg.py:105 ../Sketch/UI/sketchdlg.py:212
+#: ../Sketch/UI/styledlg.py:53
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../Sketch/UI/aligndlg.py:104
+msgid "Relative To Selection"
+msgstr "Relativo a la selección"
+
+#: ../Sketch/UI/aligndlg.py:109
+msgid "Relative To Lowermost"
+msgstr "Relativo al más bajo"
+
+#: ../Sketch/UI/aligndlg.py:114
+msgid "Relative To Page"
+msgstr "Relativo a la página"
+
+#: ../Script/create_star.py:99 ../Sketch/UI/blenddlg.py:62
+msgid "Steps"
+msgstr "Pasos"
+
+#: ../Sketch/UI/blenddlg.py:74
+msgid "Select Start"
+msgstr "Principio de la selección"
+
+#: ../Sketch/UI/blenddlg.py:81
+msgid "Select End"
+msgstr "Fin de la selección"
+
+#: ../Sketch/UI/blenddlg.py:123
+msgid "Set %d Blend Steps"
+msgstr "Fijar %d pasos de mezcla"
+
+#: ../Sketch/UI/canvas.py:174
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../Sketch/UI/canvas.py:180 ../Sketch/UI/mainwindow.py:891
+msgid "Edit"
+msgstr "Corregir"
+
+#: ../Sketch/UI/canvas.py:186 ../Sketch/UI/mainwindow.py:691
+msgid "Create"
+msgstr "Crear"
+
+#: ../Sketch/UI/canvas.py:191
+msgid "Zoom Area"
+msgstr "Acerca área"
+
+#: ../Sketch/UI/canvas.py:195
+msgid "Pick Object"
+msgstr "Escoger objeto"
+
+#: ../Sketch/UI/canvas.py:200
+msgid "Place Object"
+msgstr "Situar objeto"
+
+#: ../Sketch/UI/canvas.py:740
+msgid "Draw Rectangle"
+msgstr "Dibujar rectángulo"
+
+#: ../Sketch/UI/canvas.py:744
+msgid "Draw Ellipse"
+msgstr "Dibujar elipse"
+
+#: ../Sketch/UI/canvas.py:748
+msgid "Draw Curve"
+msgstr "Dibujar curva"
+
+#: ../Sketch/UI/canvas.py:752
+msgid "Draw Poly-Line"
+msgstr "Dibujar Polilínea"
+
+#: ../Sketch/UI/canvas.py:756
+msgid "Draw Text"
+msgstr "Dibujar texto"
+
+#: ../Sketch/UI/canvas.py:914
+msgid "Selection Mode"
+msgstr "Modo de selección"
+
+#: ../Sketch/UI/canvas.py:999
+msgid "Edit Mode"
+msgstr "Modo de corrección"
+
+#: ../Sketch/UI/canvas.py:1295
+msgid "Toggle Mode"
+msgstr "Cambiar modo"
+
+#: ../Sketch/UI/canvas.py:1463
+msgid "Snap to Grid"
+msgstr "Ajustar a la rejilla"
+
+#: ../Sketch/UI/canvas.py:1477
+msgid "Snap to Objects"
+msgstr "Ajustar a los objetos"
+
+#: ../Sketch/UI/canvas.py:1492
+msgid "Snap to Guides"
+msgstr "Ajustar a las guías"
+
+#: ../Sketch/UI/canvas.py:1505
+msgid "Snap Bounding Rect"
+msgstr "Ajustar al rectángulo circunscrito"
+
+#: ../Sketch/UI/canvas.py:1518
+msgid "Snap Move Relative"
+msgstr "Ajustar movimiento relativo"
+
+#: ../Sketch/UI/canvas.py:1537
+msgid "Objects"
+msgstr "Objetos"
+
+#: ../Sketch/UI/canvas.py:1539
+msgid "Guide"
+msgstr "Guías"
+
+#: ../Sketch/UI/canvas.py:1541
+msgid "Snap: "
+msgstr "Ajustar: "
+
+#: ../Sketch/UI/canvas.py:1542
+msgid "No Snap"
+msgstr "No ajustar"
+
+#: ../Sketch/UI/canvas.py:1573
+msgid "Crosshairs"
+msgstr "Retículo"
+
+#: ../Sketch/UI/canvas.py:1726
+msgid "Redraw"
+msgstr "Redibujar"
+
+#: ../Sketch/UI/canvas.py:1751
+msgid "Zoom In"
+msgstr "Acercar"
+
+#: ../Sketch/UI/canvas.py:1753
+msgid "Zoom Out"
+msgstr "Alejar"
+
+#: ../Sketch/UI/canvas.py:1776
+msgid "Fit to Window"
+msgstr "Encajar en la ventana"
+
+#: ../Sketch/UI/canvas.py:1778
+msgid "Fit Selected to Window"
+msgstr "Encajar selección a la ventana"
+
+#: ../Sketch/UI/canvas.py:1789
+msgid "Fit Page to Window"
+msgstr "Encajar página a la ventana"
+
+#: ../Sketch/UI/canvas.py:1802
+msgid "Restore Previous View"
+msgstr "Restaurar vista anterior"
+
+#: ../Sketch/UI/canvas.py:1812
+msgid "Outline"
+msgstr "Contorno"
+
+#: ../Sketch/UI/canvas.py:1816
+msgid "Draw Page Outline"
+msgstr "Dibujar contorno de la página"
+
+#: ../Sketch/UI/canvas.py:1856
+msgid "Set Fill Color..."
+msgstr "Fijar color de relleno..."
+
+#: ../Sketch/UI/canvas.py:1872
+msgid "Set Fill Color"
+msgstr "Fijar color de relleno"
+
+#: ../Sketch/UI/canvas.py:1889
+msgid "Set Line Color"
+msgstr "Fijar color del manejador"
+
+#: ../Sketch/UI/colordlg.py:324
+msgid "Select Color"
+msgstr "Elegir color"
+
+#: ../Script/create_spiral.py:53 ../Script/create_star.py:119
+#: ../Script/create_star_outline.py:56 ../Script/export_raster.py:79
+#: ../Script/simple_separation.py:175 ../Sketch/UI/colordlg.py:339
+#: ../Sketch/UI/gradientedit.py:308 ../Sketch/UI/layerdlg.py:378
+#: ../Sketch/UI/mainwindow.py:265 ../Sketch/UI/optiondlg.py:154
+#: ../Sketch/UI/styledlg.py:162 ../Sketch/UI/tkext.py:717
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../Sketch/UI/curvedlg.py:31 ../Sketch/UI/mainwindow.py:893
+msgid "Curve"
+msgstr "Curva"
+
+#: ../Sketch/UI/filldlg.py:282 ../Sketch/UI/linedlg.py:138
+msgid "Color"
+msgstr "Color"
+
+#: ../Sketch/UI/filldlg.py:337
+msgid "Border"
+msgstr "Borde"
+
+#: ../Sketch/UI/filldlg.py:347 ../Sketch/UI/gradientedit.py:293
+msgid "Edit Gradient"
+msgstr "Corregir gradiente"
+
+#: ../Sketch/UI/filldlg.py:501
+msgid "Load Image..."
+msgstr "Cargar imagen..."
+
+#: ../Sketch/UI/filldlg.py:504
+msgid "Pick Image..."
+msgstr "Escoger imagen..."
+
+#: ../Sketch/UI/filldlg.py:529 ../Sketch/UI/mainwindow.py:1077
+msgid "Load Image"
+msgstr "Cargar imagen"
+
+#: ../Sketch/UI/filldlg.py:530 ../Sketch/UI/mainwindow.py:1111
+msgid ""
+"Cannot load %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"No se puede cargar %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/UI/filldlg.py:559
+msgid "Fill Style"
+msgstr "Estilo de relleno"
+
+#: ../Sketch/UI/filldlg.py:579
+msgid "Transform Pattern"
+msgstr "Patrón de transformación"
+
+#: ../Sketch/UI/filldlg.py:705
+msgid "Set Fill"
+msgstr "Fijar relleno"
+
+#: ../Sketch/UI/fontdlg.py:47
+msgid "Fonts"
+msgstr "Tipos de letra"
+
+#: ../Sketch/UI/fontdlg.py:75
+msgid "Font Family:"
+msgstr "Familia de letra:"
+
+#: ../Sketch/UI/fontdlg.py:86
+msgid "Font Style:"
+msgstr "Estilo de letra:"
+
+#: ../Sketch/UI/fontdlg.py:98
+msgid "Size:"
+msgstr "Tamaño:"
+
+#: ../Sketch/UI/fontdlg.py:161
+msgid "Set Font `%s'"
+msgstr "Fijar tipo de letra `%s'"
+
+#: ../Sketch/UI/fontdlg.py:233
+msgid "Set Font Size %.1f"
+msgstr "Fijar tamaño de letra %.1f"
+
+#: ../Sketch/UI/gradientedit.py:188
+msgid "Set Handle Color"
+msgstr "Fijar color del manejador"
+
+#: ../Sketch/UI/gradientedit.py:190
+msgid "Delete Handle"
+msgstr "Borrar manejador"
+
+#: ../Sketch/UI/gradientedit.py:192
+msgid "Insert Handle"
+msgstr "Insertar manejador"
+
+#: ../Sketch/UI/gradientedit.py:304
+msgid "Reverse"
+msgstr "Invertir"
+
+#: ../Sketch/UI/griddlg.py:51
+msgid "Origin:"
+msgstr "Origen:"
+
+#: ../Sketch/UI/griddlg.py:62
+msgid "Widths:"
+msgstr "Anchos:"
+
+#: ../Sketch/UI/guidedlg.py:85
+msgid "Add H"
+msgstr "Añadir H"
+
+#: ../Sketch/UI/guidedlg.py:88
+msgid "Add V"
+msgstr "Añadir V"
+
+#: ../Sketch/UI/guidedlg.py:119
+msgid "% 6.*f %s    horizontal"
+msgstr "% 6.*f %s    horizontal"
+
+#: ../Sketch/UI/guidedlg.py:121
+msgid "% 6.*f %s    vertical"
+msgstr "% 6.*f %s    vertical"
+
+#: ../Sketch/UI/guidedlg.py:145
+msgid "Y:"
+msgstr "Y:"
+
+#: ../Sketch/UI/guidedlg.py:147
+msgid "X:"
+msgstr "X:"
+
+#: ../Sketch/UI/layerdlg.py:161
+msgid "Layers"
+msgstr "Capas"
+
+#: ../Sketch/UI/layerdlg.py:287
+msgid "Rename"
+msgstr "Renombrar"
+
+#: ../Sketch/UI/layerdlg.py:289
+msgid "Lower Layer"
+msgstr "Bajar capa"
+
+#: ../Sketch/UI/layerdlg.py:290
+msgid "Raise Layer"
+msgstr "Subir capa"
+
+#: ../Sketch/UI/layerdlg.py:293
+msgid "Move Selection Here"
+msgstr "Mover la selección aquí"
+
+#: ../Sketch/UI/layerdlg.py:295
+msgid "Select All Children"
+msgstr "Seleccionar todos los hijos"
+
+#: ../Sketch/UI/layerdlg.py:297
+msgid "Deselect All Children"
+msgstr "Deseleccionar todos los hijos"
+
+#: ../Sketch/UI/layerdlg.py:365
+msgid "Name"
+msgstr "Nombre"
+
+#: ../Sketch/UI/layoutdlg.py:35
+msgid "Layout"
+msgstr "Formato"
+
+#: ../Sketch/UI/layoutdlg.py:49
+msgid "Paper format:"
+msgstr "Formato del papel:"
+
+#: ../Sketch/UI/layoutdlg.py:64
+msgid "Portrait"
+msgstr "Retrato"
+
+#: ../Sketch/UI/layoutdlg.py:69
+msgid "Landscape"
+msgstr "Apaisado"
+
+#: ../Sketch/UI/layoutdlg.py:84
+msgid "Page size:"
+msgstr "Tamaño de página:"
+
+#: ../Sketch/UI/layoutdlg.py:92
+msgid "Height"
+msgstr "Alto"
+
+#: ../Sketch/UI/linedlg.py:124
+msgid "Line Style"
+msgstr "Estilo de línea"
+
+#: ../Sketch/UI/linedlg.py:145
+msgid "None"
+msgstr "Ninguno"
+
+#: ../Sketch/UI/linedlg.py:238
+msgid "Set Outline"
+msgstr "Fijar contorno"
+
+#: ../Sketch/UI/mainwindow.py:120
+msgid "Save Document"
+msgstr "Guardar documento"
+
+#: ../Sketch/UI/mainwindow.py:122
+msgid ""
+"%s has been changed.\n"
+"Do you want to save it?"
+msgstr ""
+"%s ha cambiado.\n"
+"¿Quiere guardarlo?"
+
+#: ../Sketch/UI/mainwindow.py:160
+msgid "New"
+msgstr "Nuevo"
+
+#: ../Sketch/UI/mainwindow.py:162
+msgid "New Document"
+msgstr "Nuevo documento"
+
+#: ../Sketch/UI/mainwindow.py:166
+msgid "Open..."
+msgstr "Abrir..."
+
+#: ../Sketch/UI/mainwindow.py:178
+msgid "Open Document"
+msgstr "Abrir documento"
+
+#: ../Sketch/UI/mainwindow.py:201
+msgid "Open"
+msgstr "Abrir"
+
+#: ../Sketch/UI/mainwindow.py:202
+msgid "An error occurred:\n"
+msgstr "Error:\n"
+
+#: ../Sketch/UI/mainwindow.py:209
+msgid "Warnings from the import filter:\n"
+msgstr "Avisos del filtro importador:\n"
+
+#: ../Sketch/UI/mainwindow.py:214
+msgid "Save"
+msgstr "Guardar"
+
+#: ../Sketch/UI/mainwindow.py:216
+msgid "Save As..."
+msgstr "Guardar como..."
+
+#: ../Sketch/UI/mainwindow.py:260
+msgid ""
+"Cannot create backup file %(filename)s:\n"
+"%(message)s\n"
+"Choose `continue' to try saving anyway,\n"
+"or `cancel' to cancel."
+msgstr ""
+"No se puede crear una copia de seguridad en %(filename)s:\n"
+"%(message)s\n"
+"Elija `continuar' para intentar guardar de todas formas,\n"
+"o `Cancelar' para cancelar la operación."
+
+#: ../Sketch/UI/mainwindow.py:266
+msgid "Save To File"
+msgstr "Guardar a fichero"
+
+#: ../Sketch/UI/mainwindow.py:268
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../Sketch/UI/mainwindow.py:294
+msgid ""
+"Cannot save %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"No se puede guardar %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/UI/mainwindow.py:322
+msgid "Save as PostScript..."
+msgstr "Guardar como PostScript..."
+
+#: ../Sketch/UI/mainwindow.py:327
+msgid "Save As PostScript"
+msgstr "Guardar como PostScript"
+
+#: ../Sketch/UI/mainwindow.py:328 ../Sketch/UI/printdlg.py:147
+msgid "The document doesn't have any printable layers."
+msgstr "El documento no tiene capas imprimibles."
+
+#: ../Sketch/UI/mainwindow.py:382
+msgid "Insert Document..."
+msgstr "Insertar documento..."
+
+#: ../Sketch/UI/mainwindow.py:402
+msgid "Insert Document"
+msgstr "Insertar documento"
+
+#: ../Sketch/UI/mainwindow.py:418
+msgid "The document is empty"
+msgstr "El documento está vacío"
+
+#: ../Sketch/UI/mainwindow.py:421
+msgid "Load Palette..."
+msgstr "Cargar paleta..."
+
+#: ../Sketch/UI/mainwindow.py:437
+msgid "Load Palette"
+msgstr "Cargar paleta"
+
+#: ../Sketch/UI/mainwindow.py:438
+msgid "Cannot load palette %(filename)s"
+msgstr "No se puede cargar la paleta %(filename)"
+
+#: ../Sketch/UI/mainwindow.py:463
+msgid "Hide Dialogs"
+msgstr "Esconder diálogos"
+
+#: ../Sketch/UI/mainwindow.py:468
+msgid "Show Dialogs"
+msgstr "Mostrar diálogos"
+
+#: ../Sketch/UI/mainwindow.py:477
+msgid "Layers..."
+msgstr "Capas..."
+
+#: ../Sketch/UI/mainwindow.py:480
+msgid "Align..."
+msgstr "Alinear..."
+
+#: ../Sketch/UI/mainwindow.py:482
+msgid "Grid..."
+msgstr "Rejilla..."
+
+#: ../Sketch/UI/mainwindow.py:484
+msgid "Line..."
+msgstr "Línea..."
+
+#: ../Sketch/UI/mainwindow.py:487
+msgid "Fill..."
+msgstr "Relleno..."
+
+#: ../Sketch/UI/mainwindow.py:490
+msgid "Font..."
+msgstr "Tipo de letra..."
+
+#: ../Sketch/UI/mainwindow.py:492
+msgid "Styles..."
+msgstr "Estilos..."
+
+#: ../Sketch/UI/mainwindow.py:494
+msgid "Blend..."
+msgstr "Mezclar..."
+
+#: ../Sketch/UI/mainwindow.py:497
+msgid "Page Layout..."
+msgstr "Formato de página..."
+
+#: ../Sketch/UI/mainwindow.py:501
+msgid "Curve Commands..."
+msgstr "Órdenes de curva..."
+
+#: ../Sketch/UI/mainwindow.py:503
+msgid "Guide Lines..."
+msgstr "Líneas guía..."
+
+#: ../Sketch/UI/mainwindow.py:505
+msgid "Print..."
+msgstr "Imprimir..."
+
+#: ../Sketch/UI/mainwindow.py:509
+msgid "Reload Module..."
+msgstr "Recargar módulo..."
+
+#: ../Sketch/UI/mainwindow.py:521
+msgid "Options..."
+msgstr "Opciones..."
+
+#: ../Sketch/UI/mainwindow.py:564
+msgid "Error running script `%s'"
+msgstr "Error en el programa %s"
+
+#: ../Sketch/UI/mainwindow.py:567
+msgid "Exit"
+msgstr "Salir"
+
+#: ../Sketch/UI/mainwindow.py:773
+msgid "Zoom"
+msgstr "Nivel de acercamiento"
+
+#: ../Sketch/UI/mainwindow.py:890
+msgid "File"
+msgstr "Fichero"
+
+#: ../Sketch/UI/mainwindow.py:892
+msgid "Effects"
+msgstr "Efectos"
+
+#: ../Script/spread.py:44 ../Sketch/UI/mainwindow.py:894
+msgid "Arrange"
+msgstr "Distribuir"
+
+#: ../Sketch/UI/mainwindow.py:895
+msgid "Style"
+msgstr "Estilo"
+
+#: ../Sketch/UI/mainwindow.py:896
+msgid "View"
+msgstr "Vista"
+
+#: ../Sketch/UI/mainwindow.py:897
+msgid "Script"
+msgstr "Programas"
+
+#: ../Sketch/UI/mainwindow.py:898
+msgid "Windows"
+msgstr "Ventanas"
+
+#: ../Sketch/UI/mainwindow.py:900
+msgid "Special"
+msgstr "Especial"
+
+#: ../Sketch/UI/mainwindow.py:1002
+msgid "modified"
+msgstr "modificado"
+
+#: ../Sketch/UI/mainwindow.py:1003
+msgid "unmodified"
+msgstr "sin modificar"
+
+#: ../Sketch/UI/mainwindow.py:1006
+msgid "About..."
+msgstr "Acerca de..."
+
+#: ../Sketch/UI/mainwindow.py:1008
+msgid ""
+"Skencil (%(version)s)\n"
+"(c) 1996-2007 by Bernhard Herzog\n"
+"\n"
+"Versions:\n"
+"Python:\t%(py)s\tTcl:\t%(tcl)s\n"
+"Tkinter:\t%(tkinter)s\tTk:\t%(tk)s"
+msgstr ""
+"Skencil (%(version)s)\n"
+"(c) 1996-2007 de Bernhard Herzog\n"
+"\n"
+"Versiones:\n"
+"Python:\t%(py)s\tTcl:\t%(tcl)s\n"
+"Tkinter:\t%(tkinter)s\tTk:\t%(tk)s"
+
+#: ../Sketch/UI/mainwindow.py:1019
+msgid "About Skencil"
+msgstr "Acerca de Skencil"
+
+#: ../Sketch/UI/mainwindow.py:1088
+msgid "Load Raster/EPS Image..."
+msgstr "Cargar imagen de puntos/EPS..."
+
+#: ../Sketch/UI/mainwindow.py:1117
+msgid "Add Horizontal Guide Line"
+msgstr "Añadir línea guía horizontal"
+
+#: ../Sketch/UI/mainwindow.py:1119
+msgid "Add Vertical Guide Line"
+msgstr "Añadir línea guía vertical"
+
+#: ../Sketch/UI/mainwindow.py:1128
+msgid "Name Style..."
+msgstr "Nombrar estilo..."
+
+#: ../Sketch/UI/mainwindow.py:1145
+msgid "No Fill"
+msgstr "Sin relleno"
+
+#: ../Sketch/UI/mainwindow.py:1148
+msgid "No Line"
+msgstr "Sin línea"
+
+#: ../Sketch/UI/mainwindow.py:1158
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: ../Sketch/UI/mainwindow.py:1160
+msgid "Select Next"
+msgstr "Seleccionar siguiente"
+
+#: ../Sketch/UI/mainwindow.py:1161
+msgid "Select Previous"
+msgstr "Seleccionar anterior"
+
+#: ../Sketch/UI/mainwindow.py:1163
+msgid "Select First Child"
+msgstr "Seleccionar el primer hijo"
+
+#: ../Sketch/UI/mainwindow.py:1165
+msgid "Select Parent"
+msgstr "Seleccionar padre"
+
+#: ../Sketch/UI/mainwindow.py:1172
+msgid "Move to Top"
+msgstr "Mover a la cima"
+
+#: ../Sketch/UI/mainwindow.py:1175
+msgid "Move to Bottom"
+msgstr "Mover al fondo"
+
+#: ../Sketch/UI/mainwindow.py:1178
+msgid "Move One Up"
+msgstr "Mover uno arriba"
+
+#: ../Sketch/UI/mainwindow.py:1181
+msgid "Move One Down"
+msgstr "Mover uno abajo"
+
+#: ../Sketch/UI/mainwindow.py:1188
+msgid "Group"
+msgstr "Agrupar"
+
+#: ../Sketch/UI/mainwindow.py:1242
+msgid "Copy"
+msgstr "Copiar"
+
+#: ../Sketch/UI/mainwindow.py:1248
+msgid "Paste"
+msgstr "Pegar"
+
+#: ../Sketch/UI/mainwindow.py:1268
+msgid "Discard Undo History"
+msgstr "Borrar acciones de deshacer"
+
+#: ../Sketch/UI/optiondlg.py:40
+msgid "Global Options"
+msgstr "Opciones globales"
+
+#: ../Sketch/UI/optiondlg.py:63
+msgid "# Undo Levels:"
+msgstr "Nº de niveles de deshacer:"
+
+#: ../Sketch/UI/optiondlg.py:72
+msgid "unlimited"
+msgstr "ilimitado"
+
+#: ../Sketch/UI/optiondlg.py:100
+msgid "Duplication Offset"
+msgstr "Margen de duplicado"
+
+#: ../Sketch/UI/optiondlg.py:102
+msgid "Hor."
+msgstr "Hor."
+
+#: ../Sketch/UI/optiondlg.py:107
+msgid "Vert."
+msgstr "Vert."
+
+#: ../Sketch/UI/optiondlg.py:128
+msgid "Default Unit"
+msgstr "Unidad predeterminada"
+
+#: ../Sketch/UI/palette.py:122
+msgid "Could not load palette %s; trying mini.spl..."
+msgstr "No se pudo cargar la paleta %s; intentándolo con mini.spl..."
+
+#: ../Sketch/UI/palette.py:127
+msgid "Could not load palette mini.spl; reverting to black&white"
+msgstr "No se pudo cargar la paleta mini.spl; cambiando a blanco y negro"
+
+#: ../Sketch/UI/palette.py:137
+msgid "Skencil/Sketch Palette"
+msgstr "Paleta de Skencil/Sketch"
+
+#: ../Sketch/UI/palette.py:138 ../Sketch/UI/skapp.py:64
+msgid "All Files"
+msgstr "Todos los ficheros"
+
+#: ../Sketch/UI/plugindlg.py:223
+msgid "Set %s"
+msgstr "Fijar %s"
+
+#: ../Sketch/UI/plugindlg.py:239
+msgid "Set Parameters"
+msgstr "Fijar parámetros"
+
+#: ../Sketch/UI/printdlg.py:37
+msgid "Print"
+msgstr "Imprimir"
+
+#: ../Sketch/UI/printdlg.py:62
+msgid "Rotate ccw."
+msgstr "Rotar (sentido de las agujas del reloj)"
+
+#: ../Sketch/UI/printdlg.py:68
+msgid "Embed fonts"
+msgstr ""
+
+#: ../Sketch/UI/printdlg.py:77
+msgid "Printer"
+msgstr "Impresora"
+
+#: ../Sketch/UI/printdlg.py:80
+msgid "Command"
+msgstr "Orden"
+
+#: ../Sketch/UI/printdlg.py:87
+msgid "EPS"
+msgstr "EPS"
+
+#: ../Sketch/UI/printdlg.py:90
+msgid "Filename"
+msgstr "Nombre de fichero"
+
+#: ../Sketch/UI/printdlg.py:96
+msgid "..."
+msgstr "..."
+
+#: ../Sketch/UI/skapp.py:61
+msgid "Skencil/Sketch Document"
+msgstr "Documento de Skencil/Sketch"
+
+#: ../Sketch/UI/skapp.py:78
+msgid "Encapsulated PostScript"
+msgstr "PostScript encapsulado"
+
+#: ../Sketch/UI/skapp.py:79
+msgid "JPEG"
+msgstr "JPEG"
+
+#: ../Sketch/UI/skapp.py:80
+msgid "GIF"
+msgstr "GIF"
+
+#: ../Sketch/UI/skapp.py:81
+msgid "Portable Bitmap"
+msgstr "Mapa de bits portable"
+
+#: ../Script/export_raster.py:204 ../Sketch/UI/skapp.py:82
+msgid "Portable Graymap"
+msgstr "Mapa de grises portable"
+
+#: ../Script/export_raster.py:203 ../Sketch/UI/skapp.py:83
+msgid "Portable Pixmap"
+msgstr "Mapa de píxels portable"
+
+#: ../Sketch/UI/skapp.py:84
+msgid "TIFF"
+msgstr "TIFF"
+
+#: ../Sketch/UI/skapp.py:85
+msgid "Windows / OS/2 Bitmap"
+msgstr "Mapa de bits de Windows / OS/2"
+
+#: ../Sketch/UI/skapp.py:86
+msgid "PCX"
+msgstr "PCX"
+
+#: ../Sketch/UI/sketchdlg.py:256
+msgid "Auto Update"
+msgstr "Actualización automática"
+
+#: ../Sketch/UI/sketchdlg.py:261
+msgid "Update From..."
+msgstr "Actualizar desde..."
+
+#: ../Sketch/UI/styledlg.py:43
+msgid "Styles"
+msgstr "Estilos"
+
+#: ../Sketch/UI/styledlg.py:118
+msgid "Create Style"
+msgstr "Crear estilo"
+
+#: ../Sketch/UI/styledlg.py:171
+msgid "Please enter a style name."
+msgstr "Introduzca un nombre de estilo."
+
+#: ../Sketch/UI/styledlg.py:176
+msgid ""
+"The name `%(name)s' is already used.\n"
+"Please choose another one."
+msgstr ""
+"El nombre `%(name)s' ya se está utilizando.\n"
+"Escoja otro."
+
+#: ../Sketch/UI/styledlg.py:199
+msgid "Set Default Properties"
+msgstr "Fijar propiedades por omisión"
+
+#: ../Sketch/UI/styledlg.py:209
+msgid ""
+"Please select the object categories whose default properties you want to "
+"change"
+msgstr ""
+"Elija a qué clase(s) de objeto quiere cambiar las propiedades por omisión"
+
+#: ../Sketch/UI/styledlg.py:217
+msgid "Graphics Objects"
+msgstr "Objetos gráficos"
+
+#: ../Sketch/UI/styledlg.py:225
+msgid "Text Objects"
+msgstr "Objetos de texto"
+
+#: ../Sketch/UI/tkext.py:714
+msgid "Ok"
+msgstr "Aceptar"
+
+#: ../Sketch/UI/tkext.py:715
+msgid "Yes"
+msgstr "Sí"
+
+#: ../Sketch/UI/tkext.py:716
+msgid "No"
+msgstr "No"
+
+#: ../Plugins/Filters/ailoader.py:100 ../Plugins/Filters/aisaver.py:27
+msgid "Adobe Illustrator"
+msgstr "Adobe Illustrator"
+
+#: ../Plugins/Filters/ailoader.py:422
+msgid "Vector patterns not supported. Using black"
+msgstr "No se pueden usar patrones vectoriales. Se utilizará el negro"
+
+#: ../Plugins/Filters/ailoader.py:549
+msgid "Gradient ColorStyle %d not yet supported.substituted black"
+msgstr ""
+"Todavía no se puede utilizar el Estilo de Color de Gradiente %d, se "
+"sustituirá por el negro"
+
+#: ../Plugins/Filters/ailoader.py:555
+msgid "Unknown ColorStyle %d"
+msgstr "Estilo de Color desconocido (%d)"
+
+#: ../Plugins/Filters/ailoader.py:597
+msgid "less than two color stops in gradient"
+msgstr "hay menos de dos colores en el gradiente"
+
+#: ../Plugins/Filters/ailoader.py:673
+msgid "Unknown gradient type %d"
+msgstr "Tipo de gradiente desconocido (%d)"
+
+#: ../Plugins/Filters/ailoader.py:876
+msgid "Multiple Master fonts not supported. Using Times Roman"
+msgstr ""
+"No pueden utilizarse varios tipos de letra maestros (Multiple Master fonts). "
+"Se utilizará Times Roman"
+
+#: ../Plugins/Filters/ailoader.py:883
+msgid "Additional encoding ignored"
+msgstr "Codificación adicional ignorada"
+
+#: ../Plugins/Filters/ailoader.py:892
+msgid "Area text not supported"
+msgstr "No puede usarse el texto de área"
+
+#: ../Plugins/Filters/ailoader.py:971
+msgid "No font %s."
+msgstr "No se encuentra el tipo de letra %s."
+
+#: ../Plugins/Filters/ailoader.py:996
+msgid "Only images with 1 or 3 components and 8 bits/component supported"
+msgstr "Utilice sólo imágenes con 1 ó 3 componenetes y 8 bits/componente"
+
+#: ../Plugins/Filters/bziploader.py:27
+msgid "Bzipped Files"
+msgstr "Ficheros comprimidos con bzip"
+
+#: ../Plugins/Filters/cmxloader.py:393
+msgid "Color model %s not implemented. Using black"
+msgstr "El modelo de color %s no está implementado. Se usará el negro"
+
+#: ../Plugins/Filters/cmxloader.py:735
+msgid "Unknown unit specification %d, assuming inches"
+msgstr "No se conoce la unidad de medida %d. Se supondrán pulgadas"
+
+#: ../Plugins/Filters/cmxloader.py:773
+msgid "Invalid image specification"
+msgstr "Especificación de imagen inválida"
+
+#: ../Plugins/Filters/cmxloader.py:1131
+msgid "fill type 'monochrome-bitmap' not implemented, using solid black"
+msgstr ""
+"el tipo de relleno 'mapa de bits monocromo' no está implementado. Se usará "
+"el negro"
+
+#: ../Plugins/Filters/cmxloader.py:1160
+msgid "fill type 'texture' not implemented, using solid black"
+msgstr "el tipo de relleno 'textura' no está implementado. Se usará el negro"
+
+#: ../Plugins/Filters/cmxloader.py:1172
+msgid "fill type %d not implemented, using solid black"
+msgstr "El tipo de relleno %d no está implementado. Se usará el negro"
+
+#: ../Plugins/Filters/cmxloader.py:1369
+msgid "Lens specification ignored"
+msgstr "Especificación de lentes ignorada"
+
+#: ../Plugins/Filters/cmxloader.py:1374
+msgid "Canvas specification ignored"
+msgstr "Especificación de área de dibujo ignorada"
+
+#: ../Plugins/Filters/cmxloader.py:1405
+msgid "Texture fill not implemented, using solid black"
+msgstr "El relleno de textura no está implementado. Se usará el negro"
+
+#: ../Plugins/Filters/cmxloader.py:1478
+msgid "Substituting radial gradient for square gradient"
+msgstr "Se ha sustituido el gradiente radial por el cuadrado"
+
+#: ../Plugins/Filters/cmxloader.py:1497
+msgid "Image for twocolor fill is not 1 bit deep"
+msgstr ""
+"La imagen a rellenar con los colores no tiene un bit de profundidad de color"
+
+#: ../Plugins/Filters/cmxloader.py:1859
+msgid "Unexpected end of file"
+msgstr "Fin de fichero inesperado"
+
+#: ../Plugins/Filters/drawinput.py:48
+msgid "Drawfile"
+msgstr "Drawfile"
+
+#: ../Plugins/Filters/gziploader.py:27
+msgid "Gzipped Files"
+msgstr "Ficheros comprimidos con gzip"
+
+#: ../Plugins/Filters/skloader.py:87
+msgid ""
+"The file was created by a newer version of Skencil or Sketch, there might be "
+"inaccuracies."
+msgstr ""
+"El fichero se han creado con una versión de Skencil o Sketch más nueva, "
+"podría haber fallos u omisiones."
+
+#: ../Plugins/Filters/skloader.py:126
+msgid "Unknown paper format '%s', using A4 instead"
+msgstr "Formato de papel '%s' desconocido, se usará A4 en su lugar"
+
+#: ../Plugins/Filters/skloader.py:177
+msgid "No gradient for gradient pattern"
+msgstr "No hay gradiente para el patrón de gradiente"
+
+#: ../Plugins/Filters/skloader.py:266
+msgid "unnamed style"
+msgstr "Estilo sin nombre"
+
+#: ../Plugins/Filters/skloader.py:309
+msgid "Error reading line %s"
+msgstr "Error leyendo la línea %s"
+
+#: ../Plugins/Filters/skloader.py:436
+msgid "Unknown Plugin: %s"
+msgstr "Extensor desconocido: %s"
+
+#: ../Plugins/Filters/skloader.py:484
+msgid "Omitted some arguments for function %s"
+msgstr "Se han omitido ciertos argumentos en la función %s"
+
+#: ../Plugins/Filters/skloader.py:487
+msgid "Cannot call function %s"
+msgstr "No se puede llamar a la función %s"
+
+#: ../Plugins/Filters/skloader.py:496
+msgid "Unknown function %s"
+msgstr "Función desconocida: %s"
+
+#: ../Plugins/Filters/skloader.py:514
+msgid ""
+"error %s:%s in line %d:\n"
+"%s"
+msgstr ""
+"error %s:%s en la línea %d:\n"
+"%s"
+
+#: ../Plugins/Filters/wmfloader.py:213
+msgid "The file is not a placeable windows metafile"
+msgstr "El fichero no es un WMF posicionable"
+
+#: ../Plugins/Filters/wmfloader.py:331
+msgid "Bitmap brushes not yet implemented. Using black"
+msgstr "Las brochas de mapa de bits no están implementadas. Se usará el negro"
+
+#: ../Plugins/Filters/wmfloader.py:515
+msgid "WMF objects"
+msgstr "Objetos WMF"
+
+#: ../Plugins/Filters/xfigloader.py:28
+msgid "XFig"
+msgstr "XFig"
+
+#: ../Plugins/Filters/xfigloader.py:229
+msgid "PostScript font `%(ps)s' substituted for TeX-font `%(tex)s'"
+msgstr ""
+"Tipo de letra PostScript `%(ps)s' sustituido por tipo de letra TeX `%(tex)s'"
+
+#: ../Plugins/Filters/xfigloader.py:400
+msgid "X-Spline treated as PolyLine"
+msgstr "Spline-X tratado como Polilínea"
+
+#: ../Plugins/Filters/xfigloader.py:529
+msgid ""
+"error in line %d:\n"
+"%s"
+msgstr ""
+"error en la línea %d:\n"
+"%s"
+
+#: ../Plugins/Objects/lcdtext.py:29
+msgid "LCD Text"
+msgstr "Texto LCD"
+
+#: ../Plugins/Objects/lcdtext.py:30
+msgid "Text"
+msgstr "Texto"
+
+#: ../Plugins/Objects/lcdtext.py:148
+msgid "LCD Text: `%(text)s', size %(size)g"
+msgstr "Texto LCD: `%(text)s', tamaño %(size)g"
+
+# ../Plugins/Objects/multilinetext.py:24 :190
+#: ../Plugins/Objects/multilinetext.py:24
+msgid "Multiline Text"
+msgstr "Texto de párrafo"
+
+#: ../Plugins/Objects/multilinetext.py:267
+msgid "Set MultilineText Parameters"
+msgstr "Fijar parámetros de texto multilínea"
+
+#: ../Plugins/Objects/regpoly.py:29
+msgid "Regular Polygon"
+msgstr "Polígono regular"
+
+#: ../Plugins/Objects/regpoly.py:30
+msgid "Vertices"
+msgstr "Vértices"
+
+#: ../Plugins/Objects/regpoly.py:31 ../Script/create_spiral.py:46
+#: ../Script/create_star.py:106
+msgid "Radius"
+msgstr "Radio"
+
+#: ../Plugins/Objects/regpoly.py:81
+msgid "Regular Polygon: %(vertices)d vertices, radius %(radius)[length]"
+msgstr "Polígono regular: %(vertices)d vértices, radio %(radius)[length]"
+
+#: ../Script/create_spiral.py:34
+msgid "Create Spiral"
+msgstr "Crear espiral"
+
+#: ../Script/create_spiral.py:39
+msgid "Rotations"
+msgstr "Rotaciones"
+
+#: ../Script/create_spiral.py:91
+msgid "Spiral"
+msgstr "Espiral"
+
+#: ../Script/create_spiral.py:92 ../Script/create_star_outline.py:86
+msgid "Create Objects"
+msgstr "Crear objetos"
+
+#: ../Script/create_star.py:68 ../Script/create_star_outline.py:30
+msgid "Create Star"
+msgstr "Crear estrella"
+
+#: ../Script/create_star.py:92 ../Script/create_star_outline.py:35
+msgid "Corners"
+msgstr "Esquinas"
+
+#: ../Script/create_star_outline.py:42
+msgid "Outer Radius"
+msgstr "Radio exterior"
+
+#: ../Script/create_star_outline.py:49
+msgid "Inner Radius"
+msgstr "Radio interior"
+
+#: ../Script/create_star_outline.py:85
+msgid "Star Outline"
+msgstr "Contorno de estrella"
+
+#: ../Script/export_raster.py:52
+msgid "Choose Raster Parameters"
+msgstr "Fijar parámetros de imagen de puntos"
+
+#: ../Script/export_raster.py:57
+msgid "ppi"
+msgstr "ppp"
+
+#: ../Script/export_raster.py:64
+msgid "w. Transparency"
+msgstr "Con transparencia"
+
+#: ../Script/export_raster.py:71
+msgid "use BB information"
+msgstr "tener en cuenta la caja continente"
+
+#: ../Script/export_raster.py:205
+msgid "Jpeg"
+msgstr "Jpeg"
+
+#: ../Script/export_raster.py:206
+msgid "Portable Network Graphics"
+msgstr "Portable Network Graphics (PNG)"
+
+# ../Script/export_raster.py:220 :233 :239
+#: ../Script/export_raster.py:229
+msgid "Export Raster"
+msgstr "Exportar a imagen de puntos"
+
+#: ../Script/export_raster.py:241
+msgid "unknown extension %s"
+msgstr "Extensión desconocida: %s"
+
+#: ../Script/export_raster.py:255
+msgid "Export Raster Alpha (100ppi)"
+msgstr "Exportar a imagen de puntos con alfa (100ppi)"
+
+#: ../Script/reload_image.py:76
+msgid "Reload Image"
+msgstr "Recargar imagen"
+
+#: ../Script/simple_separation.py:52
+msgid ""
+"The drawing contains unsupported fill or line patterns. Only solid\n"
+"colors are supported.\n"
+msgstr ""
+"El dibujo contiene patrones de relleno o línea desconocidos. Sólo\n"
+"se entienden los colores sólidos.\n"
+
+#: ../Script/simple_separation.py:57
+msgid ""
+"The drawing contains raster images, which are not supported for separation\n"
+msgstr "El dibujo contiene imágenes de puntos, que no pueden separarse\n"
+
+#: ../Script/simple_separation.py:61
+msgid ""
+"The drawing contains embedded EPS files which are not supported for\n"
+"separation\n"
+msgstr "El dibujo contiene ficheros EPS embebidos, que no pueden separarse\n"
+
+#: ../Script/simple_separation.py:139
+msgid ""
+"The drawing has %d unique colors.\n"
+"Please choose a basename for the separation files.\n"
+"There will be one file for each color with a name of\n"
+"the form basename-XXXXXX.ps where XXXXXX is the\n"
+"hexadecimal color value.\n"
+msgstr ""
+"El dibujo tiene %d colores únicos.\n"
+"Escoja un nombre base para los ficheros de separación.\n"
+"Habrá un fichero con cada color con un nombre de la\n"
+"forma nombrebase-XXXXXX.ps, donde XXXXXX es el\n"
+"valor hexadecimal del color.\n"
+
+#: ../Script/simple_separation.py:166
+msgid "Basename:"
+msgstr "Raíz del nombre:"
+
+# ../Script/simple_separation.py:216 :268
+#: ../Script/simple_separation.py:216
+msgid "Simple Separation"
+msgstr "Separación simple"
+
+#: ../Script/spread.py:43
+msgid "Spread Horizontal (cascade left)"
+msgstr "Distribuir horizontalmente (en cascada por la izquierda)"
+
+#: ../Script/spread.py:65
+msgid "Spread Horizontal (cascade right)"
+msgstr "Distribuir horizontalmente (en cascada por la derecha)"
+
+#: ../Script/spread.py:88
+msgid "Spread Horizontal (center)"
+msgstr "Distribuir horizontalmente (centrados)"
+
+#: ../Script/spread.py:113
+msgid "Spread Horizontal (bbox)"
+msgstr "Distribuir horizontalmente (caja continente)"
+
+#: ../Script/spread.py:136
+msgid "Spread Vertical (cascade bottom)"
+msgstr "Distribuir verticalmente (en cascada por abajo)"
+
+#: ../Script/spread.py:159
+msgid "Spread Vertical (cascade top)"
+msgstr "Distribuir verticalmente (en cascada por arriba)"
+
+#: ../Script/spread.py:182
+msgid "Spread Vertical (center)"
+msgstr "Distribuir verticalmente (centrados)"
+
+#: ../Script/spread.py:208
+msgid "Spread Vertical (bbox)"
+msgstr "Distribuir verticalmente (caja continente)"

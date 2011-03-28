@@ -1,0 +1,2110 @@
+# Danish messages for sketch.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Keld Simonsen <keld@dkuug.dk>, 2002
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sketch 0.6.14pre1\n"
+"POT-Creation-Date: 2005-06-19 01:19+ZONE\n"
+"PO-Revision-Date: 2005-01-22 20:27+0100\n"
+"Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
+"Language-Team: Danish <dansk@klid.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../Sketch/Base/load.py:286
+msgid "%(message)s (%(count)d times)"
+msgstr "%(message)s (%(count)d gange)"
+
+#: ../Sketch/Base/load.py:352
+msgid "unrecognised file type"
+msgstr "ukendt filtype"
+
+#: ../Sketch/Base/load.py:361
+msgid ""
+"Cannot open %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"Kan ikke åbne %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/Base/main.py:41
+msgid ""
+"Usage:\tskencil [options] [filename]\n"
+"\n"
+"skencil accepts these options:\n"
+"\n"
+"  -h --help\t\tPrint this help message\n"
+"  -d --display=DISPLAY\tUse DISPLAY a X Display\n"
+"  -g --geometry=WxH+X+Y\tThe geometry of the main window in standard X "
+"fashion\n"
+"  --run-script=script   Execute the file script after startup\n"
+"  --version\t\tPrint the version number to stdout\n"
+"\n"
+"for compatibility with other X software skencil also accepts geometry\n"
+"specifications in the standard X format:\n"
+"\n"
+"  -geometry WxH+X+Y\n"
+"\n"
+msgstr ""
+"Brug:\tskencil [flag] [filnavn]\n"
+"\n"
+"skencil accepterer disse flag:\n"
+"\n"
+"  -h --help\t\tVis denne hjælpemeddelelse\n"
+"  -d --display=DISPLAY\tBrug DISPLAY som X-display\n"
+"  -g --geometry=BxH+X+Y\tGeometrien for hovedvinduet på standardform for X\n"
+"  --run-script=skript   Kør filskriptet efter opstart\n"
+"  --version\t\tUdskriv versionsnumret på standard ud\n"
+"\n"
+"for kompatibilitet med andet X-programmel accepterer skencil også\n"
+"geometrispecifikationer i standardformatet for X:\n"
+"\n"
+"  -geometry BxH+X+Y\n"
+"\n"
+
+#: ../Sketch/Base/plugins.py:85
+msgid "Cannot load plugin module %s"
+msgstr "Kan ikke indlæse indstiksmodulet %s"
+
+#: ../Sketch/Base/plugins.py:203
+msgid "Cannot load filter %(name)s"
+msgstr "Kan ikke indlæse filter %(name)s"
+
+#: ../Sketch/Base/plugins.py:268
+msgid "Cannot load plugin %(name)s.%(attr)s"
+msgstr "Kan ikke indlæse indstiksmodulet %(name)s.%(attr)s"
+
+#: ../Sketch/Base/plugins.py:329
+msgid ""
+"Cannot list directory %(filename)s\n"
+"%(message)s"
+msgstr ""
+"Kan ikke liste kataloget %(filename)s\n"
+"%(message)s"
+
+#: ../Sketch/Base/plugins.py:355
+msgid "No plugin-type information in %(filename)s"
+msgstr "Ingen information om indstiksmodultype i %(filename)s"
+
+#: ../Sketch/Base/plugins.py:364
+msgid "can't read configuration information from %(filename)s"
+msgstr "kan ikke læse konfigurationsinformation fra %(filename)s"
+
+#: ../Sketch/Base/undo.py:207
+msgid "Undo %s"
+msgstr "Fortryd %s"
+
+# src/menus.c:302
+#: ../Sketch/Base/undo.py:208 ../Sketch/UI/mainwindow.py:1260
+msgid "Undo"
+msgstr "Fortryd"
+
+#: ../Sketch/Base/undo.py:216
+msgid "Redo %s"
+msgstr "Lav %s igen"
+
+# src/menus.c:306
+#: ../Sketch/Base/undo.py:217 ../Sketch/UI/mainwindow.py:1264
+msgid "Redo"
+msgstr "Lav igen"
+
+#: ../Sketch/Base/warn.py:63
+msgid "Warning"
+msgstr "Advarsel"
+
+#: ../Sketch/Base/warn.py:79
+msgid "Print Traceback"
+msgstr "Udskriv sporing"
+
+#: ../Script/create_star.py:115 ../Script/create_star_outline.py:54
+#: ../Script/export_raster.py:77 ../Script/simple_separation.py:173
+#: ../Sketch/Base/warn.py:81 ../Sketch/UI/colordlg.py:337
+#: ../Sketch/UI/gradientedit.py:306 ../Sketch/UI/layerdlg.py:376
+#: ../Sketch/UI/optiondlg.py:152 ../Sketch/UI/sketchdlg.py:400
+#: ../Sketch/UI/styledlg.py:160
+msgid "OK"
+msgstr "OK"
+
+#: ../Sketch/Base/warn.py:87
+msgid "Traceback"
+msgstr "Sporing"
+
+#: ../Sketch/Graphics/arrow.py:94
+msgid "%s is not an arrow definition file"
+msgstr "%s er ikke en píl-definitionsfil"
+
+#: ../Sketch/Graphics/arrow.py:107
+msgid ""
+"Error trying to read arrows from %s\n"
+"Using builtin defaults"
+msgstr ""
+"Fejl ved forsøg på at læse pile fra %s\n"
+"Bruger indbyggede standardpile"
+
+#: ../Sketch/Graphics/bezier.py:202
+msgid "PolyBezier (%(nodes)d nodes in %(paths)d paths)"
+msgstr "PolyBezier (%(nodes)d noder i %(paths)d slynger)"
+
+#: ../Sketch/Graphics/bezier.py:279
+msgid "Create Curve"
+msgstr "Opret kurve"
+
+#: ../Sketch/Graphics/bezier.py:352
+msgid "Create Poly-Line"
+msgstr "Opret polylinje"
+
+#: ../Sketch/Graphics/bezier.py:479
+msgid "Select All Nodes"
+msgstr "Markér alle noder"
+
+#: ../Sketch/Graphics/bezier.py:800
+msgid "%d nodes in PolyBezier"
+msgstr "%d noder i PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:809
+msgid "PolyBezier"
+msgstr "PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:811
+msgid "First node of PolyBezier"
+msgstr "Første node i PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:813
+msgid "Last node of PolyBezier"
+msgstr "Sidste node i PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:815
+msgid "1 node of PolyBezier"
+msgstr "1 node i PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:818
+msgid "Point on curve at position %.2f"
+msgstr "Punkt på kurven ved position %.2f"
+
+#: ../Sketch/Graphics/bezier.py:821
+msgid "No Node of PolyBezier"
+msgstr "Ingen node i PolyBezier"
+
+#: ../Sketch/Graphics/bezier.py:872
+msgid "Cut Curve"
+msgstr "Klip kurve ud"
+
+#: ../Sketch/Graphics/bezier.py:958
+msgid "Close Nodes"
+msgstr "Luk noder"
+
+#: ../Sketch/Graphics/bezier.py:969
+msgid "Angle"
+msgstr "Vinkel"
+
+#: ../Sketch/Graphics/bezier.py:971
+msgid "Smooth"
+msgstr "Blød"
+
+#: ../Sketch/Graphics/bezier.py:973
+msgid "Symmetrical"
+msgstr "Symmetrisk"
+
+#: ../Sketch/Graphics/bezier.py:990
+msgid "Curve->Line"
+msgstr "Kurve->Linje"
+
+#: ../Sketch/Graphics/bezier.py:1007
+msgid "Line->Curve"
+msgstr "Linje->Kurve"
+
+#: ../Sketch/Graphics/bezier.py:1030
+msgid "Delete Nodes"
+msgstr "Fjern noder"
+
+#: ../Sketch/Graphics/bezier.py:1049
+msgid "Insert Nodes"
+msgstr "Indsæt noder"
+
+#: ../Sketch/Graphics/blendgroup.py:124
+msgid "Interpolation with %d steps"
+msgstr "Interpolation med %d trin"
+
+#: ../Sketch/Graphics/blendgroup.py:346
+msgid "BlendGroup with %d control objects"
+msgstr "BlendGroup med %d kontrolobjekter"
+
+#: ../Sketch/Graphics/color.py:108
+msgid "I can't alloc all needed colors. I'll use a private colormap"
+msgstr ""
+"Jeg kan ikke allokere alle farver som behøves. Jeg vil bruge et privat "
+"farvekort"
+
+#: ../Sketch/Graphics/compound.py:252
+msgid "Compound with %d objects"
+msgstr "Sammensætning med %d objekter"
+
+#: ../Sketch/Graphics/dashes.py:35
+msgid "%s is not dashes file"
+msgstr "%s er ingen stregfil"
+
+#: ../Sketch/Graphics/dashes.py:38
+msgid ""
+"Error trying to read dashes from %s\n"
+"Using builtin defaults"
+msgstr ""
+"Fejl ved forsøg på at læse streg fra %s\n"
+"Bruger indbyggede standardstreger"
+
+#: ../Sketch/Graphics/document.py:82 ../Sketch/UI/guidedlg.py:39
+msgid "Guide Lines"
+msgstr "Trådlinjer"
+
+#: ../Sketch/Graphics/document.py:86
+msgid "Layer 1"
+msgstr "Lag 1"
+
+#: ../Plugins/Filters/ailoader.py:814 ../Sketch/Graphics/document.py:113
+msgid "Layer %d"
+msgstr "Lag %d"
+
+#: ../Sketch/Graphics/document.py:510 ../Sketch/Scripting/wrapper.py:119
+msgid "Create Object"
+msgstr "Opret objekt"
+
+#: ../Sketch/Graphics/document.py:1272
+msgid "Add Style"
+msgstr "Tilføj stíl"
+
+#: ../Sketch/Graphics/document.py:1283
+msgid "Set Properties"
+msgstr "Sæt egenskaber"
+
+#: ../Sketch/Graphics/document.py:1313 ../Sketch/UI/guidedlg.py:91
+#: ../Sketch/UI/layerdlg.py:291 ../Sketch/UI/mainwindow.py:1169
+#: ../Sketch/UI/styledlg.py:62
+msgid "Delete"
+msgstr "Fjern"
+
+#: ../Sketch/Graphics/document.py:1349
+msgid "Move To Top"
+msgstr "Flyt til toppen"
+
+#: ../Sketch/Graphics/document.py:1352
+msgid "Move To Bottom"
+msgstr "Flyt til bunden"
+
+#: ../Sketch/Graphics/document.py:1355
+msgid "Lower"
+msgstr "Sænk"
+
+#: ../Sketch/Graphics/document.py:1358
+msgid "Raise"
+msgstr "Løft"
+
+#: ../Sketch/Graphics/document.py:1362
+msgid "Move Selection to `%s'"
+msgstr "Flyt markeringen til \"%s\""
+
+#: ../Sketch/Graphics/document.py:1415 ../Sketch/UI/mainwindow.py:1245
+msgid "Cut"
+msgstr "Klip ud"
+
+#: ../Sketch/Graphics/document.py:1437 ../Sketch/UI/mainwindow.py:1184
+msgid "Duplicate"
+msgstr "Duplikér"
+
+#: ../Sketch/Graphics/document.py:1471
+msgid "Create Group"
+msgstr "Opret gruppe"
+
+#: ../Sketch/Graphics/document.py:1479 ../Sketch/UI/mainwindow.py:1192
+msgid "Ungroup"
+msgstr "Afgruppér"
+
+#: ../Sketch/Graphics/document.py:1500 ../Sketch/UI/mainwindow.py:1225
+msgid "Create Mask Group"
+msgstr "Opret maskegruppe"
+
+#: ../Sketch/Graphics/document.py:1532
+msgid "Transform"
+msgstr "Forvandl"
+
+#: ../Sketch/Graphics/document.py:1535
+msgid "Translate"
+msgstr "Oversæt"
+
+#: ../Sketch/Graphics/document.py:1539 ../Sketch/UI/mainwindow.py:1223
+msgid "Remove Transformation"
+msgstr "Fjern transformering"
+
+#: ../Sketch/Graphics/document.py:1551
+msgid "Align Objects"
+msgstr "Justér objekt"
+
+#: ../Sketch/Graphics/document.py:1589 ../Sketch/UI/mainwindow.py:1209
+msgid "Abut Horizontal"
+msgstr "Vandret grænse"
+
+#: ../Sketch/Graphics/document.py:1614 ../Sketch/UI/mainwindow.py:1210
+msgid "Abut Vertical"
+msgstr "Lodret grænse"
+
+#: ../Sketch/Graphics/document.py:1647 ../Sketch/UI/mainwindow.py:1212
+msgid "Flip Horizontal"
+msgstr "Vend vandret"
+
+#: ../Sketch/Graphics/document.py:1654 ../Sketch/UI/mainwindow.py:1215
+msgid "Flip Vertical"
+msgstr "Vend lodret"
+
+#: ../Sketch/Graphics/document.py:1659
+msgid "Flip Both"
+msgstr "Vend begge veje"
+
+#: ../Sketch/Graphics/document.py:1736 ../Sketch/UI/blenddlg.py:38
+msgid "Blend"
+msgstr "Farvetoning"
+
+#: ../Sketch/Graphics/document.py:1745
+msgid "I can't blend the selected objects"
+msgstr "Jeg kan ikke farvetone de markerede objekter"
+
+#: ../Sketch/Graphics/document.py:1769 ../Sketch/UI/mainwindow.py:1220
+msgid "Cancel Blend"
+msgstr "Afbryd farvetoning"
+
+#: ../Sketch/Graphics/document.py:1797 ../Sketch/UI/mainwindow.py:1227
+msgid "Create Path Text"
+msgstr "Opret slyngetekst"
+
+#: ../Sketch/Graphics/document.py:1824 ../Sketch/UI/mainwindow.py:1229
+msgid "Create Clone"
+msgstr "Opret klon"
+
+#: ../Sketch/Graphics/document.py:1855 ../Sketch/UI/mainwindow.py:1200
+msgid "Combine Beziers"
+msgstr "Kombinér Bezierkurver"
+
+#: ../Sketch/Graphics/document.py:1876 ../Sketch/UI/mainwindow.py:1203
+msgid "Split Beziers"
+msgstr "Opdel Bezierkurver"
+
+#: ../Sketch/Graphics/document.py:1898 ../Sketch/UI/mainwindow.py:1197
+msgid "Convert To Curve"
+msgstr "Konvertér til kurver"
+
+#: ../Sketch/Graphics/document.py:1979
+msgid "Select Layer"
+msgstr "Vælg lag"
+
+#: ../Sketch/Graphics/document.py:1991
+msgid "Change Layer State"
+msgstr "Ændr lagtilstand"
+
+#: ../Sketch/Graphics/document.py:2009
+msgid "Set Layer Outline Color"
+msgstr "Sæt lagrammefarve"
+
+#: ../Sketch/Graphics/document.py:2021
+msgid "Rename Layer"
+msgstr "Skift navn på lag"
+
+#: ../Sketch/Graphics/document.py:2033
+msgid "Append Layer"
+msgstr "Tilføj lag"
+
+#: ../Sketch/Graphics/document.py:2047 ../Sketch/Graphics/layer.py:40
+msgid "New Layer"
+msgstr "Nyt lag"
+
+#: ../Sketch/Graphics/document.py:2103
+msgid "Move Layer Up"
+msgstr "Flyt lag opad"
+
+#: ../Sketch/Graphics/document.py:2114
+msgid "Move Layer Down"
+msgstr "Flyt lag nedad"
+
+#: ../Sketch/Graphics/document.py:2155
+msgid "Delete Layer"
+msgstr "Fjern lag"
+
+#: ../Sketch/Graphics/document.py:2218 ../Sketch/UI/mainwindow.py:1278
+msgid "Update Style"
+msgstr "Opdatér stil"
+
+#: ../Sketch/Graphics/document.py:2257
+msgid "Create Style %s"
+msgstr "Opret stil %s"
+
+#: ../Sketch/Graphics/document.py:2273
+msgid "Remove Style %s"
+msgstr "Fjern stil %s"
+
+#: ../Sketch/Graphics/document.py:2327
+msgid "Change Page Layout"
+msgstr "Ændr sidelayout"
+
+#: ../Sketch/Graphics/document.py:2342
+msgid "Set Grid Geometry"
+msgstr "Sæt gittergeometri"
+
+#: ../Sketch/Graphics/document.py:2364
+msgid "Add Guide Line"
+msgstr "Tilføj guidelinje"
+
+#: ../Sketch/Graphics/document.py:2381
+msgid "Delete Guide Line"
+msgstr "Fjern guidelinje"
+
+#: ../Sketch/Graphics/document.py:2395
+msgid "Move Guide Line"
+msgstr "Flyt guidelinje"
+
+#: ../Sketch/Graphics/ellipse.py:113
+msgid "Arc"
+msgstr "Bue"
+
+#: ../Sketch/Graphics/ellipse.py:114
+msgid "Chord"
+msgstr "Korde"
+
+#: ../Sketch/Graphics/ellipse.py:115
+msgid "Pie Slice"
+msgstr "Lagkagestykke"
+
+#: ../Sketch/Graphics/ellipse.py:265
+msgid "Circle radius %(radius)[length], center %(center)[position]"
+msgstr "Cirkelradius %(radius)[length], centrum %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:268
+msgid "Ellipse axes %(axes)[size], center %(center)[position]"
+msgstr "Ellipseakser %(axes)[size], centrum %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:286
+msgid "Create Ellipse"
+msgstr "Opret ellipse"
+
+#: ../Sketch/Graphics/ellipse.py:325
+msgid "Circle %(radius)[length], center %(center)[position]"
+msgstr "Cirkel %(radius)[length], centrum %(center)[position]"
+
+#: ../Sketch/Graphics/ellipse.py:328
+msgid "Ellipse %(size)[size], center %(center)[position]"
+msgstr "Ellipse %(size)[size], centrum %(center)[position]"
+
+#: ../Sketch/Graphics/eps.py:147
+msgid "EpsFile `%(filename)s' %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr "EpsFil \"%(filename)s\" %(width)d × %(height)d ved (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/font.py:184
+msgid ""
+"I cannot find the metrics for the font %(ps_name)s.\n"
+"The file %(afm)s is not in the font_path.\n"
+"I'll use the metrics for %(fallback)s instead."
+msgstr ""
+"Jeg kan ikke finde metrikken for skrifttypen %(ps_name)s.\n"
+"Filen %(afm)s findes ikke i skrifttypesøgestien.\n"
+"Jeg vil bruge metrikken for %(fallback)s i stedet."
+
+#: ../Sketch/Graphics/font.py:261
+msgid ""
+"Cannot list directory %s:%s\n"
+"ignoring it in font_path"
+msgstr ""
+"Kan ikke liste kataloget %s:%s\n"
+"ignorerer den i skrifttypesøgesti"
+
+#: ../Sketch/Graphics/font.py:291
+msgid "Cannot load sfd file %(filename)s:%(message)s;ignoring it"
+msgstr "Kan ikke indlæse sfd-filen %(filename)s:%(message)s;ignorerer den"
+
+#: ../Sketch/Graphics/font.py:417
+msgid "I can't find font %(fontname)s. I'll use %(fallback)s instead"
+msgstr ""
+"Jeg kan ikke finde skrifttypen %(fontname)s. Jeg vil bruge %(fallback)s i "
+"stedet"
+
+#: ../Sketch/Graphics/graphics.py:822
+msgid ""
+"Cannot load %(font)s:\n"
+"%(text)s"
+msgstr ""
+"Kan ikke indlæse %(font)s:\n"
+"%(text)s"
+
+# src/utils.c:119
+#: ../Sketch/Graphics/graphics.py:997
+msgid "Can't create shared memory image: %s"
+msgstr "Kan ikke oprette delt hukommelsesbilled:e %s"
+
+#: ../Sketch/Graphics/group.py:29
+msgid "Group with %d objects"
+msgstr "Gruppe med %d objekter"
+
+#: ../Sketch/Graphics/guide.py:90
+msgid "Horizontal Guide Line at %(coord)[length]"
+msgstr "Vandret guidelinje ved %(coord)[length]"
+
+#: ../Sketch/Graphics/guide.py:93
+msgid "Vertical Guide Line at %(coord)[length]"
+msgstr "Lodret guidelinje ved %(coord)[length]"
+
+#: ../Sketch/Graphics/image.py:117
+msgid "Embedded Image %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr "Indbygget billede %(width)d × %(height)d ved (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/image.py:121
+msgid "Linked Image `%(filename)s' %(width)d x %(height)d at (%(x)d, %(y)d)"
+msgstr ""
+"Lænket billede \"%(filename)s\" %(width)d × %(height)d ved (%(x)d, %(y)d)"
+
+#: ../Sketch/Graphics/image.py:135
+msgid "Embed Image"
+msgstr "Indbyg billede"
+
+#: ../Sketch/Graphics/image.py:143
+msgid "Grayscale Image"
+msgstr "Lav billede til gråskala"
+
+#: ../Sketch/Graphics/image.py:145
+msgid "Invert Image"
+msgstr "Invertér billede"
+
+#: ../Sketch/Graphics/layer.py:231
+msgid "Guides"
+msgstr "Hjælpelinjer"
+
+#: ../Plugins/Filters/skloader.py:139 ../Sketch/Graphics/layer.py:327
+#: ../Sketch/UI/canvas.py:1535 ../Sketch/UI/griddlg.py:34
+msgid "Grid"
+msgstr "Gitter"
+
+#: ../Sketch/Graphics/maskgroup.py:74
+msgid "MaskGroup with %d objects"
+msgstr "Maskegruppe med %d objekter"
+
+#: ../Sketch/Graphics/maskgroup.py:162
+msgid "Select Mask"
+msgstr "Vælg maske"
+
+#: ../Sketch/Graphics/plugobj.py:169
+msgid "Unknown Plugin Object `%s'"
+msgstr "Ukendt indstiksmodulobjekt \"s\""
+
+#: ../Sketch/Graphics/properties.py:397
+msgid "Fill Pattern"
+msgstr "Fyldningsmønster"
+
+#: ../Sketch/Graphics/properties.py:397
+msgid "Pattern"
+msgstr "Mønster"
+
+#: ../Sketch/Graphics/properties.py:399
+msgid "Fill Transform Pattern"
+msgstr "Fyldningstransformeringsmønster"
+
+#: ../Sketch/Graphics/properties.py:400
+msgid "Transform pattern"
+msgstr "Transformeringsmønster"
+
+#: ../Sketch/Graphics/properties.py:401
+msgid "Line Pattern"
+msgstr "Linjemønster"
+
+#: ../Sketch/Graphics/properties.py:403
+msgid "Line Width"
+msgstr "Linjebredde"
+
+#: ../Sketch/Graphics/properties.py:403 ../Sketch/UI/layoutdlg.py:86
+#: ../Sketch/UI/linedlg.py:152
+msgid "Width"
+msgstr "Bredde"
+
+#: ../Sketch/Graphics/properties.py:405
+msgid "Line Cap"
+msgstr "Linjetag"
+
+#: ../Sketch/Graphics/properties.py:405
+msgid "Cap"
+msgstr "Tag"
+
+#: ../Sketch/Graphics/properties.py:407
+msgid "Line Join"
+msgstr "Linjesammenføjning"
+
+#: ../Sketch/Graphics/properties.py:407
+msgid "Join"
+msgstr "Sammenføj"
+
+#: ../Sketch/Graphics/properties.py:409
+msgid "Line Dashes"
+msgstr "Linjestreger"
+
+#: ../Sketch/Graphics/properties.py:409
+msgid "Dashes"
+msgstr "Streger"
+
+#: ../Sketch/Graphics/properties.py:410
+msgid "Line Arrow 1"
+msgstr "Linje-pil 1"
+
+#: ../Sketch/Graphics/properties.py:410
+msgid "Arrow 1"
+msgstr "Pil 1"
+
+#: ../Sketch/Graphics/properties.py:412
+msgid "Line Arrow 2"
+msgstr "Linje-pil 2"
+
+#: ../Sketch/Graphics/properties.py:412
+msgid "Arrow 2"
+msgstr "Pil 2"
+
+#: ../Sketch/Graphics/properties.py:414
+msgid "Font"
+msgstr "Skrifttype"
+
+#: ../Sketch/Graphics/properties.py:415
+msgid "Font Size"
+msgstr "Skrifttypestørrelse"
+
+#: ../Plugins/Objects/lcdtext.py:31 ../Sketch/Graphics/properties.py:415
+msgid "Size"
+msgstr "Størrelse"
+
+#: ../Sketch/Graphics/psdevice.py:192
+msgid "Can't embed font '%s': %s"
+msgstr "Kan ikke indlejre skrifttypen \"%s\": %s"
+
+#: ../Sketch/Graphics/psdevice.py:199
+msgid "Can't find file for font '%s' for embedding"
+msgstr "Kan ikke finde filen for skrifttypen \"%s\" for indlejring"
+
+#: ../Sketch/Graphics/rectangle.py:185
+msgid "Rectangle %(size)[size]"
+msgstr "Rektangel %(size)[size]"
+
+#: ../Sketch/Graphics/rectangle.py:204
+msgid "Create Rectangle"
+msgstr "Opret rektangel"
+
+#: ../Sketch/Graphics/selection.py:471
+msgid "No Selection"
+msgstr "Ingen markering"
+
+#: ../Sketch/Graphics/selection.py:483
+msgid "%s on `%%(layer)s'"
+msgstr "%s på \"%%(layer)s\""
+
+#: ../Sketch/Graphics/selection.py:486
+msgid "%(object)s on `%(layer)s'"
+msgstr "%(object)s på \"%(layer)s\""
+
+#: ../Sketch/Graphics/selection.py:493
+msgid "%(number)d objects on `%(layer)s'"
+msgstr "%(number)d objekter på \"%(layer)s\""
+
+#: ../Sketch/Graphics/selection.py:496
+msgid "%d objects on several layers"
+msgstr "%d objekter på flere lag"
+
+#: ../Sketch/Graphics/selection.py:585
+msgid "Move Objects"
+msgstr "Flyt objekter"
+
+#: ../Sketch/Graphics/selection.py:601
+msgid "Resize Objects"
+msgstr "Ændr størrelse på objekter"
+
+#: ../Sketch/Graphics/selection.py:625
+msgid "Scale %(factorx)[factor], %(factory)[factor]"
+msgstr "Skalér %(factorx)[factor], %(factory)[factor]"
+
+#: ../Sketch/Graphics/selection.py:629
+msgid "Move %(x)[length], %(y)[length]"
+msgstr "Flyt %(x)[length], %(y)[length]"
+
+#: ../Sketch/Graphics/selection.py:827
+msgid "Shear Objects"
+msgstr "Skær i objekter"
+
+#: ../Sketch/Graphics/selection.py:829
+msgid "Rotate Objects"
+msgstr "Rotér objekt"
+
+#: ../Sketch/Graphics/selection.py:834
+msgid "Rotation Center at %(position)[position]"
+msgstr "Rotationscentrum ved %(position)[position]"
+
+#: ../Sketch/Graphics/selection.py:839
+msgid "Rotate by %(angle)[angle]"
+msgstr "Rotér med %(angle)[angle]"
+
+#: ../Sketch/Graphics/selection.py:842
+msgid "Horizontal Shear by %(ratio)[factor]"
+msgstr "Vandret skæring med %(ratio)[factor]"
+
+#: ../Sketch/Graphics/selection.py:845
+msgid "Vertical Shear by %(ratio)[factor]"
+msgstr "Lodret skæring med %(ratio)[factor]"
+
+#: ../Sketch/Graphics/selection.py:848
+msgid "Identity Transform"
+msgstr "Identitetstransformation"
+
+#: ../Sketch/Graphics/selection.py:1014
+msgid "Edit Object"
+msgstr "Redigér objekt"
+
+#: ../Sketch/Graphics/text.py:318
+msgid "Align Left"
+msgstr "Venstrejustér"
+
+#: ../Sketch/Graphics/text.py:320
+msgid "Align Right"
+msgstr "Højrejustér"
+
+#: ../Sketch/Graphics/text.py:322
+msgid "Align H. Center"
+msgstr "Centrér vandret"
+
+#: ../Sketch/Graphics/text.py:324
+msgid "Align Top"
+msgstr "Justér mod toppen"
+
+#: ../Sketch/Graphics/text.py:326
+msgid "Align V. Center"
+msgstr "Centrér lodret"
+
+#: ../Sketch/Graphics/text.py:328
+msgid "Align Baseline"
+msgstr "Justér mod baselinje"
+
+#: ../Sketch/Graphics/text.py:330
+msgid "Align Bottom"
+msgstr "Justér mod bunden"
+
+#: ../Sketch/Graphics/text.py:386
+msgid "Text `%(text)s' at %(position)[position]"
+msgstr "Tekst \"%(text)s\" ved %(position)[position]"
+
+#: ../Sketch/Graphics/text.py:450
+msgid "Create Text"
+msgstr "Opret tekst"
+
+#: ../Sketch/Graphics/text.py:734
+msgid "Text on Path: `%(text)s'"
+msgstr "Tekst på slynge: \"%(text)s\""
+
+#: ../Sketch/Graphics/text.py:895
+msgid "Path Text: `%(text)s'"
+msgstr "Slyngetekst: \"%(text)s\""
+
+#: ../Sketch/Graphics/text.py:905
+msgid "Select Text"
+msgstr "Markere tekst"
+
+#: ../Sketch/Graphics/text.py:909
+msgid "Select Path"
+msgstr "Markér slynge"
+
+#: ../Sketch/Graphics/text.py:916
+msgid "Rotate Letters"
+msgstr "Rotér bogstaver"
+
+#: ../Sketch/Graphics/text.py:918
+msgid "Skew Letters"
+msgstr "Hældning på bogstaver"
+
+#: ../Sketch/UI/aligndlg.py:45
+msgid "Align"
+msgstr "Justér"
+
+#: ../Sketch/UI/aligndlg.py:86 ../Sketch/UI/blenddlg.py:50
+#: ../Sketch/UI/layoutdlg.py:113 ../Sketch/UI/sketchdlg.py:208
+#: ../Sketch/UI/styledlg.py:56
+msgid "Apply"
+msgstr "Udfør"
+
+#: ../Sketch/UI/aligndlg.py:97 ../Sketch/UI/blenddlg.py:56
+#: ../Sketch/UI/curvedlg.py:57 ../Sketch/UI/guidedlg.py:94
+#: ../Sketch/UI/layerdlg.py:182 ../Sketch/UI/layoutdlg.py:116
+#: ../Sketch/UI/printdlg.py:105 ../Sketch/UI/sketchdlg.py:212
+#: ../Sketch/UI/styledlg.py:53
+msgid "Close"
+msgstr "Luk"
+
+#: ../Sketch/UI/aligndlg.py:104
+msgid "Relative To Selection"
+msgstr "Relativ til markering"
+
+#: ../Sketch/UI/aligndlg.py:109
+msgid "Relative To Lowermost"
+msgstr "Relativt til laveste"
+
+#: ../Sketch/UI/aligndlg.py:114
+msgid "Relative To Page"
+msgstr "Relativt til side"
+
+#: ../Script/create_star.py:99 ../Sketch/UI/blenddlg.py:62
+msgid "Steps"
+msgstr "Trin"
+
+#: ../Sketch/UI/blenddlg.py:74
+msgid "Select Start"
+msgstr "Vælg start"
+
+#: ../Sketch/UI/blenddlg.py:81
+msgid "Select End"
+msgstr "Vælg slut"
+
+#: ../Sketch/UI/blenddlg.py:123
+msgid "Set %d Blend Steps"
+msgstr "Sæt %d farvetoningstrin"
+
+#: ../Sketch/UI/canvas.py:174
+msgid "Select"
+msgstr "Markér"
+
+#: ../Sketch/UI/canvas.py:180 ../Sketch/UI/mainwindow.py:891
+msgid "Edit"
+msgstr "Redigér"
+
+#: ../Sketch/UI/canvas.py:186 ../Sketch/UI/mainwindow.py:691
+msgid "Create"
+msgstr "Opret"
+
+#: ../Sketch/UI/canvas.py:191
+msgid "Zoom Area"
+msgstr "Zoom område"
+
+#: ../Sketch/UI/canvas.py:195
+msgid "Pick Object"
+msgstr "Vælg objekt"
+
+#: ../Sketch/UI/canvas.py:200
+msgid "Place Object"
+msgstr "Placér objekt"
+
+#: ../Sketch/UI/canvas.py:740
+msgid "Draw Rectangle"
+msgstr "Tegn rektangel"
+
+#: ../Sketch/UI/canvas.py:744
+msgid "Draw Ellipse"
+msgstr "Tegn ellipse"
+
+#: ../Sketch/UI/canvas.py:748
+msgid "Draw Curve"
+msgstr "Tegn kurve"
+
+#: ../Sketch/UI/canvas.py:752
+msgid "Draw Poly-Line"
+msgstr "Tegn polylinje"
+
+#: ../Sketch/UI/canvas.py:756
+msgid "Draw Text"
+msgstr "Tegn tekst"
+
+#: ../Sketch/UI/canvas.py:914
+msgid "Selection Mode"
+msgstr "Markeringstilstand"
+
+#: ../Sketch/UI/canvas.py:999
+msgid "Edit Mode"
+msgstr "Redigeringstilstand"
+
+#: ../Sketch/UI/canvas.py:1295
+msgid "Toggle Mode"
+msgstr "Skift mellem tilstande"
+
+#: ../Sketch/UI/canvas.py:1463
+msgid "Snap to Grid"
+msgstr "Fæst ved gitter"
+
+#: ../Sketch/UI/canvas.py:1477
+msgid "Snap to Objects"
+msgstr "Fæst ved objekter"
+
+#: ../Sketch/UI/canvas.py:1492
+msgid "Snap to Guides"
+msgstr "Fæst ved hjælpelinjer"
+
+#: ../Sketch/UI/canvas.py:1505
+msgid "Snap Bounding Rect"
+msgstr "Fæst ved rammerektangel"
+
+# Øh?
+#: ../Sketch/UI/canvas.py:1518
+msgid "Snap Move Relative"
+msgstr "Flyt trinvis relativt"
+
+#: ../Sketch/UI/canvas.py:1537
+msgid "Objects"
+msgstr "Objekter"
+
+#: ../Sketch/UI/canvas.py:1539
+msgid "Guide"
+msgstr "Hjælpelinje"
+
+#: ../Sketch/UI/canvas.py:1541
+msgid "Snap: "
+msgstr "Fæst: "
+
+#: ../Sketch/UI/canvas.py:1542
+msgid "No Snap"
+msgstr "Intet fæstende"
+
+#: ../Sketch/UI/canvas.py:1573
+msgid "Crosshairs"
+msgstr "Krydshår"
+
+#: ../Sketch/UI/canvas.py:1726
+msgid "Redraw"
+msgstr "Tegn igen"
+
+#: ../Sketch/UI/canvas.py:1751
+msgid "Zoom In"
+msgstr "Zoom ind"
+
+#: ../Sketch/UI/canvas.py:1753
+msgid "Zoom Out"
+msgstr "Zoom ud"
+
+#: ../Sketch/UI/canvas.py:1776
+msgid "Fit to Window"
+msgstr "Tilpas til vinduet"
+
+#: ../Sketch/UI/canvas.py:1778
+msgid "Fit Selected to Window"
+msgstr "Tilpas markeret til vinduet"
+
+#: ../Sketch/UI/canvas.py:1789
+msgid "Fit Page to Window"
+msgstr "Tilpas siden til vinduet"
+
+#: ../Sketch/UI/canvas.py:1802
+msgid "Restore Previous View"
+msgstr "Genskab foregående visning"
+
+#: ../Sketch/UI/canvas.py:1812
+msgid "Outline"
+msgstr "Kontur"
+
+#: ../Sketch/UI/canvas.py:1816
+msgid "Draw Page Outline"
+msgstr "Tegn sidekontur"
+
+#: ../Sketch/UI/canvas.py:1856
+msgid "Set Fill Color..."
+msgstr "Sæt fyldningsfarve..."
+
+#: ../Sketch/UI/canvas.py:1872
+msgid "Set Fill Color"
+msgstr "Sæt fyldningsfarve"
+
+#: ../Sketch/UI/canvas.py:1889
+msgid "Set Line Color"
+msgstr "Sæt linjefarve"
+
+#: ../Sketch/UI/colordlg.py:324
+msgid "Select Color"
+msgstr "Vælg farve"
+
+#: ../Script/create_spiral.py:53 ../Script/create_star.py:119
+#: ../Script/create_star_outline.py:56 ../Script/export_raster.py:79
+#: ../Script/simple_separation.py:175 ../Sketch/UI/colordlg.py:339
+#: ../Sketch/UI/gradientedit.py:308 ../Sketch/UI/layerdlg.py:378
+#: ../Sketch/UI/mainwindow.py:265 ../Sketch/UI/optiondlg.py:154
+#: ../Sketch/UI/styledlg.py:162 ../Sketch/UI/tkext.py:717
+msgid "Cancel"
+msgstr "Afbryd"
+
+#: ../Sketch/UI/curvedlg.py:31 ../Sketch/UI/mainwindow.py:893
+msgid "Curve"
+msgstr "Kurve"
+
+#: ../Sketch/UI/filldlg.py:282 ../Sketch/UI/linedlg.py:138
+msgid "Color"
+msgstr "Farve"
+
+#: ../Sketch/UI/filldlg.py:337
+msgid "Border"
+msgstr "Kant"
+
+#: ../Sketch/UI/filldlg.py:347 ../Sketch/UI/gradientedit.py:293
+msgid "Edit Gradient"
+msgstr "Redigér farveskala"
+
+#: ../Sketch/UI/filldlg.py:501
+msgid "Load Image..."
+msgstr "Indlæs billede..."
+
+#: ../Sketch/UI/filldlg.py:504
+msgid "Pick Image..."
+msgstr "Vælg billede..."
+
+#: ../Sketch/UI/filldlg.py:529 ../Sketch/UI/mainwindow.py:1077
+msgid "Load Image"
+msgstr "Indlæs billede"
+
+#: ../Sketch/UI/filldlg.py:530 ../Sketch/UI/mainwindow.py:1111
+msgid ""
+"Cannot load %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"Kan ikke indlæse %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/UI/filldlg.py:559
+msgid "Fill Style"
+msgstr "Udfyldningsstil"
+
+#: ../Sketch/UI/filldlg.py:579
+msgid "Transform Pattern"
+msgstr "Transformér mønster"
+
+#: ../Sketch/UI/filldlg.py:705
+msgid "Set Fill"
+msgstr "Sæt fyldning"
+
+#: ../Sketch/UI/fontdlg.py:47
+msgid "Fonts"
+msgstr "Skrifttype"
+
+#: ../Sketch/UI/fontdlg.py:75
+msgid "Font Family:"
+msgstr "Skrifttypesfamilie:"
+
+#: ../Sketch/UI/fontdlg.py:86
+msgid "Font Style:"
+msgstr "Skrifttypesstil:"
+
+#: ../Sketch/UI/fontdlg.py:98
+msgid "Size:"
+msgstr "Størrelse:"
+
+#: ../Sketch/UI/fontdlg.py:161
+msgid "Set Font `%s'"
+msgstr "Sæt skrifttypen \"%s\""
+
+#: ../Sketch/UI/fontdlg.py:233
+msgid "Set Font Size %.1f"
+msgstr "Sæt skrifttypesstørrelsen %.1f"
+
+#: ../Sketch/UI/gradientedit.py:188
+msgid "Set Handle Color"
+msgstr "Sæt håndtagsfarve"
+
+#: ../Sketch/UI/gradientedit.py:190
+msgid "Delete Handle"
+msgstr "Fjern håndtag"
+
+#: ../Sketch/UI/gradientedit.py:192
+msgid "Insert Handle"
+msgstr "Indsætte håndtag"
+
+#: ../Sketch/UI/gradientedit.py:304
+msgid "Reverse"
+msgstr "Vend om"
+
+#: ../Sketch/UI/griddlg.py:51
+msgid "Origin:"
+msgstr "Oprindelse:"
+
+#: ../Sketch/UI/griddlg.py:62
+msgid "Widths:"
+msgstr "Bredder:"
+
+#: ../Sketch/UI/guidedlg.py:85
+msgid "Add H"
+msgstr "Tilføj H"
+
+#: ../Sketch/UI/guidedlg.py:88
+msgid "Add V"
+msgstr "Tilføj V"
+
+#: ../Sketch/UI/guidedlg.py:119
+msgid "% 6.*f %s    horizontal"
+msgstr "% 6.*f %s    vandret"
+
+#: ../Sketch/UI/guidedlg.py:121
+msgid "% 6.*f %s    vertical"
+msgstr "% 6.*f %s    lodret"
+
+#: ../Sketch/UI/guidedlg.py:145
+msgid "Y:"
+msgstr "Y:"
+
+#: ../Sketch/UI/guidedlg.py:147
+msgid "X:"
+msgstr "X:"
+
+#: ../Sketch/UI/layerdlg.py:161
+msgid "Layers"
+msgstr "Lag"
+
+#: ../Sketch/UI/layerdlg.py:287
+msgid "Rename"
+msgstr "Skift navn"
+
+#: ../Sketch/UI/layerdlg.py:289
+msgid "Lower Layer"
+msgstr "Sænk lag"
+
+#: ../Sketch/UI/layerdlg.py:290
+msgid "Raise Layer"
+msgstr "Løft lag"
+
+#: ../Sketch/UI/layerdlg.py:293
+msgid "Move Selection Here"
+msgstr "Flyt markering hertil"
+
+#: ../Sketch/UI/layerdlg.py:295
+msgid "Select All Children"
+msgstr "Markér alle børn"
+
+#: ../Sketch/UI/layerdlg.py:297
+msgid "Deselect All Children"
+msgstr "Afmarkér alle børn"
+
+#: ../Sketch/UI/layerdlg.py:365
+msgid "Name"
+msgstr "Navn"
+
+#: ../Sketch/UI/layoutdlg.py:35
+msgid "Layout"
+msgstr "Layout"
+
+#: ../Sketch/UI/layoutdlg.py:49
+msgid "Paper format:"
+msgstr "Papirformat:"
+
+#: ../Sketch/UI/layoutdlg.py:64
+msgid "Portrait"
+msgstr "Stående"
+
+#: ../Sketch/UI/layoutdlg.py:69
+msgid "Landscape"
+msgstr "Liggende"
+
+#: ../Sketch/UI/layoutdlg.py:84
+msgid "Page size:"
+msgstr "Sidestørrelse:"
+
+#: ../Sketch/UI/layoutdlg.py:92
+msgid "Height"
+msgstr "Højde"
+
+#: ../Sketch/UI/linedlg.py:124
+msgid "Line Style"
+msgstr "Linjestil"
+
+#: ../Sketch/UI/linedlg.py:145
+msgid "None"
+msgstr "Ingen"
+
+#: ../Sketch/UI/linedlg.py:238
+msgid "Set Outline"
+msgstr "Sæt kontur"
+
+#: ../Sketch/UI/mainwindow.py:120
+msgid "Save Document"
+msgstr "Gem dokument"
+
+#: ../Sketch/UI/mainwindow.py:122
+msgid ""
+"%s has been changed.\n"
+"Do you want to save it?"
+msgstr ""
+"%s er ændret.\n"
+"Vil du gemme den?"
+
+#: ../Sketch/UI/mainwindow.py:160
+msgid "New"
+msgstr "Nyt"
+
+#: ../Sketch/UI/mainwindow.py:162
+msgid "New Document"
+msgstr "Nyt dokument"
+
+#: ../Sketch/UI/mainwindow.py:166
+msgid "Open..."
+msgstr "Åbn..."
+
+#: ../Sketch/UI/mainwindow.py:178
+msgid "Open Document"
+msgstr "Åbn dokument"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:1 src/dialogs.c:732
+# src/menus.c:276
+#: ../Sketch/UI/mainwindow.py:201
+msgid "Open"
+msgstr "Åbn"
+
+#: ../Sketch/UI/mainwindow.py:202
+msgid "An error occurred:\n"
+msgstr "En fejl skete:\n"
+
+# ../Sketch/UI/mainwindow.py:209 :409
+#: ../Sketch/UI/mainwindow.py:209
+msgid "Warnings from the import filter:\n"
+msgstr "Advarsler fra importfiltret:\n"
+
+# src/menus.c:280
+#: ../Sketch/UI/mainwindow.py:214
+msgid "Save"
+msgstr "Gem"
+
+#: ../Sketch/UI/mainwindow.py:216
+msgid "Save As..."
+msgstr "Gem som..."
+
+#: ../Sketch/UI/mainwindow.py:260
+msgid ""
+"Cannot create backup file %(filename)s:\n"
+"%(message)s\n"
+"Choose `continue' to try saving anyway,\n"
+"or `cancel' to cancel."
+msgstr ""
+"Kan ikke oprette sikkerhedskopi %(filename)s:\n"
+"%(message)s\n"
+"Vælg \"Fortsæt\" for at gemme alligevel,\n"
+"eller \"Afbryd\" for at afbryde."
+
+#: ../Sketch/UI/mainwindow.py:266
+msgid "Save To File"
+msgstr "Gem i fil"
+
+#: ../Sketch/UI/mainwindow.py:268
+msgid "Continue"
+msgstr "Fortsæt"
+
+#: ../Sketch/UI/mainwindow.py:294
+msgid ""
+"Cannot save %(filename)s:\n"
+"%(message)s"
+msgstr ""
+"Kan ikke gemme %(filename)s:\n"
+"%(message)s"
+
+#: ../Sketch/UI/mainwindow.py:322
+msgid "Save as PostScript..."
+msgstr "Gem som PostScript..."
+
+#: ../Sketch/UI/mainwindow.py:327
+msgid "Save As PostScript"
+msgstr "Gem som PostScript"
+
+#: ../Sketch/UI/mainwindow.py:328 ../Sketch/UI/printdlg.py:147
+msgid "The document doesn't have any printable layers."
+msgstr "Dokumentet har ikke nogen udskrivbare lag."
+
+#: ../Sketch/UI/mainwindow.py:382
+msgid "Insert Document..."
+msgstr "Indsæt dokument..."
+
+#: ../Sketch/UI/mainwindow.py:402
+msgid "Insert Document"
+msgstr "Indsæt dokument"
+
+#: ../Sketch/UI/mainwindow.py:418
+msgid "The document is empty"
+msgstr "Dokumentet er tomt"
+
+#: ../Sketch/UI/mainwindow.py:421
+msgid "Load Palette..."
+msgstr "Indlæs palette..."
+
+#: ../Sketch/UI/mainwindow.py:437
+msgid "Load Palette"
+msgstr "Indlæs palette"
+
+#: ../Sketch/UI/mainwindow.py:438
+msgid "Cannot load palette %(filename)s"
+msgstr "Kan ikke indlæse paletten %(filename)s"
+
+#: ../Sketch/UI/mainwindow.py:463
+msgid "Hide Dialogs"
+msgstr "Skjul dialogvindue"
+
+#: ../Sketch/UI/mainwindow.py:468
+msgid "Show Dialogs"
+msgstr "Vis dialogvindue"
+
+#: ../Sketch/UI/mainwindow.py:477
+msgid "Layers..."
+msgstr "Lag..."
+
+#: ../Sketch/UI/mainwindow.py:480
+msgid "Align..."
+msgstr "Justér..."
+
+#: ../Sketch/UI/mainwindow.py:482
+msgid "Grid..."
+msgstr "Gitter..."
+
+#: ../Sketch/UI/mainwindow.py:484
+msgid "Line..."
+msgstr "Linje..."
+
+#: ../Sketch/UI/mainwindow.py:487
+msgid "Fill..."
+msgstr "Fyld..."
+
+#: ../Sketch/UI/mainwindow.py:490
+msgid "Font..."
+msgstr "Skrifttype..."
+
+#: ../Sketch/UI/mainwindow.py:492
+msgid "Styles..."
+msgstr "Stile..."
+
+#: ../Sketch/UI/mainwindow.py:494
+msgid "Blend..."
+msgstr "Farvetone..."
+
+#: ../Sketch/UI/mainwindow.py:497
+msgid "Page Layout..."
+msgstr "Sidelayout..."
+
+#: ../Sketch/UI/mainwindow.py:501
+msgid "Curve Commands..."
+msgstr "Kurvekommandoer..."
+
+#: ../Sketch/UI/mainwindow.py:503
+msgid "Guide Lines..."
+msgstr "Hjælpelinjer..."
+
+#: ../Sketch/UI/mainwindow.py:505
+msgid "Print..."
+msgstr "Udskriv..."
+
+#: ../Sketch/UI/mainwindow.py:509
+msgid "Reload Module..."
+msgstr "Genindlæs modul..."
+
+#: ../Sketch/UI/mainwindow.py:521
+msgid "Options..."
+msgstr "Alternativer..."
+
+#: ../Sketch/UI/mainwindow.py:564
+msgid "Error running script `%s'"
+msgstr "Fejl ved kørsel af skriptet \"%s\""
+
+# src/menus.c:315 src/menus.c:316
+#: ../Sketch/UI/mainwindow.py:567
+msgid "Exit"
+msgstr "Afslut"
+
+#: ../Sketch/UI/mainwindow.py:773
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../Sketch/UI/mainwindow.py:890
+msgid "File"
+msgstr "Arkiv"
+
+#: ../Sketch/UI/mainwindow.py:892
+msgid "Effects"
+msgstr "Effekter"
+
+#: ../Script/spread.py:44 ../Sketch/UI/mainwindow.py:894
+msgid "Arrange"
+msgstr "Arrangér"
+
+#: ../Sketch/UI/mainwindow.py:895
+msgid "Style"
+msgstr "Stil"
+
+#: ../Sketch/UI/mainwindow.py:896
+msgid "View"
+msgstr "Vis"
+
+#: ../Sketch/UI/mainwindow.py:897
+msgid "Script"
+msgstr "Skript"
+
+#: ../Sketch/UI/mainwindow.py:898
+msgid "Windows"
+msgstr "Vindue"
+
+#: ../Sketch/UI/mainwindow.py:900
+msgid "Special"
+msgstr "Speciel"
+
+#: ../Sketch/UI/mainwindow.py:1002
+msgid "modified"
+msgstr "ændret"
+
+#: ../Sketch/UI/mainwindow.py:1003
+msgid "unmodified"
+msgstr "uændret"
+
+#: ../Sketch/UI/mainwindow.py:1006
+msgid "About..."
+msgstr "Om..."
+
+#: ../Sketch/UI/mainwindow.py:1008
+msgid ""
+"Skencil (%(version)s)\n"
+"(c) 1996-2007 by Bernhard Herzog\n"
+"\n"
+"Versions:\n"
+"Python:\t%(py)s\tTcl:\t%(tcl)s\n"
+"Tkinter:\t%(tkinter)s\tTk:\t%(tk)s"
+msgstr ""
+"Skencil (%(version)s)\n"
+"© 1996-2007 by Bernhard Herzog\n"
+"\n"
+"Versioner:\n"
+"Python:\t%(py)s\tTcl:\t%(tcl)s\n"
+"Tkinter:\t%(tkinter)s\tTk:\t%(tk)s"
+
+#: ../Sketch/UI/mainwindow.py:1019
+#, fuzzy
+msgid "About Skencil"
+msgstr "Om Sketch"
+
+#: ../Sketch/UI/mainwindow.py:1088
+msgid "Load Raster/EPS Image..."
+msgstr "Indlæs raster-/EPS-billede..."
+
+#: ../Sketch/UI/mainwindow.py:1117
+msgid "Add Horizontal Guide Line"
+msgstr "Tilføj vandret hjælpelinje"
+
+#: ../Sketch/UI/mainwindow.py:1119
+msgid "Add Vertical Guide Line"
+msgstr "Tilføj lodret hjælpelinje"
+
+#: ../Sketch/UI/mainwindow.py:1128
+msgid "Name Style..."
+msgstr "Navnestil..."
+
+#: ../Sketch/UI/mainwindow.py:1145
+msgid "No Fill"
+msgstr "Ingen fyldning"
+
+#: ../Sketch/UI/mainwindow.py:1148
+msgid "No Line"
+msgstr "Ingen linje"
+
+#: ../Sketch/UI/mainwindow.py:1158
+msgid "Select All"
+msgstr "Markér alt"
+
+#: ../Sketch/UI/mainwindow.py:1160
+msgid "Select Next"
+msgstr "Markér næste"
+
+#: ../Sketch/UI/mainwindow.py:1161
+msgid "Select Previous"
+msgstr "Markér foregående"
+
+#: ../Sketch/UI/mainwindow.py:1163
+msgid "Select First Child"
+msgstr "Markér første barn"
+
+#: ../Sketch/UI/mainwindow.py:1165
+msgid "Select Parent"
+msgstr "Markér forælder"
+
+#: ../Sketch/UI/mainwindow.py:1172
+msgid "Move to Top"
+msgstr "Flyt øverst"
+
+#: ../Sketch/UI/mainwindow.py:1175
+msgid "Move to Bottom"
+msgstr "Flyt nederst"
+
+#: ../Sketch/UI/mainwindow.py:1178
+msgid "Move One Up"
+msgstr "Flyt en opad"
+
+#: ../Sketch/UI/mainwindow.py:1181
+msgid "Move One Down"
+msgstr "Flyt en nedad"
+
+#: ../Sketch/UI/mainwindow.py:1188
+msgid "Group"
+msgstr "Gruppér"
+
+#: ../Sketch/UI/mainwindow.py:1242
+msgid "Copy"
+msgstr "Kopiér"
+
+#: ../Sketch/UI/mainwindow.py:1248
+msgid "Paste"
+msgstr "Indsæt"
+
+#: ../Sketch/UI/mainwindow.py:1268
+msgid "Discard Undo History"
+msgstr "Forkast fortrydelseshistorik"
+
+#: ../Sketch/UI/optiondlg.py:40
+msgid "Global Options"
+msgstr "Globale alternativer"
+
+#: ../Sketch/UI/optiondlg.py:63
+msgid "# Undo Levels:"
+msgstr "# Fortrydelseshistorik:"
+
+#: ../Sketch/UI/optiondlg.py:72
+msgid "unlimited"
+msgstr "ubegrænset"
+
+#: ../Sketch/UI/optiondlg.py:100
+msgid "Duplication Offset"
+msgstr "Duplikeringsafstand"
+
+#: ../Sketch/UI/optiondlg.py:102
+msgid "Hor."
+msgstr "Vand."
+
+#: ../Sketch/UI/optiondlg.py:107
+msgid "Vert."
+msgstr "Lod."
+
+#: ../Sketch/UI/optiondlg.py:128
+msgid "Default Unit"
+msgstr "Standardenhed"
+
+#: ../Sketch/UI/palette.py:122
+msgid "Could not load palette %s; trying mini.spl..."
+msgstr "Kunne ikke indlæse paletten %s, forsøger med mini.spl..."
+
+#: ../Sketch/UI/palette.py:127
+msgid "Could not load palette mini.spl; reverting to black&white"
+msgstr "Kunne ikke indlæse paletten mini.slp; går tilbage til sorthvidt"
+
+#: ../Sketch/UI/palette.py:137
+#, fuzzy
+msgid "Skencil/Sketch Palette"
+msgstr "Sketchpalette"
+
+#: ../Sketch/UI/palette.py:138 ../Sketch/UI/skapp.py:64
+msgid "All Files"
+msgstr "Alle filer"
+
+#: ../Sketch/UI/plugindlg.py:223
+msgid "Set %s"
+msgstr "Sæt %s"
+
+#: ../Sketch/UI/plugindlg.py:239
+msgid "Set Parameters"
+msgstr "Sæt parametre"
+
+#: ../Sketch/UI/printdlg.py:37
+msgid "Print"
+msgstr "Udskriv"
+
+#: ../Sketch/UI/printdlg.py:62
+msgid "Rotate ccw."
+msgstr "Rotér mod uret."
+
+#: ../Sketch/UI/printdlg.py:68
+msgid "Embed fonts"
+msgstr ""
+
+#: ../Sketch/UI/printdlg.py:77
+msgid "Printer"
+msgstr "Printer"
+
+#: ../Sketch/UI/printdlg.py:80
+msgid "Command"
+msgstr "Kommando"
+
+#: ../Sketch/UI/printdlg.py:87
+msgid "EPS"
+msgstr "EPS"
+
+#: ../Sketch/UI/printdlg.py:90
+msgid "Filename"
+msgstr "Filnavn"
+
+#: ../Sketch/UI/printdlg.py:96
+msgid "..."
+msgstr "..."
+
+#: ../Sketch/UI/skapp.py:61
+#, fuzzy
+msgid "Skencil/Sketch Document"
+msgstr "Sketch-dokument"
+
+#: ../Sketch/UI/skapp.py:78
+msgid "Encapsulated PostScript"
+msgstr "Encapsulated PostScript"
+
+#: ../Sketch/UI/skapp.py:79
+msgid "JPEG"
+msgstr "JPEG"
+
+#: ../Sketch/UI/skapp.py:80
+msgid "GIF"
+msgstr "GIF"
+
+#: ../Sketch/UI/skapp.py:81
+msgid "Portable Bitmap"
+msgstr "Portabel bitmap"
+
+#: ../Script/export_raster.py:204 ../Sketch/UI/skapp.py:82
+msgid "Portable Graymap"
+msgstr "Portabel gråmap"
+
+#: ../Script/export_raster.py:203 ../Sketch/UI/skapp.py:83
+msgid "Portable Pixmap"
+msgstr "Portabel pixmap"
+
+#: ../Sketch/UI/skapp.py:84
+msgid "TIFF"
+msgstr "TIFF"
+
+#: ../Sketch/UI/skapp.py:85
+msgid "Windows / OS/2 Bitmap"
+msgstr "Windows- / OS/2-bitmapsbillede"
+
+#: ../Sketch/UI/skapp.py:86
+msgid "PCX"
+msgstr "PCX"
+
+#: ../Sketch/UI/sketchdlg.py:256
+msgid "Auto Update"
+msgstr "Opdatér automatisk"
+
+#: ../Sketch/UI/sketchdlg.py:261
+msgid "Update From..."
+msgstr "Opdatér fra..."
+
+#: ../Sketch/UI/styledlg.py:43
+msgid "Styles"
+msgstr "Stile"
+
+#: ../Sketch/UI/styledlg.py:118
+msgid "Create Style"
+msgstr "Opret stil"
+
+#: ../Sketch/UI/styledlg.py:171
+msgid "Please enter a style name."
+msgstr "Angiv et stilnavn."
+
+#: ../Sketch/UI/styledlg.py:176
+msgid ""
+"The name `%(name)s' is already used.\n"
+"Please choose another one."
+msgstr ""
+"Navnet \"%(name)s\" bruges allerede.\n"
+"Vælg et andet."
+
+#: ../Sketch/UI/styledlg.py:199
+msgid "Set Default Properties"
+msgstr "Sæt standardegenskaber"
+
+#: ../Sketch/UI/styledlg.py:209
+msgid ""
+"Please select the object categories whose default properties you want to "
+"change"
+msgstr "Vælg de objektkategorier hvis standardegenskaber du vil ændre"
+
+#: ../Sketch/UI/styledlg.py:217
+msgid "Graphics Objects"
+msgstr "Grafikobjekter"
+
+#: ../Sketch/UI/styledlg.py:225
+msgid "Text Objects"
+msgstr "Tekstobjekter"
+
+#: ../Sketch/UI/tkext.py:714
+msgid "Ok"
+msgstr "O.K."
+
+#: ../Sketch/UI/tkext.py:715
+msgid "Yes"
+msgstr "Ja"
+
+#: ../Sketch/UI/tkext.py:716
+msgid "No"
+msgstr "Nej"
+
+#: ../Plugins/Filters/ailoader.py:100 ../Plugins/Filters/aisaver.py:27
+msgid "Adobe Illustrator"
+msgstr "Adobe Illustrator"
+
+#: ../Plugins/Filters/ailoader.py:422
+msgid "Vector patterns not supported. Using black"
+msgstr "Vektormønstre understøttes ikke. Bruger sort"
+
+#: ../Plugins/Filters/ailoader.py:549
+msgid "Gradient ColorStyle %d not yet supported.substituted black"
+msgstr "Farveskala-ColorStyle %d understøttes ikke endnu. Erstattet med sort"
+
+#: ../Plugins/Filters/ailoader.py:555
+msgid "Unknown ColorStyle %d"
+msgstr "Ukendt ColorStyle %d"
+
+#: ../Plugins/Filters/ailoader.py:597
+msgid "less than two color stops in gradient"
+msgstr "færre end to farvestop i farveskalaen"
+
+#: ../Plugins/Filters/ailoader.py:673
+msgid "Unknown gradient type %d"
+msgstr "Ukendt farveskalatype %d"
+
+#: ../Plugins/Filters/ailoader.py:876
+msgid "Multiple Master fonts not supported. Using Times Roman"
+msgstr "Flere hovedskrifttyper understøttes ikke. Bruger Times Roman"
+
+#: ../Plugins/Filters/ailoader.py:883
+msgid "Additional encoding ignored"
+msgstr "Yderligere kodning ignoreret"
+
+#: ../Plugins/Filters/ailoader.py:892
+msgid "Area text not supported"
+msgstr "Areatext understøttes ikke"
+
+#: ../Plugins/Filters/ailoader.py:971
+msgid "No font %s."
+msgstr "Ingen skrifttype %s."
+
+#: ../Plugins/Filters/ailoader.py:996
+msgid "Only images with 1 or 3 components and 8 bits/component supported"
+msgstr "Kun billeder med 1 eller 3 komponenter og 8 bitkomponent understøttes"
+
+#: ../Plugins/Filters/bziploader.py:27
+msgid "Bzipped Files"
+msgstr "Bzippede filer"
+
+#: ../Plugins/Filters/cmxloader.py:393
+msgid "Color model %s not implemented. Using black"
+msgstr "Farvemodellen %s understøttes ikke. Bruger sort"
+
+# Mærkligt, varfor antager man ikke det måttsystem som er normalest i verden?
+#: ../Plugins/Filters/cmxloader.py:735
+msgid "Unknown unit specification %d, assuming inches"
+msgstr "Ukendt enhedsspecifikation %d, antager tommer"
+
+#: ../Plugins/Filters/cmxloader.py:773
+msgid "Invalid image specification"
+msgstr "Ugyldig billedspecifikation"
+
+#: ../Plugins/Filters/cmxloader.py:1131
+msgid "fill type 'monochrome-bitmap' not implemented, using solid black"
+msgstr ""
+"fyldningstypen \"monochrome-bitmap\" er ikke implementeret, bruger ensfarvet "
+"sort"
+
+#: ../Plugins/Filters/cmxloader.py:1160
+msgid "fill type 'texture' not implemented, using solid black"
+msgstr ""
+"fyldningstypen \"texture\" er ikke implementeret, bruger ensfarvet sort"
+
+#: ../Plugins/Filters/cmxloader.py:1172
+msgid "fill type %d not implemented, using solid black"
+msgstr "fyldningstypen %d er ikke implementeret, bruger ensfarvet sort"
+
+#: ../Plugins/Filters/cmxloader.py:1369
+msgid "Lens specification ignored"
+msgstr "Linsespecifikation ignoreret"
+
+#: ../Plugins/Filters/cmxloader.py:1374
+msgid "Canvas specification ignored"
+msgstr "Canvas-specifikation ignoreret"
+
+#: ../Plugins/Filters/cmxloader.py:1405
+msgid "Texture fill not implemented, using solid black"
+msgstr "Teksturfyldning er ikke implementeret, bruger ensfarvet sort"
+
+# Hmm? Nogen som begriper?
+#: ../Plugins/Filters/cmxloader.py:1478
+msgid "Substituting radial gradient for square gradient"
+msgstr "Erstatter firkantsfarvetoning med radial farvetoning"
+
+#: ../Plugins/Filters/cmxloader.py:1497
+msgid "Image for twocolor fill is not 1 bit deep"
+msgstr "Billede for tofarvefyldning er ikke 1 bit dyb"
+
+#: ../Plugins/Filters/cmxloader.py:1859
+msgid "Unexpected end of file"
+msgstr "Uventet filslut"
+
+#: ../Plugins/Filters/drawinput.py:48
+msgid "Drawfile"
+msgstr "Tegningsfil"
+
+#: ../Plugins/Filters/gziploader.py:27
+msgid "Gzipped Files"
+msgstr "Gzippede filer"
+
+#: ../Plugins/Filters/skloader.py:87
+#, fuzzy
+msgid ""
+"The file was created by a newer version of Skencil or Sketch, there might be "
+"inaccuracies."
+msgstr ""
+"Filen oprettedes af en nyere version af Sketch, der kan forekomme "
+"unøjagtigheder."
+
+# Ser man på, hér bruger man minsann et vettigt papirformat som standard
+#: ../Plugins/Filters/skloader.py:126
+msgid "Unknown paper format '%s', using A4 instead"
+msgstr "Papirformatet \"%s\" er ukendt, bruger A4 i stedet"
+
+#: ../Plugins/Filters/skloader.py:177
+msgid "No gradient for gradient pattern"
+msgstr "Ingen farvetoning for farvetoningsmønster"
+
+#: ../Plugins/Filters/skloader.py:266
+msgid "unnamed style"
+msgstr "unavngivet stil"
+
+#: ../Plugins/Filters/skloader.py:309
+msgid "Error reading line %s"
+msgstr "Fejl ved læsning af linjen %s"
+
+#: ../Plugins/Filters/skloader.py:436
+msgid "Unknown Plugin: %s"
+msgstr "Ukendt indstiksmodul: %s"
+
+#: ../Plugins/Filters/skloader.py:484
+msgid "Omitted some arguments for function %s"
+msgstr "Udeladte nogle argumenter for funktionen %s"
+
+#: ../Plugins/Filters/skloader.py:487
+msgid "Cannot call function %s"
+msgstr "Kan ikke kalde funktionen %s"
+
+#: ../Plugins/Filters/skloader.py:496
+msgid "Unknown function %s"
+msgstr "Ukendt funktion %s"
+
+#: ../Plugins/Filters/skloader.py:514
+msgid ""
+"error %s:%s in line %d:\n"
+"%s"
+msgstr ""
+"fejl %s:%s på linje %d:\n"
+"%s"
+
+#: ../Plugins/Filters/wmfloader.py:213
+msgid "The file is not a placeable windows metafile"
+msgstr "Filen er ikke en placeringsbar windows-metafil"
+
+#: ../Plugins/Filters/wmfloader.py:331
+msgid "Bitmap brushes not yet implemented. Using black"
+msgstr "Bitmap-pensler er endnu ikke implementerede. Bruger sort"
+
+#: ../Plugins/Filters/wmfloader.py:515
+msgid "WMF objects"
+msgstr "WMF-objekter"
+
+#: ../Plugins/Filters/xfigloader.py:28
+msgid "XFig"
+msgstr "XFig"
+
+#: ../Plugins/Filters/xfigloader.py:229
+msgid "PostScript font `%(ps)s' substituted for TeX-font `%(tex)s'"
+msgstr ""
+"PostScript-skrifttypen \"%(ps)s\" erstatter TeX-skrifttypen \"%(tex)s\""
+
+#: ../Plugins/Filters/xfigloader.py:400
+msgid "X-Spline treated as PolyLine"
+msgstr "X-spline behandles som polylinje"
+
+#: ../Plugins/Filters/xfigloader.py:529
+msgid ""
+"error in line %d:\n"
+"%s"
+msgstr ""
+"fejl på linje %d:\n"
+"%s"
+
+#: ../Plugins/Objects/lcdtext.py:29
+msgid "LCD Text"
+msgstr "LCD-tekst"
+
+#: ../Plugins/Objects/lcdtext.py:30
+msgid "Text"
+msgstr "Tekst"
+
+#: ../Plugins/Objects/lcdtext.py:148
+msgid "LCD Text: `%(text)s', size %(size)g"
+msgstr "LCD-tekst: \"%(text)s\", størrelse %(size)g"
+
+#: ../Plugins/Objects/multilinetext.py:24
+msgid "Multiline Text"
+msgstr "Flerlinjet tekst"
+
+#: ../Plugins/Objects/multilinetext.py:267
+msgid "Set MultilineText Parameters"
+msgstr "Sæt parametre for flerlinjes tekst"
+
+#: ../Plugins/Objects/regpoly.py:29
+msgid "Regular Polygon"
+msgstr "Normal polygon"
+
+#: ../Plugins/Objects/regpoly.py:30
+msgid "Vertices"
+msgstr "Hjørner"
+
+#: ../Plugins/Objects/regpoly.py:31 ../Script/create_spiral.py:46
+#: ../Script/create_star.py:106
+msgid "Radius"
+msgstr "Radius"
+
+#: ../Plugins/Objects/regpoly.py:81
+msgid "Regular Polygon: %(vertices)d vertices, radius %(radius)[length]"
+msgstr "Normal polygon: %(vertices)d hjørner, radius %(radius)[length]"
+
+#: ../Script/create_spiral.py:34
+msgid "Create Spiral"
+msgstr "Lav spiral"
+
+#: ../Script/create_spiral.py:39
+msgid "Rotations"
+msgstr "Rotationer"
+
+#: ../Script/create_spiral.py:91
+msgid "Spiral"
+msgstr "Spiral"
+
+#: ../Script/create_spiral.py:92 ../Script/create_star_outline.py:86
+msgid "Create Objects"
+msgstr "Lav objekter"
+
+#: ../Script/create_star.py:68 ../Script/create_star_outline.py:30
+msgid "Create Star"
+msgstr "Lav stjerne"
+
+#: ../Script/create_star.py:92 ../Script/create_star_outline.py:35
+msgid "Corners"
+msgstr "Hjørner"
+
+#: ../Script/create_star_outline.py:42
+msgid "Outer Radius"
+msgstr "Ydre radius"
+
+#: ../Script/create_star_outline.py:49
+msgid "Inner Radius"
+msgstr "Indre radius"
+
+#: ../Script/create_star_outline.py:85
+msgid "Star Outline"
+msgstr "Stjernekontur"
+
+#: ../Script/export_raster.py:52
+msgid "Choose Raster Parameters"
+msgstr "Vælg rasterparametre"
+
+#: ../Script/export_raster.py:57
+msgid "ppi"
+msgstr "ppi"
+
+#: ../Script/export_raster.py:64
+msgid "w. Transparency"
+msgstr "med gennemsigtighed"
+
+#: ../Script/export_raster.py:71
+msgid "use BB information"
+msgstr "brug BB-information"
+
+#: ../Script/export_raster.py:205
+msgid "Jpeg"
+msgstr "Jpeg"
+
+#: ../Script/export_raster.py:206
+msgid "Portable Network Graphics"
+msgstr "Portable Network Graphics (PNG)"
+
+# ../Script/export_raster.py:220 :233 :239
+#: ../Script/export_raster.py:229
+msgid "Export Raster"
+msgstr "Eksportér raster"
+
+#: ../Script/export_raster.py:241
+msgid "unknown extension %s"
+msgstr "ukendt udvidelse %s"
+
+#: ../Script/export_raster.py:255
+msgid "Export Raster Alpha (100ppi)"
+msgstr "Eksportér rasteralfa (100 ppi)"
+
+#: ../Script/reload_image.py:76
+msgid "Reload Image"
+msgstr "Genindlæs billede"
+
+#: ../Script/simple_separation.py:52
+msgid ""
+"The drawing contains unsupported fill or line patterns. Only solid\n"
+"colors are supported.\n"
+msgstr ""
+"Tegningen indeholder fyldnings- eller linjemønstre som ikke understøttes. "
+"Kun fyldte farver understøttes.\n"
+
+#: ../Script/simple_separation.py:57
+msgid ""
+"The drawing contains raster images, which are not supported for separation\n"
+msgstr ""
+"Tegningen indeholder rasterbilleder hvis separering ikke understøttes\n"
+
+#: ../Script/simple_separation.py:61
+msgid ""
+"The drawing contains embedded EPS files which are not supported for\n"
+"separation\n"
+msgstr ""
+"Tegningen indeholder filer af typen indbygget EPS hvis separering ikke "
+"understøttes\n"
+
+#: ../Script/simple_separation.py:139
+#, fuzzy
+msgid ""
+"The drawing has %d unique colors.\n"
+"Please choose a basename for the separation files.\n"
+"There will be one file for each color with a name of\n"
+"the form basename-XXXXXX.ps where XXXXXX is the\n"
+"hexadecimal color value.\n"
+msgstr ""
+"Tegningen har %d unikke farver.\n"
+"Vælg et basenavn for separeringsfilerne.\n"
+"Der vil være én fil for hver farve med\n"
+"navn på formen basename-XXXXXX.ps hvor XXXXXX er\n"
+"den heksadecimale farveværdi.\n"
+
+#: ../Script/simple_separation.py:166
+msgid "Basename:"
+msgstr "Basenavn:"
+
+# ../Script/simple_separation.py:216 :268
+#: ../Script/simple_separation.py:216
+msgid "Simple Separation"
+msgstr "Simpel separering"
+
+#: ../Script/spread.py:43
+msgid "Spread Horizontal (cascade left)"
+msgstr "Spred vandret (kaskadér til venstre)"
+
+#: ../Script/spread.py:65
+msgid "Spread Horizontal (cascade right)"
+msgstr "Spred vandret (kaskadér til højre)"
+
+#: ../Script/spread.py:88
+msgid "Spread Horizontal (center)"
+msgstr "Spred vandret (centrér)"
+
+#: ../Script/spread.py:113
+msgid "Spread Horizontal (bbox)"
+msgstr "Spred vandret (bbox)"
+
+#: ../Script/spread.py:136
+msgid "Spread Vertical (cascade bottom)"
+msgstr "Spred lodret (kaskadér i bunden)"
+
+#: ../Script/spread.py:159
+msgid "Spread Vertical (cascade top)"
+msgstr "Spred lodret (kaskadér i toppen)"
+
+#: ../Script/spread.py:182
+msgid "Spread Vertical (center)"
+msgstr "Spred lodret (centrér)"
+
+#: ../Script/spread.py:208
+msgid "Spread Vertical (bbox)"
+msgstr "Spred lodret (bbox)"

@@ -1,0 +1,4 @@
+include MANIFEST.in setup.cfg skencil
+
+recursive-include src/extensions *.*
+recursive-include src/share *.*

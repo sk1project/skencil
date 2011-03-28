@@ -1,0 +1,98 @@
+# -*- coding: utf-8 -*-
+#
+#    Copyright (C) 2011 by Igor E. Novikov
+#    
+#    This library is free software; you can redistribute it and/or
+#    modify it under the terms of the GNU Lesser General Public
+#    License as published by the Free Software Foundation; either
+#    version 3 of the License, or (at your option) any later version.
+#    
+#    This library is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    See the GNU
+#    Library General Public License for more details.
+#    
+#    You should have received a copy of the GNU Library General Public
+#    License along with this library; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+import dialogs
+
+class AppProxy:
+    
+    app = None
+    canvas = None
+    mw = None
+    
+    def __init__(self, app):
+        self.app = app
+        
+    def update_references(self):
+        self.mw = self.app.mw
+        self.canvas = self.app.mw.canvas
+        
+    def exit(self, *args):
+        self.app.exit()
+        
+    def new(self, *args):
+        self.app.mw.add_doc()
+    
+    def open(self, *args):
+        self.app.open()
+    
+    def save(self, *args):
+        self.app.save()
+    
+    def save_as(self, *args):
+        self.app.save_as()
+        
+    def close(self, *args):
+        self.mw.close_current_doc()
+    
+    def insert_doc(self, *args):
+        self.app.insert_doc()
+        
+    def do_print(self, *args):
+        pass
+    
+    def do_print_setup(self, *args):
+        pass
+    
+    def undo(self, *args):
+        pass
+    
+    def redo(self, *args):
+        pass
+    
+    def cut(self, *args):
+        pass
+    
+    def copy(self, *args):
+        pass
+    
+    def paste(self, *args):
+        pass
+    
+    def delete(self, *args):
+        pass
+    
+    def zoom_in(self, *args):
+        self.canvas.zoom_in()
+            
+    def zoom_out(self, *args):
+        self.canvas.zoom_out()
+        
+    def fit_zoom_to_page(self, *args):
+        self.canvas.zoom_fit_to_page()
+          
+    def zoom_100(self, *args):
+        pass    
+    def zoom_selected(self, *args):
+        pass
+    
+    def preferences(self, *args):
+        pass
+    
+    def about(self, *args):
+        dialogs.about_dialog(self.mw)
+        
