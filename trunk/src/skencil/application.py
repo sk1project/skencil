@@ -20,6 +20,7 @@ import gtk
 
 from skencil import _, config
 from proxy import AppProxy
+from inspector import DocumentInspector
 from mainwindow import MainWindow
 from actions import create_actions
 
@@ -30,10 +31,16 @@ class Application:
     docs = []
     current_doc = None
     
+    proxy = None
+    inspector = None
+    
+    
     def __init__(self, path):
         self.path = path
         
         self.proxy = AppProxy(self)
+        self.inspector = DocumentInspector(self)
+        
         
         self.accelgroup = gtk.AccelGroup()
         self.actiongroup = gtk.ActionGroup('BasicAction')
