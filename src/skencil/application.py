@@ -19,6 +19,7 @@
 import gtk
 
 from skencil import _, config
+from app_conf import AppData
 from proxy import AppProxy
 from inspector import DocumentInspector
 from mainwindow import MainWindow
@@ -26,6 +27,8 @@ from actions import create_actions
 
 
 class Application:
+    
+    app_data = None
     
     actions = {}
     docs = []
@@ -37,6 +40,8 @@ class Application:
     
     def __init__(self, path):
         self.path = path
+        
+        self.app_data = AppData()
         
         self.proxy = AppProxy(self)
         self.inspector = DocumentInspector(self)
