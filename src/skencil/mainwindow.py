@@ -86,10 +86,10 @@ class MainWindow(gtk.Window):
         
     def set_win_title(self, docname=''):
         if docname:           
-            title = '%s - %s' % (docname, config.name)
+            title = '%s - %s' % (docname, config.app_name)
             self.set_title(title)
         else:
-            self.set_title(config.name)
+            self.set_title(config.app_name)
         
     def add_doc(self):
 #        icon = os.path.join(config.resource_dir, 'app_icon.png')
