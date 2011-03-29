@@ -76,16 +76,17 @@ class AppCanvas(gtk.DrawingArea):
 
 	def update_scrolls(self):
 		x, y = self.win_to_doc()
+		m11 = self.trafo[0]
 
 		self.mw.h_adj.set_lower(-WORKSPACE_WIDTH / 2)
 		self.mw.h_adj.set_upper(WORKSPACE_WIDTH / 2)
-		self.mw.h_adj.set_page_size(WORKSPACE_WIDTH / 10.0)
+		self.mw.h_adj.set_page_size(self.width / m11)
 		self.my_change = True
 		self.mw.h_adj.set_value(x)
 
 		self.mw.v_adj.set_lower(-WORKSPACE_HEIGHT / 2)
 		self.mw.v_adj.set_upper(WORKSPACE_HEIGHT / 2)
-		self.mw.v_adj.set_page_size(WORKSPACE_HEIGHT / 10.0)
+		self.mw.v_adj.set_page_size(self.height / m11)
 		self.my_change = True
 		self.mw.v_adj.set_value(-y)
 

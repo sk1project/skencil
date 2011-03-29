@@ -89,7 +89,6 @@ class Application:
 		events.emit(events.APP_STATUS, _('New document created'))
 
 	def close(self, doc=None):
-		print 'close signal'
 		if not self.docs:
 			return
 		if doc is None:
