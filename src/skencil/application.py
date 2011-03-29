@@ -18,6 +18,7 @@
 import gtk
 
 from skencil import _, config
+from skencil import events
 from app_conf import AppData
 from proxy import AppProxy
 from inspector import DocumentInspector
@@ -55,6 +56,7 @@ class Application:
 		
 	def run(self):
 		self.mw.show_all()
+		events.emit(events.NO_DOCS)
 		gtk.main()
 
 	def exit(self):
