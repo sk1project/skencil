@@ -25,7 +25,7 @@ def about_dialog(parent):
 	from credits import CREDITS 
 	from license import LICENSE 
 	authors = [
-		"Igor E. Novikov (Gtk+ version)\n\
+		"\nIgor E. Novikov (Gtk+ version)\n\
 		<igor.e.novikov@gmail.com>\n",
 		"Bernhard Herzog (Tcl/Tk version)\n\
 		<bernhard@users.sourceforge.net>\n",

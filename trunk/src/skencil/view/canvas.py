@@ -125,8 +125,8 @@ class SketchCanvas(gtk.DrawingArea):
 		self.width = w
 		self.height = h
 		zoom = min(w / width, h / height) * PAGEFIT
-		dx = w / 2.0 - zoom * width / 2.0
-		dy = h / 2.0 + zoom * height / 2.0
+		dx = w / 2.0
+		dy = h / 2.0
 		self.trafo = [zoom, 0, 0, -zoom, dx, dy]
 		self.matrix = cairo.Matrix(zoom, 0, 0, -zoom, dx, dy)
 		self.zoom = zoom		  
@@ -171,7 +171,7 @@ class SketchCanvas(gtk.DrawingArea):
 		painter.set_antialias(cairo.ANTIALIAS_NONE)
 		painter.set_line_width(1.0 / self.zoom)
 		w, h = PAGE_FORMATS["A4"] 
-		painter.rectangle(0, 0, w, h)
+		painter.rectangle(-w/2.0, -h/2.0, w, h)
 		painter.set_source_rgb(0, 0, 0)
 		painter.stroke()
 		painter.rectangle(0, 0, 5, 5)
@@ -199,17 +199,17 @@ class DummyDoc:
 	
 	def __init__(self):
 		self.childs = []
-		for i in range(100):
+		for i in range(10):
 			self.childs.append(DummyRect())
 	
 class DummyRect:
 	def __init__(self):
 		import random
 		self.shape = [
-		 random.randint(10, 300), #self.x
-		 random.randint(10, 200), #self.y
-		 random.randint(10, 300), #self.w
-		 random.randint(10, 200)  #self.h
+		 random.randint(-100, 100), #self.x
+		 random.randint(-100, 100), #self.y
+		 random.randint(-100, 100), #self.w
+		 random.randint(-100, 100)  #self.h
 		]
 		self.color = [
 					random.randint(0, 255) / 255.0, #R
