@@ -15,7 +15,13 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import os
+
 from uc2.presenter import UCDocPresenter 
+
+from skencil import config
+from eventloop import EventLoop
+from widgets.docarea import DocArea 
 
 class DocPresenter(UCDocPresenter):
 	
@@ -24,8 +30,29 @@ class DocPresenter(UCDocPresenter):
 	eventloop = None
 	docarea = None
 	canvas = None
-	tab = None
 	
 	def __init__(self, app, doc_file=''):
-		UCDocPresenter.__init__(self, config, appdata)
-		pass
+		UCDocPresenter.__init__(self, config, app.appdata)
+		self.app = app
+		self.eventloop = EventLoop(self)
+
+
+		if doc_file:
+			self.load(doc_file)
+			self.doc_name = os.path.basename(self.doc_file)
+		else:
+			self.new()
+			self.doc_name = self.app.get_new_docname()
+
+		self.cms = self.app.default_cms
+		
+		self.docarea = DocArea(self.app, self)
+		self.canvas = self.docarea.canvas
+		self.app.mw.add_tab(self.docarea)
+		
+	def close(self):
+		if not self.docarea is None:
+			self.app.mw.remove_tab(self.docarea)
+		UCDocPresenter.close(self)
+		
+		

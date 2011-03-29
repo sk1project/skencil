@@ -3,6 +3,7 @@
 	<name>skencil-2.x</name>
 	<comment></comment>
 	<projects>
+		<project>uc2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

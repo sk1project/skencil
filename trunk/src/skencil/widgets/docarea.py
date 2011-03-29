@@ -21,14 +21,17 @@ import gtk
 from skencil.view.canvas import AppCanvas
 from ruler import RulerCorner, Ruler
 
-class DocArea(gtk.Frame):
+class DocArea(gtk.Table):
 	
-	def __init__(self, mw):
-		gtk.Frame.__init__(self)
-		self.mw = mw
-		self.app = mw.app
-
-		self.set_property('shadow_type', gtk.SHADOW_NONE)
+	def __init__(self, app, presenter):
+		gtk.Table.__init__(self)
+		self.app = app
+		self.presenter = presenter
+		
+		self.tab_caption = TabCaption(self, presenter.doc_name)
+		
+		self.frame = gtk.Frame()
+		self.frame.set_property('shadow_type', gtk.SHADOW_NONE)
 		
 		da_box = gtk.Table(3, 3, False)
 		
@@ -53,4 +56,61 @@ class DocArea(gtk.Frame):
 		da_box.attach(self.canvas, 1, 2, 1, 2, gtk.FILL | gtk.EXPAND,
 			gtk.FILL | gtk.EXPAND, 0, 0)	  
 		
-		self.add(da_box)
+		self.frame.add(da_box)
+		self.attach(self.frame, 0, 1, 0, 1,
+					gtk.EXPAND | gtk.FILL, gtk.EXPAND | gtk.FILL,
+					xpadding=2, ypadding=2)	
+
+
+class TabCaption(gtk.HBox):
+	
+	def __init__(self, master, caption):
+		gtk.HBox.__init__(self, False, 0)
+		self.presenter = master.presenter
+		self.app = master.app
+		self.mw = master.app.mw
+		
+		self.label = gtk.Label('')
+		self.tab_icon = gtk.Image()
+		self.tab_icon.set_from_stock(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU)
+		self.but_icon = gtk.Image()
+		self.but_icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)		
+		
+		self.tab_button = gtk.EventBox()
+		self.tab_button.set_border_width(0)
+		self.tab_button.set_visible_window(False)
+		self.tab_button.set_size_request(15, 15)
+		color = self.mw.get_style().bg[gtk.STATE_ACTIVE]
+		self.tab_button.modify_bg(gtk.STATE_NORMAL, color)
+		self.tab_button.add(self.but_icon)
+
+		self.pack_start(self.tab_icon, False)
+		self.pack_start(self.label, False)
+		self.pack_start(self.tab_button, False)
+		self.set_caption(caption)
+		self.show_all()
+		self.but_icon.hide()
+		
+		self.tab_button.connect('button-press-event', self.button_press)
+		self.tab_button.connect('button-release-event', self.button_release)
+		self.tab_button.connect('leave-notify-event', self.leave_event)
+		self.tab_button.connect('enter-notify-event', self.enter_event)
+		
+	def set_caption(self, caption):
+		self.label.set_text('  %s  ' % (caption))
+		
+	def enter_event(self, *args):
+		self.but_icon.show()
+		
+	def leave_event(self, *args):
+		self.but_icon.hide()
+		
+	def button_press(self, *args):
+		self.tab_button.set_visible_window(True)
+	
+	def button_release(self, *args):
+		self.tab_button.set_visible_window(False)
+		self.app.close(self.presenter)
+		
+	
+		
