@@ -44,10 +44,7 @@ class AppAction(gtk.Action):
 				events.connect(channel, self.receiver)
 
 	def receiver(self, *args):
-		print 'SIGNAL'
-		result = self.validator()
-		print result
-		self.set_sensitive(result)
+		self.set_sensitive(self.validator())
 
 def create_actions(app):
 	insp = app.inspector
@@ -67,16 +64,16 @@ def create_actions(app):
 	['SAVE', _('_Save'), _('Save'), gtk.STOCK_SAVE, '<Control>S',
 	 proxy.save, None, None],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
-	 proxy.save_as, None, None], # [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	 proxy.save_as, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>W',
-	 proxy.close, [NO_DOCS], insp.is_doc],
+	 proxy.close, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['CLOSE_ALL', _('_Close All'), _('Close All'), None, None,
-	 proxy.close_all, None, None], # [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	 proxy.close_all, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 
 	['PRINT', _('_Print...'), _('Print'), gtk.STOCK_PRINT, '<Control>P',
-	 proxy.do_print, None, None],
+	 proxy.do_print, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['PRINT_SETUP', _('Print Setup...'), _('Print Setup'), gtk.STOCK_PRINT_PREVIEW, None,
-	 proxy.do_print_setup, None, None],
+	 proxy.do_print_setup, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 
 
 	['UNDO', _('_Undo'), _('Undo'), gtk.STOCK_UNDO, '<Control>Z',
@@ -95,15 +92,15 @@ def create_actions(app):
 
 
 	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>plus',
-	 proxy.zoom_in, None, None],
+	 proxy.zoom_in, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_OUT', _('Zoom out'), _('Zoom out'), gtk.STOCK_ZOOM_OUT, '<Control>minus',
-	 proxy.zoom_out, None, None],
+	 proxy.zoom_out, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_PAGE', _('Fit zoom to page'), _('Fit zoom to page'), gtk.STOCK_FILE, '<Shift>F4',
-	 proxy.fit_zoom_to_page, None, None],
+	 proxy.fit_zoom_to_page, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_100', _('Zoom 100%'), _('Zoom 100%'), gtk.STOCK_ZOOM_100, None,
-	 proxy.zoom_100, None, None],
+	 proxy.zoom_100, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_SELECTED', _('Zoom selected'), _('Zoom selected'), gtk.STOCK_ZOOM_FIT, 'F4',
-	 proxy.zoom_selected, None, None],
+	 proxy.zoom_selected, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 
 
 	['PREFERENCES', _('Preferences'), _('Preferences'), gtk.STOCK_PREFERENCES, None,

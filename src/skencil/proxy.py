@@ -20,7 +20,6 @@ import dialogs
 class AppProxy:
 
 	app = None
-	canvas = None
 	mw = None
 
 	def __init__(self, app):
@@ -28,7 +27,6 @@ class AppProxy:
 
 	def update_references(self):
 		self.mw = self.app.mw
-		self.canvas = self.app.mw.canvas
 
 	def exit(self, *args):
 		self.app.exit()
@@ -79,13 +77,13 @@ class AppProxy:
 		pass
 
 	def zoom_in(self, *args):
-		self.canvas.zoom_in()
+		self.app.current_doc.canvas.zoom_in()
 
 	def zoom_out(self, *args):
-		self.canvas.zoom_out()
+		self.app.current_doc.canvas.zoom_out()
 
 	def fit_zoom_to_page(self, *args):
-		self.canvas.zoom_fit_to_page()
+		self.app.current_doc.canvas.zoom_fit_to_page()
 
 	def zoom_100(self, *args):
 		pass

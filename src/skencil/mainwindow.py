@@ -102,6 +102,7 @@ class MainWindow(gtk.Window):
 		if not self.nb.get_n_pages():
 			self.nb_frame.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
 			self.set_win_title()
+			self.app.current_doc = None
 
 	def change_doc(self, *args):
 		da = self.nb.get_nth_page(self.nb.get_current_page())
