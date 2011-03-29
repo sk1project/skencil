@@ -24,6 +24,7 @@ from proxy import AppProxy
 from inspector import DocumentInspector
 from mainwindow import MainWindow
 from actions import create_actions
+from presenter import DocPresenter 
 
 
 class Application:
@@ -57,13 +58,27 @@ class Application:
 	def run(self):
 		self.mw.show_all()
 		events.emit(events.NO_DOCS)
-		gtk.main()
+		events.emit(events.APP_STATUS, 
+				_('To start create new or open existing document'))
+		gtk.main()		
 
+	def get_new_docname(self):
+		self.doc_counter += 1
+		return _('Untitled') + ' ' + str(self.doc_counter)
+
+	def set_current_doc(self, doc):
+		self.current_doc = doc
+		events.emit(events.DOC_CHANGED, doc)
+		
 	def exit(self):
 		gtk.main_quit()
 		
 	def new(self):
-		pass
+		doc = DocPresenter(self)
+		self.docs.append(doc)
+		self.set_current_doc(doc)
+#		self.mw.set_title()
+		events.emit(events.APP_STATUS, _('New document created'))
 	
 	def open(self):
 		pass

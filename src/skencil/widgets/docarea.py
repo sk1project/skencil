@@ -18,7 +18,7 @@
 import gtk
 
 
-from skencil.view.canvas import SketchCanvas
+from skencil.view.canvas import AppCanvas
 from ruler import RulerCorner, Ruler
 
 class DocArea(gtk.Frame):
@@ -49,7 +49,7 @@ class DocArea(gtk.Frame):
 		self.hscroll = gtk.HScrollbar(self.h_adj) 
 		da_box.attach(self.hscroll, 1, 2, 2, 3, gtk.EXPAND | gtk.FILL, gtk.SHRINK)   
 		
-		self.canvas = SketchCanvas(self)
+		self.canvas = AppCanvas(self)
 		da_box.attach(self.canvas, 1, 2, 1, 2, gtk.FILL | gtk.EXPAND,
 			gtk.FILL | gtk.EXPAND, 0, 0)	  
 		
