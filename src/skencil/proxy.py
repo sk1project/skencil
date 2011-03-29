@@ -34,7 +34,7 @@ class AppProxy:
 		self.app.exit()
 		
 	def new(self, *args):
-		self.app.mw.add_doc()
+		self.app.new()
 	
 	def open(self, *args):
 		self.app.open()
@@ -46,7 +46,7 @@ class AppProxy:
 		self.app.save_as()
 		
 	def close(self, *args):
-		self.mw.close_current_doc()
+		self.app.close()
 	
 	def insert_doc(self, *args):
 		self.app.insert_doc()

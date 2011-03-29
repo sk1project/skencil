@@ -17,6 +17,8 @@
 
 import gtk
 
+from uc2 import cms 
+
 from skencil import _, config
 from skencil import events
 from app_conf import AppData
@@ -29,21 +31,24 @@ from presenter import DocPresenter
 
 class Application:
 	
-	app_data = None
+	appdata = None
 	
 	actions = {}
 	docs = []
 	current_doc = None
+	doc_counter = 0
 	
 	proxy = None
 	inspector = None
+	default_cms = None
 	
 	
 	def __init__(self, path):
 		self.path = path
 		
-		self.app_data = AppData()
+		self.appdata = AppData()
 		
+		self.default_cms = cms.ColorManager(self.stub)
 		self.proxy = AppProxy(self)
 		self.inspector = DocumentInspector(self)
 		
@@ -60,7 +65,10 @@ class Application:
 		events.emit(events.NO_DOCS)
 		events.emit(events.APP_STATUS, 
 				_('To start create new or open existing document'))
-		gtk.main()		
+		gtk.main()	
+		
+	def stub(self, *args):
+		pass	
 
 	def get_new_docname(self):
 		self.doc_counter += 1
@@ -77,8 +85,18 @@ class Application:
 		doc = DocPresenter(self)
 		self.docs.append(doc)
 		self.set_current_doc(doc)
-#		self.mw.set_title()
+		self.mw.set_win_title()
 		events.emit(events.APP_STATUS, _('New document created'))
+		
+	def close(self, doc=None):
+		if not self.docs:
+			return
+		if doc is None:
+			doc = self.current_doc
+		doc.close()
+		self.docs.remove(doc)
+		if not self.docs:
+			events.emit(events.NO_DOCS)
 	
 	def open(self):
 		pass

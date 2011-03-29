@@ -54,6 +54,9 @@ def create_actions(app):
 	actions = {}
 	entries = [
 #	name, label, tooltip, icon, shortcut, callable, [channels], validator 
+#gtk.accelerator_name(ord('+'),gtk.gdk.CONTROL_MASK)
+	
+
 	['NEW', _('_New'), _('New'), gtk.STOCK_NEW, '<Control>N',
 	 proxy.new, None, None],
 	['OPEN', _('_Open'), _('Open'), gtk.STOCK_OPEN, '<Control>O',
@@ -62,7 +65,7 @@ def create_actions(app):
 	 proxy.save, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
 	 proxy.save_as, None, None],
-	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>F4',
+	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, None,
 	 proxy.close, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	
 	['PRINT', _('_Print...'), _('Print'), gtk.STOCK_PRINT, '<Control>P',

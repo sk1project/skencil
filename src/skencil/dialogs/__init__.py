@@ -35,8 +35,8 @@ def about_dialog(parent):
 	about.set_property('window-position', gtk.WIN_POS_CENTER)
 	about.set_icon(parent.get_icon())
 	
-	about.set_program_name(parent.app.app_data.app_name)
-	about.set_version(parent.app.app_data.version)
+	about.set_program_name(parent.app.appdata.app_name)
+	about.set_version(parent.app.appdata.version)
 	about.set_copyright("Copyright (C) 2003-2011 by Igor E. Novikov\n" + \
 						"Copyright (C) 1997-2005 by Bernhard Herzog")
 	about.set_comments(_("Vector graphics editor based on sK1 0.9.x") + "\n" + \
