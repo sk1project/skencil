@@ -23,6 +23,7 @@ from menubar import AppMenubar
 from toolbar import AppToolbar
 from tools import AppTools
 from palette import Palette
+from statusbar import AppStatusbar
 from widgets.docarea import DocArea
 
 class MainWindow(gtk.Window):
@@ -60,8 +61,7 @@ class MainWindow(gtk.Window):
 		vbox.pack_start(hbox , True, True, 2)	 
 		#---CENTRAL PART
 		
-		self.statusbar = gtk.Statusbar()
-		self.statusbar.push(0, _('To start create new or open existing document'))
+		self.statusbar = AppStatusbar(self)
 		vbox.pack_end(self.statusbar, expand=False)
 		
 		self.palette = Palette(self)

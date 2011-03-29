@@ -26,7 +26,7 @@ DOC_CLOSED, DOC_MODIFIED, DOC_SAVED, MODE_CHANGED, NO_DOCS, SELECTION_CHANGED
 class AppAction(gtk.Action):
 	
 	def __init__(self, name, label, tooltip, icon, shortcut,
-				 callable, events, validator, flag=True):
+				 callable, channels, validator, flag=True):
 		
 		gtk.Action.__init__(self, name, label, tooltip, icon)
 		self.shortcut = shortcut
@@ -34,7 +34,17 @@ class AppAction(gtk.Action):
 		self.events = events
 		self.validator = validator
 		
-		self.connect('activate', self.callable)
+		self.connect('activate', self.callable)		
+		
+		self.channels = channels
+		self.validator = validator
+		
+		if channels:
+			for channel in channels:
+				events.connect(channel, self.receiver)	
+				
+	def receiver(self, *args):
+		self.set_sensitive(self.validator())
 
 def create_actions(app):
 	insp=app.inspector
@@ -43,17 +53,17 @@ def create_actions(app):
 	actiongroup = app.actiongroup
 	actions = {}
 	entries = [
-#	name, label, tooltip, icon, shortcut, action, [events], validator 
+#	name, label, tooltip, icon, shortcut, callable, [channels], validator 
 	['NEW', _('_New'), _('New'), gtk.STOCK_NEW, '<Control>N',
 	 proxy.new, None, None],
 	['OPEN', _('_Open'), _('Open'), gtk.STOCK_OPEN, '<Control>O',
 	 proxy.open, None, None],
 	['SAVE', _('_Save'), _('Save'), gtk.STOCK_SAVE, '<Control>S',
-	 proxy.save, [NO_DOCS], None],
+	 proxy.save, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
 	 proxy.save_as, None, None],
 	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>F4',
-	 proxy.close, None, None],
+	 proxy.close, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	
 	['PRINT', _('_Print...'), _('Print'), gtk.STOCK_PRINT, '<Control>P',
 	 proxy.do_print, None, None],

@@ -29,7 +29,7 @@ ZOOM_OUT = 0.8
 WORKSPACE_HEIGHT = 2000 * mm_to_pt
 WORKSPACE_WIDTH = 4000 * mm_to_pt
 
-class SketchCanvas(gtk.DrawingArea):
+class AppCanvas(gtk.DrawingArea):
 	
 	mw = None
 	matrix = None
