@@ -24,30 +24,33 @@ DOC_CLOSED, DOC_MODIFIED, DOC_SAVED, MODE_CHANGED, NO_DOCS, SELECTION_CHANGED
 
 
 class AppAction(gtk.Action):
-	
+
 	def __init__(self, name, label, tooltip, icon, shortcut,
 				 callable, channels, validator, flag=True):
-		
+
 		gtk.Action.__init__(self, name, label, tooltip, icon)
 		self.shortcut = shortcut
 		self.callable = callable
 		self.events = events
 		self.validator = validator
-		
-		self.connect('activate', self.callable)		
-		
+
+		self.connect('activate', self.callable)
+
 		self.channels = channels
 		self.validator = validator
-		
+
 		if channels:
 			for channel in channels:
-				events.connect(channel, self.receiver)	
-				
+				events.connect(channel, self.receiver)
+
 	def receiver(self, *args):
-		self.set_sensitive(self.validator())
+		print 'SIGNAL'
+		result = self.validator()
+		print result
+		self.set_sensitive(result)
 
 def create_actions(app):
-	insp=app.inspector
+	insp = app.inspector
 	proxy = app.proxy
 	accelgroup = app.accelgroup
 	actiongroup = app.actiongroup
@@ -55,30 +58,32 @@ def create_actions(app):
 	entries = [
 #	name, label, tooltip, icon, shortcut, callable, [channels], validator 
 #gtk.accelerator_name(ord('+'),gtk.gdk.CONTROL_MASK)
-	
+
 
 	['NEW', _('_New'), _('New'), gtk.STOCK_NEW, '<Control>N',
 	 proxy.new, None, None],
 	['OPEN', _('_Open'), _('Open'), gtk.STOCK_OPEN, '<Control>O',
 	 proxy.open, None, None],
 	['SAVE', _('_Save'), _('Save'), gtk.STOCK_SAVE, '<Control>S',
-	 proxy.save, [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	 proxy.save, None, None],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
-	 proxy.save_as, None, None],
-	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, None,
-	 proxy.close, [NO_DOCS, DOC_CHANGED], insp.is_doc],
-	
+	 proxy.save_as, None, None], # [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>W',
+	 proxy.close, [NO_DOCS], insp.is_doc],
+	['CLOSE_ALL', _('_Close All'), _('Close All'), None, None,
+	 proxy.close_all, None, None], # [NO_DOCS, DOC_CHANGED], insp.is_doc],
+
 	['PRINT', _('_Print...'), _('Print'), gtk.STOCK_PRINT, '<Control>P',
 	 proxy.do_print, None, None],
 	['PRINT_SETUP', _('Print Setup...'), _('Print Setup'), gtk.STOCK_PRINT_PREVIEW, None,
 	 proxy.do_print_setup, None, None],
-	
-	
+
+
 	['UNDO', _('_Undo'), _('Undo'), gtk.STOCK_UNDO, '<Control>Z',
 	 proxy.undo, None, None],
 	['REDO', _('_Redo'), _('Redo'), gtk.STOCK_REDO, '<Control><Shift>Z',
 	 proxy.redo, None, None],
-		
+
 	['CUT', _('Cu_t'), _('Cut'), gtk.STOCK_CUT, '<Control>X',
 	 proxy.cut, None, None],
 	['COPY', _('_Copy'), _('Copy'), gtk.STOCK_COPY, '<Control>C',
@@ -87,8 +92,8 @@ def create_actions(app):
 	 proxy.paste, None, None],
 	['DELETE', _('_Delete'), _('Delete'), gtk.STOCK_DELETE, 'Delete',
 	 proxy.delete, None, None],
-	
-	
+
+
 	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>plus',
 	 proxy.zoom_in, None, None],
 	['ZOOM_OUT', _('Zoom out'), _('Zoom out'), gtk.STOCK_ZOOM_OUT, '<Control>minus',
@@ -99,8 +104,8 @@ def create_actions(app):
 	 proxy.zoom_100, None, None],
 	['ZOOM_SELECTED', _('Zoom selected'), _('Zoom selected'), gtk.STOCK_ZOOM_FIT, 'F4',
 	 proxy.zoom_selected, None, None],
-	
-	
+
+
 	['PREFERENCES', _('Preferences'), _('Preferences'), gtk.STOCK_PREFERENCES, None,
 	 proxy.preferences, None, None],
 	['QUIT', _('_Exit'), _('Exit'), gtk.STOCK_QUIT, '<Control>Q',
@@ -108,15 +113,15 @@ def create_actions(app):
 	['ABOUT', _('_About Skencil'), _('About Skencil'), gtk.STOCK_ABOUT, None,
 	 proxy.about, None, None],
 	]
-	
+
 	for entry in entries:
 		action = AppAction(entry[0], entry[1], entry[2], entry[3],
 						   entry[4], entry[5], entry[6], entry[7])
-		actions[entry[0]] = action 
+		actions[entry[0]] = action
 		if not action.shortcut is None:
-			actiongroup.add_action_with_accel(action, action.shortcut) 
+			actiongroup.add_action_with_accel(action, action.shortcut)
 			action.set_accel_group(accelgroup)
 		else:
 			actiongroup.add_action(action)
-	
+
 	return actions

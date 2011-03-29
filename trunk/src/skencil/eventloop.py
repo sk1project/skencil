@@ -16,21 +16,21 @@
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class EventLoop:
-	
+
 	presenter = None
-	
+
 	VIEW_CHANGED = []
 	SELECT_AREA = []
 	DOC_MODIFIED = []
 	SELECTION_CHANGED = []
-	
+
 	def __init__(self, presenter):
 		self.presenter = presenter
 		self.VIEW_CHANGED = []
 		self.SELECT_AREA = []
 		self.DOC_MODIFIED = []
 		self.SELECTION_CHANGED = []
-	
+
 	def connect(self, channel, receiver):
 		"""
 		Connects signal receive method
@@ -42,7 +42,7 @@ class EventLoop:
 			except:
 				msg = "Cannot connect to channel:"
 				print msg, channel, "receiver:", receiver
-				
+
 	def disconnect(self, channel, receiver):
 		"""
 		Disconnects signal receive method
@@ -54,7 +54,7 @@ class EventLoop:
 			except:
 				msg = "Cannot disconnect from channel:"
 				print msg, channel, "receiver:", receiver
-				
+
 	def emit(self, channel, *args):
 		"""
 		Sends signal to all receivers in channel.

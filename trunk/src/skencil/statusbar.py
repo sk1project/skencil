@@ -21,17 +21,17 @@ import gtk
 from skencil import events
 
 class AppStatusbar(gtk.Statusbar):
-	
+
 	def __init__(self, mw):
 		gtk.Statusbar.__init__(self)
-		
+
 		self.mw = mw
 		self.app = mw.app
 		self.build()
 		events.connect(events.APP_STATUS, self.show_message)
-		
+
 	def build(self):
 		pass
-	
-	def show_message(self, args):		
+
+	def show_message(self, args):
 		self.push(0, args[0])

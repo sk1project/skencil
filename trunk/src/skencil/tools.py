@@ -21,7 +21,7 @@ import gtk
 from skencil import _, config
 
 class AppTools(gtk.Frame):
-	
+
 	def __init__(self, mw):
 		gtk.Frame.__init__(self)
 		self.mw = mw
@@ -32,9 +32,9 @@ class AppTools(gtk.Frame):
 #		self.set_handle_position(gtk.POS_TOP)
 		self.set_property('shadow_type', gtk.SHADOW_NONE)
 		self.set_border_width(0)
-		
+
 		self.toolbar = gtk.VBox(False, 0)
-		
+
 		icons = ['select.png',
 			   'shaper.png',
 			   'zoom.png',
@@ -44,7 +44,7 @@ class AppTools(gtk.Frame):
 			   'create_curve.png',
 			   'create_text.png'
 			   ]
-		
+
 		for icon_file in icons:
 			icon_file = os.path.join(config.resource_dir,
 									 'icons', 'tools', icon_file)
@@ -52,19 +52,19 @@ class AppTools(gtk.Frame):
 			icon.set_from_file(icon_file)
 			toolbutton = gtk.ToolButton(icon)
 			self.toolbar.pack_start(toolbutton, False, False, 0)
-			
+
 		x, y, h, w = toolbutton.allocation
 		self.add(self.toolbar)
-		
-		
+
+
 #		self.build()
-		
+
 	def create_entries(self):
 		return [
 				'ZOOM_IN',
 				'ZOOM_OUT',
 			   ]
-		
+
 	def build(self):
 		entries = self.create_entries()
 		index = 0

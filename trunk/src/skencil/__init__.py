@@ -29,16 +29,16 @@ config = None
 
 
 def skencil_run():
-	
+
 	"""Skencil application launch routine."""
-	
+
 	global config
-	
+
 	_pkgdir = __path__[0]
-	config = get_app_config(_pkgdir)   
+	config = get_app_config(_pkgdir)
 	__path__.insert(0, os.path.join(_pkgdir, 'modules'))
-	
+
 	from application import Application
-	
+
 	app = Application(_pkgdir)
 	app.run()

@@ -21,13 +21,13 @@ class DocumentInspector:
 		self.app = app
 		
 	def is_doc(self):
-		if self.app.current_doc:
+		if self.app.docs:
 			return True
 		else:
 			return False
 		
 	def is_not_doc(self):
-		if self.app.current_doc:
+		if self.app.docs:
 			return False
 		else:
 			return True
