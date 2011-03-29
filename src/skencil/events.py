@@ -61,7 +61,7 @@ def connect(channel, receiver):
 		except:
 			msg = "Cannot connect to channel:"
 			print msg, channel, "receiver:", receiver
-			
+
 def disconnect(channel, receiver):
 	"""
 	Disconnects signal receive method
@@ -73,7 +73,7 @@ def disconnect(channel, receiver):
 		except:
 			msg = "Cannot disconnect from channel:"
 			print msg, channel, "receiver:", receiver
-			
+
 def emit(channel, *args):
 	"""
 	Sends signal to all receivers in channel.
@@ -88,7 +88,7 @@ def emit(channel, *args):
 				pass
 	except:
 		print "Cannot send signal to channel:", channel
-		
+
 
 
 

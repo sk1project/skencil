@@ -22,19 +22,19 @@ from skencil import _, config
 
 
 def about_dialog(parent):
-	from credits import CREDITS 
-	from license import LICENSE 
+	from credits import CREDITS
+	from license import LICENSE
 	authors = [
 		"\nIgor E. Novikov (Gtk+ version)\n\
 		<igor.e.novikov@gmail.com>\n",
 		"Bernhard Herzog (Tcl/Tk version)\n\
 		<bernhard@users.sourceforge.net>\n",
 		]
-		
+
 	about = gtk.AboutDialog()
 	about.set_property('window-position', gtk.WIN_POS_CENTER)
 	about.set_icon(parent.get_icon())
-	
+
 	about.set_program_name(parent.app.appdata.app_name)
 	about.set_version(parent.app.appdata.version)
 	about.set_copyright("Copyright (C) 2003-2011 by Igor E. Novikov\n" + \

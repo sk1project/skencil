@@ -17,20 +17,20 @@
 
 import os
 
-from uc2.presenter import UCDocPresenter 
+from uc2.presenter import UCDocPresenter
 
 from skencil import config
 from eventloop import EventLoop
-from widgets.docarea import DocArea 
+from widgets.docarea import DocArea
 
 class DocPresenter(UCDocPresenter):
-	
+
 	saved = True
-	
+
 	eventloop = None
 	docarea = None
 	canvas = None
-	
+
 	def __init__(self, app, doc_file=''):
 		UCDocPresenter.__init__(self, config, app.appdata)
 		self.app = app
@@ -45,14 +45,13 @@ class DocPresenter(UCDocPresenter):
 			self.doc_name = self.app.get_new_docname()
 
 		self.cms = self.app.default_cms
-		
+
 		self.docarea = DocArea(self.app, self)
 		self.canvas = self.docarea.canvas
 		self.app.mw.add_tab(self.docarea)
-		
+
 	def close(self):
 		if not self.docarea is None:
 			self.app.mw.remove_tab(self.docarea)
 		UCDocPresenter.close(self)
-		
-		
+

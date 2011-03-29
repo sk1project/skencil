@@ -18,16 +18,16 @@
 import gtk
 
 class AppToolbar(gtk.Toolbar):
-	
+
 	def __init__(self, mw):
 		gtk.Toolbar.__init__(self)
 		self.mw = mw
 		self.app = mw.app
 		self.actions = self.app.actions
-		
+
 		self.set_style(gtk.TOOLBAR_ICONS)
 		self.build()
-		
+
 	def create_entries(self):
 		return [
 				'NEW',
@@ -55,7 +55,7 @@ class AppToolbar(gtk.Toolbar):
 				None,
 				'PREFERENCES',
 			   ]
-		
+
 	def build(self):
 		entries = self.create_entries()
 		index = 0

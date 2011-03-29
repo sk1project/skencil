@@ -18,80 +18,83 @@
 import dialogs
 
 class AppProxy:
-	
+
 	app = None
 	canvas = None
 	mw = None
-	
+
 	def __init__(self, app):
 		self.app = app
-		
+
 	def update_references(self):
 		self.mw = self.app.mw
 		self.canvas = self.app.mw.canvas
-		
+
 	def exit(self, *args):
 		self.app.exit()
-		
+
 	def new(self, *args):
 		self.app.new()
-	
+
 	def open(self, *args):
 		self.app.open()
-	
+
 	def save(self, *args):
 		self.app.save()
-	
+
 	def save_as(self, *args):
 		self.app.save_as()
-		
+
 	def close(self, *args):
 		self.app.close()
-	
+
+	def close_all(self, *args):
+		self.app.close_all()
+
 	def insert_doc(self, *args):
 		self.app.insert_doc()
-		
+
 	def do_print(self, *args):
 		pass
-	
+
 	def do_print_setup(self, *args):
 		pass
-	
+
 	def undo(self, *args):
 		pass
-	
+
 	def redo(self, *args):
 		pass
-	
+
 	def cut(self, *args):
 		pass
-	
+
 	def copy(self, *args):
 		pass
-	
+
 	def paste(self, *args):
 		pass
-	
+
 	def delete(self, *args):
 		pass
-	
+
 	def zoom_in(self, *args):
 		self.canvas.zoom_in()
-			
+
 	def zoom_out(self, *args):
 		self.canvas.zoom_out()
-		
+
 	def fit_zoom_to_page(self, *args):
 		self.canvas.zoom_fit_to_page()
-		  
+
 	def zoom_100(self, *args):
-		pass	
+		pass
 	def zoom_selected(self, *args):
 		pass
-	
+
 	def preferences(self, *args):
 		pass
-	
+
 	def about(self, *args):
 		dialogs.about_dialog(self.mw)
-		
+

@@ -8,7 +8,7 @@ contributed to Skencil with code or through minipayments.
 
 In particular, thanks to (in alphabetical order):
 
-Ralf Ahlbrink 
+Ralf Ahlbrink
 Maxim Barabash
 Brian Bartholomew 
 Claudio Bettio 

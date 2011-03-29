@@ -18,17 +18,17 @@
 import gtk
 
 class Palette(gtk.Frame):
-	
+
 	def __init__(self, mw):
 		gtk.Frame.__init__(self)
 		self.mw = mw
 		self.app = mw.app
-		
+
 		hbox = gtk.HBox()
-		
+
 		self.pal_widget = gtk.Frame(label=None)
 		self.pal_widget.set_property('shadow_type', gtk.SHADOW_NONE)
 		self.pal_widget.set_size_request(-1, 18)
 		hbox.pack_end(self.pal_widget, True, False, 0)
 		self.add(hbox)
-		
+

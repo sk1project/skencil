@@ -17,7 +17,7 @@
 
 import gtk
 
-from uc2 import cms 
+from uc2 import cms
 
 from skencil import _, config
 from skencil import events
@@ -26,49 +26,49 @@ from proxy import AppProxy
 from inspector import DocumentInspector
 from mainwindow import MainWindow
 from actions import create_actions
-from presenter import DocPresenter 
+from presenter import DocPresenter
 
 
 class Application:
-	
+
 	appdata = None
-	
+
 	actions = {}
 	docs = []
 	current_doc = None
 	doc_counter = 0
-	
+
 	proxy = None
 	inspector = None
 	default_cms = None
-	
-	
+
+
 	def __init__(self, path):
 		self.path = path
-		
+
 		self.appdata = AppData()
-		
+
 		self.default_cms = cms.ColorManager(self.stub)
 		self.proxy = AppProxy(self)
 		self.inspector = DocumentInspector(self)
-		
-		
+
+
 		self.accelgroup = gtk.AccelGroup()
 		self.actiongroup = gtk.ActionGroup('BasicAction')
-		
+
 		self.actions = create_actions(self)
 		self.mw = MainWindow(self)
-		self.proxy.update_references()		
-		
+		self.proxy.update_references()
+
 	def run(self):
 		self.mw.show_all()
 		events.emit(events.NO_DOCS)
-		events.emit(events.APP_STATUS, 
+		events.emit(events.APP_STATUS,
 				_('To start create new or open existing document'))
-		gtk.main()	
-		
+		gtk.main()
+
 	def stub(self, *args):
-		pass	
+		pass
 
 	def get_new_docname(self):
 		self.doc_counter += 1
@@ -77,18 +77,19 @@ class Application:
 	def set_current_doc(self, doc):
 		self.current_doc = doc
 		events.emit(events.DOC_CHANGED, doc)
-		
+
 	def exit(self):
 		gtk.main_quit()
-		
+
 	def new(self):
 		doc = DocPresenter(self)
 		self.docs.append(doc)
 		self.set_current_doc(doc)
 		self.mw.set_win_title()
 		events.emit(events.APP_STATUS, _('New document created'))
-		
+
 	def close(self, doc=None):
+		print 'close signal'
 		if not self.docs:
 			return
 		if doc is None:
@@ -97,17 +98,27 @@ class Application:
 		self.docs.remove(doc)
 		if not self.docs:
 			events.emit(events.NO_DOCS)
-	
+		return True
+
+	def close_all(self):
+		result = True
+		if self.docs:
+			while self.docs:
+				result = self.close(self.docs[0])
+				if not result:
+					break
+		return result
+
 	def open(self):
 		pass
-	
+
 	def save(self):
 		pass
-	
+
 	def save_as(self):
 		pass
-	
+
 	def insert_doc(self):
 		pass
-	
-	
+
+

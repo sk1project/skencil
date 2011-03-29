@@ -35,6 +35,7 @@ class AppMenubar(gtk.MenuBar):
 				 'SAVE',
 				 'SAVE_AS',
 				 'CLOSE',
+				 'CLOSE_ALL',
 				 None,
 				 'PRINT_SETUP',
 				 'PRINT',

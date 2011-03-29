@@ -22,60 +22,60 @@ from skencil.view.canvas import AppCanvas
 from ruler import RulerCorner, Ruler
 
 class DocArea(gtk.Table):
-	
+
 	def __init__(self, app, presenter):
 		gtk.Table.__init__(self)
 		self.app = app
 		self.presenter = presenter
-		
+
 		self.tab_caption = TabCaption(self, presenter.doc_name)
-		
+
 		self.frame = gtk.Frame()
 		self.frame.set_property('shadow_type', gtk.SHADOW_NONE)
-		
+
 		da_box = gtk.Table(3, 3, False)
-		
+
 		self.corner = RulerCorner(self)
 		da_box.attach(self.corner, 0, 1, 0, 1, gtk.SHRINK, gtk.SHRINK)
-		
+
 		self.hruler = Ruler(self, 0)
 		da_box.attach(self.hruler, 1, 3, 0, 1, gtk.EXPAND | gtk.FILL, gtk.SHRINK)
-		
+
 		self.vruler = Ruler(self, 1)
 		da_box.attach(self.vruler, 0, 1, 1, 3, gtk.SHRINK, gtk.EXPAND | gtk.FILL)
-		
+
 		self.v_adj = gtk.Adjustment()
-		self.vscroll = gtk.VScrollbar(self.v_adj) 
-		da_box.attach(self.vscroll, 2, 3, 1, 2, gtk.SHRINK, gtk.EXPAND | gtk.FILL)	
-		
+		self.vscroll = gtk.VScrollbar(self.v_adj)
+		da_box.attach(self.vscroll, 2, 3, 1, 2, gtk.SHRINK, gtk.EXPAND | gtk.FILL)
+
 		self.h_adj = gtk.Adjustment()
-		self.hscroll = gtk.HScrollbar(self.h_adj) 
-		da_box.attach(self.hscroll, 1, 2, 2, 3, gtk.EXPAND | gtk.FILL, gtk.SHRINK)   
-		
+		self.hscroll = gtk.HScrollbar(self.h_adj)
+		da_box.attach(self.hscroll, 1, 2, 2, 3, gtk.EXPAND | gtk.FILL, gtk.SHRINK)
+
 		self.canvas = AppCanvas(self)
 		da_box.attach(self.canvas, 1, 2, 1, 2, gtk.FILL | gtk.EXPAND,
-			gtk.FILL | gtk.EXPAND, 0, 0)	  
-		
+			gtk.FILL | gtk.EXPAND, 0, 0)
+
 		self.frame.add(da_box)
 		self.attach(self.frame, 0, 1, 0, 1,
 					gtk.EXPAND | gtk.FILL, gtk.EXPAND | gtk.FILL,
-					xpadding=2, ypadding=2)	
+					xpadding=2, ypadding=2)
 
 
 class TabCaption(gtk.HBox):
-	
+
 	def __init__(self, master, caption):
 		gtk.HBox.__init__(self, False, 0)
 		self.presenter = master.presenter
 		self.app = master.app
 		self.mw = master.app.mw
-		
+
 		self.label = gtk.Label('')
 		self.tab_icon = gtk.Image()
 		self.tab_icon.set_from_stock(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU)
 		self.but_icon = gtk.Image()
-		self.but_icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)		
-		
+		self.but_icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+
 		self.tab_button = gtk.EventBox()
 		self.tab_button.set_border_width(0)
 		self.tab_button.set_visible_window(False)
@@ -90,27 +90,26 @@ class TabCaption(gtk.HBox):
 		self.set_caption(caption)
 		self.show_all()
 		self.but_icon.hide()
-		
+
 		self.tab_button.connect('button-press-event', self.button_press)
 		self.tab_button.connect('button-release-event', self.button_release)
 		self.tab_button.connect('leave-notify-event', self.leave_event)
 		self.tab_button.connect('enter-notify-event', self.enter_event)
-		
+
 	def set_caption(self, caption):
 		self.label.set_text('  %s  ' % (caption))
-		
+
 	def enter_event(self, *args):
 		self.but_icon.show()
-		
+
 	def leave_event(self, *args):
 		self.but_icon.hide()
-		
+
 	def button_press(self, *args):
 		self.tab_button.set_visible_window(True)
-	
+
 	def button_release(self, *args):
 		self.tab_button.set_visible_window(False)
 		self.app.close(self.presenter)
-		
-	
-		
+
+
