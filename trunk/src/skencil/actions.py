@@ -18,6 +18,10 @@
 import gtk
 
 from skencil import _
+from skencil import events
+from skencil.events import APP_STATUS, CLIPBOARD, CONFIG_MODIFIED, DOC_CHANGED, \
+DOC_CLOSED, DOC_MODIFIED, DOC_SAVED, MODE_CHANGED, NO_DOCS, SELECTION_CHANGED
+
 
 class AppAction(gtk.Action):
 	
@@ -33,6 +37,7 @@ class AppAction(gtk.Action):
 		self.connect('activate', self.callable)
 
 def create_actions(app):
+	insp=app.inspector
 	proxy = app.proxy
 	accelgroup = app.accelgroup
 	actiongroup = app.actiongroup
@@ -40,62 +45,61 @@ def create_actions(app):
 	entries = [
 #	name, label, tooltip, icon, shortcut, action, [events], validator 
 	['NEW', _('_New'), _('New'), gtk.STOCK_NEW, '<Control>N',
-	 proxy.new, None, None, True],
+	 proxy.new, None, None],
 	['OPEN', _('_Open'), _('Open'), gtk.STOCK_OPEN, '<Control>O',
-	 proxy.open, None, None, True],
+	 proxy.open, None, None],
 	['SAVE', _('_Save'), _('Save'), gtk.STOCK_SAVE, '<Control>S',
-	 proxy.save, None, None, False],
+	 proxy.save, [NO_DOCS], None],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
-	 proxy.save_as, None, None, False],
+	 proxy.save_as, None, None],
 	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>F4',
-	 proxy.close, None, None, False],
+	 proxy.close, None, None],
 	
 	['PRINT', _('_Print...'), _('Print'), gtk.STOCK_PRINT, '<Control>P',
-	 proxy.do_print, None, None, True],
+	 proxy.do_print, None, None],
 	['PRINT_SETUP', _('Print Setup...'), _('Print Setup'), gtk.STOCK_PRINT_PREVIEW, None,
-	 proxy.do_print_setup, None, None, True],
+	 proxy.do_print_setup, None, None],
 	
 	
 	['UNDO', _('_Undo'), _('Undo'), gtk.STOCK_UNDO, '<Control>Z',
-	 proxy.undo, None, None, True],
+	 proxy.undo, None, None],
 	['REDO', _('_Redo'), _('Redo'), gtk.STOCK_REDO, '<Control><Shift>Z',
-	 proxy.redo, None, None, True],
+	 proxy.redo, None, None],
 		
 	['CUT', _('Cu_t'), _('Cut'), gtk.STOCK_CUT, '<Control>X',
-	 proxy.cut, None, None, True],
+	 proxy.cut, None, None],
 	['COPY', _('_Copy'), _('Copy'), gtk.STOCK_COPY, '<Control>C',
-	 proxy.copy, None, None, True],
+	 proxy.copy, None, None],
 	['PASTE', _('_Paste'), _('Paste'), gtk.STOCK_PASTE, '<Control>V',
-	 proxy.paste, None, None, True],
+	 proxy.paste, None, None],
 	['DELETE', _('_Delete'), _('Delete'), gtk.STOCK_DELETE, 'Delete',
-	 proxy.delete, None, None, True],
+	 proxy.delete, None, None],
 	
 	
 	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>plus',
-	 proxy.zoom_in, None, None, True],
+	 proxy.zoom_in, None, None],
 	['ZOOM_OUT', _('Zoom out'), _('Zoom out'), gtk.STOCK_ZOOM_OUT, '<Control>minus',
-	 proxy.zoom_out, None, None, True],
+	 proxy.zoom_out, None, None],
 	['ZOOM_PAGE', _('Fit zoom to page'), _('Fit zoom to page'), gtk.STOCK_FILE, '<Shift>F4',
-	 proxy.fit_zoom_to_page, None, None, True],
+	 proxy.fit_zoom_to_page, None, None],
 	['ZOOM_100', _('Zoom 100%'), _('Zoom 100%'), gtk.STOCK_ZOOM_100, None,
-	 proxy.zoom_100, None, None, True],
+	 proxy.zoom_100, None, None],
 	['ZOOM_SELECTED', _('Zoom selected'), _('Zoom selected'), gtk.STOCK_ZOOM_FIT, 'F4',
-	 proxy.zoom_selected, None, None, True],
+	 proxy.zoom_selected, None, None],
 	
 	
 	['PREFERENCES', _('Preferences'), _('Preferences'), gtk.STOCK_PREFERENCES, None,
-	 proxy.preferences, None, None, True],
+	 proxy.preferences, None, None],
 	['QUIT', _('_Exit'), _('Exit'), gtk.STOCK_QUIT, '<Control>Q',
-	 proxy.exit, None, None, True],
+	 proxy.exit, None, None],
 	['ABOUT', _('_About Skencil'), _('About Skencil'), gtk.STOCK_ABOUT, None,
-	 proxy.about, None, None, True],
+	 proxy.about, None, None],
 	]
 	
 	for entry in entries:
 		action = AppAction(entry[0], entry[1], entry[2], entry[3],
 						   entry[4], entry[5], entry[6], entry[7])
 		actions[entry[0]] = action 
-		action.set_sensitive(entry[8])  
 		if not action.shortcut is None:
 			actiongroup.add_action_with_accel(action, action.shortcut) 
 			action.set_accel_group(accelgroup)
