@@ -2,26 +2,25 @@
 #
 #    Copyright (C) 2011 by Igor E. Novikov
 #    
-#    This library is free software; you can redistribute it and/or
-#    modify it under the terms of the GNU Lesser General Public
-#    License as published by the Free Software Foundation; either
-#    version 3 of the License, or (at your option) any later version.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #    
-#    This library is distributed in the hope that it will be useful,
+#    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    See the GNU
-#    Library General Public License for more details.
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #    
-#    You should have received a copy of the GNU Library General Public
-#    License along with this library; if not, write to the Free Software
-#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
 import gtk
 import cairo
 
 
-from skencil.lib.papersize import Papersize
-from skencil.lib.units import mm_to_pt
+from skencil import _, config
+from uc2.uc_conf import mm_to_pt, PAGE_FORMATS
 
 PAGEFIT = 0.9
 ZOOM_IN = 1.25
@@ -120,7 +119,7 @@ class SketchCanvas(gtk.DrawingArea):
         
     def _fit_to_page(self):           
         #FIXME: here should be document page size request 
-        width, height = Papersize["A4"]
+        width, height = PAGE_FORMATS["A4"]
                 
         x, y, w, h = self.allocation
         self.width = w
@@ -171,7 +170,7 @@ class SketchCanvas(gtk.DrawingArea):
         #FIXME: here should be document redraw
         painter.set_antialias(cairo.ANTIALIAS_NONE)
         painter.set_line_width(1.0 / self.zoom)
-        w, h = Papersize["A4"] 
+        w, h = PAGE_FORMATS["A4"] 
         painter.rectangle(0, 0, w, h)
         painter.set_source_rgb(0, 0, 0)
         painter.stroke()

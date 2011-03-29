@@ -1,9 +1,21 @@
-#Tue Mar 29 01:56:10 EEST 2011
+#Tue Mar 29 02:43:16 EEST 2011
 eclipse.preferences.version=1
 encoding//src/skencil/__init__.py=utf-8
 encoding//src/skencil/actions.py=utf-8
 encoding//src/skencil/app_conf.py=utf-8
 encoding//src/skencil/application.py=utf-8
+encoding//src/skencil/dialogs/__init__.py=utf-8
+encoding//src/skencil/dialogs/credits.py=utf-8
+encoding//src/skencil/dialogs/license.py=utf-8
 encoding//src/skencil/docwrapper.py=utf-8
+encoding//src/skencil/events.py=utf-8
 encoding//src/skencil/inspector.py=utf-8
 encoding//src/skencil/mainwindow.py=utf-8
+encoding//src/skencil/menubar.py=utf-8
+encoding//src/skencil/palette.py=utf-8
+encoding//src/skencil/proxy.py=utf-8
+encoding//src/skencil/toolbar.py=utf-8
+encoding//src/skencil/tools.py=utf-8
+encoding//src/skencil/view/canvas.py=utf-8
+encoding//src/skencil/widgets/docarea.py=utf-8
+encoding//src/skencil/widgets/ruler.py=utf-8
