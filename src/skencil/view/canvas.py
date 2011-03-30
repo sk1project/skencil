@@ -165,33 +165,49 @@ class AppCanvas(gtk.DrawingArea):
 
 		self._keep_center()
 
-		painter = self.window.cairo_create()
-		painter.set_matrix(self.matrix)
+		win_ctx = self.window.cairo_create()
+		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
+		ctx = cairo.Context(buffer)
+
+		ctx.set_source_rgb(1, 1, 1)
+		ctx.paint()
+
+		ctx.set_matrix(self.matrix)
 
 		#FIXME: here should be document redraw
-		painter.set_antialias(cairo.ANTIALIAS_NONE)
-		painter.set_line_width(1.0 / self.zoom)
+		ctx.set_line_width(1.0 / self.zoom)
+		offset = 5.0 / self.zoom
 		w, h = PAGE_FORMATS["A4"]
-		painter.rectangle(-w / 2.0, -h / 2.0, w, h)
-		painter.set_source_rgb(0, 0, 0)
-		painter.stroke()
-		painter.rectangle(0, 0, 5, 5)
-		painter.stroke()
-		painter.set_antialias(cairo.ANTIALIAS_DEFAULT)
+		ctx.rectangle(-w / 2.0 + offset, -h / 2.0 - offset, w, h)
+		ctx.set_source_rgb(0.5, 0.5, 0.5)
+		ctx.fill()
+		ctx.set_antialias(cairo.ANTIALIAS_NONE)
+		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
+		ctx.set_source_rgb(1, 1, 1)
+		ctx.fill()
+		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
+		ctx.set_source_rgb(0, 0, 0)
+		ctx.stroke()
+		ctx.rectangle(0, 0, 5, 5)
+		ctx.stroke()
+		ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
 
 		for child in self.doc.childs:
 			x, y, w, h = child.shape
 			r, g, b, a = child.color
 
 			#FILL
-			painter.rectangle(x, y, w, h)
-			painter.set_source_rgba(r, g, b, a)
-			painter.fill()
+			ctx.rectangle(x, y, w, h)
+			ctx.set_source_rgba(r, g, b, a)
+			ctx.fill()
 			#OUTLINE
-			painter.set_line_width(1)
-			painter.rectangle(x, y, w, h)
-			painter.set_source_rgb(0, 0, 0)
-			painter.stroke()
+			ctx.set_line_width(1)
+			ctx.rectangle(x, y, w, h)
+			ctx.set_source_rgb(0, 0, 0)
+			ctx.stroke()
+
+		win_ctx.set_source_surface(buffer)
+		win_ctx.paint()
 
 
 class DummyDoc:
@@ -200,7 +216,7 @@ class DummyDoc:
 
 	def __init__(self):
 		self.childs = []
-		for i in range(10):
+		for i in range(100):
 			self.childs.append(DummyRect())
 
 class DummyRect:

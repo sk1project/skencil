@@ -104,6 +104,7 @@ class TabCaption(gtk.HBox):
 
 	def leave_event(self, *args):
 		self.but_icon.hide()
+		self.tab_button.set_visible_window(False)
 
 	def button_press(self, *args):
 		self.tab_button.set_visible_window(True)
