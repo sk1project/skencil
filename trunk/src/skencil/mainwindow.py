@@ -115,13 +115,6 @@ class MainWindow(gtk.Window):
 		self.app.current_doc = da.presenter
 		self.set_win_title(da.presenter.doc_name)
 
-
-	def add_doc(self):
-#		icon = os.path.join(config.resource_dir, 'app_icon.png')
-#		cur = gtk.gdk.Cursor(gtk.gdk.display_get_default(), gtk.gdk.pixbuf_new_from_file(icon), 5, 5)
-#		self.window.set_cursor(cur)
-		pass
-
 	def close_current_doc(self):
 		self.nb.remove_page(self.nb.get_current_page())
 		if not self.nb.get_n_pages():
