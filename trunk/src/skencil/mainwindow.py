@@ -74,10 +74,16 @@ class MainWindow(gtk.Window):
 		self.set_default_size(900, 650)
 		self.set_size_request(900, 650)
 		self.set_position(gtk.WIN_POS_CENTER)
-		self.connect("delete-event", self.app.proxy.exit)
+		self.connect("delete-event", self.exit)
 		self.add_accel_group(self.app.accelgroup)
 		icon = os.path.join(config.resource_dir, 'app_icon.png')
 		self.set_icon_from_file(icon)
+
+	def exit(self, *args):
+		if self.app.close_all():
+			return False
+		else:
+			return True
 
 	def set_win_title(self, docname=''):
 		if docname:

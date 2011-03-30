@@ -79,7 +79,9 @@ class Application:
 		events.emit(events.DOC_CHANGED, doc)
 
 	def exit(self):
-		gtk.main_quit()
+		if self.close_all():
+			print 'EXIT'
+			gtk.main_quit()
 
 	def new(self):
 		doc = DocPresenter(self)

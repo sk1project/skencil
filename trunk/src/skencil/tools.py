@@ -28,8 +28,6 @@ class AppTools(gtk.Frame):
 		self.app = mw.app
 		self.actions = self.app.actions
 
-#		self.set_snap_edge(gtk.POS_TOP | gtk.POS_LEFT)
-#		self.set_handle_position(gtk.POS_TOP)
 		self.set_property('shadow_type', gtk.SHADOW_NONE)
 		self.set_border_width(0)
 
