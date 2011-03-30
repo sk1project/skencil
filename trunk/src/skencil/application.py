@@ -80,8 +80,9 @@ class Application:
 
 	def exit(self):
 		if self.close_all():
-			print 'EXIT'
 			gtk.main_quit()
+			return True
+		return False
 
 	def new(self):
 		doc = DocPresenter(self)

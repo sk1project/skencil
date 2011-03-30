@@ -64,6 +64,8 @@ class DocArea(gtk.Table):
 
 class TabCaption(gtk.HBox):
 
+	do_action = False
+
 	def __init__(self, master, caption):
 		gtk.HBox.__init__(self, False, 0)
 		self.presenter = master.presenter
@@ -75,6 +77,7 @@ class TabCaption(gtk.HBox):
 		self.tab_icon.set_from_stock(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU)
 		self.but_icon = gtk.Image()
 		self.but_icon.set_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+
 
 		self.tab_button = gtk.EventBox()
 		self.tab_button.set_border_width(0)
@@ -89,7 +92,7 @@ class TabCaption(gtk.HBox):
 		self.pack_start(self.tab_button, False)
 		self.set_caption(caption)
 		self.show_all()
-		self.but_icon.hide()
+		self.but_icon.set_property('sensitive', False)
 
 		self.tab_button.connect('button-press-event', self.button_press)
 		self.tab_button.connect('button-release-event', self.button_release)
@@ -100,17 +103,19 @@ class TabCaption(gtk.HBox):
 		self.label.set_text('  %s  ' % (caption))
 
 	def enter_event(self, *args):
-		self.but_icon.show()
+		self.but_icon.set_property('sensitive', True)
 
 	def leave_event(self, *args):
-		self.but_icon.hide()
-		self.tab_button.set_visible_window(False)
+		self.but_icon.set_property('sensitive', False)
+		self.do_action = False
 
 	def button_press(self, *args):
-		self.tab_button.set_visible_window(True)
+		self.but_icon.set_property('sensitive', False)
+		self.do_action = True
 
 	def button_release(self, *args):
-		self.tab_button.set_visible_window(False)
-		self.app.close(self.presenter)
+		self.but_icon.set_property('sensitive', True)
+		if self.do_action:
+			self.app.close(self.presenter)
 
 
