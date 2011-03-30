@@ -85,7 +85,6 @@ class Application:
 		doc = DocPresenter(self)
 		self.docs.append(doc)
 		self.set_current_doc(doc)
-		self.mw.set_win_title()
 		events.emit(events.APP_STATUS, _('New document created'))
 
 	def close(self, doc=None):

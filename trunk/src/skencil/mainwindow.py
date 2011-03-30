@@ -58,6 +58,7 @@ class MainWindow(gtk.Window):
 		self.nb = gtk.Notebook()
 		self.nb_frame.add(self.nb)
 		self.nb.connect('switch-page', self.change_doc)
+		self.nb.set_property('scrollable', True)
 
 		vbox.pack_start(hbox , True, True, 2)
 		#---CENTRAL PART
@@ -77,7 +78,6 @@ class MainWindow(gtk.Window):
 		self.add_accel_group(self.app.accelgroup)
 		icon = os.path.join(config.resource_dir, 'app_icon.png')
 		self.set_icon_from_file(icon)
-
 
 	def set_win_title(self, docname=''):
 		if docname:
@@ -105,8 +105,10 @@ class MainWindow(gtk.Window):
 			self.app.current_doc = None
 
 	def change_doc(self, *args):
-		da = self.nb.get_nth_page(self.nb.get_current_page())
+		da = self.nb.get_nth_page(args[2])
 		self.app.current_doc = da.presenter
+		self.set_win_title(da.presenter.doc_name)
+
 
 	def add_doc(self):
 #		icon = os.path.join(config.resource_dir, 'app_icon.png')
