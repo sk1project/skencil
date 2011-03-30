@@ -80,7 +80,7 @@ class MainWindow(gtk.Window):
 		self.set_icon_from_file(icon)
 
 	def exit(self, *args):
-		if self.app.close_all():
+		if self.app.exit():
 			return False
 		else:
 			return True
