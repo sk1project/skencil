@@ -15,20 +15,53 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import os
 import gtk
 
-class Palette(gtk.Frame):
+from skencil import config
+
+class Palette(gtk.HBox):
 
 	def __init__(self, mw):
-		gtk.Frame.__init__(self)
+		gtk.HBox.__init__(self)
 		self.mw = mw
 		self.app = mw.app
 
-		hbox = gtk.HBox()
+		self.dback = PalButton('double-arrow-left.png')
+		self.pack_start(self.dback, False, False, 0)
+		self.back = PalButton('arrow-left.png')
+		self.pack_start(self.back, False, False, 0)
+
+		self.no_color = gtk.EventBox()
+		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
+		loader = gtk.gdk.pixbuf_new_from_file
+		image = gtk.Image()
+		pixbuf = loader(os.path.join(image_dir, 'no-color.png'))
+		image.set_from_pixbuf(pixbuf)
+		self.no_color.add(image)
+		self.pack_start(self.no_color, False, False, 2)
 
 		self.pal_widget = gtk.Frame(label=None)
-		self.pal_widget.set_property('shadow_type', gtk.SHADOW_NONE)
+		self.pal_widget.set_property('shadow_type', gtk.SHADOW_IN)
 		self.pal_widget.set_size_request(-1, 18)
-		hbox.pack_end(self.pal_widget, True, False, 0)
-		self.add(hbox)
+		self.pack_start(self.pal_widget, True, True, 0)
+
+		self.forward = PalButton('arrow-right.png')
+		self.pack_start(self.forward, False, False, 0)
+		self.dforward = PalButton('double-arrow-right.png')
+		self.pack_start(self.dforward, False, False, 0)
+
+
+
+class PalButton(gtk.Button):
+	def __init__(self, file_name):
+		gtk.Button.__init__(self)
+		self.set_property('relief', gtk.RELIEF_NONE)
+		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
+		loader = gtk.gdk.pixbuf_new_from_file
+		image = gtk.Image()
+		pixbuf = loader(os.path.join(image_dir, file_name))
+		image.set_from_pixbuf(pixbuf)
+		self.add(image)
+
 
