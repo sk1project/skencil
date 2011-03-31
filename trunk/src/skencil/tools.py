@@ -20,18 +20,13 @@ import gtk
 
 from skencil import _, config
 
-class AppTools(gtk.Frame):
+class AppTools(gtk.VBox):
 
 	def __init__(self, mw):
-		gtk.Frame.__init__(self)
+		gtk.VBox.__init__(self, False, 0)
 		self.mw = mw
 		self.app = mw.app
 		self.actions = self.app.actions
-
-		self.set_property('shadow_type', gtk.SHADOW_NONE)
-		self.set_border_width(0)
-
-		self.toolbar = gtk.VBox(False, 0)
 
 		icons = ['select.png',
 			   'shaper.png',
@@ -49,28 +44,6 @@ class AppTools(gtk.Frame):
 			icon = gtk.Image()
 			icon.set_from_file(icon_file)
 			toolbutton = gtk.ToolButton(icon)
-			self.toolbar.pack_start(toolbutton, False, False, 0)
-
-		x, y, h, w = toolbutton.allocation
-		self.add(self.toolbar)
+			self.pack_start(toolbutton, False, False, 0)
 
 
-#		self.build()
-
-	def create_entries(self):
-		return [
-				'ZOOM_IN',
-				'ZOOM_OUT',
-			   ]
-
-	def build(self):
-		entries = self.create_entries()
-		index = 0
-		for entry in entries:
-			if entry is None:
-				button = gtk.SeparatorToolItem()
-			else:
-				action = self.actions[entry]
-				button = action.create_tool_item()
-			self.insert(button, index)
-			index += 1
