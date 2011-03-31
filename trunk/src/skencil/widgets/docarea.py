@@ -23,6 +23,8 @@ from ruler import RulerCorner, Ruler
 
 class DocArea(gtk.Table):
 
+	canvas = None
+
 	def __init__(self, app, presenter):
 		gtk.Table.__init__(self)
 		self.app = app
