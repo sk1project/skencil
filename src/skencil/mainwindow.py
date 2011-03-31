@@ -47,8 +47,8 @@ class MainWindow(gtk.Window):
 		#---CENTRAL PART
 		hbox = gtk.HBox(False, 0)
 
-		tools = AppTools(self)
-		hbox.pack_start(tools, False, False, 0)
+		self.tools = AppTools(self)
+		hbox.pack_start(self.tools, False, False, 0)
 
 		self.nb_frame = gtk.EventBox()
 		hbox.pack_start(self.nb_frame, True, True, 2)
@@ -78,6 +78,8 @@ class MainWindow(gtk.Window):
 		self.add_accel_group(self.app.accelgroup)
 		icon = os.path.join(config.resource_dir, 'app_icon.png')
 		self.set_icon_from_file(icon)
+		self.show_all()
+		self.tools.set_visible(False)
 
 	def exit(self, *args):
 		if self.app.exit():
@@ -96,7 +98,7 @@ class MainWindow(gtk.Window):
 		if not self.nb.get_n_pages():
 			color = self.get_style().bg[gtk.STATE_NORMAL]
 			self.nb_frame.modify_bg(gtk.STATE_NORMAL, color)
-
+			self.tools.set_visible(True)
 		index = self.nb.append_page(da, da.tab_caption)
 		da.show_all()
 		self.nb.show_all()
@@ -109,6 +111,7 @@ class MainWindow(gtk.Window):
 			self.nb_frame.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
 			self.set_win_title()
 			self.app.current_doc = None
+			self.tools.set_visible(False)
 
 	def change_doc(self, *args):
 		da = self.nb.get_nth_page(args[2])

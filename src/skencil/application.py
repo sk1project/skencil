@@ -61,7 +61,6 @@ class Application:
 		self.proxy.update_references()
 
 	def run(self):
-		self.mw.show_all()
 		events.emit(events.NO_DOCS)
 		events.emit(events.APP_STATUS,
 				_('To start create new or open existing document'))

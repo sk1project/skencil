@@ -30,20 +30,30 @@ class AppTools(gtk.VBox):
 
 		icons = ['select.png',
 			   'shaper.png',
+			   'fleur.png',
 			   'zoom.png',
-			   'create_rect.png',
-			   'create_ellipse.png',
 			   'create_poly.png',
 			   'create_curve.png',
-			   'create_text.png'
+			   'create_rect.png',
+			   'create_ellipse.png',
+			   'create_polygon.png',
+			   'create_text.png',
+			   None,
+			   'stroke.png',
+			   'fill.png',
+			   'gradient.png',
+			   None,
 			   ]
 
 		for icon_file in icons:
-			icon_file = os.path.join(config.resource_dir,
-									 'icons', 'tools', icon_file)
-			icon = gtk.Image()
-			icon.set_from_file(icon_file)
-			toolbutton = gtk.ToolButton(icon)
-			self.pack_start(toolbutton, False, False, 0)
+			if icon_file is None:
+				self.pack_start(gtk.HSeparator(), False, False, 0)
+			else:
+				icon_file = os.path.join(config.resource_dir,
+										 'icons', 'tools', icon_file)
+				icon = gtk.Image()
+				icon.set_from_file(icon_file)
+				toolbutton = gtk.ToolButton(icon)
+				self.pack_start(toolbutton, False, False, 0)
 
 
