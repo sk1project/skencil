@@ -114,10 +114,3 @@ class MainWindow(gtk.Window):
 		da = self.nb.get_nth_page(args[2])
 		self.app.current_doc = da.presenter
 		self.set_win_title(da.presenter.doc_name)
-
-	def close_current_doc(self):
-		self.nb.remove_page(self.nb.get_current_page())
-		if not self.nb.get_n_pages():
-			self.nb_frame.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
-			self.set_win_title()
-

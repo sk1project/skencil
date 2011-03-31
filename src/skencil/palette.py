@@ -19,6 +19,7 @@ import os
 import gtk
 
 from skencil import config
+from skencil.widgets.palette_widget import PaletteWidget
 
 class Palette(gtk.HBox):
 
@@ -29,8 +30,10 @@ class Palette(gtk.HBox):
 
 		self.dback = PalButton('double-arrow-left.png')
 		self.pack_start(self.dback, False, False, 0)
+		self.dback.connect('clicked', self.action_dback)
 		self.back = PalButton('arrow-left.png')
 		self.pack_start(self.back, False, False, 0)
+		self.back.connect('clicked', self.action_back)
 
 		self.no_color = gtk.EventBox()
 		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
@@ -39,17 +42,42 @@ class Palette(gtk.HBox):
 		pixbuf = loader(os.path.join(image_dir, 'no-color.png'))
 		image.set_from_pixbuf(pixbuf)
 		self.no_color.add(image)
-		self.pack_start(self.no_color, False, False, 2)
+		self.pack_start(self.no_color, False, False, 0)
 
-		self.pal_widget = gtk.Frame(label=None)
-		self.pal_widget.set_property('shadow_type', gtk.SHADOW_IN)
-		self.pal_widget.set_size_request(-1, 18)
-		self.pack_start(self.pal_widget, True, True, 0)
+		self.palwidget = PaletteWidget(self)
+		self.pack_start(self.palwidget, True, True, 1)
 
 		self.forward = PalButton('arrow-right.png')
 		self.pack_start(self.forward, False, False, 0)
+		self.forward.connect('clicked', self.action_forward)
 		self.dforward = PalButton('double-arrow-right.png')
 		self.pack_start(self.dforward, False, False, 0)
+		self.dforward.connect('clicked', self.action_dforward)
+
+
+	def action_dforward(self, *args):
+		self.palwidget.position -= 20
+		if self.palwidget.position < -self.palwidget.max_pos:
+			self.palwidget.position = -self.palwidget.max_pos
+		self.palwidget.queue_draw()
+
+	def action_forward(self, *args):
+		self.palwidget.position -= 1
+		if self.palwidget.position < -self.palwidget.max_pos:
+			self.palwidget.position = -self.palwidget.max_pos
+		self.palwidget.queue_draw()
+
+	def action_back(self, *args):
+		self.palwidget.position += 1
+		if self.palwidget.position > 0:
+			self.palwidget.position = 0
+		self.palwidget.queue_draw()
+
+	def action_dback(self, *args):
+		self.palwidget.position += 20
+		if self.palwidget.position > 0:
+			self.palwidget.position = 0
+		self.palwidget.queue_draw()
 
 
 
