@@ -20,13 +20,13 @@ import gtk
 from skencil import _
 
 class AppMenubar(gtk.MenuBar):
-	
+
 	def __init__(self, mw):
 		gtk.MenuBar.__init__(self)
 		self.mw = mw
 		self.app = mw.app
 		self.actions = self.app.actions
-		
+
 		#----FILE MENU
 		self.file_item, self.file_menu = self.create_menu("_File")
 		items = ['NEW',
@@ -40,8 +40,8 @@ class AppMenubar(gtk.MenuBar):
 				 'PRINT_SETUP',
 				 'PRINT',
 				 None,
-				 'QUIT'				 
-		]   
+				 'QUIT'
+		]
 		self.add_items(self.file_menu, items)
 
 		#----EDIT MENU
@@ -55,53 +55,57 @@ class AppMenubar(gtk.MenuBar):
 				 'DELETE',
 				 None,
 				 'PREFERENCES',
-		]   
+		]
 		self.add_items(self.edit_menu, items)
-		
+
 		#----VIEW MENU
 		self.view_item, self.view_menu = self.create_menu("_View")
-		
+
+		#----LAYOUT MENU
+		self.layout_item, self.effects_menu = self.create_menu("_Layout")
+
 		#----ARRANGE MENU
 		self.arrange_item, self.arrange_menu = self.create_menu("_Arrange")
-		
+
 		#----EFFETCS MENU
 		self.effects_item, self.effects_menu = self.create_menu("E_ffects")
-		
-		#----CURVE MENU
-		self.curve_item, self.curve_menu = self.create_menu("_Curve")
-		
+
+		#----BITMAPS MENU
+		self.bitmaps_item, self.curve_menu = self.create_menu("_Bitmaps")
+
 		#----STYLE MENU
 		self.style_item, self.style_menu = self.create_menu("_Style")
-		
+
 		#----SCRIPT MENU
 		self.script_item, self.script_menu = self.create_menu("_Script")
-		
+
 		#----WINDOWS MENU
-		self.windows_item, self.windows_menu = self.create_menu("_Windows")
-		
+		self.windows_item, self.windows_menu = self.create_menu("_Window")
+
 		#----HELP MENU
 		self.help_item, self.help_menu = self.create_menu("_Help")
 		items = ['ABOUT',
-		]   
+		]
 		self.add_items(self.help_menu, items)
-			
+
 		self.append(self.file_item)
 		self.append(self.edit_item)
 		self.append(self.view_item)
+		self.append(self.layout_item)
 		self.append(self.arrange_item)
 		self.append(self.effects_item)
-		self.append(self.curve_item)
+		self.append(self.bitmaps_item)
 		self.append(self.style_item)
 		self.append(self.script_item)
 		self.append(self.windows_item)
 		self.append(self.help_item)
-		
-	def create_menu(self, text):  
+
+	def create_menu(self, text):
 		menu = gtk.Menu()
 		item = gtk.MenuItem(text)
 		item.set_submenu(menu)
 		return item, menu
-	
+
 	def add_items(self, parent, items):
 		for item in items:
 			if item is None:
