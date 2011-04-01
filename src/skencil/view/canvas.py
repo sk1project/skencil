@@ -22,6 +22,8 @@ import cairo
 from skencil import _, config
 from uc2.uc_conf import mm_to_pt, PAGE_FORMATS
 
+from renderer import CairoRenderer
+
 PAGEFIT = 0.9
 ZOOM_IN = 1.25
 ZOOM_OUT = 0.8
@@ -52,7 +54,10 @@ class AppCanvas(gtk.DrawingArea):
 		self.trafo = [1.0, 0.0, 0.0, 1.0, 0.0 , 0.0]
 		self.mw.h_adj.connect('value_changed', self.hscroll)
 		self.mw.v_adj.connect('value_changed', self.vscroll)
-		self.doc = DummyDoc()
+
+		self.doc = self.presenter.model
+		self.dummy_doc = DummyDoc()
+		self.renderer = CairoRenderer(self)
 		self.my_change = False
 
 	def test(self, *args):
@@ -127,7 +132,7 @@ class AppCanvas(gtk.DrawingArea):
 
 	def _fit_to_page(self):
 		#FIXME: here should be document page size request 
-		width, height = PAGE_FORMATS["A4"]
+		width, height = self.presenter.get_page_size()
 
 		x, y, w, h = self.allocation
 		w = float(w)
@@ -176,51 +181,54 @@ class AppCanvas(gtk.DrawingArea):
 		self._keep_center()
 
 		win_ctx = self.window.cairo_create()
-		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24,
-								int(self.width),
-								int(self.height))
-		ctx = cairo.Context(buffer)
+		self.renderer.paint_document(win_ctx)
 
-		ctx.set_source_rgb(1, 1, 1)
-		ctx.paint()
 
-		ctx.set_matrix(self.matrix)
-
-		#FIXME: here should be document redraw
-		ctx.set_line_width(1.0 / self.zoom)
-		offset = 5.0 / self.zoom
-		w, h = PAGE_FORMATS["A4"]
-		ctx.rectangle(-w / 2.0 + offset, -h / 2.0 - offset, w, h)
-		ctx.set_source_rgb(0.5, 0.5, 0.5)
-		ctx.fill()
-		ctx.set_antialias(cairo.ANTIALIAS_NONE)
-		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
-		ctx.set_source_rgb(1, 1, 1)
-		ctx.fill()
-		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
-		ctx.set_source_rgb(0, 0, 0)
-		ctx.stroke()
-		ctx.rectangle(0, 0, 5, 5)
-		ctx.stroke()
-
-		ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
-
-		for child in self.doc.childs:
-			x, y, w, h = child.shape
-			r, g, b, a = child.color
-
-			#FILL
-			ctx.rectangle(x, y, w, h)
-			ctx.set_source_rgba(r, g, b, a)
-			ctx.fill()
-			#OUTLINE
-			ctx.set_line_width(1)
-			ctx.rectangle(x, y, w, h)
-			ctx.set_source_rgb(0, 0, 0)
-			ctx.stroke()
-
-		win_ctx.set_source_surface(buffer)
-		win_ctx.paint()
+#		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24,
+#								int(self.width),
+#								int(self.height))
+#		ctx = cairo.Context(buffer)
+#
+#		ctx.set_source_rgb(1, 1, 1)
+#		ctx.paint()
+#
+#		ctx.set_matrix(self.matrix)
+#
+#		#FIXME: here should be document redraw
+#		ctx.set_line_width(1.0 / self.zoom)
+#		offset = 5.0 / self.zoom
+#		w, h = PAGE_FORMATS["A4"]
+#		ctx.rectangle(-w / 2.0 + offset, -h / 2.0 - offset, w, h)
+#		ctx.set_source_rgb(0.5, 0.5, 0.5)
+#		ctx.fill()
+#		ctx.set_antialias(cairo.ANTIALIAS_NONE)
+#		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
+#		ctx.set_source_rgb(1, 1, 1)
+#		ctx.fill()
+#		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
+#		ctx.set_source_rgb(0, 0, 0)
+#		ctx.stroke()
+#		ctx.rectangle(0, 0, 5, 5)
+#		ctx.stroke()
+#
+#		ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
+#
+#		for child in self.doc.childs:
+#			x, y, w, h = child.shape
+#			r, g, b, a = child.color
+#
+#			#FILL
+#			ctx.rectangle(x, y, w, h)
+#			ctx.set_source_rgba(r, g, b, a)
+#			ctx.fill()
+#			#OUTLINE
+#			ctx.set_line_width(1)
+#			ctx.rectangle(x, y, w, h)
+#			ctx.set_source_rgb(0, 0, 0)
+#			ctx.stroke()
+#
+#		win_ctx.set_source_surface(buffer)
+#		win_ctx.paint()
 
 
 class DummyDoc:
