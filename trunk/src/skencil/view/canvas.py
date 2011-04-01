@@ -42,11 +42,14 @@ class AppCanvas(gtk.DrawingArea):
 
 		gtk.DrawingArea.__init__(self)
 		self.mw = parent
+		self.presenter = parent.presenter
+		self.eventloop = self.presenter.eventloop
+
 		self.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color("#ffffff"))
 
 
 		self.connect('expose_event', self.repaint)
-		self.trafo = [1, 0, 0, 1, 0 , 0]
+		self.trafo = [1.0, 0.0, 0.0, 1.0, 0.0 , 0.0]
 		self.mw.h_adj.connect('value_changed', self.hscroll)
 		self.mw.v_adj.connect('value_changed', self.vscroll)
 		self.doc = DummyDoc()
@@ -60,7 +63,7 @@ class AppCanvas(gtk.DrawingArea):
 			self.my_change = False
 		else:
 			m11, m12, m21, m22, dx, dy = self.trafo
-			val = self.mw.v_adj.get_value()*m11
+			val = float(self.mw.v_adj.get_value()) * m11
 			dy = -val
 			self.trafo = [m11, m12, m21, m22, dx, dy]
 			self.matrix = cairo.Matrix(m11, m12, m21, m22, dx, dy)
@@ -68,7 +71,7 @@ class AppCanvas(gtk.DrawingArea):
 
 	def hscroll(self, *args):
 		m11, m12, m21, m22, dx, dy = self.trafo
-		val = self.mw.h_adj.get_value()*m11
+		val = float(self.mw.h_adj.get_value()) * m11
 		dx = -val
 		self.trafo = [m11, m12, m21, m22, dx, dy]
 		self.matrix = cairo.Matrix(m11, m12, m21, m22, dx, dy)
@@ -78,23 +81,25 @@ class AppCanvas(gtk.DrawingArea):
 		x, y = self.win_to_doc()
 		m11 = self.trafo[0]
 
-		self.mw.h_adj.set_lower(-WORKSPACE_WIDTH / 2)
-		self.mw.h_adj.set_upper(WORKSPACE_WIDTH / 2)
+		self.mw.h_adj.set_lower(-WORKSPACE_WIDTH / 2.0)
+		self.mw.h_adj.set_upper(WORKSPACE_WIDTH / 2.0)
 		self.mw.h_adj.set_page_size(self.width / m11)
 		self.my_change = True
 		self.mw.h_adj.set_value(x)
 
-		self.mw.v_adj.set_lower(-WORKSPACE_HEIGHT / 2)
-		self.mw.v_adj.set_upper(WORKSPACE_HEIGHT / 2)
+		self.mw.v_adj.set_lower(-WORKSPACE_HEIGHT / 2.0)
+		self.mw.v_adj.set_upper(WORKSPACE_HEIGHT / 2.0)
 		self.mw.v_adj.set_page_size(self.height / m11)
 		self.my_change = True
 		self.mw.v_adj.set_value(-y)
 
 	def _keep_center(self):
 		x, y, w, h = self.allocation
+		w = float(w)
+		h = float(h)
 		if not w == self.width or not h == self.height:
-			_dx = (w - self.width) / 2
-			_dy = (h - self.height) / 2
+			_dx = (w - self.width) / 2.0
+			_dy = (h - self.height) / 2.0
 			m11, m12, m21, m22, dx, dy = self.trafo
 			dx += _dx
 			dy += _dy
@@ -113,6 +118,8 @@ class AppCanvas(gtk.DrawingArea):
 
 	def win_to_doc(self, point=[0, 0]):
 		x, y = point
+		x = float(x)
+		y = float(y)
 		m11, m12, m21, m22, dx, dy = self.trafo
 		x_new = (x - dx) / m11
 		y_new = (y - dy) / m22
@@ -123,6 +130,8 @@ class AppCanvas(gtk.DrawingArea):
 		width, height = PAGE_FORMATS["A4"]
 
 		x, y, w, h = self.allocation
+		w = float(w)
+		h = float(h)
 		self.width = w
 		self.height = h
 		zoom = min(w / width, h / height) * PAGEFIT
@@ -140,8 +149,8 @@ class AppCanvas(gtk.DrawingArea):
 	def _zoom(self, dzoom=1.0):
 		m11, m12, m21, m22, dx, dy = self.trafo
 		m11 *= dzoom
-		_dx = (self.width * dzoom - self.width) / 2
-		_dy = (self.height * dzoom - self.height) / 2
+		_dx = (self.width * dzoom - self.width) / 2.0
+		_dy = (self.height * dzoom - self.height) / 2.0
 		dx = dx * dzoom - _dx
 		dy = dy * dzoom - _dy
 		self.trafo = [m11, m12, m21, -m11, dx, dy]
@@ -158,6 +167,7 @@ class AppCanvas(gtk.DrawingArea):
 
 	def force_redraw(self):
 		self.queue_draw()
+		self.eventloop.emit(self.eventloop.VIEW_CHANGED)
 
 	def repaint(self, *args):
 		if self.matrix is None:
@@ -166,7 +176,9 @@ class AppCanvas(gtk.DrawingArea):
 		self._keep_center()
 
 		win_ctx = self.window.cairo_create()
-		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24, self.width, self.height)
+		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24,
+								int(self.width),
+								int(self.height))
 		ctx = cairo.Context(buffer)
 
 		ctx.set_source_rgb(1, 1, 1)
@@ -190,6 +202,7 @@ class AppCanvas(gtk.DrawingArea):
 		ctx.stroke()
 		ctx.rectangle(0, 0, 5, 5)
 		ctx.stroke()
+
 		ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
 
 		for child in self.doc.childs:

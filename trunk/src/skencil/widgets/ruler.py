@@ -102,12 +102,15 @@ VERTICAL = 1
 
 class Ruler(gtk.DrawingArea):
 
+	exposed = False
+
 	def __init__(self, docarea, orient):
 		gtk.DrawingArea.__init__(self)
 		self.docarea = docarea
 		self.mw = docarea.app.mw
 		self.orient = orient
 		self.presenter = docarea.presenter
+		self.eventloop = self.presenter.eventloop
 		self.doc = self.presenter.model
 		self.viewport = docarea.canvas
 
@@ -115,24 +118,13 @@ class Ruler(gtk.DrawingArea):
 		self.positions = None
 		self.set_range(0.0, 1.0)
 
-		color = self.mw.get_style().bg[gtk.STATE_ACTIVE]
-		self.border_color = [color.red / 65535.0,
-						color.green / 65535.0,
-						color.blue / 65535.0]
-		r, g, b = self.border_color
-
 		if self.orient:
 			self.set_size_request(SIZE, -1)
-			self.grad = cairo.LinearGradient(0, 0, SIZE, 0)
-			self.grad.add_color_stop_rgba(0, r, g, b, 0)
-			self.grad.add_color_stop_rgba(1, r, g, b, .8)
 		else:
 			self.set_size_request(-1, SIZE)
-			self.grad = cairo.LinearGradient(0, 0, 0, SIZE)
-			self.grad.add_color_stop_rgba(0, r, g, b, 0)
-			self.grad.add_color_stop_rgba(1, r, g, b, .8)
 
 		self.connect('expose_event', self.repaint)
+		self.eventloop.connect(self.eventloop.VIEW_CHANGED, self.repaint)
 
 	def check_config(self, *args):
 		if not self.origin == self.presenter.model.doc_origin:
@@ -193,7 +185,8 @@ class Ruler(gtk.DrawingArea):
 		num_ticks = floor(length / main_tick_step) + 2
 
 		if main_tick_step < min_tick_step:
-			tick_step = ceil(min_tick_step / main_tick_step) * main_tick_step
+#			tick_step = ceil(min_tick_step / main_tick_step) * main_tick_step
+			tick_step = floor(min_tick_step / main_tick_step) * main_tick_step
 			subdivisions = (1,)
 			ticks = 1
 		else:
@@ -228,7 +221,8 @@ class Ruler(gtk.DrawingArea):
 
 		texts = []
 		if main_tick_step < min_text_step:
-			stride = int(ceil(min_text_step / main_tick_step))
+#			stride = int(ceil(min_text_step / main_tick_step))
+			stride = int(floor(min_text_step / main_tick_step))
 			start_index = stride - (floor(origin / factor) % stride)
 			start_index = int(start_index * ticks)
 			stride = stride * ticks
@@ -257,12 +251,46 @@ class Ruler(gtk.DrawingArea):
 		self.texts = texts
 		return self.positions, self.texts
 
-	def repaint(self, *args):
-		ticks, texts = self.get_positions()
-		x, y, w, h = self.allocation
+	def update_colors(self):
+		color = self.mw.get_style().bg[gtk.STATE_ACTIVE]
+		self.border_color = [color.red / 65535.0,
+						color.green / 65535.0,
+						color.blue / 65535.0]
+
 		r, g, b = self.border_color
-		painter = self.window.cairo_create()
+
+		color = self.get_style().bg[gtk.STATE_NORMAL]
+		self.bg_color = [color.red / 65535.0,
+					color.green / 65535.0,
+					color.blue / 65535.0]
+
+		r0, g0, b0 = self.bg_color
+
+		if self.orient:
+			self.grad = cairo.LinearGradient(0, 0, SIZE, 0)
+			self.grad.add_color_stop_rgb(0, r0, g0, b0)
+			self.grad.add_color_stop_rgb(1, r, g, b)
+		else:
+			self.grad = cairo.LinearGradient(0, 0, 0, SIZE)
+			self.grad.add_color_stop_rgb(0, r0, g0, b0)
+			self.grad.add_color_stop_rgb(1, r, g, b)
+
+
+	def repaint(self, *args):
+		if not self.exposed:
+			self.update_colors()
+			self.exposed = True
+
+		r, g, b = self.border_color
+		r0, g0, b0 = self.bg_color
+		x, y, w, h = self.allocation
+
+		win_ctx = self.window.cairo_create()
+		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24, w, h)
+		painter = cairo.Context(buffer)
+
 		painter.set_antialias(cairo.ANTIALIAS_NONE)
+
 		painter.set_line_width(1)
 		if self.orient:
 			painter.set_source(self.grad)
@@ -287,11 +315,14 @@ class Ruler(gtk.DrawingArea):
 			painter.set_source_rgb(0, 0, 0)
 			self.draw_horizontal(painter)
 
+		win_ctx.set_source_surface(buffer)
+		win_ctx.paint()
 
 	def draw_vertical(self, painter):
 		x, y, width, height = self.allocation
 
 		ticks, texts = self.get_positions()
+
 		for h, pos in ticks:
 			pos = height - pos
 			painter.move_to(width - h - 1, pos)
@@ -320,6 +351,7 @@ class Ruler(gtk.DrawingArea):
 		x, y, width, height = self.allocation
 
 		ticks, texts = self.get_positions()
+
 		for h, pos in ticks:
 			painter.move_to(pos, height)
 			painter.line_to(pos, height - h - 1)
