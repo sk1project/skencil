@@ -184,52 +184,6 @@ class AppCanvas(gtk.DrawingArea):
 		self.renderer.paint_document(win_ctx)
 
 
-#		buffer = cairo.ImageSurface(cairo.FORMAT_RGB24,
-#								int(self.width),
-#								int(self.height))
-#		ctx = cairo.Context(buffer)
-#
-#		ctx.set_source_rgb(1, 1, 1)
-#		ctx.paint()
-#
-#		ctx.set_matrix(self.matrix)
-#
-#		#FIXME: here should be document redraw
-#		ctx.set_line_width(1.0 / self.zoom)
-#		offset = 5.0 / self.zoom
-#		w, h = PAGE_FORMATS["A4"]
-#		ctx.rectangle(-w / 2.0 + offset, -h / 2.0 - offset, w, h)
-#		ctx.set_source_rgb(0.5, 0.5, 0.5)
-#		ctx.fill()
-#		ctx.set_antialias(cairo.ANTIALIAS_NONE)
-#		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
-#		ctx.set_source_rgb(1, 1, 1)
-#		ctx.fill()
-#		ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
-#		ctx.set_source_rgb(0, 0, 0)
-#		ctx.stroke()
-#		ctx.rectangle(0, 0, 5, 5)
-#		ctx.stroke()
-#
-#		ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
-#
-#		for child in self.doc.childs:
-#			x, y, w, h = child.shape
-#			r, g, b, a = child.color
-#
-#			#FILL
-#			ctx.rectangle(x, y, w, h)
-#			ctx.set_source_rgba(r, g, b, a)
-#			ctx.fill()
-#			#OUTLINE
-#			ctx.set_line_width(1)
-#			ctx.rectangle(x, y, w, h)
-#			ctx.set_source_rgb(0, 0, 0)
-#			ctx.stroke()
-#
-#		win_ctx.set_source_surface(buffer)
-#		win_ctx.paint()
-
 
 class DummyDoc:
 
