@@ -17,6 +17,7 @@
 
 import os
 import gtk
+import cairo
 
 from skencil import _, config
 from menubar import AppMenubar
@@ -51,12 +52,13 @@ class MainWindow(gtk.Window):
 		hbox.pack_start(self.tools, False, False, 0)
 
 		self.nb_frame = gtk.EventBox()
+		self.nb_splash = SplashArea()
 		hbox.pack_start(self.nb_frame, True, True, 2)
 		self.nodocs_color = self.get_style().fg[gtk.STATE_INSENSITIVE]
-		self.nb_frame.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
+		self.nb_splash.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
 
 		self.nb = gtk.Notebook()
-		self.nb_frame.add(self.nb)
+		self.nb_frame.add(self.nb_splash)
 		self.nb.connect('switch-page', self.change_doc)
 		self.nb.set_property('scrollable', True)
 
@@ -96,8 +98,8 @@ class MainWindow(gtk.Window):
 
 	def add_tab(self, da):
 		if not self.nb.get_n_pages():
-			color = self.get_style().bg[gtk.STATE_NORMAL]
-			self.nb_frame.modify_bg(gtk.STATE_NORMAL, color)
+			self.nb_frame.remove(self.nb_splash)
+			self.nb_frame.add(self.nb)
 			self.tools.set_visible(True)
 		index = self.nb.append_page(da, da.tab_caption)
 		da.show_all()
@@ -108,7 +110,8 @@ class MainWindow(gtk.Window):
 	def remove_tab(self, tab):
 		self.nb.remove_page(self.nb.page_num(tab))
 		if not self.nb.get_n_pages():
-			self.nb_frame.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
+			self.nb_frame.remove(self.nb)
+			self.nb_frame.add(self.nb_splash)
 			self.set_win_title()
 			self.app.current_doc = None
 			self.tools.set_visible(False)
@@ -117,3 +120,12 @@ class MainWindow(gtk.Window):
 		da = self.nb.get_nth_page(args[2])
 		self.app.current_doc = da.presenter
 		self.set_win_title(da.presenter.doc_name)
+
+
+class SplashArea(gtk.DrawingArea):
+
+	def __init__(self):
+		gtk.DrawingArea.__init__(self)
+
+
+
