@@ -1,4 +1,4 @@
-#Fri Apr 01 01:23:28 EEST 2011
+#Fri Apr 01 14:17:35 EEST 2011
 eclipse.preferences.version=1
 encoding//src/skencil/__init__.py=utf-8
 encoding//src/skencil/actions.py=utf-8
@@ -15,7 +15,6 @@ encoding//src/skencil/menubar.py=utf-8
 encoding//src/skencil/palette.py=utf-8
 encoding//src/skencil/presenter.py=utf-8
 encoding//src/skencil/proxy.py=utf-8
-encoding//src/skencil/resources/cmyk_palette.py=utf-8
 encoding//src/skencil/statusbar.py=utf-8
 encoding//src/skencil/toolbar.py=utf-8
 encoding//src/skencil/tools.py=utf-8

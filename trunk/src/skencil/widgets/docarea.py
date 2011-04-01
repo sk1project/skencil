@@ -61,7 +61,7 @@ class DocArea(gtk.Table):
 		self.frame.add(da_box)
 		self.attach(self.frame, 0, 1, 0, 1,
 					gtk.EXPAND | gtk.FILL, gtk.EXPAND | gtk.FILL,
-					xpadding=2, ypadding=2)
+					xpadding=1, ypadding=1)
 
 
 class TabCaption(gtk.HBox):
