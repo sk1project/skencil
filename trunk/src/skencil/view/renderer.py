@@ -29,9 +29,9 @@ class CairoRenderer:
 
 		self.canvas = canvas
 
-	def paint_document(self, ctx):
+	def paint_document(self):
 		self.doc = self.canvas.doc
-		self.win_ctx = ctx
+		self.win_ctx = self.canvas.window.cairo_create()
 		self.start()
 		self.paint_page_border()
 		self.render_doc()

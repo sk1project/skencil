@@ -180,11 +180,8 @@ class AppCanvas(gtk.DrawingArea):
 	def repaint(self, *args):
 		if self.matrix is None:
 			self.zoom_fit_to_page()
-
 		self._keep_center()
-
-		win_ctx = self.window.cairo_create()
-		self.renderer.paint_document(win_ctx)
+		self.renderer.paint_document()
 
 
 
