@@ -170,6 +170,9 @@ class AppCanvas(gtk.DrawingArea):
 	def zoom_out(self):
 		self._zoom(ZOOM_OUT)
 
+	def zoom_100(self):
+		self._zoom(1.0 / self.zoom)
+
 	def force_redraw(self):
 		self.queue_draw()
 		self.eventloop.emit(self.eventloop.VIEW_CHANGED)

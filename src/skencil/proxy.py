@@ -59,10 +59,13 @@ class AppProxy:
 		pass
 
 	def undo(self, *args):
-		pass
+		self.app.current_doc.api.do_undo()
 
 	def redo(self, *args):
-		pass
+		self.app.current_doc.api.do_redo()
+
+	def clear_history(self, *args):
+		self.app.current_doc.api.clear_history()
 
 	def cut(self, *args):
 		pass
@@ -86,7 +89,8 @@ class AppProxy:
 		self.app.current_doc.canvas.zoom_fit_to_page()
 
 	def zoom_100(self, *args):
-		pass
+		self.app.current_doc.canvas.zoom_100()
+
 	def zoom_selected(self, *args):
 		pass
 
