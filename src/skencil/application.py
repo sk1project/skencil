@@ -21,6 +21,7 @@ from uc2 import cms
 
 from skencil import _, config
 from skencil import events
+import dialogs
 from app_conf import AppData
 from proxy import AppProxy
 from inspector import DocumentInspector
@@ -110,7 +111,24 @@ class Application:
 		return result
 
 	def open(self):
-		pass
+		doc_file = dialogs.get_open_file_name(self.mw, self,
+											config.open_dir)
+#		if os.path.lexists(doc_file):
+#			try:
+#				doc = DocumentPresenter(self, doc_file)
+#			except:
+#				msg = self.tr('Cannot open file')
+#				msg = "<b>%s '%s'</b><br><br>" % (msg, doc_file)
+#				s = self.tr('The file may be corrupted or not supported format')
+#				QtGui.QMessageBox.warning(self.mw, self.appdata.app_name,
+#												msg + s, QtGui.QMessageBox.Ok)
+#				return
+#			self.docs.append(doc)
+#			self.set_current_doc(doc)
+#			self.mw.menubar.rebuild_window_menu()
+#			self.mw.set_title()
+#			self.config.open_dir = os.path.dirname(doc_file)
+#			events.emit(events.APP_STATUS, self.tr('Document opened'))
 
 	def save(self):
 		pass
