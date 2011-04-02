@@ -70,9 +70,9 @@ VFONT = {
 }
 
 SIGN = {
-	0: ([1, 1, 10, 16, 10], [1, 15, 9, 15, 11], [1, 8, 2, 8, 16], [1, 7, 3, 9, 3], [0, 2, 16, 14, 4]),
-	1: ([1, 3, 2, 3, 16], [1, 2, 3, 4, 3], [1, 1, 14, 16, 14], [1, 15, 13, 15, 15], [0, 5, 12, 15, 2]),
-	2: ([1, 3, 2, 3, 16], [1, 2, 15, 4, 15], [1, 1, 4, 16, 4], [1, 15, 3, 15, 5], [0, 3, 4, 13, 14])
+	0: ([1, 2, 9, 16, 9], [1, 14, 8, 14, 11], [1, 8, 2, 8, 16], [1, 7, 3, 10, 3], [0, 3, 15, 15, 3]),
+	1: ([1, 3, 2, 3, 16], [1, 2, 3, 5, 3], [1, 1, 13, 16, 13], [1, 14, 12, 14, 15], [0, 4, 13, 15, 2]),
+	2: ([1, 3, 2, 3, 16], [1, 2, 14, 5, 14], [1, 1, 4, 16, 4], [1, 14, 3, 14, 6], [0, 3, 4, 13, 14])
 }
 
 class RulerCorner(gtk.DrawingArea):
@@ -80,22 +80,61 @@ class RulerCorner(gtk.DrawingArea):
 	def __init__(self, docarea):
 		gtk.DrawingArea.__init__(self)
 		self.docarea = docarea
+		self.presenter = docarea.presenter
+		self.eventloop = self.presenter.eventloop
+		self.origin = self.presenter.model.doc_origin
+
+		self.add_events(gtk.gdk.BUTTON_PRESS_MASK |
+					gtk.gdk.BUTTON_RELEASE_MASK)
 
 		self.set_size_request(SIZE, SIZE)
 		self.connect('expose_event', self.repaint)
+		self.connect('button-release-event', self.click_event)
+		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.check_coords)
+
+	def check_coords(self, *args):
+		if not self.origin == self.presenter.model.doc_origin:
+			self.origin = self.presenter.model.doc_origin
+			self.repaint()
+
+	def click_event(self, *args):
+		origin = self.presenter.model.doc_origin
+		if origin < sk1doc.ORIGINS[-1]:
+			origin += 1
+		else:
+			origin = sk1doc.ORIGINS[0]
+		self.presenter.api.set_doc_origin(origin)
 
 	def repaint(self, *args):
 		color = self.get_style().bg[gtk.STATE_ACTIVE]
 		r = color.red / 65535.0
 		g = color.green / 65535.0
 		b = color.blue / 65535.0
+		bgcolor = self.get_style().bg[gtk.STATE_NORMAL]
+		r0 = bgcolor.red / 65535.0
+		g0 = bgcolor.green / 65535.0
+		b0 = bgcolor.blue / 65535.0
+
 		painter = self.window.cairo_create()
 		painter.set_antialias(cairo.ANTIALIAS_NONE)
+		painter.set_source_rgb(r0, g0, b0)
+		painter.paint()
 		painter.set_source_rgb(r, g, b)
-		painter.set_line_width(1)
+		painter.set_line_width(1.0)
 		painter.rectangle(-1, -1, SIZE, SIZE)
 		painter.stroke()
 
+		coord = self.origin
+		painter.set_source_rgb(0, 0, 0)
+		painter.set_line_width(1.0)
+		for job in SIGN[coord]:
+			if job[0]:
+				painter.set_dash([], 0)
+			else:
+				painter.set_dash([0.2], 0)
+			painter.move_to(job[1], job[2])
+			painter.line_to(job[3], job[4])
+			painter.stroke()
 
 HORIZONTAL = 0
 VERTICAL = 1
@@ -125,6 +164,7 @@ class Ruler(gtk.DrawingArea):
 
 		self.connect('expose_event', self.repaint)
 		self.eventloop.connect(self.eventloop.VIEW_CHANGED, self.repaint)
+		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.check_config)
 
 	def check_config(self, *args):
 		if not self.origin == self.presenter.model.doc_origin:

@@ -29,8 +29,9 @@ class DocArea(gtk.Table):
 		gtk.Table.__init__(self)
 		self.app = app
 		self.presenter = presenter
+		self.caption = presenter.doc_name
 
-		self.tab_caption = TabCaption(self, presenter.doc_name)
+		self.tab_caption = TabCaption(self, self.caption)
 
 		self.frame = gtk.Frame()
 		self.frame.set_property('shadow_type', gtk.SHADOW_NONE)
@@ -63,6 +64,9 @@ class DocArea(gtk.Table):
 					gtk.EXPAND | gtk.FILL, gtk.EXPAND | gtk.FILL,
 					xpadding=1, ypadding=1)
 
+	def set_caption(self, caption):
+		self.caption = caption
+		self.tab_caption.set_caption(self.caption)
 
 class TabCaption(gtk.HBox):
 

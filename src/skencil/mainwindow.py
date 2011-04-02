@@ -119,7 +119,12 @@ class MainWindow(gtk.Window):
 	def change_doc(self, *args):
 		da = self.nb.get_nth_page(args[2])
 		self.app.current_doc = da.presenter
-		self.set_win_title(da.presenter.doc_name)
+		self.set_win_title(da.caption)
+
+	def set_tab_title(self, tab, title):
+		tab.set_caption(title)
+		if self.nb.page_num(tab) == self.nb.current_page():
+			self.set_win_title(title)
 
 
 class SplashArea(gtk.DrawingArea):

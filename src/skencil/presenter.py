@@ -20,8 +20,10 @@ import os
 from uc2.presenter import UCDocPresenter
 
 from skencil import config
-from eventloop import EventLoop
 from widgets.docarea import DocArea
+
+from eventloop import EventLoop
+from api import PresenterAPI
 
 class DocPresenter(UCDocPresenter):
 
@@ -46,6 +48,7 @@ class DocPresenter(UCDocPresenter):
 
 		self.cms = self.app.default_cms
 
+		self.api = PresenterAPI(self)
 		self.docarea = DocArea(self.app, self)
 		self.canvas = self.docarea.canvas
 		self.app.mw.add_tab(self.docarea)
@@ -54,4 +57,17 @@ class DocPresenter(UCDocPresenter):
 		if not self.docarea is None:
 			self.app.mw.remove_tab(self.docarea)
 		UCDocPresenter.close(self)
+
+	def reflect_saving(self):
+		self.saved = True
+		self.set_title()
+		self.api.save_mark()
+		self.app.events.emit(self.app.events.DOC_SAVED, self)
+
+	def set_title(self):
+		if self.saved:
+			title = self.doc_name
+		else:
+			title = self.doc_name + '*'
+		self.app.mw.set_tab_title(self.docarea, title)
 
