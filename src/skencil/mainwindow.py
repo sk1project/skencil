@@ -73,14 +73,16 @@ class MainWindow(gtk.Window):
 
 		self.add(vbox)
 		self.set_win_title()
-		self.set_default_size(900, 650)
-		self.set_size_request(900, 650)
+		self.set_size_request(config.mw_min_width, config.mw_min_height)
+		self.set_default_size(config.mw_width, config.mw_height)
 		self.set_position(gtk.WIN_POS_CENTER)
 		self.connect("delete-event", self.exit)
 		self.add_accel_group(self.app.accelgroup)
 		icon = os.path.join(config.resource_dir, 'app_icon.png')
 		self.set_icon_from_file(icon)
 		self.show_all()
+		if config.mw_maximized:
+			self.window.maximize()
 		self.tools.set_visible(False)
 
 	def exit(self, *args):

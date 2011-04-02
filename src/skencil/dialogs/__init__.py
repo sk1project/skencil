@@ -48,7 +48,7 @@ def _get_open_fiters():
 	return result
 
 def get_open_file_name(parent, app, start_dir):
-
+	result = ''
 	dialog = gtk.FileChooserDialog(_('Open file'),
 				parent,
 				gtk.FILE_CHOOSER_ACTION_OPEN,
@@ -62,10 +62,24 @@ def get_open_file_name(parent, app, start_dir):
 	for filter in _get_open_fiters():
 		dialog.add_filter(filter)
 
-	dialog.run()
-	result = dialog.get_filename()
+	ret = dialog.run()
+	if not ret == gtk.RESPONSE_CANCEL:
+		result = dialog.get_filename()
 	dialog.destroy()
 	return result
+
+
+def msg_dialog(parent, title, text, seconary_text='', dlg_type=gtk.MESSAGE_WARNING):
+	dialog = gtk.MessageDialog(parent,
+					flags=gtk.DIALOG_MODAL,
+					type=dlg_type,
+					buttons=gtk.BUTTONS_OK,
+					message_format=text)
+	if seconary_text:
+		dialog.format_secondary_text(seconary_text)
+	dialog.set_title(title)
+	dialog.run()
+	dialog.destroy()
 
 
 def about_dialog(parent):

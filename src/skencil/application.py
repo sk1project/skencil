@@ -15,9 +15,13 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import os
 import gtk
 
+import uc2
+from uc2.utils import system
 from uc2 import cms
+from uc2 import sk1doc
 
 from skencil import _, config
 from skencil import events
@@ -48,6 +52,7 @@ class Application:
 		self.path = path
 
 		self.appdata = AppData()
+		config.load(self.appdata.app_config)
 
 		self.default_cms = cms.ColorManager(self.stub)
 		self.proxy = AppProxy(self)
@@ -80,6 +85,8 @@ class Application:
 
 	def exit(self):
 		if self.close_all():
+			self.update_config()
+			config.save(self.appdata.app_config)
 			gtk.main_quit()
 			return True
 		return False
@@ -113,30 +120,54 @@ class Application:
 	def open(self):
 		doc_file = dialogs.get_open_file_name(self.mw, self,
 											config.open_dir)
-#		if os.path.lexists(doc_file):
-#			try:
-#				doc = DocumentPresenter(self, doc_file)
-#			except:
-#				msg = self.tr('Cannot open file')
-#				msg = "<b>%s '%s'</b><br><br>" % (msg, doc_file)
-#				s = self.tr('The file may be corrupted or not supported format')
-#				QtGui.QMessageBox.warning(self.mw, self.appdata.app_name,
-#												msg + s, QtGui.QMessageBox.Ok)
-#				return
-#			self.docs.append(doc)
-#			self.set_current_doc(doc)
-#			self.mw.menubar.rebuild_window_menu()
-#			self.mw.set_title()
-#			self.config.open_dir = os.path.dirname(doc_file)
-#			events.emit(events.APP_STATUS, self.tr('Document opened'))
+		if os.path.lexists(doc_file):
+			try:
+				doc = DocPresenter(self, doc_file)
+			except:
+				msg = _('Cannot open file')
+				msg = "%s '%s'" % (msg, doc_file)
+				sec = _('The file may be corrupted or not supported format')
+				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec,
+								gtk.MESSAGE_ERROR)
+				return
+			self.docs.append(doc)
+			self.set_current_doc(doc)
+			config.open_dir = os.path.dirname(doc_file)
+			events.emit(events.APP_STATUS, _('Document opened'))
 
-	def save(self):
-		pass
+	def save(self, doc=''):
+		if not doc:
+			doc = self.current_doc
+		if not doc.doc_file:
+			return self.save_as()
+		ext = os.path.splitext(self.current_doc.doc_file)[1]
+		if not ext == sk1doc.DOC_EXTENSION:
+			return self.save_as()
+		if not os.path.lexists(os.path.dirname(self.current_doc.doc_file)):
+			return self.save_as()
 
+		try:
+			doc.save()
+			events.emit(events.DOC_SAVED, doc)
+		except:
+			return False
+		events.emit(events.APP_STATUS, self.tr('Document saved'))
+		return True
 	def save_as(self):
 		pass
 
 	def insert_doc(self):
 		pass
 
+	def update_config(self):
+		w, h = self.mw.get_size()
+		state = self.mw.window.get_state()
+		if state == gtk.gdk.WINDOW_STATE_MAXIMIZED:
+			if config.os != system.MACOSX:
+				config.mw_maximized = 1
+		else:
+			config.mw_maximized = 0
+
+			config.mw_width = w
+			config.mw_height = h
 

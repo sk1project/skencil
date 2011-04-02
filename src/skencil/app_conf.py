@@ -47,7 +47,6 @@ class AppConfig(UCConfig):
 			events.emit(events.CONFIG_MODIFIED, attr, value)
 
 	#============== GENERIC SECTION ===================
-	sk1_version = '1.0'
 
 	#============== UI SECTION ===================
 	palette_cell_vertical = 18
@@ -60,17 +59,17 @@ class AppConfig(UCConfig):
 
 	mw_maximized = 1
 
-	mw_width = 1024
+	mw_width = 900
 	mw_height = 700
 
-	mw_min_width = 1024
+	mw_min_width = 900
 	mw_min_height = 700
 
 	set_doc_icon = 1
 
 	ruler_style = 1
 	ruler_min_tick_step = 3
-	ruler_min_text_step = 30
+	ruler_min_text_step = 50
 	ruler_max_text_step = 100
 
 	# 0 - page center
