@@ -48,6 +48,7 @@ class AppMenubar(gtk.MenuBar):
 		self.edit_item, self.edit_menu = self.create_menu("_Edit")
 		items = ['UNDO',
 				 'REDO',
+				 'CLEAR_HISTORY',
 				 None,
 				 'CUT',
 				 'COPY',

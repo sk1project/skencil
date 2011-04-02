@@ -62,7 +62,8 @@ def create_actions(app):
 	['OPEN', _('_Open'), _('Open'), gtk.STOCK_OPEN, '<Control>O',
 	 proxy.open, None, None],
 	['SAVE', _('_Save'), _('Save'), gtk.STOCK_SAVE, '<Control>S',
-	 proxy.save, None, None],
+	 proxy.save, [NO_DOCS, DOC_CHANGED, DOC_MODIFIED, DOC_SAVED],
+	 insp.is_doc_not_saved],
 	['SAVE_AS', _('Save _As...'), _('Save As...'), gtk.STOCK_SAVE_AS, None,
 	 proxy.save_as, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['CLOSE', _('_Close'), _('Close'), gtk.STOCK_CLOSE, '<Control>W',
@@ -77,9 +78,15 @@ def create_actions(app):
 
 
 	['UNDO', _('_Undo'), _('Undo'), gtk.STOCK_UNDO, '<Control>Z',
-	 proxy.undo, None, None],
+	 proxy.undo, [events.NO_DOCS, events.DOC_CHANGED, events.DOC_MODIFIED,
+	 events.DOC_CLOSED], insp.is_undo],
 	['REDO', _('_Redo'), _('Redo'), gtk.STOCK_REDO, '<Control><Shift>Z',
-	 proxy.redo, None, None],
+	 proxy.redo, [events.NO_DOCS, events.DOC_CHANGED, events.DOC_MODIFIED,
+	 events.DOC_CLOSED], insp.is_redo],
+	['CLEAR_HISTORY', _('Clear undo history'), _('Clear undo history'),
+	None, None, proxy.clear_history, [events.NO_DOCS, events.DOC_CHANGED,
+	 events.DOC_MODIFIED, events.DOC_CLOSED], insp.is_history],
+
 
 	['CUT', _('Cu_t'), _('Cut'), gtk.STOCK_CUT, '<Control>X',
 	 proxy.cut, None, None],

@@ -19,7 +19,7 @@ import os
 import gtk
 import cairo
 
-from skencil import _, config
+from skencil import _, config, events
 from menubar import AppMenubar
 from toolbar import AppToolbar
 from tools import AppTools
@@ -120,10 +120,11 @@ class MainWindow(gtk.Window):
 		da = self.nb.get_nth_page(args[2])
 		self.app.current_doc = da.presenter
 		self.set_win_title(da.caption)
+		events.emit(events.DOC_CHANGED, self)
 
 	def set_tab_title(self, tab, title):
 		tab.set_caption(title)
-		if self.nb.page_num(tab) == self.nb.current_page():
+		if self.nb.page_num(tab) == self.nb.get_current_page():
 			self.set_win_title(title)
 
 

@@ -17,7 +17,7 @@
 
 
 
-from sk1app import events
+from skencil import events
 from uc2.sk1doc import model
 
 class PresenterAPI:
@@ -45,8 +45,6 @@ class PresenterAPI:
 		self.redo = []
 
 	def do_undo(self):
-#		canvas = self.presenter.view
-#		canvas.set_temp_cursor(canvas.wait_cursor)
 		transaction_list = self.undo[-1][0]
 		for transaction in transaction_list:
 			self._do_action(transaction)
@@ -58,13 +56,8 @@ class PresenterAPI:
 			self.presenter.reflect_saving()
 		if not self.undo and not self.undo_marked:
 			self.presenter.reflect_saving()
-#		if self.presenter.selection.items:
-#			self.view.sel_item.refresh()
-#		canvas.restore_cursor()
 
 	def do_redo(self):
-#		canvas = self.presenter.view
-#		canvas.set_temp_cursor(canvas.wait_cursor)
 		transaction_list = self.redo[-1][1]
 		for transaction in transaction_list:
 			self._do_action(transaction)
@@ -74,9 +67,6 @@ class PresenterAPI:
 		self.eventloop.emit(self.eventloop.DOC_MODIFIED)
 		if not self.undo or self.undo[-1][2]:
 			self.presenter.reflect_saving()
-#		if self.presenter.selection.items:
-#			self.view.sel_item.refresh()
-#		canvas.restore_cursor()
 
 	def _do_action(self, action):
 		if not action: return
@@ -111,7 +101,7 @@ class PresenterAPI:
 	def clear_history(self):
 		self.undo = []
 		self.redo = []
-		events.emit(events.DOC_CHANGED, self.presenter)
+		events.emit(events.DOC_MODIFIED, self.presenter)
 
 	def set_doc_origin(self, origin):
 		cur_origin = self.model.doc_origin
