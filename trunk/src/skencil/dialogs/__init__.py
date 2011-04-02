@@ -18,7 +18,54 @@
 import os
 import gtk
 
+from uc2.formats import data
+from uc2.utils.fs import expanduser_unicode
+
 from skencil import _, config
+
+def _get_open_fiters():
+	result = []
+	descr = data.FORMAT_DESCRIPTION
+	ext = data.FORMAT_EXTENSION
+	items = [] + data.LOADER_FORMATS
+	for item in items:
+		filter = gtk.FileFilter()
+		filter.set_name(descr[item])
+		filter.add_pattern('*.' + ext[item])
+		result.append(filter)
+
+	filter = gtk.FileFilter()
+	filter.set_name(_('All supported formats'))
+	for item in items:
+		filter.add_pattern('*.' + ext[item])
+	result.append(filter)
+
+	filter = gtk.FileFilter()
+	filter.set_name(_('All files'))
+	filter.add_pattern('*')
+	result.append(filter)
+
+	return result
+
+def get_open_file_name(parent, app, start_dir):
+
+	dialog = gtk.FileChooserDialog(_('Open file'),
+				parent,
+				gtk.FILE_CHOOSER_ACTION_OPEN,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+
+	dialog.set_default_response(gtk.RESPONSE_OK)
+	start_dir = expanduser_unicode(start_dir)
+	dialog.set_current_folder(start_dir)
+
+	for filter in _get_open_fiters():
+		dialog.add_filter(filter)
+
+	dialog.run()
+	result = dialog.get_filename()
+	dialog.destroy()
+	return result
 
 
 def about_dialog(parent):
