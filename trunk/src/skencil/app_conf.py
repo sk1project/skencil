@@ -59,10 +59,10 @@ class AppConfig(UCConfig):
 
 	mw_maximized = 1
 
-	mw_width = 900
+	mw_width = 1000
 	mw_height = 700
 
-	mw_min_width = 900
+	mw_min_width = 1000
 	mw_min_height = 700
 
 	set_doc_icon = 1
