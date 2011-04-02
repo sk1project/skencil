@@ -52,10 +52,10 @@ class MainWindow(gtk.Window):
 		hbox.pack_start(self.tools, False, False, 0)
 
 		self.nb_frame = gtk.EventBox()
-		self.nb_splash = SplashArea()
+		self.nb_splash = SplashArea(self)
 		hbox.pack_start(self.nb_frame, True, True, 2)
-		self.nodocs_color = self.get_style().fg[gtk.STATE_INSENSITIVE]
-		self.nb_splash.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
+#		self.nodocs_color = self.get_style().fg[gtk.STATE_INSENSITIVE]
+#		self.nb_splash.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
 
 		self.nb = gtk.Notebook()
 		self.nb_frame.add(self.nb_splash)
@@ -132,8 +132,53 @@ class MainWindow(gtk.Window):
 
 class SplashArea(gtk.DrawingArea):
 
-	def __init__(self):
+	def __init__(self, mw):
 		gtk.DrawingArea.__init__(self)
+		self.mw = mw
+		self.nodocs_color = self.mw.get_style().fg[gtk.STATE_INSENSITIVE]
+		self.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
+
+		r = self.nodocs_color.red / 0xff
+		g = self.nodocs_color.green / 0xff
+		b = self.nodocs_color.blue / 0xff
+		self.pixel = r * 256 * 256 * 256 + g * 65536 + b * 256 + 255
+
+		banner_file = os.path.join(config.resource_dir, 'cairo_banner.png')
+		self.cairo_banner = gtk.gdk.pixbuf_new_from_file(banner_file)
+		banner_file = os.path.join(config.resource_dir, 'skencil_banner.png')
+		self.skencil_banner = gtk.gdk.pixbuf_new_from_file(banner_file)
+		self.connect('expose_event', self.repaint)
+
+	def repaint(self, *args):
+		_x, _y, w, h = self.allocation
+		self.composite(self.cairo_banner, 5,
+					h - self.cairo_banner.get_height() - 5)
+		self.composite(self.skencil_banner,
+					w / 2 - self.skencil_banner.get_width() / 2,
+					(h - self.skencil_banner.get_height()) / 3)
+
+	def composite(self, banner, x, y):
+		frame = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,
+							False, 8,
+            banner.get_width(),
+            banner.get_height())
+
+		frame.fill(self.pixel)
+		banner.composite(
+			frame,
+			0, 0,
+            banner.get_width(),
+            banner.get_height(),
+            0, 0, 1, 1, gtk.gdk.INTERP_NEAREST, 255)
+
+		self.window.draw_rgb_image(
+            self.style.black_gc,
+            x, y,
+            frame.get_width(),
+            frame.get_height(),
+            gtk.gdk.RGB_DITHER_NORMAL,
+            frame.get_pixels(),
+            frame.get_rowstride())
 
 
 
