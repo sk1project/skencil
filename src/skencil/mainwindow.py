@@ -129,6 +129,9 @@ class MainWindow(gtk.Window):
 		if self.nb.page_num(tab) == self.nb.get_current_page():
 			self.set_win_title(title)
 
+	def set_active_tab(self, tab):
+		self.nb.set_current_page(self.nb.page_num(tab))
+
 
 class SplashArea(gtk.DrawingArea):
 

@@ -108,7 +108,8 @@ def get_save_file_name(parent, app, path):
 	dialog.destroy()
 	return result
 
-def msg_dialog(parent, title, text, seconary_text='', dlg_type=gtk.MESSAGE_WARNING):
+def msg_dialog(parent, title, text, seconary_text='',
+			dlg_type=gtk.MESSAGE_ERROR):
 	dialog = gtk.MessageDialog(parent,
 					flags=gtk.DIALOG_MODAL,
 					type=dlg_type,
@@ -119,6 +120,23 @@ def msg_dialog(parent, title, text, seconary_text='', dlg_type=gtk.MESSAGE_WARNI
 	dialog.set_title(title)
 	dialog.run()
 	dialog.destroy()
+
+def warning_dialog(parent, title, text, seconary_text='',
+				buttons=[(gtk.STOCK_OK, gtk.RESPONSE_OK)],
+				dlg_type=gtk.MESSAGE_WARNING):
+	dialog = gtk.MessageDialog(parent,
+					flags=gtk.DIALOG_MODAL,
+					type=dlg_type,
+					message_format=text)
+	if seconary_text:
+		dialog.format_secondary_text(seconary_text)
+	for button in buttons:
+		dialog.add_button(button[0], button[1])
+	dialog.set_title(title)
+	dialog.set_default_response(buttons[-1][1])
+	ret = dialog.run()
+	dialog.destroy()
+	return ret
 
 
 def about_dialog(parent):

@@ -102,10 +102,33 @@ class Application:
 			return
 		if doc is None:
 			doc = self.current_doc
-		doc.close()
-		self.docs.remove(doc)
-		if not self.docs:
-			events.emit(events.NO_DOCS)
+
+		if not self.mw.nb.page_num(doc.docarea) == self.mw.nb.get_current_page():
+			self.mw.set_active_tab(doc.docarea)
+
+		if self.inspector.is_doc_not_saved(doc):
+			first = _("Document '%s' has been modified.") % (doc.doc_name)
+			second = _('Do you want to save your changes?')
+			ret = dialogs.warning_dialog(self.mw, self.appdata.app_name,
+					first, second,
+					[(_("Don't save") , gtk.RESPONSE_NO,),
+					(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL),
+					(gtk.STOCK_SAVE, gtk.RESPONSE_OK)])
+
+			if ret == gtk.RESPONSE_OK:
+				if not self.save(): return False
+			elif ret == gtk.RESPONSE_NO: pass
+			else: return False
+
+		if doc in self.docs:
+			self.docs.remove(doc)
+			doc.close()
+			events.emit(events.DOC_CLOSED)
+			if not len(self.docs):
+				self.current_doc = None
+				events.emit(events.NO_DOCS)
+				msg = _('To start create new or open existing document')
+				events.emit(events.APP_STATUS, msg)
 		return True
 
 	def close_all(self):
@@ -127,8 +150,7 @@ class Application:
 				msg = _('Cannot open file')
 				msg = "%s '%s'" % (msg, doc_file)
 				sec = _('The file may be corrupted or not supported format')
-				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec,
-								gtk.MESSAGE_ERROR)
+				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec)
 				return
 			self.docs.append(doc)
 			self.set_current_doc(doc)
@@ -177,8 +199,7 @@ class Application:
 				sec = _('Please check file name and write permissions')
 				msg = ("%s '%s'.") % (first, self.current_doc.doc_name)
 
-				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec,
-								gtk.MESSAGE_ERROR)
+				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec)
 
 				return False
 			config.save_dir = os.path.dirname(doc_file)
