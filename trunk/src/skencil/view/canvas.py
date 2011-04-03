@@ -23,7 +23,9 @@ from uc2.uc_conf import mm_to_pt, PAGE_FORMATS
 from skencil import _, config
 from skencil import modes, events
 
+import controllers
 from renderer import CairoRenderer
+
 
 PAGEFIT = 0.9
 ZOOM_IN = 1.25
@@ -41,6 +43,8 @@ class AppCanvas(gtk.DrawingArea):
 	width = 0
 	height = 0
 	mode = None
+	controller = None
+	ctrls = None
 
 	def __init__(self, parent):
 
@@ -52,6 +56,15 @@ class AppCanvas(gtk.DrawingArea):
 
 		self.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color("#ffffff"))
 
+		self.add_events(gtk.gdk.BUTTON_PRESS_MASK |
+					gtk.gdk.POINTER_MOTION_MASK |
+					gtk.gdk.BUTTON_RELEASE_MASK |
+              		gtk.gdk.SCROLL_MASK)
+
+		self.connect('button_press_event', self.mousePressEvent)
+		self.connect('motion_notify_event', self.mouseMoveEvent)
+		self.connect('button_release_event', self.mouseReleaseEvent)
+		self.connect('scroll-event', self.wheelEvent)
 
 		self.connect('expose_event', self.repaint)
 		self.trafo = [1.0, 0.0, 0.0, 1.0, 0.0 , 0.0]
@@ -62,12 +75,31 @@ class AppCanvas(gtk.DrawingArea):
 		self.dummy_doc = DummyDoc()
 		self.renderer = CairoRenderer(self)
 		self.my_change = False
+		self.ctrls = self.init_controllers()
+
+	def init_controllers(self):
+		dummy = controllers.AbstractController(self, self.presenter)
+		ctrls = {
+		modes.SELECT_MODE: dummy,
+		modes.SHAPER_MODE: dummy,
+		modes.ZOOM_MODE: dummy,
+		modes.FLEUR_MODE: controllers.FleurController(self, self.presenter),
+		modes.LINE_MODE: dummy,
+		modes.CURVE_MODE: dummy,
+		modes.RECT_MODE: dummy,
+		modes.ELLIPSE_MODE: dummy,
+		modes.TEXT_MODE: dummy,
+		modes.POLYGON_MODE: dummy,
+		modes.MOVE_MODE: dummy
+		}
+		return ctrls
 
 
 	def set_mode(self, mode):
 		if not mode == self.mode:
 			self.mode = mode
 			self.set_canvas_cursor(mode)
+			self.controller = self.ctrls[mode]
 			events.emit(events.MODE_CHANGED, mode)
 
 	def set_canvas_cursor(self, mode):
@@ -195,6 +227,29 @@ class AppCanvas(gtk.DrawingArea):
 			self.set_mode(modes.SELECT_MODE)
 		self._keep_center()
 		self.renderer.paint_document()
+
+#==============EVENT CONTROLLING==========================
+	def mouseDoubleClickEvent(self, widget, event):
+		pass
+
+	def mouseMoveEvent(self, widget, event):
+		self.controller.mouse_move(event)
+
+	def mousePressEvent(self, widget, event):
+		self.set_canvas_cursor(self.mode)
+		self.controller.mouse_down(event)
+
+	def mouseReleaseEvent(self, widget, event):
+		self.controller.mouse_up(event)
+
+	def wheelEvent(self, widget, event):
+		self.controller.wheel(event)
+
+	def keyPressEvent(self, widget, event):
+		pass
+
+	def keyReleaseEvent(self, widget, event):
+		pass
 
 
 
