@@ -26,6 +26,7 @@ from uc2 import sk1doc
 from skencil import _, config
 from skencil import events
 import dialogs
+import modes
 from app_conf import AppData
 from proxy import AppProxy
 from inspector import DocumentInspector
@@ -46,6 +47,7 @@ class Application:
 	proxy = None
 	inspector = None
 	default_cms = None
+	cursors = None
 
 
 	def __init__(self, path):
@@ -54,6 +56,7 @@ class Application:
 		self.appdata = AppData()
 		config.load(self.appdata.app_config)
 
+		self.cursors = modes.get_cursors()
 		self.default_cms = cms.ColorManager(self.stub)
 		self.proxy = AppProxy(self)
 		self.inspector = DocumentInspector(self)

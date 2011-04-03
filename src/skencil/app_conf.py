@@ -65,7 +65,7 @@ class AppConfig(UCConfig):
 	mw_min_width = 1000
 	mw_min_height = 700
 
-	show_splash = 0
+	show_splash = 1
 
 	set_doc_icon = 1
 
