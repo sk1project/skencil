@@ -89,12 +89,14 @@ class AppCanvas(gtk.DrawingArea):
 		self.mw.h_adj.set_lower(-WORKSPACE_WIDTH / 2.0)
 		self.mw.h_adj.set_upper(WORKSPACE_WIDTH / 2.0)
 		self.mw.h_adj.set_page_size(self.width / m11)
+		self.mw.h_adj.set_step_increment(self.width / (m11 * 10.0))
 		self.my_change = True
 		self.mw.h_adj.set_value(x)
 
 		self.mw.v_adj.set_lower(-WORKSPACE_HEIGHT / 2.0)
 		self.mw.v_adj.set_upper(WORKSPACE_HEIGHT / 2.0)
 		self.mw.v_adj.set_page_size(self.height / m11)
+		self.mw.v_adj.set_step_increment(self.height / (m11 * 10.0))
 		self.my_change = True
 		self.mw.v_adj.set_value(-y)
 
