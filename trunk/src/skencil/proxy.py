@@ -16,6 +16,7 @@
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
 import dialogs
+import modes
 
 class AppProxy:
 
@@ -103,3 +104,45 @@ class AppProxy:
 	def about(self, *args):
 		dialogs.about_dialog(self.mw)
 
+	#----Canvas modes
+
+	def set_select_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.SELECT_MODE)
+
+	def set_shaper_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.SHAPER_MODE)
+
+	def set_zoom_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.ZOOM_MODE)
+
+	def set_fleur_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.FLEUR_MODE)
+
+	def set_line_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.LINE_MODE)
+
+	def set_curve_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.CURVE_MODE)
+
+	def set_rect_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.RECT_MODE)
+
+	def set_ellipse_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.ELLIPSE_MODE)
+
+	def set_text_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.TEXT_MODE)
+
+	def set_polygon_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.POLYGON_MODE)
+
+	def set_zoom_out_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.ZOOM_OUT_MODE)
+
+	def set_move_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.MOVE_MODE)
+
+	def set_copy_mode(self, *args):
+		self.app.current_doc.canvas.set_mode(modes.COPY_MODE)
+
+	#-------

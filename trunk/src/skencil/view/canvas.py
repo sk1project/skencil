@@ -19,8 +19,9 @@ import gtk
 import cairo
 
 
-from skencil import _, config
 from uc2.uc_conf import mm_to_pt, PAGE_FORMATS
+from skencil import _, config
+from skencil import modes, events
 
 from renderer import CairoRenderer
 
@@ -39,6 +40,7 @@ class AppCanvas(gtk.DrawingArea):
 	zoom = 1.0
 	width = 0
 	height = 0
+	mode = None
 
 	def __init__(self, parent):
 
@@ -46,6 +48,7 @@ class AppCanvas(gtk.DrawingArea):
 		self.mw = parent
 		self.presenter = parent.presenter
 		self.eventloop = self.presenter.eventloop
+		self.app = self.presenter.app
 
 		self.modify_bg(gtk.STATE_NORMAL, gtk.gdk.Color("#ffffff"))
 
@@ -60,8 +63,15 @@ class AppCanvas(gtk.DrawingArea):
 		self.renderer = CairoRenderer(self)
 		self.my_change = False
 
-	def test(self, *args):
-		print self.mw.v_adj.get_value()
+
+	def set_mode(self, mode):
+		if not mode == self.mode:
+			self.mode = mode
+			self.set_canvas_cursor(mode)
+			events.emit(events.MODE_CHANGED, mode)
+
+	def set_canvas_cursor(self, mode):
+		self.window.set_cursor(self.app.cursors[mode])
 
 	def vscroll(self, *args):
 		if self.my_change:
@@ -182,6 +192,7 @@ class AppCanvas(gtk.DrawingArea):
 	def repaint(self, *args):
 		if self.matrix is None:
 			self.zoom_fit_to_page()
+			self.set_mode(modes.SELECT_MODE)
 		self._keep_center()
 		self.renderer.paint_document()
 

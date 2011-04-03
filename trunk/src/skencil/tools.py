@@ -19,6 +19,7 @@ import os
 import gtk
 
 from skencil import _, config
+from skencil import events, modes
 
 class AppTools(gtk.VBox):
 
@@ -28,16 +29,19 @@ class AppTools(gtk.VBox):
 		self.app = mw.app
 		self.actions = self.app.actions
 
-		icons = ['select.png',
-			   'shaper.png',
-			   'fleur.png',
-			   'zoom.png',
-			   'create_poly.png',
-			   'create_curve.png',
-			   'create_rect.png',
-			   'create_ellipse.png',
-			   'create_polygon.png',
-			   'create_text.png',
+		spacer = gtk.EventBox()
+		self.pack_start(spacer, False, False, 10)
+
+		items = [('select.png', 'SELECT_MODE', modes.SELECT_MODE),
+			   ('shaper.png', 'SHAPER_MODE', modes.SHAPER_MODE),
+			   ('fleur.png', 'FLEUR_MODE', modes.FLEUR_MODE),
+			   ('zoom.png', 'ZOOM_MODE', modes.ZOOM_MODE),
+			   ('create_poly.png', 'LINE_MODE', modes.LINE_MODE),
+			   ('create_curve.png', 'CURVE_MODE', modes.CURVE_MODE),
+			   ('create_rect.png', 'RECT_MODE', modes.RECT_MODE),
+			   ('create_ellipse.png', 'ELLIPSE_MODE', modes.ELLIPSE_MODE),
+			   ('create_polygon.png', 'POLYGON_MODE', modes.POLYGON_MODE),
+			   ('create_text.png', 'TEXT_MODE', modes.TEXT_MODE),
 			   None,
 			   'stroke.png',
 			   'fill.png',
@@ -45,15 +49,64 @@ class AppTools(gtk.VBox):
 			   None,
 			   ]
 
-		for icon_file in icons:
-			if icon_file is None:
+		for item in items:
+			if item is None:
 				self.pack_start(gtk.HSeparator(), False, False, 0)
 			else:
+				if len(item) == 3:
+					icon_file = item[0]
+					action = self.actions[item[1]]
+				else:
+					icon_file = item
+					action = None
 				icon_file = os.path.join(config.resource_dir,
 										 'icons', 'tools', icon_file)
 				icon = gtk.Image()
 				icon.set_from_file(icon_file)
-				toolbutton = gtk.ToolButton(icon)
+				if len(item) == 3:
+					toolbutton = AppToggleButton(self.app, item[2], icon, action)
+				else:
+					toolbutton = AppToolButton(self.app, icon)
 				self.pack_start(toolbutton, False, False, 0)
+
+class AppToggleButton(gtk.ToggleToolButton):
+
+	def __init__(self, app, mode, image, action):
+		gtk.ToggleToolButton.__init__(self)
+		self.app = app
+		self.mode = mode
+		self.action = action
+		self.set_icon_widget(image)
+		self.set_tooltip_text(self.action.tooltip)
+		events.connect(events.MODE_CHANGED, self.check_mode)
+		events.connect(events.DOC_CHANGED, self.check_mode)
+		self.connect('toggled', self.toggle_changed)
+		self.mode_flag = False
+
+	def check_mode(self, *args):
+		canvas = self.app.current_doc.canvas
+		if canvas.mode == self.mode:
+			self.mode_flag = True
+			self.set_property('active', True)
+		else:
+			self.mode_flag = False
+			self.set_property('active', False)
+
+	def toggle_changed(self, *args):
+		if self.mode_flag and not self.get_active():
+			self.set_property('active', True)
+		if self.get_active() and not self.mode_flag:
+			self.action.activate()
+
+class AppToolButton(gtk.ToolButton):
+
+	def __init__(self, app, image, action=None):
+		gtk.ToolButton.__init__(self, image)
+		self.app = app
+		self.action = action
+		if not action is None:
+			action.connect_proxy(self)
+
+
 
 
