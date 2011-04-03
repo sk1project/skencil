@@ -68,6 +68,45 @@ def get_open_file_name(parent, app, start_dir):
 	dialog.destroy()
 	return result
 
+def _get_save_fiters():
+	result = []
+	descr = data.FORMAT_DESCRIPTION
+	ext = data.FORMAT_EXTENSION
+	items = [] + data.SAVER_FORMATS
+	for item in items:
+		filter = gtk.FileFilter()
+		filter.set_name(descr[item])
+		filter.add_pattern('*.' + ext[item])
+		result.append(filter)
+
+	return result
+
+def get_save_file_name(parent, app, path):
+	result = ''
+	dialog = gtk.FileChooserDialog(_('Save file As...'),
+				parent,
+				gtk.FILE_CHOOSER_ACTION_SAVE,
+				(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+					gtk.STOCK_SAVE, gtk.RESPONSE_OK))
+	dialog.set_do_overwrite_confirmation(True)
+
+	dialog.set_default_response(gtk.RESPONSE_OK)
+	path = expanduser_unicode(path)
+
+	doc_folder = os.path.dirname(path)
+	dialog.set_current_folder(doc_folder)
+
+	doc_name = os.path.basename(path)
+	dialog.set_current_name(doc_name)
+
+	for filter in _get_save_fiters():
+		dialog.add_filter(filter)
+
+	ret = dialog.run()
+	if not ret == gtk.RESPONSE_CANCEL:
+		result = dialog.get_filename()
+	dialog.destroy()
+	return result
 
 def msg_dialog(parent, title, text, seconary_text='', dlg_type=gtk.MESSAGE_WARNING):
 	dialog = gtk.MessageDialog(parent,

@@ -153,8 +153,43 @@ class Application:
 			return False
 		events.emit(events.APP_STATUS, self.tr('Document saved'))
 		return True
+
 	def save_as(self):
-		pass
+		doc_file = '' + self.current_doc.doc_file
+		if not doc_file:
+			doc_file = '' + self.current_doc.doc_name
+		if not os.path.splitext(doc_file)[1] == sk1doc.DOC_EXTENSION:
+			doc_file = os.path.splitext(doc_file)[0] + sk1doc.DOC_EXTENSION
+		if not os.path.lexists(os.path.dirname(doc_file)):
+			doc_file = os.path.join(config.save_dir,
+								os.path.basename(doc_file))
+		doc_file = dialogs.get_save_file_name(self.mw, self, doc_file)
+		if doc_file:
+			old_file = self.current_doc.doc_file
+			old_name = self.current_doc.doc_name
+			self.current_doc.set_doc_file(doc_file)
+			try:
+				self.current_doc.save()
+			except IOError:
+				self.current_doc.set_doc_file(old_file, old_name)
+
+				first = _('Cannot save document')
+				sec = _('Please check file name and write permissions')
+				msg = ("%s '%s'.") % (first, self.current_doc.doc_name)
+
+				dialogs.msg_dialog(self.mw, self.appdata.app_name, msg, sec,
+								gtk.MESSAGE_ERROR)
+
+				return False
+			config.save_dir = os.path.dirname(doc_file)
+			events.emit(events.APP_STATUS, _('Document saved'))
+			return True
+		else:
+			return False
+
+	def save_all(self):
+		for doc in [] + self.docs:
+			self.save(doc)
 
 	def insert_doc(self):
 		pass
