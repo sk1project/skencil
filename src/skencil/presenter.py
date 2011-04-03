@@ -77,3 +77,24 @@ class DocPresenter(UCDocPresenter):
 			title = self.doc_name + '*'
 		self.app.mw.set_tab_title(self.docarea, title)
 
+	def set_doc_file(self, doc_file, doc_name=''):
+		self.doc_file = doc_file
+		if doc_name:
+			self.doc_name = doc_name
+		else:
+			self.doc_name = os.path.basename(self.doc_file)
+		self.set_title()
+
+	def save(self):
+		try:
+			if config.make_backup:
+				if os.path.lexists(self.doc_file):
+					if os.path.lexists(self.doc_file + '~'):
+						os.remove(self.doc_file + '~')
+					os.rename(self.doc_file, self.doc_file + '~')
+			UCDocPresenter.save(self, self.doc_file)
+		except IOError:
+			errtype, value, traceback = sys.exc_info()
+			raise IOError(errtype, value, traceback)
+		self.reflect_saving()
+
