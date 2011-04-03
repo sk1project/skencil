@@ -153,12 +153,13 @@ class SplashArea(gtk.DrawingArea):
 		self.connect('expose_event', self.repaint)
 
 	def repaint(self, *args):
-		_x, _y, w, h = self.allocation
-		self.composite(self.cairo_banner, 5,
-					h - self.cairo_banner.get_height() - 5)
-		self.composite(self.skencil_banner,
-					w / 2 - self.skencil_banner.get_width() / 2,
-					(h - self.skencil_banner.get_height()) / 3)
+		if config.show_splash:
+			_x, _y, w, h = self.allocation
+			self.composite(self.cairo_banner, 5,
+						h - self.cairo_banner.get_height() - 5)
+			self.composite(self.skencil_banner,
+						w / 2 - self.skencil_banner.get_width() / 2,
+						(h - self.skencil_banner.get_height()) / 3)
 
 	def composite(self, banner, x, y):
 		frame = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB,

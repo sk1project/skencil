@@ -57,13 +57,15 @@ class AppConfig(UCConfig):
 	# 1 - windowed 
 	interface_type = 0
 
-	mw_maximized = 1
+	mw_maximized = 0
 
 	mw_width = 1000
 	mw_height = 700
 
 	mw_min_width = 1000
 	mw_min_height = 700
+
+	show_splash = 0
 
 	set_doc_icon = 1
 
