@@ -43,6 +43,9 @@ class AppProxy:
 	def save_as(self, *args):
 		self.app.save_as()
 
+	def save_all(self, *args):
+		self.app.save_all()
+
 	def close(self, *args):
 		self.app.close()
 
