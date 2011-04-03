@@ -23,6 +23,7 @@ import cairo
 
 from uc2.uc_conf import unit_dict
 from uc2 import sk1doc
+from uc2.utils import system
 
 from skencil import _, config
 
@@ -106,11 +107,18 @@ class RulerCorner(gtk.DrawingArea):
 		self.presenter.api.set_doc_origin(origin)
 
 	def repaint(self, *args):
-		color = self.get_style().bg[gtk.STATE_ACTIVE]
-		r = color.red / 65535.0
-		g = color.green / 65535.0
-		b = color.blue / 65535.0
-		bgcolor = self.get_style().bg[gtk.STATE_NORMAL]
+		if config.ruler_style:
+			color = self.get_style().bg[gtk.STATE_ACTIVE]
+			r = color.red / 65535.0
+			g = color.green / 65535.0
+			b = color.blue / 65535.0
+		else:
+			r = g = b = 0
+
+		if system.get_os_family() == system.WINDOWS:
+			bgcolor = self.get_style().base[gtk.STATE_NORMAL]
+		else:
+			bgcolor = self.get_style().bg[gtk.STATE_NORMAL]
 		r0 = bgcolor.red / 65535.0
 		g0 = bgcolor.green / 65535.0
 		b0 = bgcolor.blue / 65535.0
@@ -299,7 +307,10 @@ class Ruler(gtk.DrawingArea):
 
 		r, g, b = self.border_color
 
-		color = self.get_style().bg[gtk.STATE_NORMAL]
+		if system.get_os_family() == system.WINDOWS:
+			color = self.get_style().base[gtk.STATE_NORMAL]
+		else:
+			color = self.get_style().bg[gtk.STATE_NORMAL]
 		self.bg_color = [color.red / 65535.0,
 					color.green / 65535.0,
 					color.blue / 65535.0]
@@ -315,6 +326,8 @@ class Ruler(gtk.DrawingArea):
 			self.grad.add_color_stop_rgb(0, r0, g0, b0)
 			self.grad.add_color_stop_rgb(1, r, g, b)
 
+		if not config.ruler_style:
+			self.border_color = [0, 0, 0]
 
 	def repaint(self, *args):
 		if not self.exposed:
@@ -330,12 +343,15 @@ class Ruler(gtk.DrawingArea):
 		painter = cairo.Context(buffer)
 
 		painter.set_antialias(cairo.ANTIALIAS_NONE)
+		painter.set_source_rgb(r0, g0, b0)
+		painter.paint()
 
 		painter.set_line_width(1)
 		if self.orient:
-			painter.set_source(self.grad)
-			painter.rectangle(-1, -1, SIZE, h)
-			painter.fill ()
+			if config.ruler_style:
+				painter.set_source(self.grad)
+				painter.rectangle(-1, -1, SIZE, h)
+				painter.fill ()
 
 			painter.set_source_rgb(r, g, b)
 			painter.rectangle(-1, -1, SIZE, h)
@@ -344,9 +360,10 @@ class Ruler(gtk.DrawingArea):
 			painter.set_source_rgb(0, 0, 0)
 			self.draw_vertical(painter)
 		else:
-			painter.set_source(self.grad)
-			painter.rectangle(-1, -1, w , SIZE)
-			painter.fill ()
+			if config.ruler_style:
+				painter.set_source(self.grad)
+				painter.rectangle(-1, -1, w , SIZE)
+				painter.fill ()
 
 			painter.set_source_rgb(r, g, b)
 			painter.rectangle(-1, -1, w , SIZE)

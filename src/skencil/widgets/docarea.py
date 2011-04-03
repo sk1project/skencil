@@ -17,9 +17,11 @@
 
 import gtk
 
+from uc2.utils import system
 
 from skencil.view.canvas import AppCanvas
 from ruler import RulerCorner, Ruler
+
 
 class DocArea(gtk.Table):
 
@@ -32,9 +34,6 @@ class DocArea(gtk.Table):
 		self.caption = presenter.doc_name
 
 		self.tab_caption = TabCaption(self, self.caption)
-
-		self.frame = gtk.Frame()
-		self.frame.set_property('shadow_type', gtk.SHADOW_NONE)
 
 		da_box = gtk.Table(3, 3, False)
 
@@ -59,10 +58,14 @@ class DocArea(gtk.Table):
 		da_box.attach(self.canvas, 1, 2, 1, 2, gtk.FILL | gtk.EXPAND,
 			gtk.FILL | gtk.EXPAND, 0, 0)
 
-		self.frame.add(da_box)
-		self.attach(self.frame, 0, 1, 0, 1,
+		if system.get_os_family() == system.WINDOWS:
+			xpad = 2; ypad = 0
+		else:
+			xpad = ypad = 3
+
+		self.attach(da_box, 0, 1, 0, 1,
 					gtk.EXPAND | gtk.FILL, gtk.EXPAND | gtk.FILL,
-					xpadding=1, ypadding=1)
+					xpadding=xpad, ypadding=ypad)
 
 	def set_caption(self, caption):
 		self.caption = caption

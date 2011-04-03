@@ -47,15 +47,13 @@ class MainWindow(gtk.Window):
 
 		#---CENTRAL PART
 		hbox = gtk.HBox(False, 0)
-
+		self.tools_frame = gtk.EventBox()
 		self.tools = AppTools(self)
-		hbox.pack_start(self.tools, False, False, 0)
+		hbox.pack_start(self.tools_frame, False, False, 1)
 
 		self.nb_frame = gtk.EventBox()
 		self.nb_splash = SplashArea(self)
-		hbox.pack_start(self.nb_frame, True, True, 2)
-#		self.nodocs_color = self.get_style().fg[gtk.STATE_INSENSITIVE]
-#		self.nb_splash.modify_bg(gtk.STATE_NORMAL, self.nodocs_color)
+		hbox.pack_start(self.nb_frame, True, True, 1)
 
 		self.nb = gtk.Notebook()
 		self.nb_frame.add(self.nb_splash)
@@ -83,7 +81,6 @@ class MainWindow(gtk.Window):
 		self.show_all()
 		if config.mw_maximized:
 			self.window.maximize()
-		self.tools.set_visible(False)
 
 	def exit(self, *args):
 		if self.app.exit():
@@ -102,7 +99,8 @@ class MainWindow(gtk.Window):
 		if not self.nb.get_n_pages():
 			self.nb_frame.remove(self.nb_splash)
 			self.nb_frame.add(self.nb)
-			self.tools.set_visible(True)
+			self.tools_frame.add(self.tools)
+			self.tools_frame.show_all()
 		index = self.nb.append_page(da, da.tab_caption)
 		da.show_all()
 		self.nb.show_all()
@@ -116,7 +114,7 @@ class MainWindow(gtk.Window):
 			self.nb_frame.add(self.nb_splash)
 			self.set_win_title()
 			self.app.current_doc = None
-			self.tools.set_visible(False)
+			self.tools_frame.remove(self.tools)
 
 	def change_doc(self, *args):
 		da = self.nb.get_nth_page(args[2])
