@@ -16,8 +16,12 @@
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
 import gtk
+import gobject
 
 from skencil import modes
+
+ZOOM_IN = 1.25
+ZOOM_OUT = 0.8
 
 class AbstractController:
 
@@ -92,3 +96,101 @@ class FleurController(AbstractController):
 				ha.set_value(ha.get_value() - dx / zoom)
 				va.set_value(va.get_value() - dy / zoom)
 				self.start = self.end
+
+class ZoomController(AbstractController):
+
+	counter = 0
+	timer = None
+	DELAY = 50
+
+	def __init__(self, canvas, presenter):
+		AbstractController.__init__(self, canvas, presenter)
+
+	def mouse_down(self, event):
+		if event.button == 1:
+			self.draw = True
+			self.start = [event.x, event.y]
+			self.end = [event.x, event.y]
+			self.counter = 0
+			self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+		elif event.button == 3:
+			self.start = [event.x, event.y]
+			cursor = self.canvas.app.cursors[modes.ZOOM_OUT_MODE]
+			self.canvas.set_temp_cursor(cursor)
+
+	def _draw_frame(self,):
+		if self.end:
+			self.canvas.renderer.draw_frame(self.start, self.end)
+			self.end = []
+		return True
+
+	def mouse_move(self, event):
+		if self.draw:
+			self.end = [event.x, event.y]
+
+	def mouse_up(self, event):
+		if event.button == 1:
+			if self.draw:
+				gobject.source_remove(self.timer)
+				self.draw = False
+				self.counter = 0
+				self.end = [event.x, event.y]
+				self.canvas.renderer.stop_draw_frame(self.start, self.end)
+				if self.start and self.end:
+					change_x = abs(self.end[0] - self.start[0])
+					change_y = abs(self.end[1] - self.start[1])
+					if change_x < 5 and change_y < 5:
+						self.canvas.zoom_at_point(self.start, ZOOM_IN)
+					else:
+						self.canvas.zoom_to_rectangle(self.start, self.end)
+			self.end = []
+			self.start = []
+		elif event.button == 3:
+			if not self.draw:
+				self.canvas.zoom_at_point(self.start, ZOOM_OUT)
+				self.canvas.restore_cursor()
+
+class SelectController(AbstractController):
+
+	counter = 0
+	timer = None
+	DELAY = 50
+
+	def __init__(self, canvas, presenter):
+		AbstractController.__init__(self, canvas, presenter)
+
+	def mouse_down(self, event):
+		if event.button == 1:
+			self.draw = True
+			self.start = [event.x, event.y]
+			self.end = [event.x, event.y]
+			self.counter = 0
+			self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+
+	def _draw_frame(self,):
+		if self.end:
+			self.canvas.renderer.draw_frame(self.start, self.end)
+			self.end = []
+		return True
+
+	def mouse_move(self, event):
+		if self.draw:
+			self.end = [event.x, event.y]
+
+	def mouse_up(self, event):
+		if event.button == 1:
+			if self.draw:
+				gobject.source_remove(self.timer)
+				self.draw = False
+				self.counter = 0
+				self.end = [event.x, event.y]
+				self.canvas.renderer.stop_draw_frame(self.start, self.end)
+				if self.start and self.end:
+					change_x = abs(self.end[0] - self.start[0])
+					change_y = abs(self.end[1] - self.start[1])
+					if change_x < 5 and change_y < 5:
+						self.canvas.select_at_point(self.start)
+					else:
+						self.canvas.select_by_rectangle(self.start, self.end)
+			self.end = []
+			self.start = []
