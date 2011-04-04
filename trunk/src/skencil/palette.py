@@ -24,7 +24,7 @@ from skencil.widgets.palette_widget import PaletteWidget
 class Palette(gtk.HBox):
 
 	def __init__(self, mw):
-		gtk.HBox.__init__(self)
+		gtk.HBox.__init__(self, False, 0)
 		self.mw = mw
 		self.app = mw.app
 
@@ -36,6 +36,7 @@ class Palette(gtk.HBox):
 		self.back.connect('clicked', self.action_back)
 
 		self.no_color = gtk.EventBox()
+		self.no_color.set_size_request(-1, 22)
 		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
 		loader = gtk.gdk.pixbuf_new_from_file
 		image = gtk.Image()
