@@ -73,7 +73,7 @@ class AppCanvas(gtk.DrawingArea):
 		self.mw.v_adj.connect('value_changed', self.vscroll)
 
 		self.doc = self.presenter.model
-		self.dummy_doc = DummyDoc()
+#		self.dummy_doc = DummyDoc()
 		self.renderer = CairoRenderer(self)
 		self.my_change = False
 		self.ctrls = self.init_controllers()
