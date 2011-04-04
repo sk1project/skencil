@@ -32,21 +32,22 @@ class AppTools(gtk.VBox):
 		spacer = gtk.EventBox()
 		self.pack_start(spacer, False, False, 10)
 
-		items = [('select.png', 'SELECT_MODE', modes.SELECT_MODE),
-			   ('shaper.png', 'SHAPER_MODE', modes.SHAPER_MODE),
-			   ('fleur.png', 'FLEUR_MODE', modes.FLEUR_MODE),
-			   ('zoom.png', 'ZOOM_MODE', modes.ZOOM_MODE),
-			   ('create_poly.png', 'LINE_MODE', modes.LINE_MODE),
-			   ('create_curve.png', 'CURVE_MODE', modes.CURVE_MODE),
-			   ('create_rect.png', 'RECT_MODE', modes.RECT_MODE),
-			   ('create_ellipse.png', 'ELLIPSE_MODE', modes.ELLIPSE_MODE),
-			   ('create_polygon.png', 'POLYGON_MODE', modes.POLYGON_MODE),
-			   ('create_text.png', 'TEXT_MODE', modes.TEXT_MODE),
-			   None,
-			   'stroke.png',
-			   'fill.png',
-			   'gradient.png',
-			   None,
+		items = [None,
+				('select.png', 'SELECT_MODE', modes.SELECT_MODE),
+				('shaper.png', 'SHAPER_MODE', modes.SHAPER_MODE),
+				('fleur.png', 'FLEUR_MODE', modes.FLEUR_MODE),
+				('zoom.png', 'ZOOM_MODE', modes.ZOOM_MODE),
+				('create_poly.png', 'LINE_MODE', modes.LINE_MODE),
+				('create_curve.png', 'CURVE_MODE', modes.CURVE_MODE),
+				('create_rect.png', 'RECT_MODE', modes.RECT_MODE),
+				('create_ellipse.png', 'ELLIPSE_MODE', modes.ELLIPSE_MODE),
+				('create_polygon.png', 'POLYGON_MODE', modes.POLYGON_MODE),
+				('create_text.png', 'TEXT_MODE', modes.TEXT_MODE),
+				None,
+				'stroke.png',
+				'fill.png',
+				'gradient.png',
+				None,
 			   ]
 
 		for item in items:
