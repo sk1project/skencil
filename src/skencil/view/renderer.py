@@ -98,7 +98,11 @@ class CairoRenderer:
 		self.ctx.rectangle(0, 0, 5, 5)
 		self.ctx.stroke()
 
+
 	def render_doc(self):
+		self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
+
+	def render_dummy_doc(self):
 		self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
 
 		for child in self.canvas.dummy_doc.childs:

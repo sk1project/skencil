@@ -3,7 +3,7 @@
 	<name>skencil-2.x</name>
 	<comment></comment>
 	<projects>
-		<project>uc2</project>
+		<project>uniconvertor-2.x</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
