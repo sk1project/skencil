@@ -28,8 +28,8 @@ from renderer import CairoRenderer
 
 
 PAGEFIT = 0.9
-ZOOM_IN = 1.25
-ZOOM_OUT = 0.8
+ZOOM_IN = 2.5
+ZOOM_OUT = 0.4
 
 WORKSPACE_HEIGHT = 2000 * mm_to_pt
 WORKSPACE_WIDTH = 4000 * mm_to_pt
@@ -45,6 +45,7 @@ class AppCanvas(gtk.DrawingArea):
 	mode = None
 	controller = None
 	ctrls = None
+	orig_cursor = None
 
 	def __init__(self, parent):
 
@@ -80,9 +81,9 @@ class AppCanvas(gtk.DrawingArea):
 	def init_controllers(self):
 		dummy = controllers.AbstractController(self, self.presenter)
 		ctrls = {
-		modes.SELECT_MODE: dummy,
+		modes.SELECT_MODE: controllers.SelectController(self, self.presenter),
 		modes.SHAPER_MODE: dummy,
-		modes.ZOOM_MODE: dummy,
+		modes.ZOOM_MODE: controllers.ZoomController(self, self.presenter),
 		modes.FLEUR_MODE: controllers.FleurController(self, self.presenter),
 		modes.LINE_MODE: dummy,
 		modes.CURVE_MODE: dummy,
@@ -104,6 +105,15 @@ class AppCanvas(gtk.DrawingArea):
 
 	def set_canvas_cursor(self, mode):
 		self.window.set_cursor(self.app.cursors[mode])
+
+	def set_temp_cursor(self, cursor):
+		self.orig_cursor = self.app.cursors[self.mode]
+		self.window.set_cursor(cursor)
+
+	def restore_cursor(self):
+		if not self.orig_cursor is None:
+			self.window.set_cursor(self.orig_cursor)
+			self.orig_cursor = None
 
 	def vscroll(self, *args):
 		if self.my_change:
@@ -157,6 +167,17 @@ class AppCanvas(gtk.DrawingArea):
 			self.width = w
 			self.height = h
 			self.update_scrolls()
+
+	def _set_center(self, center):
+		x, y = center
+		_dx = self.width / 2.0 - x
+		_dy = self.height / 2.0 - y
+		m11, m12, m21, m22, dx, dy = self.trafo
+		dx += _dx
+		dy += _dy
+		self.trafo = [m11, m12, m21, m22, dx, dy]
+		self.matrix = cairo.Matrix(m11, m12, m21, m22, dx, dy)
+		self.update_scrolls()
 
 	def doc_to_win(self, point=[0.0, 0.0]):
 		x, y = point
@@ -216,6 +237,30 @@ class AppCanvas(gtk.DrawingArea):
 
 	def zoom_100(self):
 		self._zoom(1.0 / self.zoom)
+
+	def zoom_at_point(self, point, zoom):
+		self._set_center(point)
+		self._zoom(zoom)
+
+	def zoom_to_rectangle(self, start, end):
+		x, y, w, h = self.allocation
+		w = float(w)
+		h = float(h)
+		self.width = w
+		self.height = h
+		width = abs(end[0] - start[0])
+		height = abs(end[1] - start[1])
+		zoom = min(w / width, h / height)
+		center = [start[0] + (end[0] - start[0]) / 2,
+				start[1] + (end[1] - start[1]) / 2]
+		self._set_center(center)
+		self._zoom(zoom)
+
+	def select_at_point(self, point):
+		pass
+
+	def select_by_rectangle(self, start, end):
+		pass
 
 	def force_redraw(self):
 		self.queue_draw()

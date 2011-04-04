@@ -19,6 +19,8 @@ import cairo
 
 class CairoRenderer:
 
+	direct_matrix = None
+
 	canvas = None
 	ctx = None
 	win_ctx = None
@@ -28,6 +30,35 @@ class CairoRenderer:
 	def __init__(self, canvas):
 
 		self.canvas = canvas
+		self.direct_matrix = cairo.Matrix(1.0, 0.0, 0.0, 1.0, 0.0, 0.0)
+
+	def draw_frame(self, start, end):
+		win_ctx = self.canvas.window.cairo_create()
+		surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
+								int(self.canvas.width),
+								int(self.canvas.height))
+		ctx = cairo.Context(surface)
+		ctx.set_source_surface(self.surface)
+		ctx.paint()
+		ctx.set_matrix(self.direct_matrix)
+		ctx.set_antialias(cairo.ANTIALIAS_NONE)
+		ctx.set_line_width(1.0)
+		ctx.set_source_rgb(1, 1, 1)
+		ctx.rectangle(start[0], start[1],
+					end[0] - start[0], end[1] - start[1])
+		ctx.stroke()
+		ctx.set_dash([5, 5])
+		ctx.set_source_rgb(0, 0, 0)
+		ctx.rectangle(start[0], start[1],
+					end[0] - start[0], end[1] - start[1])
+		ctx.stroke()
+		win_ctx.set_source_surface(surface)
+		win_ctx.paint()
+
+	def stop_draw_frame(self, start, end):
+		ctx = self.canvas.window.cairo_create()
+		ctx.set_source_surface(self.surface)
+		ctx.paint()
 
 	def paint_document(self):
 		self.doc = self.canvas.doc
