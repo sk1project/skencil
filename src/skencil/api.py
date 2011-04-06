@@ -15,10 +15,12 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from copy import deepcopy
 
-
+from skencil import _, config
 from skencil import events
 from uc2.sk1doc import model
+
 
 class PresenterAPI:
 
@@ -112,14 +114,47 @@ class PresenterAPI:
 		self.methods.set_doc_origin(origin)
 		self.add_undo(transaction)
 
+	def _delete_object(self, obj):
+		self.methods.delete_object(obj)
 
+	def _insert_object(self, obj, parent, index):
+		self.methods.insert_object(obj, parent, index)
+
+	def insert_object(self, obj, parent, index):
+		self._insert_object(obj, parent, index)
+		transaction = [
+			[[self._delete_object, obj]],
+			[[self._insert_object, obj, parent, index]],
+			False]
+		self.add_undo(transaction)
+
+	def _normalize_rect(self, rect):
+		x0, y0, x1, y1 = rect
+		x0, y0 = self.view.win_to_doc([x0, y0])
+		x1, y1 = self.view.win_to_doc([x1, y1])
+		new_rect = [0, 0, 0, 0]
+		if x0 < x1:
+			new_rect[0] = x0
+			new_rect[2] = x1 - x0
+		else:
+			new_rect[0] = x1
+			new_rect[2] = x0 - x1
+		if y0 < y1:
+			new_rect[1] = y0
+			new_rect[3] = y1 - y0
+		else:
+			new_rect[1] = y1
+			new_rect[3] = y0 - y1
+		return new_rect
 
 	def create_rectangle(self, rect):
-		rect = [rect.x(), rect.y(), rect.width(), rect.height()]
-		config = self.app.config
+		rect = self._normalize_rect(rect)
 		parent = self.presenter.active_layer
 		obj = model.Rectangle(config, parent, rect)
+		style = deepcopy(self.model.styles['Default Style'])
+		obj.style = style
+		obj.update()
 		index = len(parent.childs)
-#		self.insert_object(obj, None, parent, index)
+		self.insert_object(obj, parent, index)
 
 

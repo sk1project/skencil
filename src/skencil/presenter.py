@@ -51,6 +51,7 @@ class DocPresenter(UCDocPresenter):
 		self.api = PresenterAPI(self)
 		self.docarea = DocArea(self.app, self)
 		self.canvas = self.docarea.canvas
+		self.api.view = self.canvas
 		self.app.mw.add_tab(self.docarea)
 		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.modified)
 

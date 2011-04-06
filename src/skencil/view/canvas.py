@@ -19,11 +19,12 @@ import gtk
 import cairo
 
 
-from uc2.uc_conf import mm_to_pt, PAGE_FORMATS
+from uc2.uc_conf import mm_to_pt
 from skencil import _, config
 from skencil import modes, events
 
 import controllers
+import creators
 from renderer import CairoRenderer
 
 
@@ -73,10 +74,10 @@ class AppCanvas(gtk.DrawingArea):
 		self.mw.v_adj.connect('value_changed', self.vscroll)
 
 		self.doc = self.presenter.model
-#		self.dummy_doc = DummyDoc()
 		self.renderer = CairoRenderer(self)
 		self.my_change = False
 		self.ctrls = self.init_controllers()
+		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.repaint)
 
 	def init_controllers(self):
 		dummy = controllers.AbstractController(self, self.presenter)
@@ -87,7 +88,7 @@ class AppCanvas(gtk.DrawingArea):
 		modes.FLEUR_MODE: controllers.FleurController(self, self.presenter),
 		modes.LINE_MODE: dummy,
 		modes.CURVE_MODE: dummy,
-		modes.RECT_MODE: dummy,
+		modes.RECT_MODE: creators.RectangleCreator(self, self.presenter),
 		modes.ELLIPSE_MODE: dummy,
 		modes.TEXT_MODE: dummy,
 		modes.POLYGON_MODE: dummy,
@@ -196,7 +197,6 @@ class AppCanvas(gtk.DrawingArea):
 		return [x_new, y_new]
 
 	def _fit_to_page(self):
-		#FIXME: here should be document page size request 
 		width, height = self.presenter.get_page_size()
 
 		x, y, w, h = self.allocation
@@ -298,27 +298,5 @@ class AppCanvas(gtk.DrawingArea):
 
 
 
-class DummyDoc:
 
-	childs = []
 
-	def __init__(self):
-		self.childs = []
-		for i in range(100):
-			self.childs.append(DummyRect())
-
-class DummyRect:
-	def __init__(self):
-		import random
-		self.shape = [
-		 random.randint(-100, 100), #self.x
-		 random.randint(-100, 100), #self.y
-		 random.randint(-100, 100), #self.w
-		 random.randint(-100, 100)  #self.h
-		]
-		self.color = [
-					random.randint(0, 255) / 255.0, #R
-					random.randint(0, 255) / 255.0, #G
-					random.randint(0, 255) / 255.0, #B
-					random.randint(0, 255) / 255.0  #A
-					  ]
