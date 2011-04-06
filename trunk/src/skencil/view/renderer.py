@@ -17,6 +17,8 @@
 
 import cairo
 
+from uc2.sk1doc import model
+
 class CairoRenderer:
 
 	direct_matrix = None
@@ -25,6 +27,7 @@ class CairoRenderer:
 	ctx = None
 	win_ctx = None
 	surface = None
+	presenter = None
 	doc = None
 
 	def __init__(self, canvas):
@@ -62,6 +65,7 @@ class CairoRenderer:
 
 	def paint_document(self):
 		self.doc = self.canvas.doc
+		self.presenter = self.canvas.presenter
 		self.win_ctx = self.canvas.window.cairo_create()
 		self.start()
 		self.paint_page_border()
@@ -101,20 +105,56 @@ class CairoRenderer:
 
 	def render_doc(self):
 		self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
+		page = self.presenter.active_page
+		for layer in page.childs:
+			for object in layer.childs:
+				self.render_object(object)
 
-	def render_dummy_doc(self):
-		self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
+	def render_object(self, object):
+		if object.cid > model.PRIMITIVE_CLASS:
+			self.render_primitives(object)
+		else:
+			pass
+		#FIXME: Here should be groups rendering
 
-		for child in self.canvas.dummy_doc.childs:
-			x, y, w, h = child.shape
-			r, g, b, a = child.color
-
-			#FILL
-			self.ctx.rectangle(x, y, w, h)
-			self.ctx.set_source_rgba(r, g, b, a)
+	def render_primitives(self, object):
+		if object.cache_cpath is None:
+			object.update()
+		if object.style[0]:
+			self.ctx.new_path()
+			self.process_fill(object.style)
+			self.ctx.append_path(object.cache_cpath)
 			self.ctx.fill()
-			#OUTLINE
-			self.ctx.set_line_width(1)
-			self.ctx.rectangle(x, y, w, h)
-			self.ctx.set_source_rgb(0, 0, 0)
+		if object.style[1]:
+			self.ctx.new_path()
+			self.process_stroke(object.style)
+			self.ctx.append_path(object.cache_cpath)
 			self.ctx.stroke()
+
+	def process_fill(self, style):
+		fill = style[0]
+		color = fill[1]
+		r, g, b = self.presenter.cms.get_cairo_color(color)
+		self.ctx.set_source_rgba(r, g, b, color[2])
+
+	def process_stroke(self, style):
+		stroke = style[1]
+		#FIXME: add stroke style
+
+		self.ctx.set_line_width(stroke[1] / self.canvas.zoom)
+
+		color = stroke[2]
+		r, g, b = self.presenter.cms.get_cairo_color(color)
+		self.ctx.set_source_rgba(r, g, b, color[2])
+
+		self.ctx.set_dash(stroke[3])
+		self.ctx.set_line_cap(stroke[4])
+		self.ctx.set_line_join(stroke[5])
+		self.ctx.set_miter_limit(stroke[6])
+
+
+
+
+
+
+
