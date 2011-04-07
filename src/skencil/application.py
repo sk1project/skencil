@@ -33,6 +33,7 @@ from inspector import DocumentInspector
 from mainwindow import MainWindow
 from actions import create_actions
 from presenter import DocPresenter
+from clipboard import AppClipboard
 
 
 class Application:
@@ -60,6 +61,7 @@ class Application:
 		self.default_cms = cms.ColorManager(self.stub)
 		self.proxy = AppProxy(self)
 		self.inspector = DocumentInspector(self)
+		self.clipboard = AppClipboard(self)
 
 
 		self.accelgroup = gtk.AccelGroup()

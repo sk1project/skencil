@@ -93,7 +93,7 @@ class DocumentInspector:
 			return False
 
 	def is_clipboard(self):
-		if self.app.clipboard:
+		if self.app.clipboard.contents:
 			return True
 		else:
 			return False

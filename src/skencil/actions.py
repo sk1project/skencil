@@ -17,7 +17,7 @@
 
 import gtk
 
-from skencil import _
+from skencil import _, events
 from skencil import events, modes
 from skencil.events import APP_STATUS, CLIPBOARD, CONFIG_MODIFIED, DOC_CHANGED, \
 DOC_CLOSED, DOC_MODIFIED, DOC_SAVED, MODE_CHANGED, NO_DOCS, SELECTION_CHANGED
@@ -134,13 +134,16 @@ def create_actions(app):
 
 
 	['CUT', _('Cu_t'), _('Cut'), gtk.STOCK_CUT, '<Control>X',
-	 proxy.cut, None, None],
+	 proxy.cut, [events.NO_DOCS, events.DOC_CHANGED,
+	events.SELECTION_CHANGED], insp.is_selection],
 	['COPY', _('_Copy'), _('Copy'), gtk.STOCK_COPY, '<Control>C',
-	 proxy.copy, None, None],
+	 proxy.copy, [events.NO_DOCS, events.DOC_CHANGED,
+	events.SELECTION_CHANGED], insp.is_selection],
 	['PASTE', _('_Paste'), _('Paste'), gtk.STOCK_PASTE, '<Control>V',
-	 proxy.paste, None, None],
+	 proxy.paste, [events.NO_DOCS, events.CLIPBOARD], insp.is_clipboard],
 	['DELETE', _('_Delete'), _('Delete'), gtk.STOCK_DELETE, 'Delete',
-	 proxy.delete, None, None],
+	 proxy.delete, [events.NO_DOCS, events.DOC_CHANGED,
+	events.SELECTION_CHANGED], insp.is_selection],
 
 
 	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>plus',
