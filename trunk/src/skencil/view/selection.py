@@ -45,6 +45,7 @@ class Selection:
 		msg = _('object(s) in selection')
 		msg = '%i %s' % (len(self.objs), msg)
 		events.emit(events.APP_STATUS, msg)
+		events.emit(events.SELECTION_CHANGED, self.presenter)
 
 	def update_bbox(self):
 		self.bbox = []

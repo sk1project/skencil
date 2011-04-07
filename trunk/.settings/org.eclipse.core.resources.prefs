@@ -1,10 +1,11 @@
-#Thu Apr 07 04:10:05 EEST 2011
+#Thu Apr 07 15:12:55 EEST 2011
 eclipse.preferences.version=1
 encoding//src/skencil/__init__.py=utf-8
 encoding//src/skencil/actions.py=utf-8
 encoding//src/skencil/api.py=utf-8
 encoding//src/skencil/app_conf.py=utf-8
 encoding//src/skencil/application.py=utf-8
+encoding//src/skencil/clipboard.py=utf-8
 encoding//src/skencil/dialogs/__init__.py=utf-8
 encoding//src/skencil/dialogs/credits.py=utf-8
 encoding//src/skencil/dialogs/license.py=utf-8
