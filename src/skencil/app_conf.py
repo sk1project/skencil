@@ -82,6 +82,11 @@ class AppConfig(UCConfig):
 	# 'pt', 'in', 'cm', 'mm'
 	default_unit = 'mm'
 
+	sel_frame_color = (0.0, 0.0, 0.0)
+	sel_frame_dash = [5, 5]
+	sel_marker_frame_color = (0.62745, 0.62745, 0.64314)
+	sel_marker_frame_dash = [5, 5]
+
 	#============== I/O SECTION ===================
 	open_dir = '~'
 	save_dir = '~'

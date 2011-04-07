@@ -20,6 +20,7 @@ import cairo
 
 
 from uc2.uc_conf import mm_to_pt
+from uc2.libcairo import normalize_bbox
 from skencil import _, config
 from skencil import modes, events
 
@@ -78,6 +79,8 @@ class AppCanvas(gtk.DrawingArea):
 		self.my_change = False
 		self.ctrls = self.init_controllers()
 		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.repaint)
+		self.eventloop.connect(self.eventloop.SELECTION_CHANGED,
+							self.selection_repaint)
 
 	def init_controllers(self):
 		dummy = controllers.AbstractController(self, self.presenter)
@@ -257,10 +260,15 @@ class AppCanvas(gtk.DrawingArea):
 		self._zoom(zoom)
 
 	def select_at_point(self, point):
-		pass
+		point = self.win_to_doc(point)
+		self.presenter.selection.select_at_point(point)
 
-	def select_by_rectangle(self, start, end):
-		pass
+	def select_by_rect(self, start, end):
+		start = self.win_to_doc(start)
+		end = self.win_to_doc(end)
+		rect = start + end
+		rect = normalize_bbox(rect)
+		self.presenter.selection.select_by_rect(rect)
 
 	def force_redraw(self):
 		self.queue_draw()
@@ -272,6 +280,9 @@ class AppCanvas(gtk.DrawingArea):
 			self.set_mode(modes.SELECT_MODE)
 		self._keep_center()
 		self.renderer.paint_document()
+
+	def selection_repaint(self, *args):
+		self.renderer.paint_selection()
 
 #==============EVENT CONTROLLING==========================
 	def mouseDoubleClickEvent(self, widget, event):
