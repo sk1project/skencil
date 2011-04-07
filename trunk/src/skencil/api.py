@@ -33,10 +33,11 @@ class PresenterAPI:
 	undo = []
 	redo = []
 	undo_marked = False
-	view_items = {}
+	selection = None
 
 	def __init__(self, presenter):
 		self.presenter = presenter
+		self.selection = presenter.selection
 		self.methods = self.presenter.methods
 		self.model = presenter.model
 		self.view = presenter.canvas
@@ -156,5 +157,7 @@ class PresenterAPI:
 		obj.update()
 		index = len(parent.childs)
 		self.insert_object(obj, parent, index)
+		self.selection.set([obj])
+
 
 

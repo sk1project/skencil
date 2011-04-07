@@ -165,5 +165,5 @@ class SelectController(AbstractController):
 			if change_x < 5 and change_y < 5:
 				self.canvas.select_at_point(self.start)
 			else:
-				self.canvas.select_by_rectangle(self.start, self.end)
+				self.canvas.select_by_rect(self.start, self.end)
 

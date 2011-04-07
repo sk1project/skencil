@@ -24,6 +24,7 @@ from widgets.docarea import DocArea
 
 from eventloop import EventLoop
 from api import PresenterAPI
+from view.selection import Selection
 
 class DocPresenter(UCDocPresenter):
 
@@ -32,11 +33,13 @@ class DocPresenter(UCDocPresenter):
 	eventloop = None
 	docarea = None
 	canvas = None
+	selection = None
 
 	def __init__(self, app, doc_file=''):
 		UCDocPresenter.__init__(self, config, app.appdata)
 		self.app = app
 		self.eventloop = EventLoop(self)
+		self.selection = Selection(self)
 
 
 		if doc_file:

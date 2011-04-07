@@ -19,6 +19,8 @@ import cairo
 
 from uc2.sk1doc import model
 
+from skencil import config
+
 class CairoRenderer:
 
 	direct_matrix = None
@@ -35,33 +37,72 @@ class CairoRenderer:
 		self.canvas = canvas
 		self.direct_matrix = cairo.Matrix(1.0, 0.0, 0.0, 1.0, 0.0, 0.0)
 
-	def draw_frame(self, start, end):
-		win_ctx = self.canvas.window.cairo_create()
-		surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
+	#------MARKER RENDERING
+
+	def start_soft_repaint(self):
+		self.win_ctx = self.canvas.window.cairo_create()
+		self.temp_surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
 								int(self.canvas.width),
 								int(self.canvas.height))
-		ctx = cairo.Context(surface)
-		ctx.set_source_surface(self.surface)
-		ctx.paint()
-		ctx.set_matrix(self.direct_matrix)
-		ctx.set_antialias(cairo.ANTIALIAS_NONE)
-		ctx.set_line_width(1.0)
-		ctx.set_source_rgb(1, 1, 1)
-		ctx.rectangle(start[0], start[1],
+		self.ctx = cairo.Context(self.temp_surface)
+		self.ctx.set_source_surface(self.surface)
+		self.ctx.paint()
+
+	def end_soft_repaint(self):
+		self.win_ctx.set_source_surface(self.temp_surface)
+		self.win_ctx.paint()
+
+	def draw_frame(self, start, end):
+		self.start_soft_repaint()
+		self._paint_selection()
+
+		self.ctx.set_matrix(self.direct_matrix)
+		self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
+		self.ctx.set_line_width(1.0)
+		self.ctx.set_dash([])
+		self.ctx.set_source_rgb(1, 1, 1)
+		self.ctx.rectangle(start[0], start[1],
 					end[0] - start[0], end[1] - start[1])
-		ctx.stroke()
-		ctx.set_dash([5, 5])
-		ctx.set_source_rgb(0, 0, 0)
-		ctx.rectangle(start[0], start[1],
+		self.ctx.stroke()
+		self.ctx.set_dash(config.sel_frame_dash)
+		r, g, b = config.sel_frame_color
+		self.ctx.set_source_rgb(r, g, b)
+		self.ctx.rectangle(start[0], start[1],
 					end[0] - start[0], end[1] - start[1])
-		ctx.stroke()
-		win_ctx.set_source_surface(surface)
-		win_ctx.paint()
+		self.ctx.stroke()
+
+		self.end_soft_repaint()
+
+	def _paint_selection(self):
+		selection = self.presenter.selection
+		if selection.objs:
+			selection.update_markers()
+			zoom = self.canvas.zoom
+			self.ctx.set_matrix(self.canvas.matrix)
+			self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
+			x0, y0, x1, y1 = selection.frame
+			self.ctx.set_line_width(1.0 / zoom)
+			self.ctx.set_dash([])
+			self.ctx.set_source_rgb(1, 1, 1)
+			self.ctx.rectangle(x0, y0, x1 - x0, y1 - y0)
+			self.ctx.stroke()
+			r, g, b = config.sel_marker_frame_color
+			self.ctx.set_source_rgb(r, g, b)
+			a, b = config.sel_marker_frame_dash
+			self.ctx.set_dash([a / zoom, b / zoom])
+			self.ctx.rectangle(x0, y0, x1 - x0, y1 - y0)
+			self.ctx.stroke()
+
+	def	paint_selection(self):
+		self.start_soft_repaint()
+		self._paint_selection()
+		self.end_soft_repaint()
 
 	def stop_draw_frame(self, start, end):
-		ctx = self.canvas.window.cairo_create()
-		ctx.set_source_surface(self.surface)
-		ctx.paint()
+		self.start_soft_repaint()
+		self.end_soft_repaint()
+
+	#-------DOCUMENT RENDERING
 
 	def paint_document(self):
 		self.doc = self.canvas.doc
@@ -70,7 +111,8 @@ class CairoRenderer:
 		self.start()
 		self.paint_page_border()
 		self.render_doc()
-		self.finalize()
+#		self.finalize()
+		self.paint_selection()
 
 	def start(self):
 		self.surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
