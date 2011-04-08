@@ -30,8 +30,8 @@ from renderer import CairoRenderer
 
 
 PAGEFIT = 0.9
-ZOOM_IN = 2.5
-ZOOM_OUT = 0.4
+ZOOM_IN = 1.25
+ZOOM_OUT = 0.8
 
 WORKSPACE_HEIGHT = 2000 * mm_to_pt
 WORKSPACE_WIDTH = 4000 * mm_to_pt
@@ -258,6 +258,12 @@ class AppCanvas(gtk.DrawingArea):
 				start[1] + (end[1] - start[1]) / 2]
 		self._set_center(center)
 		self._zoom(zoom)
+
+	def zoom_selected(self):
+		x0, y0, x1, y1 = self.presenter.selection.frame
+		start = self.doc_to_win([x0, y0])
+		end = self.doc_to_win([x1, y1])
+		self.zoom_to_rectangle(start, end)
 
 	def select_at_point(self, point):
 		point = self.win_to_doc(point)

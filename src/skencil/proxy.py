@@ -83,6 +83,12 @@ class AppProxy:
 	def delete(self, *args):
 		pass
 
+	def select_all(self, *args):
+		self.app.current_doc.selection.select_all()
+
+	def deselect(self, *args):
+		self.app.current_doc.selection.clear()
+
 	def zoom_in(self, *args):
 		self.app.current_doc.canvas.zoom_in()
 
@@ -96,7 +102,7 @@ class AppProxy:
 		self.app.current_doc.canvas.zoom_100()
 
 	def zoom_selected(self, *args):
-		pass
+		self.app.current_doc.canvas.zoom_selected()
 
 	def preferences(self, *args):
 		pass
