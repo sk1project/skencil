@@ -145,8 +145,13 @@ def create_actions(app):
 	 proxy.delete, [events.NO_DOCS, events.DOC_CHANGED,
 	events.SELECTION_CHANGED], insp.is_selection],
 
+	['SELECT_ALL', _('_Select All'), _('Select All'), gtk.STOCK_SELECT_ALL, '<Control>A',
+	 proxy.select_all, [events.NO_DOCS, events.DOC_CHANGED], insp.is_doc],
+	['DESELECT', _('_Deselect'), _('Deselect'), None, '<Control><Shift>A',
+	 proxy.deselect, [events.NO_DOCS, events.DOC_CHANGED,
+	events.SELECTION_CHANGED], insp.is_selection],
 
-	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>plus',
+	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>equal',
 	 proxy.zoom_in, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_OUT', _('Zoom out'), _('Zoom out'), gtk.STOCK_ZOOM_OUT, '<Control>minus',
 	 proxy.zoom_out, [NO_DOCS, DOC_CHANGED], insp.is_doc],
@@ -155,7 +160,8 @@ def create_actions(app):
 	['ZOOM_100', _('Zoom 100%'), _('Zoom 100%'), gtk.STOCK_ZOOM_100, None,
 	 proxy.zoom_100, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 	['ZOOM_SELECTED', _('Zoom selected'), _('Zoom selected'), gtk.STOCK_ZOOM_FIT, 'F4',
-	 proxy.zoom_selected, [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	 proxy.zoom_selected, [events.NO_DOCS, events.DOC_CHANGED,
+	events.SELECTION_CHANGED], insp.is_selection],
 
 
 	['PREFERENCES', _('Preferences'), _('Preferences'), gtk.STOCK_PREFERENCES, None,

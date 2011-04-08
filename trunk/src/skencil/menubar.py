@@ -57,12 +57,23 @@ class AppMenubar(gtk.MenuBar):
 				 'PASTE',
 				 'DELETE',
 				 None,
+				 'SELECT_ALL',
+				 'DESELECT',
+				 None,
 				 'PREFERENCES',
 		]
 		self.add_items(self.edit_menu, items)
 
 		#----VIEW MENU
 		self.view_item, self.view_menu = self.create_menu("_View")
+		items = ['ZOOM_100',
+				 'ZOOM_IN',
+				 'ZOOM_OUT',
+				 None,
+				 'ZOOM_PAGE',
+				 'ZOOM_SELECTED',
+		]
+		self.add_items(self.view_menu, items)
 
 		#----LAYOUT MENU
 		self.layout_item, self.effects_menu = self.create_menu("_Layout")

@@ -93,6 +93,14 @@ class Selection:
 			return
 		self.set(result)
 
+	def select_all(self):
+		result = []
+		model = self.presenter.model
+		page = self.presenter.active_page
+		layers = page.childs + model.childs[1].childs
+		for layer in layers:
+			result += layer.childs
+		self.set(result)
 
 	def remove(self, objs):
 		for obj in objs:
