@@ -67,8 +67,12 @@ class PaletteWidget(gtk.DrawingArea):
 
 	def button_press(self, *args):
 		event = args[1]
-		print 'PRESSED', event.button
-		pass
+		offset = config.palette_cell_horizontal
+		cell = int(float(event.x) / float(offset) - self.position)
+		if event.button == 1:
+			self.app.proxy.fill_selected(self.pal[cell])
+		if event.button == 3:
+			self.app.proxy.stroke_selected(self.pal[cell])
 
 	def button_release(self, *args):
 		pass
