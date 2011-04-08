@@ -104,6 +104,9 @@ class AppProxy:
 	def zoom_selected(self, *args):
 		self.app.current_doc.canvas.zoom_selected()
 
+	def force_redraw(self, *args):
+		self.app.current_doc.canvas.force_redraw()
+
 	def preferences(self, *args):
 		pass
 
@@ -152,3 +155,17 @@ class AppProxy:
 		self.app.current_doc.canvas.set_mode(modes.COPY_MODE)
 
 	#-------
+
+	def fill_selected(self, color):
+		if self.app.current_doc is None:
+			#FIXME: here should be default style changing
+			pass
+		else:
+			self.app.current_doc.api.fill_selected(color)
+
+	def stroke_selected(self, color):
+		if self.app.current_doc is None:
+			#FIXME: here should be default style changing
+			pass
+		else:
+			self.app.current_doc.api.stroke_selected(color)

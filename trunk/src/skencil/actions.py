@@ -162,6 +162,9 @@ def create_actions(app):
 	['ZOOM_SELECTED', _('Zoom selected'), _('Zoom selected'), gtk.STOCK_ZOOM_FIT, 'F4',
 	 proxy.zoom_selected, [events.NO_DOCS, events.DOC_CHANGED,
 	events.SELECTION_CHANGED], insp.is_selection],
+	['FORCE_REDRAW', _('Redraw document'), _('Redraw document'),
+	gtk.STOCK_REFRESH, '<Alt>R', proxy.force_redraw,
+	[NO_DOCS, DOC_CHANGED], insp.is_doc],
 
 
 	['PREFERENCES', _('Preferences'), _('Preferences'), gtk.STOCK_PREFERENCES, None,

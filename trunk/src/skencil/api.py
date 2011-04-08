@@ -17,9 +17,12 @@
 
 from copy import deepcopy
 
+from uc2.sk1doc import model
+from uc2 import uc_conf
+
 from skencil import _, config
 from skencil import events
-from uc2.sk1doc import model
+
 
 
 class PresenterAPI:
@@ -159,5 +162,64 @@ class PresenterAPI:
 		self.insert_object(obj, parent, index)
 		self.selection.set([obj])
 
+	def _get_objs_styles(self, objs):
+		result = []
+		for obj in objs:
+			style = deepcopy(obj.style)
+			result.append([obj, style])
+		return result
 
+	def _set_objs_styles(self, objs_styles):
+		for obj, style in objs_styles:
+			obj.style = style
+
+	def _fill_objs(self, objs, color):
+		for obj in objs:
+			style = deepcopy(obj.style)
+			fill = style[0]
+			new_fill = []
+			if not fill:
+				new_fill.append(config.default_fill_rule)
+			else:
+				new_fill.append(fill[0])
+			new_fill.append(uc_conf.FILL_SOLID)
+			new_fill.append(deepcopy(color))
+			style[0] = new_fill
+			obj.style = style
+
+	def fill_selected(self, color):
+		if self.selection.objs:
+			color = deepcopy(color)
+			objs = [] + self.selection.objs
+			initial_styles = self._get_objs_styles(objs)
+			self._fill_objs(objs, color)
+			transaction = [
+				[[self._set_objs_styles, initial_styles]],
+				[[self._fill_objs, objs, color]],
+				False]
+			self.add_undo(transaction)
+
+	def _stroke_objs(self, objs, color):
+		for obj in objs:
+			style = deepcopy(obj.style)
+			stroke = style[1]
+			if not stroke:
+				new_stroke = deepcopy(config.default_stroke)
+			else:
+				new_stroke = deepcopy(stroke)
+			new_stroke[2] = deepcopy(color)
+			style[1] = new_stroke
+			obj.style = style
+
+	def stroke_selected(self, color):
+		if self.selection.objs:
+			color = deepcopy(color)
+			objs = [] + self.selection.objs
+			initial_styles = self._get_objs_styles(objs)
+			self._stroke_objs(objs, color)
+			transaction = [
+				[[self._set_objs_styles, initial_styles]],
+				[[self._stroke_objs, objs, color]],
+				False]
+			self.add_undo(transaction)
 

@@ -175,7 +175,7 @@ class CairoRenderer:
 
 	def process_fill(self, style):
 		fill = style[0]
-		color = fill[1]
+		color = fill[2]
 		r, g, b = self.presenter.cms.get_cairo_color(color)
 		self.ctx.set_source_rgba(r, g, b, color[2])
 

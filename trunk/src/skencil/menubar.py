@@ -72,6 +72,8 @@ class AppMenubar(gtk.MenuBar):
 				 None,
 				 'ZOOM_PAGE',
 				 'ZOOM_SELECTED',
+				 None,
+				 'FORCE_REDRAW',
 		]
 		self.add_items(self.view_menu, items)
 
