@@ -72,16 +72,16 @@ class AppProxy:
 		self.app.current_doc.api.clear_history()
 
 	def cut(self, *args):
-		pass
+		self.app.current_doc.api.cut_selected()
 
 	def copy(self, *args):
-		pass
+		self.app.current_doc.api.copy_selected()
 
 	def paste(self, *args):
-		pass
+		self.app.current_doc.api.paste_selected()
 
 	def delete(self, *args):
-		pass
+		self.app.current_doc.api.delete_selected()
 
 	def select_all(self, *args):
 		self.app.current_doc.selection.select_all()
