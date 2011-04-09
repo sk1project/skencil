@@ -35,14 +35,7 @@ class Palette(gtk.HBox):
 		self.pack_start(self.back, False, False, 0)
 		self.back.connect('clicked', self.action_back)
 
-		self.no_color = gtk.EventBox()
-		self.no_color.set_size_request(-1, 22)
-		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
-		loader = gtk.gdk.pixbuf_new_from_file
-		image = gtk.Image()
-		pixbuf = loader(os.path.join(image_dir, 'no-color.png'))
-		image.set_from_pixbuf(pixbuf)
-		self.no_color.add(image)
+		self.no_color = NoColorButton(self)
 		self.pack_start(self.no_color, False, False, 0)
 
 		self.palwidget = PaletteWidget(self)
@@ -93,4 +86,24 @@ class PalButton(gtk.Button):
 		image.set_from_pixbuf(pixbuf)
 		self.add(image)
 
+class NoColorButton(gtk.EventBox):
+
+	def __init__(self, master):
+		gtk.EventBox.__init__(self)
+		self.app = master.app
+		self.set_size_request(-1, 22)
+		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
+		loader = gtk.gdk.pixbuf_new_from_file
+		image = gtk.Image()
+		pixbuf = loader(os.path.join(image_dir, 'no-color.png'))
+		image.set_from_pixbuf(pixbuf)
+		self.add(image)
+		self.connect('button-press-event', self.button_press)
+
+	def button_press(self, *args):
+		event = args[1]
+		if event.button == 1:
+			self.app.proxy.fill_selected([])
+		if event.button == 3:
+			self.app.proxy.stroke_selected([])
 

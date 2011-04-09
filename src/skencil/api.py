@@ -120,6 +120,8 @@ class PresenterAPI:
 
 	def _delete_object(self, obj):
 		self.methods.delete_object(obj)
+		if obj in self.selection.objs:
+			self.selection.remove([obj])
 
 	def _insert_object(self, obj, parent, index):
 		self.methods.insert_object(obj, parent, index)
@@ -176,15 +178,18 @@ class PresenterAPI:
 	def _fill_objs(self, objs, color):
 		for obj in objs:
 			style = deepcopy(obj.style)
-			fill = style[0]
-			new_fill = []
-			if not fill:
-				new_fill.append(config.default_fill_rule)
+			if color:
+				fill = style[0]
+				new_fill = []
+				if not fill:
+					new_fill.append(config.default_fill_rule)
+				else:
+					new_fill.append(fill[0])
+				new_fill.append(uc_conf.FILL_SOLID)
+				new_fill.append(deepcopy(color))
+				style[0] = new_fill
 			else:
-				new_fill.append(fill[0])
-			new_fill.append(uc_conf.FILL_SOLID)
-			new_fill.append(deepcopy(color))
-			style[0] = new_fill
+				style[0] = []
 			obj.style = style
 
 	def fill_selected(self, color):
@@ -202,13 +207,16 @@ class PresenterAPI:
 	def _stroke_objs(self, objs, color):
 		for obj in objs:
 			style = deepcopy(obj.style)
-			stroke = style[1]
-			if not stroke:
-				new_stroke = deepcopy(config.default_stroke)
+			if color:
+				stroke = style[1]
+				if not stroke:
+					new_stroke = deepcopy(config.default_stroke)
+				else:
+					new_stroke = deepcopy(stroke)
+				new_stroke[2] = deepcopy(color)
+				style[1] = new_stroke
 			else:
-				new_stroke = deepcopy(stroke)
-			new_stroke[2] = deepcopy(color)
-			style[1] = new_stroke
+				style[1] = []
 			obj.style = style
 
 	def stroke_selected(self, color):

@@ -47,6 +47,8 @@ class AppToolbar(gtk.Toolbar):
 				'PASTE',
 				'DELETE',
 				None,
+				'FORCE_REDRAW',
+				None,
 				'ZOOM_IN',
 				'ZOOM_OUT',
 				'ZOOM_PAGE',
