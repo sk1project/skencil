@@ -45,6 +45,7 @@ class AppCanvas(gtk.DrawingArea):
 	width = 0
 	height = 0
 	mode = None
+	previous_mode = None
 	controller = None
 	ctrls = None
 	orig_cursor = None
@@ -95,17 +96,29 @@ class AppCanvas(gtk.DrawingArea):
 		modes.ELLIPSE_MODE: dummy,
 		modes.TEXT_MODE: dummy,
 		modes.POLYGON_MODE: dummy,
-		modes.MOVE_MODE: dummy
+		modes.MOVE_MODE: controllers.MoveController(self, self.presenter)
 		}
 		return ctrls
 
 
-	def set_mode(self, mode):
+	def set_mode(self, mode=modes.SELECT_MODE):
 		if not mode == self.mode:
 			self.mode = mode
 			self.set_canvas_cursor(mode)
 			self.controller = self.ctrls[mode]
 			events.emit(events.MODE_CHANGED, mode)
+
+	def set_temp_mode(self, mode=modes.SELECT_MODE):
+		if not mode == self.mode:
+			self.previous_mode = self.mode
+			self.mode = mode
+			self.set_canvas_cursor(mode)
+			self.controller = self.ctrls[mode]
+
+	def restore_mode(self):
+		if not self.previous_mode is None:
+			self.set_mode(self.previous_mode)
+			self.previous_mode = None
 
 	def set_canvas_cursor(self, mode):
 		self.window.set_cursor(self.app.cursors[mode])

@@ -18,7 +18,7 @@
 from copy import deepcopy
 
 from uc2.sk1doc import model
-from uc2 import uc_conf
+from uc2 import uc_conf, libcairo
 
 from skencil import _, config
 from skencil import events
@@ -312,4 +312,38 @@ class PresenterAPI:
 				[[self._stroke_objs, objs, color]],
 				False]
 			self.add_undo(transaction)
+
+	def _apply_trafo(self, objs, trafo):
+		for obj in objs:
+			obj.apply_trafo(trafo)
+
+	def transform_selected(self, trafo, copy=False):
+		if self.selection.objs:
+			objs = [] + self.selection.objs
+			if copy:
+				copied_objs = []
+				for obj in objs:
+					copied_obj = obj.copy()
+					copied_obj.update()
+					copied_objs.append(copied_obj)
+				self._apply_trafo(copied_objs, trafo)
+				before = self._get_layers_snapshot()
+				self.methods.append_objects(copied_objs,
+										self.presenter.active_layer)
+				after = self._get_layers_snapshot()
+				transaction = [
+					[[self._set_layers_snapshot, before]],
+					[[self._set_layers_snapshot, after]],
+					False]
+				self.add_undo(transaction)
+				self.selection.set(copied_objs)
+			else:
+				self._apply_trafo(objs, trafo)
+				self.selection.update_bbox()
+				rev_trafo = libcairo.reverse_trafo(trafo)
+				transaction = [
+					[[self._apply_trafo, objs, rev_trafo]],
+					[[self._apply_trafo, objs, trafo]],
+					False]
+				self.add_undo(transaction)
 
