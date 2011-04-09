@@ -134,6 +134,88 @@ class PresenterAPI:
 			False]
 		self.add_undo(transaction)
 
+	def delete_object(self, obj, parent, index):
+		self._delete_object(obj)
+		transaction = [
+			[[self._insert_object, obj, parent, index]],
+			[[self._delete_object, obj]],
+			False]
+		self.add_undo(transaction)
+
+	def _get_layers_snapshot(self):
+		layers_snapshot = []
+		model = self.presenter.model
+		page = self.presenter.active_page
+		layers = page.childs + model.childs[1].childs
+		for layer in layers:
+			layers_snapshot.append([layer, [] + layer.childs])
+		return layers_snapshot
+
+	def _set_layers_snapshot(self, layers_snapshot):
+		for layer, childs in layers_snapshot:
+			layer.childs = childs
+
+	def _delete_objects(self, objs_list):
+		for obj, parent, index in objs_list:
+			self.methods.delete_object(obj)
+			if obj in self.selection.objs:
+				self.selection.remove([obj])
+
+	def _insert_objects(self, objs_list):
+		for obj, parent, index in objs_list:
+			self.methods.insert_object(obj, parent, index)
+
+	def insert_objects(self, objs_list):
+		self._insert_objects(objs_list)
+		transaction = [
+			[[self._delete_objects, objs_list]],
+			[[self._insert_objects, objs_list]],
+			False]
+		self.add_undo(transaction)
+
+	def delete_objects(self, objs_list):
+		self._delete_objects(objs_list)
+		transaction = [
+			[[self._insert_objects, objs_list]],
+			[[self._delete_objects, objs_list]],
+			False]
+		self.add_undo(transaction)
+
+	def delete_selected(self):
+		if self.selection.objs:
+			before = self._get_layers_snapshot()
+			for obj in self.selection.objs:
+				self.methods.delete_object(obj)
+			after = self._get_layers_snapshot()
+
+			transaction = [
+				[[self._set_layers_snapshot, before]],
+				[[self._set_layers_snapshot, after]],
+				False]
+			self.add_undo(transaction)
+		self.selection.clear()
+
+	def cut_selected(self):
+		self.copy_selected()
+		self.delete_selected()
+
+	def copy_selected(self):
+		if self.selection.objs:
+			self.app.clipboard.set(self.selection.objs)
+
+	def paste_selected(self):
+		objs = self.app.clipboard.get()
+		before = self._get_layers_snapshot()
+		self.methods.append_objects(objs, self.presenter.active_layer)
+		after = self._get_layers_snapshot()
+		transaction = [
+			[[self._set_layers_snapshot, before]],
+			[[self._set_layers_snapshot, after]],
+			False]
+		self.add_undo(transaction)
+		self.selection.set(objs)
+
+
 	def _normalize_rect(self, rect):
 		x0, y0, x1, y1 = rect
 		x0, y0 = self.view.win_to_doc([x0, y0])
