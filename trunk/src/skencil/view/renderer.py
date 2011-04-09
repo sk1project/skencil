@@ -183,7 +183,7 @@ class CairoRenderer:
 		stroke = style[1]
 		#FIXME: add stroke style
 
-		self.ctx.set_line_width(stroke[1] / self.canvas.zoom)
+		self.ctx.set_line_width(stroke[1])
 
 		color = stroke[2]
 		r, g, b = self.presenter.cms.get_cairo_color(color)
