@@ -102,6 +102,17 @@ class Selection:
 			result += layer.childs
 		self.set(result)
 
+	def is_point_over(self, point):
+		result = False
+		if not self.objs:
+			return result
+		rect = point + point
+		for obj in self.objs:
+			if is_bbox_in_rect(obj.cache_bbox, rect):
+				result = True
+				break
+		return result
+
 	def remove(self, objs):
 		for obj in objs:
 			if obj in self.objs:

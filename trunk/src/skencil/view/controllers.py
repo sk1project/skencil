@@ -67,7 +67,7 @@ class AbstractController:
 	def do_action(self):
 		pass
 
-	def _draw_frame(self,):
+	def _draw_frame(self, *args):
 		if self.end:
 			self.canvas.renderer.draw_frame(self.start, self.end)
 			self.end = []
@@ -152,11 +152,22 @@ class ZoomController(AbstractController):
 				self.canvas.zoom_at_point(self.start, ZOOM_IN)
 			else:
 				self.canvas.zoom_to_rectangle(self.start, self.end)
+			self.start = []
+			self.end = []
 
 class SelectController(AbstractController):
 
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
+
+	def mouse_move(self, event):
+		if self.draw:
+			AbstractController.mouse_move(self, event)
+		else:
+			point = [event.x, event.y]
+			dpoint = self.canvas.win_to_doc(point)
+			if self.presenter.selection.is_point_over(dpoint):
+				self.canvas.set_temp_mode(modes.MOVE_MODE)
 
 	def do_action(self):
 		if self.start and self.end:
@@ -167,3 +178,79 @@ class SelectController(AbstractController):
 			else:
 				self.canvas.select_by_rect(self.start, self.end)
 
+			dpoint = self.canvas.win_to_doc(self.start)
+			if self.presenter.selection.is_point_over(dpoint):
+				self.canvas.set_temp_mode(modes.MOVE_MODE)
+
+class MoveController(AbstractController):
+	start = None
+	end = None
+
+	def __init__(self, canvas, presenter):
+		AbstractController.__init__(self, canvas, presenter)
+		self.move = False
+		self.moved = False
+		self.copy = False
+
+	def mouse_down(self, event):
+		if event.button == 1:
+			self.start = [event.x, event.y]
+			self.move = True
+			self.canvas.renderer.show_move_frame()
+			self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+
+	def _draw_frame(self, *args):
+		if self.end:
+			self.canvas.renderer.draw_move_frame(self.start, self.end)
+			self.end = []
+		return True
+
+	def mouse_move(self, event):
+		if self.move:
+			self.moved = True
+			self.end = [event.x, event.y]
+		else:
+			point = [event.x, event.y]
+			dpoint = self.canvas.win_to_doc(point)
+			if self.presenter.selection.is_point_over(dpoint):
+				pass
+			else:
+				self.canvas.restore_mode()
+#		if self.move:
+#			self.moved = True
+#			self.end = event.pos()
+#			mod = event.modifiers()
+#			if int(mod & QtCore.Qt.ControlModifier) == QtCore.Qt.ControlModifier:
+#				change = self.end - self.start
+#				if abs(change.x()) > abs(change.y()):
+#					change.setY(0)
+#				else:
+#					change.setX(0)
+#				self.end = change + self.start
+#			self.canvas.draw_move_frame(self.start, self.end)
+#		else:
+#			if not self.canvas.mouse_over_selection(event.pos()):
+#				self.canvas.set_mode()
+
+	def mouse_up(self, event):
+		if self.move and event.button == 1:
+			gobject.source_remove(self.timer)
+			self.end = [event.x, event.y]
+			self.canvas.renderer.hide_move_frame()
+			self.move = False
+			if self.moved:
+				start_point = self.canvas.win_to_doc(self.start)
+				end_point = self.canvas.win_to_doc(self.end)
+				dx = end_point[0] - start_point[0]
+				dy = end_point[1] - start_point[1]
+				trafo = [1.0, 0.0, 0.0, 1.0, dx, dy]
+				self.presenter.api.transform_selected(trafo, self.copy)
+			self.moved = False
+			self.copy = False
+			self.start = []
+			self.end = []
+
+		elif self.moved and event.button == 3:
+			self.copy = True
+#			cursor = self.app.canvas_cursors[modes.COPY_MODE]
+#			self.canvas.set_temp_cursor(cursor)

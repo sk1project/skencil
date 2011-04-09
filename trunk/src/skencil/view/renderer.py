@@ -52,9 +52,10 @@ class CairoRenderer:
 		self.win_ctx.set_source_surface(self.temp_surface)
 		self.win_ctx.paint()
 
-	def draw_frame(self, start, end):
+	def draw_frame(self, start, end, flag=True):
 		self.start_soft_repaint()
-		self._paint_selection()
+		if flag:
+			self._paint_selection()
 
 		self.ctx.set_matrix(self.direct_matrix)
 		self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
@@ -100,6 +101,27 @@ class CairoRenderer:
 
 	def stop_draw_frame(self, start, end):
 		self.start_soft_repaint()
+		self.end_soft_repaint()
+
+	def show_move_frame(self):
+		bbox = self.presenter.selection.bbox
+		start = self.canvas.doc_to_win(bbox[:2])
+		end = self.canvas.doc_to_win(bbox[2:])
+		self.draw_frame(start, end, False)
+
+	def draw_move_frame(self, start_point, end_point):
+		dx = end_point[0] - start_point[0]
+		dy = end_point[1] - start_point[1]
+		bbox = self.presenter.selection.bbox
+		start = self.canvas.doc_to_win(bbox[:2])
+		end = self.canvas.doc_to_win(bbox[2:])
+		start = [start[0] + dx, start[1] + dy]
+		end = [end[0] + dx, end[1] + dy]
+		self.draw_frame(start, end, False)
+
+	def hide_move_frame(self):
+		self.start_soft_repaint()
+		self._paint_selection()
 		self.end_soft_repaint()
 
 	#-------DOCUMENT RENDERING
