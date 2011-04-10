@@ -108,6 +108,7 @@ class PresenterAPI:
 		self.undo = []
 		self.redo = []
 		events.emit(events.DOC_MODIFIED, self.presenter)
+		self.presenter.reflect_saving()
 
 	def set_doc_origin(self, origin):
 		cur_origin = self.model.doc_origin
