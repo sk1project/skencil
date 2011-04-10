@@ -226,21 +226,6 @@ class MoveController(AbstractController):
 				pass
 			else:
 				self.canvas.restore_mode()
-#		if self.move:
-#			self.moved = True
-#			self.end = event.pos()
-#			mod = event.modifiers()
-#			if int(mod & QtCore.Qt.ControlModifier) == QtCore.Qt.ControlModifier:
-#				change = self.end - self.start
-#				if abs(change.x()) > abs(change.y()):
-#					change.setY(0)
-#				else:
-#					change.setX(0)
-#				self.end = change + self.start
-#			self.canvas.draw_move_frame(self.start, self.end)
-#		else:
-#			if not self.canvas.mouse_over_selection(event.pos()):
-#				self.canvas.set_mode()
 
 	def mouse_up(self, event):
 		if self.move and event.button == 1:
