@@ -62,7 +62,7 @@ class Selection:
 			size = FRAME_OFFSET / self.presenter.canvas.zoom
 			self.frame = [x0 - size, y0 - size, x1 + size, y1 + size]
 
-	def select_by_rect(self, rect):
+	def select_by_rect(self, rect, flag=False):
 		result = []
 		model = self.presenter.model
 		page = self.presenter.active_page
@@ -71,9 +71,12 @@ class Selection:
 			for obj in layer.childs:
 				if is_bbox_in_rect(rect, obj.cache_bbox):
 					result.append(obj)
-		self.set(result)
+		if flag:
+			self.add(result)
+		else:
+			self.set(result)
 
-	def select_at_point(self, point):
+	def _select_at_point(self, point):
 		result = []
 		model = self.presenter.model
 		page = self.presenter.active_page
@@ -88,10 +91,17 @@ class Selection:
 				if is_bbox_in_rect(obj.cache_bbox, rect):
 					result.append(obj)
 					break
-		if result and result[0] in self.objs:
-			self.update()
-			return
-		self.set(result)
+		return result
+
+	def select_at_point(self, point, flag=False):
+		result = self._select_at_point(point)
+#		if result and result[0] in self.objs:
+#			self.update()
+#			return
+		if flag:
+			self.add(result)
+		else:
+			self.set(result)
 
 	def select_all(self):
 		result = []
@@ -106,11 +116,9 @@ class Selection:
 		result = False
 		if not self.objs:
 			return result
-		rect = point + point
-		for obj in self.objs:
-			if is_bbox_in_rect(obj.cache_bbox, rect):
-				result = True
-				break
+		ret = self._select_at_point(point)
+		if ret and ret[0] in self.objs:
+			result = True
 		return result
 
 	def remove(self, objs):

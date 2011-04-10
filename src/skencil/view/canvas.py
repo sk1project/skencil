@@ -278,16 +278,16 @@ class AppCanvas(gtk.DrawingArea):
 		end = self.doc_to_win([x1, y1])
 		self.zoom_to_rectangle(start, end)
 
-	def select_at_point(self, point):
+	def select_at_point(self, point, flag=False):
 		point = self.win_to_doc(point)
-		self.presenter.selection.select_at_point(point)
+		self.presenter.selection.select_at_point(point, flag)
 
-	def select_by_rect(self, start, end):
+	def select_by_rect(self, start, end, flag=False):
 		start = self.win_to_doc(start)
 		end = self.win_to_doc(end)
 		rect = start + end
 		rect = normalize_bbox(rect)
-		self.presenter.selection.select_by_rect(rect)
+		self.presenter.selection.select_by_rect(rect, flag)
 
 	def force_redraw(self):
 		self.queue_draw()

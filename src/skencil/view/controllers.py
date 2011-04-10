@@ -58,13 +58,13 @@ class AbstractController:
 				self.counter = 0
 				self.end = [event.x, event.y]
 				self.canvas.renderer.stop_draw_frame(self.start, self.end)
-				self.do_action()
+				self.do_action(event)
 
 	def mouse_move(self, event):
 		if self.draw:
 			self.end = [event.x, event.y]
 
-	def do_action(self):
+	def do_action(self, event):
 		pass
 
 	def _draw_frame(self, *args):
@@ -144,7 +144,7 @@ class ZoomController(AbstractController):
 				self.canvas.zoom_at_point(self.start, ZOOM_OUT)
 				self.canvas.restore_cursor()
 
-	def do_action(self):
+	def do_action(self, event):
 		if self.start and self.end:
 			change_x = abs(self.end[0] - self.start[0])
 			change_y = abs(self.end[1] - self.start[1])
@@ -169,14 +169,17 @@ class SelectController(AbstractController):
 			if self.presenter.selection.is_point_over(dpoint):
 				self.canvas.set_temp_mode(modes.MOVE_MODE)
 
-	def do_action(self):
+	def do_action(self, event):
 		if self.start and self.end:
+			add_flag = False
+			if event.state & gtk.gdk.SHIFT_MASK:
+				add_flag = True
 			change_x = abs(self.end[0] - self.start[0])
 			change_y = abs(self.end[1] - self.start[1])
 			if change_x < 5 and change_y < 5:
-				self.canvas.select_at_point(self.start)
+				self.canvas.select_at_point(self.start, add_flag)
 			else:
-				self.canvas.select_by_rect(self.start, self.end)
+				self.canvas.select_by_rect(self.start, self.end, add_flag)
 
 			dpoint = self.canvas.win_to_doc(self.start)
 			if self.presenter.selection.is_point_over(dpoint):
@@ -208,7 +211,14 @@ class MoveController(AbstractController):
 	def mouse_move(self, event):
 		if self.move:
 			self.moved = True
-			self.end = [event.x, event.y]
+			new = [event.x, event.y]
+			if event.state & gtk.gdk.CONTROL_MASK:
+				change = [new[0] - self.start[0], new[1] - self.start[1]]
+				if abs(change[0]) > abs(change[1]):
+					new[1] = self.start[1]
+				else:
+					new[0] = self.start[0]
+			self.end = new
 		else:
 			point = [event.x, event.y]
 			dpoint = self.canvas.win_to_doc(point)
@@ -235,7 +245,14 @@ class MoveController(AbstractController):
 	def mouse_up(self, event):
 		if self.move and event.button == 1:
 			gobject.source_remove(self.timer)
-			self.end = [event.x, event.y]
+			new = [event.x, event.y]
+			if event.state & gtk.gdk.CONTROL_MASK:
+				change = [new[0] - self.start[0], new[1] - self.start[1]]
+				if abs(change[0]) > abs(change[1]):
+					new[1] = self.start[1]
+				else:
+					new[0] = self.start[0]
+			self.end = new
 			self.canvas.renderer.hide_move_frame()
 			self.move = False
 			if self.moved:
@@ -245,6 +262,12 @@ class MoveController(AbstractController):
 				dy = end_point[1] - start_point[1]
 				trafo = [1.0, 0.0, 0.0, 1.0, dx, dy]
 				self.presenter.api.transform_selected(trafo, self.copy)
+			elif event.state & gtk.gdk.SHIFT_MASK:
+				self.canvas.select_at_point(self.start, True)
+				if not self.presenter.selection.is_point_over(self.start):
+					self.canvas.restore_mode()
+			if self.copy:
+				self.canvas.restore_cursor()
 			self.moved = False
 			self.copy = False
 			self.start = []
@@ -252,5 +275,5 @@ class MoveController(AbstractController):
 
 		elif self.moved and event.button == 3:
 			self.copy = True
-#			cursor = self.app.canvas_cursors[modes.COPY_MODE]
-#			self.canvas.set_temp_cursor(cursor)
+			cursor = self.app.cursors[modes.COPY_MODE]
+			self.canvas.set_temp_cursor(cursor)

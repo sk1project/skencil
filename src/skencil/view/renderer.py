@@ -163,8 +163,6 @@ class CairoRenderer:
 		self.ctx.rectangle(-w / 2.0, -h / 2.0, w, h)
 		self.ctx.set_source_rgb(0, 0, 0)
 		self.ctx.stroke()
-		self.ctx.rectangle(0, 0, 5, 5)
-		self.ctx.stroke()
 
 
 	def render_doc(self):

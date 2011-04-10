@@ -22,7 +22,7 @@ class RectangleCreator(AbstractController):
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
 
-	def do_action(self):
+	def do_action(self, event):
 		if self.start and self.end:
 			rect = self.start + self.end
 			self.presenter.api.create_rectangle(rect)
