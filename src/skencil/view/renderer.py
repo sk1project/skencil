@@ -54,8 +54,8 @@ class CairoRenderer:
 
 	def draw_frame(self, start, end, flag=True):
 		self.start_soft_repaint()
-		if flag:
-			self._paint_selection()
+		if flag:pass
+#			self._paint_selection()
 
 		self.ctx.set_matrix(self.direct_matrix)
 		self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
@@ -81,6 +81,8 @@ class CairoRenderer:
 			zoom = self.canvas.zoom
 			self.ctx.set_matrix(self.canvas.matrix)
 			self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
+
+			#Frame
 			x0, y0, x1, y1 = selection.frame
 			self.ctx.set_line_width(1.0 / zoom)
 			self.ctx.set_dash([])
@@ -93,6 +95,50 @@ class CairoRenderer:
 			self.ctx.set_dash([a / zoom, b / zoom])
 			self.ctx.rectangle(x0, y0, x1 - x0, y1 - y0)
 			self.ctx.stroke()
+
+			#Selection markers
+			markers = selection.markers
+			r, g, b = config.sel_marker_fill
+			r1, g1, b1 = config.sel_marker_stroke
+			size = config.sel_marker_size / zoom
+			i = 0
+			for marker in markers:
+				if i == 4:
+					cs = 3.0 / (2.0 * zoom)
+					self.ctx.set_source_rgb(r, g, b)
+					self.ctx.rectangle(marker[0], marker[1] + size / 2.0 - cs,
+									size, 2.0 * cs)
+					self.ctx.rectangle(marker[0] + size / 2.0 - cs, marker[1],
+									2.0 * cs, size)
+					self.ctx.fill()
+					self.ctx.set_source_rgb(r1, g1, b1)
+					self.ctx.move_to(marker[0] + size / 2.0, marker[1])
+					self.ctx.line_to(marker[0] + size / 2.0, marker[1] + size)
+					self.ctx.stroke()
+					self.ctx.move_to(marker[0], marker[1] + size / 2.0)
+					self.ctx.line_to(marker[0] + size, marker[1] + size / 2.0)
+					self.ctx.stroke()
+				else:
+					self.ctx.set_source_rgb(r, g, b)
+					self.ctx.rectangle(marker[0], marker[1], size, size)
+					self.ctx.fill_preserve()
+					self.ctx.set_source_rgb(r1, g1, b1)
+					self.ctx.set_line_width(1.0 / zoom)
+					self.ctx.set_dash([])
+					self.ctx.stroke()
+				i += 1
+
+			#Object markers
+			objs = selection.objs
+			self.ctx.set_source_rgb(0, 0, 0)
+			self.ctx.set_line_width(1.0 / zoom)
+			self.ctx.set_dash([])
+			offset = 2.0 / zoom
+			for obj in objs:
+				bbox = obj.cache_bbox
+				self.ctx.rectangle(bbox[0] - offset, bbox[1] - offset,
+								 2.0 * offset, 2.0 * offset)
+				self.ctx.stroke()
 
 	def	paint_selection(self):
 		self.start_soft_repaint()
