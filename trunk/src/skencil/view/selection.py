@@ -20,8 +20,6 @@ from uc2.libcairo import sum_bbox, is_bbox_in_rect
 from skencil import _, config
 from skencil import events
 
-MARKER_SIZE = 9.0
-FRAME_OFFSET = 10.0
 
 class Selection:
 
@@ -59,8 +57,26 @@ class Selection:
 		self.frame = []
 		if self.bbox:
 			x0, y0, x1, y1 = self.bbox
-			size = FRAME_OFFSET / self.presenter.canvas.zoom
+			frame_offset = config.sel_frame_offset
+			size = frame_offset / self.presenter.canvas.zoom
 			self.frame = [x0 - size, y0 - size, x1 + size, y1 + size]
+
+		self.markers = []
+		if self.bbox:
+			marker_size = config.sel_marker_size
+			offset = marker_size / (2.0 * self.presenter.canvas.zoom)
+			x0, y0, x1, y1 = self.frame
+			w = (x1 - x0) / 2.0
+			h = (y1 - y0) / 2.0
+			markers = [
+						[x0, y1], [x0 + w, y1], [x1, y1],
+						[x0, y0 + h], [x0 + w, y0 + h], [x1, y0 + h],
+						[x0, y0], [x0 + w, y0], [x1, y0],
+						]
+			for marker in markers:
+				x, y = marker
+				self.markers.append([x - offset, y - offset,
+									x + offset, y + offset])
 
 	def select_by_rect(self, rect, flag=False):
 		result = []
