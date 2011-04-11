@@ -45,7 +45,7 @@ def get_cursors():
 	cursors = {
 			SELECT_MODE:('cur_std.png', (0, 0)),
 			SHAPER_MODE:('cur_edit.png', (0, 0)),
-			ZOOM_MODE:('cur_zoom.png', (6, 6)),
+			ZOOM_MODE:('cur_zoom_in.png', (6, 6)),
 			FLEUR_MODE:('cur_fleur.png', (11, 4)),
 			LINE_MODE:('cur_create_polyline.png', (6, 6)),
 			CURVE_MODE:('cur_create_bezier.png', (6, 6)),
