@@ -49,6 +49,7 @@ class AppCanvas(gtk.DrawingArea):
 	controller = None
 	ctrls = None
 	orig_cursor = None
+	resize_marker = 0
 
 	def __init__(self, parent):
 
@@ -96,7 +97,8 @@ class AppCanvas(gtk.DrawingArea):
 		modes.ELLIPSE_MODE: dummy,
 		modes.TEXT_MODE: dummy,
 		modes.POLYGON_MODE: dummy,
-		modes.MOVE_MODE: controllers.MoveController(self, self.presenter)
+		modes.MOVE_MODE: controllers.MoveController(self, self.presenter),
+		modes.RESIZE_MODE: controllers.ResizeController(self, self.presenter),
 		}
 		return ctrls
 
@@ -104,16 +106,18 @@ class AppCanvas(gtk.DrawingArea):
 	def set_mode(self, mode=modes.SELECT_MODE):
 		if not mode == self.mode:
 			self.mode = mode
-			self.set_canvas_cursor(mode)
+#			self.set_canvas_cursor(mode)
 			self.controller = self.ctrls[mode]
+			self.controller.set_cursor()
 			events.emit(events.MODE_CHANGED, mode)
 
 	def set_temp_mode(self, mode=modes.SELECT_MODE):
 		if not mode == self.mode:
 			self.previous_mode = self.mode
 			self.mode = mode
-			self.set_canvas_cursor(mode)
+#			self.set_canvas_cursor(mode)
 			self.controller = self.ctrls[mode]
+			self.controller.set_cursor()
 
 	def restore_mode(self):
 		if not self.previous_mode is None:
