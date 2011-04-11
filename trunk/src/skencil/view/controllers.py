@@ -34,13 +34,22 @@ class AbstractController:
 	timer = None
 	DELAY = 50
 
+	mode = None
+
 	def __init__(self, canvas, presenter):
 		self.canvas = canvas
 		self.app = presenter.app
 		self.presenter = presenter
+		self.selection = presenter.selection
 		self.eventloop = presenter.eventloop
 		self.start = []
 		self.end = []
+
+	def set_cursor(self):
+		if self.mode is None:
+			self.canvas.set_canvas_cursor(self.canvas.mode)
+		else:
+			self.canvas.set_canvas_cursor(self.mode)
 
 	def mouse_down(self, event):
 		if event.button == 1:
@@ -85,6 +94,7 @@ class AbstractController:
 class FleurController(AbstractController):
 
 	counter = 0
+	mode = modes.FLEUR_MODE
 
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
@@ -125,6 +135,8 @@ class FleurController(AbstractController):
 
 class ZoomController(AbstractController):
 
+	mode = modes.ZOOM_MODE
+
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
 
@@ -157,6 +169,8 @@ class ZoomController(AbstractController):
 
 class SelectController(AbstractController):
 
+	mode = modes.SELECT_MODE
+
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
 
@@ -166,8 +180,12 @@ class SelectController(AbstractController):
 		else:
 			point = [event.x, event.y]
 			dpoint = self.canvas.win_to_doc(point)
-			if self.presenter.selection.is_point_over(dpoint):
+			if self.selection.is_point_over(dpoint):
 				self.canvas.set_temp_mode(modes.MOVE_MODE)
+			elif self.selection.is_point_over_marker(dpoint):
+				mark = self.selection.is_point_over_marker(dpoint)[0]
+				self.canvas.resize_marker = mark
+				self.canvas.set_temp_mode(modes.RESIZE_MODE)
 
 	def do_action(self, event):
 		if self.start and self.end:
@@ -182,18 +200,22 @@ class SelectController(AbstractController):
 				self.canvas.select_by_rect(self.start, self.end, add_flag)
 
 			dpoint = self.canvas.win_to_doc(self.start)
-			if self.presenter.selection.is_point_over(dpoint):
+			if self.selection.is_point_over(dpoint):
 				self.canvas.set_temp_mode(modes.MOVE_MODE)
 
 class MoveController(AbstractController):
+
 	start = None
 	end = None
+	trafo = []
+	mode = modes.MOVE_MODE
 
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)
 		self.move = False
 		self.moved = False
 		self.copy = False
+		self.trafo = []
 
 	def mouse_down(self, event):
 		if event.button == 1:
@@ -204,9 +226,17 @@ class MoveController(AbstractController):
 
 	def _draw_frame(self, *args):
 		if self.end:
-			self.canvas.renderer.draw_move_frame(self.start, self.end)
+#			self.canvas.renderer.draw_move_frame(self.start, self.end)
+			self.canvas.renderer.draw_move_frame(self.trafo)
 			self.end = []
 		return True
+
+	def _calc_trafo(self, point1, point2):
+		start_point = self.canvas.win_to_doc(point1)
+		end_point = self.canvas.win_to_doc(point2)
+		dx = end_point[0] - start_point[0]
+		dy = end_point[1] - start_point[1]
+		return [1.0, 0.0, 0.0, 1.0, dx, dy]
 
 	def mouse_move(self, event):
 		if self.move:
@@ -219,10 +249,11 @@ class MoveController(AbstractController):
 				else:
 					new[0] = self.start[0]
 			self.end = new
+			self.trafo = self._calc_trafo(self.start, self.end)
 		else:
 			point = [event.x, event.y]
 			dpoint = self.canvas.win_to_doc(point)
-			if self.presenter.selection.is_point_over(dpoint):
+			if self.selection.is_point_over(dpoint):
 				pass
 			else:
 				self.canvas.restore_mode()
@@ -241,15 +272,11 @@ class MoveController(AbstractController):
 			self.canvas.renderer.hide_move_frame()
 			self.move = False
 			if self.moved:
-				start_point = self.canvas.win_to_doc(self.start)
-				end_point = self.canvas.win_to_doc(self.end)
-				dx = end_point[0] - start_point[0]
-				dy = end_point[1] - start_point[1]
-				trafo = [1.0, 0.0, 0.0, 1.0, dx, dy]
-				self.presenter.api.transform_selected(trafo, self.copy)
+				self.trafo = self._calc_trafo(self.start, self.end)
+				self.presenter.api.transform_selected(self.trafo, self.copy)
 			elif event.state & gtk.gdk.SHIFT_MASK:
 				self.canvas.select_at_point(self.start, True)
-				if not self.presenter.selection.is_point_over(self.start):
+				if not self.selection.is_point_over(self.start):
 					self.canvas.restore_mode()
 			if self.copy:
 				self.canvas.restore_cursor()
@@ -262,3 +289,45 @@ class MoveController(AbstractController):
 			self.copy = True
 			cursor = self.app.cursors[modes.COPY_MODE]
 			self.canvas.set_temp_cursor(cursor)
+
+class ResizeController(AbstractController):
+
+	mode = modes.RESIZE_MODE
+
+	def __init__(self, canvas, presenter):
+		AbstractController.__init__(self, canvas, presenter)
+		self.move = False
+		self.moved = False
+		self.copy = False
+		self.frame = []
+
+	def mouse_move(self, event):
+		if not self.move:
+			point = self.canvas.win_to_doc([event.x, event.y])
+			if not self.selection.is_point_over_marker(point):
+				self.canvas.restore_mode()
+		else:
+			new = [event.x, event.y]
+			mark = self.canvas.resize_marker
+#			if mark = 7:
+
+
+	def mouse_down(self, event):
+		if event.button == 1:
+			self.start = [event.x, event.y]
+			self.move = True
+			self.canvas.renderer.show_move_frame()
+			self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+
+	def mouse_up(self, event):
+		if event.button == 1:
+			gobject.source_remove(self.timer)
+			self.end = [event.x, event.y]
+			self.move = False
+			self.canvas.renderer.hide_move_frame()
+
+	def _draw_frame(self, *args):
+		if self.end:
+#			self.canvas.renderer.draw_move_frame(self.start, self.end)
+			self.end = []
+		return True

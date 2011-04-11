@@ -34,11 +34,12 @@ POLYGON_MODE = 15
 ZOOM_OUT_MODE = 16
 MOVE_MODE = 17
 COPY_MODE = 18
+RESIZE_MODE = 19
 
 
 MODE_LIST = [SELECT_MODE, SHAPER_MODE, ZOOM_MODE, LINE_MODE,
 			CURVE_MODE, RECT_MODE, ELLIPSE_MODE, TEXT_MODE,
-			POLYGON_MODE, ZOOM_OUT_MODE, MOVE_MODE]
+			POLYGON_MODE, ZOOM_OUT_MODE, MOVE_MODE, RESIZE_MODE, ]
 
 def get_cursors():
 	cursors = {
@@ -55,6 +56,7 @@ def get_cursors():
 			ZOOM_OUT_MODE:('cur_zoom_out.png', (6, 6)),
 			MOVE_MODE:('cur_move.png', (0, 0)),
 			COPY_MODE:('cur_copy.png', (0, 0)),
+			RESIZE_MODE:('cur_move.png', (0, 0)),
 			}
 	keys = cursors.keys()
 	for key in keys:

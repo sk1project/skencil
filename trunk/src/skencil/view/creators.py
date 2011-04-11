@@ -15,9 +15,13 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+from skencil import modes
+
 from controllers import AbstractController
 
 class RectangleCreator(AbstractController):
+
+	mode = modes.RECT_MODE
 
 	def __init__(self, canvas, presenter):
 		AbstractController.__init__(self, canvas, presenter)

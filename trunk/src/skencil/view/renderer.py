@@ -18,6 +18,7 @@
 import cairo
 
 from uc2.sk1doc import model
+from uc2 import libcairo
 
 from skencil import config
 
@@ -155,14 +156,11 @@ class CairoRenderer:
 		end = self.canvas.doc_to_win(bbox[2:])
 		self.draw_frame(start, end, False)
 
-	def draw_move_frame(self, start_point, end_point):
-		dx = end_point[0] - start_point[0]
-		dy = end_point[1] - start_point[1]
+	def draw_move_frame(self, trafo):
 		bbox = self.presenter.selection.bbox
+		bbox = libcairo.apply_trafo_to_bbox(bbox, trafo)
 		start = self.canvas.doc_to_win(bbox[:2])
 		end = self.canvas.doc_to_win(bbox[2:])
-		start = [start[0] + dx, start[1] + dy]
-		end = [end[0] + dx, end[1] + dy]
 		self.draw_frame(start, end, False)
 
 	def hide_move_frame(self):

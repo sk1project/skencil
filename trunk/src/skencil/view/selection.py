@@ -111,9 +111,6 @@ class Selection:
 
 	def select_at_point(self, point, flag=False):
 		result = self._select_at_point(point)
-#		if result and result[0] in self.objs:
-#			self.update()
-#			return
 		if flag:
 			self.add(result)
 		else:
@@ -135,6 +132,17 @@ class Selection:
 		ret = self._select_at_point(point)
 		if ret and ret[0] in self.objs:
 			result = True
+		return result
+
+	def is_point_over_marker(self, point):
+		result = []
+		rect = point + point
+		i = 0
+		for marker in self.markers:
+			if is_bbox_in_rect(marker, rect):
+				result.append(i)
+				break
+			i += 1
 		return result
 
 	def remove(self, objs):
