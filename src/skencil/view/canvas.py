@@ -49,6 +49,7 @@ class AppCanvas(gtk.DrawingArea):
 	controller = None
 	ctrls = None
 	orig_cursor = None
+	current_cursor = None
 	resize_marker = 0
 
 	def __init__(self, parent):
@@ -125,15 +126,18 @@ class AppCanvas(gtk.DrawingArea):
 			self.previous_mode = None
 
 	def set_canvas_cursor(self, mode):
-		self.window.set_cursor(self.app.cursors[mode])
+		self.current_cursor = self.app.cursors[mode]
+		self.window.set_cursor(self.current_cursor)
 
 	def set_temp_cursor(self, cursor):
 		self.orig_cursor = self.app.cursors[self.mode]
+		self.current_cursor = cursor
 		self.window.set_cursor(cursor)
 
 	def restore_cursor(self):
 		if not self.orig_cursor is None:
 			self.window.set_cursor(self.orig_cursor)
+			self.current_cursor = self.orig_cursor
 			self.orig_cursor = None
 
 	def vscroll(self, *args):
