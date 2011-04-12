@@ -4,7 +4,7 @@
 CREDITS = """
 Many thanks to all who have commented on sK1/Skencil, sent 
 suggestions and bug reports and helped in testing or 
-contributed to Skencil with code or through minipayments.
+contributed to sK1/Skencil with code or through minipayments.
 
 In particular, thanks to (in alphabetical order):
 
@@ -13,6 +13,7 @@ Maxim Barabash
 Brian Bartholomew 
 Claudio Bettio 
 Philippe Blayo 
+Cesar Brod
 David Boddie 
 Jeffrey Boser 
 Simon Budig 
