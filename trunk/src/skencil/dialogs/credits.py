@@ -13,9 +13,9 @@ Maxim Barabash
 Brian Bartholomew 
 Claudio Bettio 
 Philippe Blayo 
-Cesar Brod
 David Boddie 
-Jeffrey Boser 
+Jeffrey Boser
+Cesar Brod 
 Simon Budig 
 Wanderlei Antonio Cavassin 
 Yves Ceccone 
