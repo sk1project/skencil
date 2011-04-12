@@ -307,9 +307,9 @@ class ResizeController(AbstractController):
 			if not self.selection.is_point_over_marker(point):
 				self.canvas.restore_mode()
 		else:
-			new = [event.x, event.y]
-			mark = self.canvas.resize_marker
-#			if mark = 7:
+			self.end = [event.x, event.y]
+			self.trafo = self._calc_trafo()
+			self.moved = True
 
 
 	def mouse_down(self, event):
@@ -325,9 +325,41 @@ class ResizeController(AbstractController):
 			self.end = [event.x, event.y]
 			self.move = False
 			self.canvas.renderer.hide_move_frame()
+			if self.moved:
+				self.trafo = self._calc_trafo()
+				self.presenter.api.transform_selected(self.trafo, self.copy)
+			self.moved = False
+			self.copy = False
+			self.start = []
+			self.end = []
+
+	def _calc_trafo(self):
+		mark = self.canvas.resize_marker
+		start_point = self.canvas.win_to_doc(self.start)
+		end_point = self.canvas.win_to_doc(self.end)
+		if mark == 7:
+			dy = start_point[1] - end_point[1]
+			bbox = self.presenter.selection.bbox
+			h = bbox[3] - bbox[1]
+			new_h = h + dy
+			m22 = new_h / h
+			if not m22: m22 = .0000000001
+			dh = bbox[3] * m22 - bbox[3]
+			return [1.0, 0.0, 0.0, m22, 0.0, -dh]
+		if mark == 5:
+			dx = end_point[0] - start_point[0]
+			bbox = self.presenter.selection.bbox
+			w = bbox[2] - bbox[0]
+			new_w = w + dx
+			m11 = new_w / w
+			if not m11: m11 = .0000000001
+			dw = bbox[0] * m11 - bbox[0]
+			return [m11, 0.0, 0.0, 1.0, -dw, 0.0]
+
+		return [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
 
 	def _draw_frame(self, *args):
 		if self.end:
-#			self.canvas.renderer.draw_move_frame(self.start, self.end)
+			self.canvas.renderer.draw_move_frame(self.trafo)
 			self.end = []
 		return True
