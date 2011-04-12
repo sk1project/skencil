@@ -158,7 +158,7 @@ def about_dialog(parent):
 	about.set_copyright("Copyright (C) 2003-2011 by Igor E. Novikov\n" + \
 						"Copyright (C) 1997-2005 by Bernhard Herzog")
 	about.set_comments(_("Vector graphics editor based on sK1 0.9.x") + "\n" + \
-						  _("and Skencil 0.6.x source code."))
+						  _("and Skencil 0.6.x experience."))
 	about.set_website('http://www.sk1project.org')
 	logo = os.path.join(config.resource_dir, 'logo.png')
 	about.set_logo(gtk.gdk.pixbuf_new_from_file(logo))
