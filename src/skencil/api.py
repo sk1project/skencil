@@ -315,8 +315,20 @@ class PresenterAPI:
 			self.add_undo(transaction)
 
 	def _apply_trafo(self, objs, trafo):
+		before = []
+		after = []
 		for obj in objs:
+			before.append(obj.get_trafo_snapshot())
 			obj.apply_trafo(trafo)
+			after.append(obj.get_trafo_snapshot())
+		self.selection.update_bbox()
+		return (before, after)
+
+	def _set_snapshots(self, snapshots):
+		for snapshot in snapshots:
+			obj = snapshot[0]
+			obj.set_trafo_snapshot(snapshot)
+		self.selection.update_bbox()
 
 	def transform_selected(self, trafo, copy=False):
 		if self.selection.objs:
@@ -339,12 +351,10 @@ class PresenterAPI:
 				self.add_undo(transaction)
 				self.selection.set(copied_objs)
 			else:
-				self._apply_trafo(objs, trafo)
-				self.selection.update_bbox()
-				rev_trafo = libcairo.reverse_trafo(trafo)
+				before, after = self._apply_trafo(objs, trafo)
 				transaction = [
-					[[self._apply_trafo, objs, rev_trafo]],
-					[[self._apply_trafo, objs, trafo]],
+					[[self._set_snapshots, before]],
+					[[self._set_snapshots, after]],
 					False]
 				self.add_undo(transaction)
 
