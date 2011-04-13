@@ -337,26 +337,75 @@ class ResizeController(AbstractController):
 		mark = self.canvas.resize_marker
 		start_point = self.canvas.win_to_doc(self.start)
 		end_point = self.canvas.win_to_doc(self.end)
-		if mark == 7:
-			dy = start_point[1] - end_point[1]
-			bbox = self.presenter.selection.bbox
-			h = bbox[3] - bbox[1]
-			new_h = h + dy
-			m22 = new_h / h
-			if not m22: m22 = .0000000001
-			dh = bbox[3] * m22 - bbox[3]
-			return [1.0, 0.0, 0.0, m22, 0.0, -dh]
+		bbox = self.presenter.selection.bbox
+		w = bbox[2] - bbox[0]
+		h = bbox[3] - bbox[1]
+		m11 = m22 = 1.0
+		dx = dy = 0.0
+		if mark == 0:
+			dy = end_point[1] - start_point[1]
+			dx = start_point[0] - end_point[0]
+			if abs(dx) < abs(dy):
+				change = dx
+				m11 = m22 = (w + change) / w
+			else:
+				change = dy
+				m11 = m22 = (h + change) / h
+			dy = -(bbox[1] * m22 - bbox[1])
+			dx = -(bbox[2] * m11 - bbox[2])
+		if mark == 1:
+			dy = end_point[1] - start_point[1]
+			m22 = (h + dy) / h
+			dy = -(bbox[1] * m22 - bbox[1])
+		if mark == 2:
+			dy = end_point[1] - start_point[1]
+			dx = end_point[0] - start_point[0]
+			if abs(dx) < abs(dy):
+				change = dx
+				m11 = m22 = (w + change) / w
+			else:
+				change = dy
+				m11 = m22 = (h + change) / h
+			dy = -(bbox[1] * m22 - bbox[1])
+			dx = -(bbox[0] * m11 - bbox[0])
+		if mark == 3:
+			dx = start_point[0] - end_point[0]
+			m11 = (w + dx) / w
+			dx = -(bbox[2] * m11 - bbox[2])
 		if mark == 5:
 			dx = end_point[0] - start_point[0]
-			bbox = self.presenter.selection.bbox
-			w = bbox[2] - bbox[0]
-			new_w = w + dx
-			m11 = new_w / w
-			if not m11: m11 = .0000000001
-			dw = bbox[0] * m11 - bbox[0]
-			return [m11, 0.0, 0.0, 1.0, -dw, 0.0]
+			m11 = (w + dx) / w
+			dx = -(bbox[0] * m11 - bbox[0])
+		if mark == 6:
+			dy = start_point[1] - end_point[1]
+			dx = start_point[0] - end_point[0]
+			if abs(dx) < abs(dy):
+				change = dx
+				m11 = m22 = (w + change) / w
+			else:
+				change = dy
+				m11 = m22 = (h + change) / h
+			dx = -(bbox[2] * m11 - bbox[2])
+			dy = -(bbox[3] * m22 - bbox[3])
+		if mark == 7:
+			dy = start_point[1] - end_point[1]
+			m22 = (h + dy) / h
+			dy = -(bbox[3] * m22 - bbox[3])
+		if mark == 8:
+			dy = start_point[1] - end_point[1]
+			dx = end_point[0] - start_point[0]
+			if abs(dx) < abs(dy):
+				change = dx
+				m11 = m22 = (w + change) / w
+			else:
+				change = dy
+				m11 = m22 = (h + change) / h
+			dy = -(bbox[3] * m22 - bbox[3])
+			dx = -(bbox[0] * m11 - bbox[0])
 
-		return [1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+		if not m11: m11 = .0000000001
+		if not m22: m22 = .0000000001
+		return [m11, 0.0, 0.0, m22, dx, dy]
 
 	def _draw_frame(self, *args):
 		if self.end:
