@@ -332,6 +332,31 @@ class ResizeController(AbstractController):
 			self.copy = False
 			self.start = []
 			self.end = []
+			point = self.canvas.win_to_doc([event.x, event.y])
+			if not self.selection.is_point_over_marker(point):
+				self.canvas.restore_mode()
+
+		if event.button == 3 and self.moved:
+			self.copy = True
+			self.set_cursor()
+
+	def set_cursor(self):
+		mark = self.canvas.resize_marker
+		mode = self.mode
+		if mark == 0 or mark == 8:
+			if self.copy: mode = modes.RESIZE_MODE1_COPY
+			else: mode = modes.RESIZE_MODE1
+		if mark == 1 or mark == 7:
+			if self.copy: mode = modes.RESIZE_MODE2_COPY
+			else: mode = modes.RESIZE_MODE2
+		if mark == 2 or mark == 6:
+			if self.copy: mode = modes.RESIZE_MODE3_COPY
+			else: mode = modes.RESIZE_MODE3
+		if mark == 3 or mark == 5:
+			if self.copy: mode = modes.RESIZE_MODE4_COPY
+			else: mode = modes.RESIZE_MODE4
+		self.mode = mode
+		self.canvas.set_canvas_cursor(mode)
 
 	def _calc_trafo(self, event):
 		control = shift = False

@@ -35,6 +35,14 @@ ZOOM_OUT_MODE = 16
 MOVE_MODE = 17
 COPY_MODE = 18
 RESIZE_MODE = 19
+RESIZE_MODE1 = 20
+RESIZE_MODE2 = 21
+RESIZE_MODE3 = 22
+RESIZE_MODE4 = 23
+RESIZE_MODE1_COPY = 24
+RESIZE_MODE2_COPY = 25
+RESIZE_MODE3_COPY = 26
+RESIZE_MODE4_COPY = 27
 
 
 MODE_LIST = [SELECT_MODE, SHAPER_MODE, ZOOM_MODE, LINE_MODE,
@@ -57,6 +65,14 @@ def get_cursors():
 			MOVE_MODE:('cur_move.png', (0, 0)),
 			COPY_MODE:('cur_copy.png', (0, 0)),
 			RESIZE_MODE:('cur_move.png', (0, 0)),
+			RESIZE_MODE1:('cur_resize1.png', (10, 10)),
+			RESIZE_MODE1_COPY:('cur_resize1_copy.png', (10, 10)),
+			RESIZE_MODE2:('cur_resize2.png', (10, 10)),
+			RESIZE_MODE2_COPY:('cur_resize2_copy.png', (10, 10)),
+			RESIZE_MODE3:('cur_resize3.png', (10, 10)),
+			RESIZE_MODE3_COPY:('cur_resize3_copy.png', (10, 10)),
+			RESIZE_MODE4:('cur_resize4.png', (10, 10)),
+			RESIZE_MODE4_COPY:('cur_resize4_copy.png', (10, 10)),
 			}
 	keys = cursors.keys()
 	for key in keys:
