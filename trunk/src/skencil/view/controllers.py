@@ -308,7 +308,7 @@ class ResizeController(AbstractController):
 				self.canvas.restore_mode()
 		else:
 			self.end = [event.x, event.y]
-			self.trafo = self._calc_trafo()
+			self.trafo = self._calc_trafo(event)
 			self.moved = True
 
 
@@ -326,14 +326,19 @@ class ResizeController(AbstractController):
 			self.move = False
 			self.canvas.renderer.hide_move_frame()
 			if self.moved:
-				self.trafo = self._calc_trafo()
+				self.trafo = self._calc_trafo(event)
 				self.presenter.api.transform_selected(self.trafo, self.copy)
 			self.moved = False
 			self.copy = False
 			self.start = []
 			self.end = []
 
-	def _calc_trafo(self):
+	def _calc_trafo(self, event):
+		control = shift = False
+		if event.state & gtk.gdk.CONTROL_MASK:
+			control = True
+		if event.state & gtk.gdk.SHIFT_MASK:
+			shift = True
 		mark = self.canvas.resize_marker
 		start_point = self.canvas.win_to_doc(self.start)
 		end_point = self.canvas.win_to_doc(self.end)
@@ -345,63 +350,99 @@ class ResizeController(AbstractController):
 		if mark == 0:
 			dy = end_point[1] - start_point[1]
 			dx = start_point[0] - end_point[0]
-			if abs(dx) < abs(dy):
-				change = dx
-				m11 = m22 = (w + change) / w
+			if control:
+				m11 = (w + dx) / w
+				m22 = (h + dy) / h
 			else:
-				change = dy
-				m11 = m22 = (h + change) / h
+				if abs(dx) < abs(dy):
+					change = dx
+					m11 = m22 = (w + change) / w
+				else:
+					change = dy
+					m11 = m22 = (h + change) / h
 			dy = -(bbox[1] * m22 - bbox[1])
 			dx = -(bbox[2] * m11 - bbox[2])
+			if shift:
+				dx += w * (m11 - 1.0) / 2.0
+				dy -= h * (m22 - 1.0) / 2.0
 		if mark == 1:
 			dy = end_point[1] - start_point[1]
 			m22 = (h + dy) / h
 			dy = -(bbox[1] * m22 - bbox[1])
+			if shift:
+				dy -= h * (m22 - 1.0) / 2.0
 		if mark == 2:
 			dy = end_point[1] - start_point[1]
 			dx = end_point[0] - start_point[0]
-			if abs(dx) < abs(dy):
-				change = dx
-				m11 = m22 = (w + change) / w
+			if control:
+				m11 = (w + dx) / w
+				m22 = (h + dy) / h
 			else:
-				change = dy
-				m11 = m22 = (h + change) / h
+				if abs(dx) < abs(dy):
+					change = dx
+					m11 = m22 = (w + change) / w
+				else:
+					change = dy
+					m11 = m22 = (h + change) / h
 			dy = -(bbox[1] * m22 - bbox[1])
 			dx = -(bbox[0] * m11 - bbox[0])
+			if shift:
+				dx -= w * (m11 - 1.0) / 2.0
+				dy -= h * (m22 - 1.0) / 2.0
 		if mark == 3:
 			dx = start_point[0] - end_point[0]
 			m11 = (w + dx) / w
 			dx = -(bbox[2] * m11 - bbox[2])
+			if shift:
+				dx += w * (m11 - 1.0) / 2.0
 		if mark == 5:
 			dx = end_point[0] - start_point[0]
 			m11 = (w + dx) / w
 			dx = -(bbox[0] * m11 - bbox[0])
+			if shift:
+				dx -= w * (m11 - 1.0) / 2.0
 		if mark == 6:
 			dy = start_point[1] - end_point[1]
 			dx = start_point[0] - end_point[0]
-			if abs(dx) < abs(dy):
-				change = dx
-				m11 = m22 = (w + change) / w
+			if control:
+				m11 = (w + dx) / w
+				m22 = (h + dy) / h
 			else:
-				change = dy
-				m11 = m22 = (h + change) / h
+				if abs(dx) < abs(dy):
+					change = dx
+					m11 = m22 = (w + change) / w
+				else:
+					change = dy
+					m11 = m22 = (h + change) / h
 			dx = -(bbox[2] * m11 - bbox[2])
 			dy = -(bbox[3] * m22 - bbox[3])
+			if shift:
+				dx += w * (m11 - 1.0) / 2.0
+				dy += h * (m22 - 1.0) / 2.0
 		if mark == 7:
 			dy = start_point[1] - end_point[1]
 			m22 = (h + dy) / h
 			dy = -(bbox[3] * m22 - bbox[3])
+			if shift:
+				dy += h * (m22 - 1.0) / 2.0
 		if mark == 8:
 			dy = start_point[1] - end_point[1]
 			dx = end_point[0] - start_point[0]
-			if abs(dx) < abs(dy):
-				change = dx
-				m11 = m22 = (w + change) / w
+			if control:
+				m11 = (w + dx) / w
+				m22 = (h + dy) / h
 			else:
-				change = dy
-				m11 = m22 = (h + change) / h
+				if abs(dx) < abs(dy):
+					change = dx
+					m11 = m22 = (w + change) / w
+				else:
+					change = dy
+					m11 = m22 = (h + change) / h
 			dy = -(bbox[3] * m22 - bbox[3])
 			dx = -(bbox[0] * m11 - bbox[0])
+			if shift:
+				dx -= w * (m11 - 1.0) / 2.0
+				dy += h * (m22 - 1.0) / 2.0
 
 		if not m11: m11 = .0000000001
 		if not m22: m22 = .0000000001
