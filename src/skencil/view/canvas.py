@@ -319,7 +319,7 @@ class AppCanvas(gtk.DrawingArea):
 		self.controller.mouse_move(event)
 
 	def mousePressEvent(self, widget, event):
-		self.set_canvas_cursor(self.mode)
+		self.controller.set_cursor()
 		self.controller.mouse_down(event)
 
 	def mouseReleaseEvent(self, widget, event):
