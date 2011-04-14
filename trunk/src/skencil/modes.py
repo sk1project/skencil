@@ -51,8 +51,8 @@ MODE_LIST = [SELECT_MODE, SHAPER_MODE, ZOOM_MODE, LINE_MODE,
 
 def get_cursors():
 	cursors = {
-			SELECT_MODE:('cur_std.png', (0, 0)),
-			SHAPER_MODE:('cur_edit.png', (0, 0)),
+			SELECT_MODE:('cur_std.png', (5, 5)),
+			SHAPER_MODE:('cur_edit.png', (5, 5)),
 			ZOOM_MODE:('cur_zoom_in.png', (6, 6)),
 			FLEUR_MODE:('cur_fleur.png', (11, 4)),
 			LINE_MODE:('cur_create_polyline.png', (6, 6)),
@@ -62,9 +62,9 @@ def get_cursors():
 			ELLIPSE_MODE:('cur_create_ellipse.png', (6, 6)),
 			TEXT_MODE:('cur_text.png', (4, 8)),
 			ZOOM_OUT_MODE:('cur_zoom_out.png', (6, 6)),
-			MOVE_MODE:('cur_move.png', (0, 0)),
-			COPY_MODE:('cur_copy.png', (0, 0)),
-			RESIZE_MODE:('cur_move.png', (0, 0)),
+			MOVE_MODE:('cur_move.png', (5, 5)),
+			COPY_MODE:('cur_copy.png', (5, 5)),
+			RESIZE_MODE:('cur_center.png', (5, 5)),
 			RESIZE_MODE1:('cur_resize1.png', (10, 10)),
 			RESIZE_MODE1_COPY:('cur_resize1_copy.png', (10, 10)),
 			RESIZE_MODE2:('cur_resize2.png', (10, 10)),
