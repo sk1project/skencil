@@ -290,7 +290,7 @@ class MoveController(AbstractController):
 			cursor = self.app.cursors[modes.COPY_MODE]
 			self.canvas.set_temp_cursor(cursor)
 
-class ResizeController(AbstractController):
+class TransformController(AbstractController):
 
 	mode = modes.RESIZE_MODE
 

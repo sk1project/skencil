@@ -99,7 +99,7 @@ class AppCanvas(gtk.DrawingArea):
 		modes.TEXT_MODE: dummy,
 		modes.POLYGON_MODE: dummy,
 		modes.MOVE_MODE: controllers.MoveController(self, self.presenter),
-		modes.RESIZE_MODE: controllers.ResizeController(self, self.presenter),
+		modes.RESIZE_MODE: controllers.TransformController(self, self.presenter),
 		}
 		return ctrls
 
