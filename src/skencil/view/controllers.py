@@ -254,7 +254,11 @@ class MoveController(AbstractController):
 			point = [event.x, event.y]
 			dpoint = self.canvas.win_to_doc(point)
 			if self.selection.is_point_over(dpoint):
-				pass
+				if self.selection.is_point_over_marker(dpoint):
+					mark = self.selection.is_point_over_marker(dpoint)[0]
+					self.canvas.resize_marker = mark
+					self.canvas.restore_mode()
+					self.canvas.set_temp_mode(modes.RESIZE_MODE)
 			else:
 				self.canvas.restore_mode()
 
@@ -355,6 +359,8 @@ class TransformController(AbstractController):
 		if mark == 3 or mark == 5:
 			if self.copy: mode = modes.RESIZE_MODE4_COPY
 			else: mode = modes.RESIZE_MODE4
+		if mark == 4:
+			mode = modes.RESIZE_MODE
 		self.mode = mode
 		self.canvas.set_canvas_cursor(mode)
 
