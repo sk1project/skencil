@@ -320,25 +320,35 @@ class TransformController(AbstractController):
 		if event.button == 1:
 			self.start = [event.x, event.y]
 			self.move = True
-			self.canvas.renderer.show_move_frame()
-			self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+			if not self.canvas.resize_marker == 4:
+				self.canvas.renderer.show_move_frame()
+				self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
+			else:
+				self.timer = gobject.timeout_add(self.DELAY, self._draw_center)
 
 	def mouse_up(self, event):
 		if event.button == 1:
 			gobject.source_remove(self.timer)
 			self.end = [event.x, event.y]
 			self.move = False
-			self.canvas.renderer.hide_move_frame()
-			if self.moved:
-				self.trafo = self._calc_trafo(event)
-				self.presenter.api.transform_selected(self.trafo, self.copy)
-			self.moved = False
-			self.copy = False
-			self.start = []
-			self.end = []
-			point = self.canvas.win_to_doc([event.x, event.y])
-			if not self.selection.is_point_over_marker(point):
-				self.canvas.restore_mode()
+			if not self.canvas.resize_marker == 4:
+				self.canvas.renderer.hide_move_frame()
+				if self.moved:
+					self.trafo = self._calc_trafo(event)
+					self.presenter.api.transform_selected(self.trafo, self.copy)
+				self.moved = False
+				self.copy = False
+				self.start = []
+				self.end = []
+				point = self.canvas.win_to_doc([event.x, event.y])
+				if not self.selection.is_point_over_marker(point):
+					self.canvas.restore_mode()
+			else:
+				self._draw_center()
+				self.moved = False
+				self.copy = False
+				self.start = []
+				self.end = []
 
 		if event.button == 3 and self.moved:
 			self.copy = True
@@ -482,5 +492,18 @@ class TransformController(AbstractController):
 	def _draw_frame(self, *args):
 		if self.end:
 			self.canvas.renderer.draw_move_frame(self.trafo)
+			self.end = []
+		return True
+
+	def _draw_center(self, *args):
+		if self.end:
+			start = self.canvas.win_to_doc(self.start)
+			end = self.canvas.win_to_doc(self.end)
+			dx = end[0] - start[0]
+			dy = end[1] - start[1]
+			x, y = self.selection.center_offset
+			self.selection.center_offset = [x + dx, y + dy]
+			self.canvas.renderer.paint_selection()
+			self.start = self.end
 			self.end = []
 		return True
