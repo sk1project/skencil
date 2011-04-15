@@ -27,6 +27,7 @@ class Selection:
 	bbox = []
 	frame = []
 	markers = []
+	center_offset = []
 
 	def __init__(self, presenter):
 		self.presenter = presenter
@@ -35,8 +36,11 @@ class Selection:
 		self.bbox = []
 		self.frame = []
 		self.markers = []
+		self.center_offset = [0.0, 0.0]
 
 	def update(self):
+		if not self.objs:
+			self.center_offset = [0.0, 0.0]
 		self.update_bbox()
 		eventloop = self.presenter.eventloop
 		eventloop.emit(eventloop.SELECTION_CHANGED)
@@ -68,9 +72,10 @@ class Selection:
 			x0, y0, x1, y1 = self.frame
 			w = (x1 - x0) / 2.0
 			h = (y1 - y0) / 2.0
+			dcx, dcy = self.center_offset
 			markers = [
 						[x0, y1], [x0 + w, y1], [x1, y1],
-						[x0, y0 + h], [x0 + w, y0 + h], [x1, y0 + h],
+						[x0, y0 + h], [x0 + w + dcx, y0 + h + dcy], [x1, y0 + h],
 						[x0, y0], [x0 + w, y0], [x1, y0],
 						]
 			for marker in markers:
@@ -160,6 +165,7 @@ class Selection:
 		self.update()
 
 	def set(self, objs):
+		self.center_offset = [0.0, 0.0]
 		self.objs = objs
 		self.update()
 
