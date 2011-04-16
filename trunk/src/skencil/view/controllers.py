@@ -308,8 +308,13 @@ class TransformController(AbstractController):
 	def mouse_move(self, event):
 		if not self.move:
 			point = self.canvas.win_to_doc([event.x, event.y])
-			if not self.selection.is_point_over_marker(point):
+			ret = self.selection.is_point_over_marker(point)
+			if not ret:
 				self.canvas.restore_mode()
+			elif not ret[0] == self.canvas.resize_marker:
+				self.canvas.resize_marker = ret[0]
+				self.set_cursor()
+
 		else:
 			self.end = [event.x, event.y]
 			self.trafo = self._calc_trafo(event)
@@ -320,7 +325,7 @@ class TransformController(AbstractController):
 		if event.button == 1:
 			self.start = [event.x, event.y]
 			self.move = True
-			if not self.canvas.resize_marker == 4:
+			if not self.canvas.resize_marker == 9:
 				self.canvas.renderer.show_move_frame()
 				self.timer = gobject.timeout_add(self.DELAY, self._draw_frame)
 			else:
@@ -331,7 +336,7 @@ class TransformController(AbstractController):
 			gobject.source_remove(self.timer)
 			self.end = [event.x, event.y]
 			self.move = False
-			if not self.canvas.resize_marker == 4:
+			if not self.canvas.resize_marker == 9:
 				self.canvas.renderer.hide_move_frame()
 				if self.moved:
 					self.trafo = self._calc_trafo(event)
@@ -369,8 +374,17 @@ class TransformController(AbstractController):
 		if mark == 3 or mark == 5:
 			if self.copy: mode = modes.RESIZE_MODE4_COPY
 			else: mode = modes.RESIZE_MODE4
-		if mark == 4:
+		if mark == 9:
 			mode = modes.RESIZE_MODE
+		if mark in [10, 12, 15, 17]:
+			if self.copy: mode = modes.RESIZE_MODE10_COPY
+			else: mode = modes.RESIZE_MODE10
+		if mark in [11, 16]:
+			if self.copy: mode = modes.RESIZE_MODE11_COPY
+			else: mode = modes.RESIZE_MODE11
+		if mark in [13, 14]:
+			if self.copy: mode = modes.RESIZE_MODE13_COPY
+			else: mode = modes.RESIZE_MODE13
 		self.mode = mode
 		self.canvas.set_canvas_cursor(mode)
 
@@ -387,6 +401,7 @@ class TransformController(AbstractController):
 		w = bbox[2] - bbox[0]
 		h = bbox[3] - bbox[1]
 		m11 = m22 = 1.0
+		m12 = m21 = 0.0
 		dx = dy = 0.0
 		if mark == 0:
 			dy = end_point[1] - start_point[1]
@@ -484,10 +499,26 @@ class TransformController(AbstractController):
 			if shift:
 				dx -= w * (m11 - 1.0) / 2.0
 				dy += h * (m22 - 1.0) / 2.0
+		if mark == 11:
+			change_x = end_point[0] - start_point[0]
+			m12 = change_x / h
+			dx = -bbox[1] * m12
+		if mark == 16:
+			change_x = start_point[0] - end_point[0]
+			m12 = change_x / h
+			dx = -bbox[3] * m12
+		if mark == 13:
+			change_y = start_point[1] - end_point[1]
+			m21 = change_y / w
+			dy = -bbox[2] * m21
+		if mark == 14:
+			change_y = end_point[1] - start_point[1]
+			m21 = change_y / w
+			dy = -bbox[0] * m21
 
 		if not m11: m11 = .0000000001
 		if not m22: m22 = .0000000001
-		return [m11, 0.0, 0.0, m22, dx, dy]
+		return [m11, m12, m21, m22, dx, dy]
 
 	def _draw_frame(self, *args):
 		if self.end:
