@@ -75,13 +75,20 @@ class Selection:
 			dcx, dcy = self.center_offset
 			markers = [
 						[x0, y1], [x0 + w, y1], [x1, y1],
-						[x0, y0 + h], [x0 + w + dcx, y0 + h + dcy], [x1, y0 + h],
+						[x0, y0 + h], [x0 + w, y0 + h], [x1, y0 + h],
 						[x0, y0], [x0 + w, y0], [x1, y0],
+						[x0 + w + dcx, y0 + h + dcy],
 						]
 			for marker in markers:
 				x, y = marker
 				self.markers.append([x - offset, y - offset,
 									x + offset, y + offset])
+
+			sec_markers = markers[0:4] + markers[5:9]
+			for marker in sec_markers:
+				x, y = marker
+				self.markers.append([x - 2 * offset, y - 2 * offset,
+									x + 2 * offset, y + 2 * offset])
 
 	def select_by_rect(self, rect, flag=False):
 		result = []
@@ -144,7 +151,7 @@ class Selection:
 		rect = point + point
 		i = 0
 		for marker in self.markers:
-			if is_bbox_in_rect(marker, rect):
+			if not i == 4 and is_bbox_in_rect(marker, rect):
 				result.append(i)
 				break
 			i += 1
