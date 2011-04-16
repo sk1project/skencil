@@ -178,7 +178,7 @@ class Application:
 			events.emit(events.DOC_SAVED, doc)
 		except:
 			return False
-		events.emit(events.APP_STATUS, self.tr('Document saved'))
+		events.emit(events.APP_STATUS, _('Document saved'))
 		return True
 
 	def save_as(self):
