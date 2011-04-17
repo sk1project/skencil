@@ -15,6 +15,8 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import math
+
 import gtk
 import gobject
 
@@ -499,6 +501,7 @@ class TransformController(AbstractController):
 			if shift:
 				dx -= w * (m11 - 1.0) / 2.0
 				dy += h * (m22 - 1.0) / 2.0
+
 		if mark == 11:
 			change_x = end_point[0] - start_point[0]
 			m12 = change_x / h
@@ -516,9 +519,23 @@ class TransformController(AbstractController):
 			m21 = change_y / w
 			dy = -bbox[0] * m21
 
+		if mark in (10, 12, 15, 17):
+			x0, y0 = bbox[:2]
+			shift_x, shift_y = self.selection.center_offset
+			center_x = x0 + w / 2.0 + shift_x
+			center_y = y0 + h / 2.0 + shift_y
+			a1 = math.atan2(start_point[1] - center_y, start_point[0] - center_x)
+			a2 = math.atan2(end_point[1] - center_y, end_point[0] - center_x)
+			angle = a2 - a1
+			m21 = math.sin(angle)
+			m11 = m22 = math.cos(angle)
+			m12 = -m21
+			dx = center_x - m11 * center_x + m21 * center_y;
+			dy = center_y - m21 * center_x - m11 * center_y;
+
 		if not m11: m11 = .0000000001
 		if not m22: m22 = .0000000001
-		return [m11, m12, m21, m22, dx, dy]
+		return [m11, m21, m12, m22, dx, dy]
 
 	def _draw_frame(self, *args):
 		if self.end:
