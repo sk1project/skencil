@@ -20,6 +20,7 @@ import math
 import gtk
 import gobject
 
+from skencil import config
 from skencil import modes
 
 ZOOM_IN = 1.25
@@ -527,6 +528,9 @@ class TransformController(AbstractController):
 			a1 = math.atan2(start_point[1] - center_y, start_point[0] - center_x)
 			a2 = math.atan2(end_point[1] - center_y, end_point[0] - center_x)
 			angle = a2 - a1
+			if control:
+				step = config.rotation_step * math.pi / 180.0
+				angle = round(angle / step) * step
 			m21 = math.sin(angle)
 			m11 = m22 = math.cos(angle)
 			m12 = -m21

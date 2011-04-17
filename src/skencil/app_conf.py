@@ -92,6 +92,8 @@ class AppConfig(UCConfig):
 	sel_marker_fill = (1.0, 1.0, 1.0)
 	sel_marker_stroke = (0.0, 0.3, 1.0)
 
+	rotation_step = 5.0 #in graduses
+
 	#============== I/O SECTION ===================
 	open_dir = '~'
 	save_dir = '~'
