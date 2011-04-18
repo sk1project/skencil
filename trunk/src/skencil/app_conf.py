@@ -93,6 +93,7 @@ class AppConfig(UCConfig):
 	sel_marker_stroke = (0.0, 0.3, 1.0)
 
 	rotation_step = 5.0 #in graduses
+	stroke_sensitive_size = 5.0 #in pixels
 
 	#============== I/O SECTION ===================
 	open_dir = '~'
