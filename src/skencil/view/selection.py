@@ -19,6 +19,7 @@ from uc2.libcairo import sum_bbox, is_bbox_in_rect
 
 from skencil import _, config
 from skencil import events
+from uc2 import libcairo
 
 
 class Selection:
@@ -111,14 +112,19 @@ class Selection:
 		layers = page.childs + model.childs[1].childs
 		layers.reverse()
 		rect = point + point
+		win_point = self.presenter.canvas.doc_to_win(point)
+		trafo = self.presenter.canvas.trafo
 		for layer in layers:
 			if result: break
 			objs = [] + layer.childs
 			objs.reverse()
 			for obj in objs:
 				if is_bbox_in_rect(obj.cache_bbox, rect):
-					result.append(obj)
-					break
+					ret = libcairo.is_point_in_path(win_point, trafo, obj,
+												 config.stroke_sensitive_size)
+					if ret:
+						result.append(obj)
+						break
 		return result
 
 	def select_at_point(self, point, flag=False):
