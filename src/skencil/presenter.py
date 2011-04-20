@@ -34,6 +34,7 @@ class DocPresenter(UCDocPresenter):
 	docarea = None
 	canvas = None
 	selection = None
+	traced_objects = None
 
 	def __init__(self, app, doc_file=''):
 		UCDocPresenter.__init__(self, config, app.appdata)
@@ -57,11 +58,28 @@ class DocPresenter(UCDocPresenter):
 		self.api.view = self.canvas
 		self.app.mw.add_tab(self.docarea)
 		self.eventloop.connect(self.eventloop.DOC_MODIFIED, self.modified)
+		self.traced_objects = [
+							self.eventloop,
+							self.api,
+							self.docarea.hruler,
+							self.docarea.vruler,
+							self.docarea.corner,
+							self.docarea,
+							self.canvas.renderer,
+							self.canvas,
+							self.selection,
+							self
+							]
 
 	def close(self):
 		if not self.docarea is None:
 			self.app.mw.remove_tab(self.docarea)
 		UCDocPresenter.close(self)
+		for obj in self.traced_objects:
+			fields = obj.__dict__
+			items = fields.keys()
+			for item in items:
+				fields[item] = None
 
 	def modified(self, *args):
 		self.saved = False

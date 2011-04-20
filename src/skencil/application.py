@@ -16,6 +16,7 @@
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
 import os
+import gc
 import gtk
 
 import uc2
@@ -128,6 +129,7 @@ class Application:
 		if doc in self.docs:
 			self.docs.remove(doc)
 			doc.close()
+			gc.collect()
 			events.emit(events.DOC_CLOSED)
 			if not len(self.docs):
 				self.current_doc = None
