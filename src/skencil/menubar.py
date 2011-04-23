@@ -15,6 +15,7 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 
+import types
 import gtk
 
 from skencil import _
@@ -66,7 +67,10 @@ class AppMenubar(gtk.MenuBar):
 
 		#----VIEW MENU
 		self.view_item, self.view_menu = self.create_menu("_View")
-		items = ['ZOOM_100',
+		items = [('STROKE_VIEW',),
+				('DRAFT_VIEW',),
+				 None,
+				 'ZOOM_100',
 				 'ZOOM_IN',
 				 'ZOOM_OUT',
 				 None,
@@ -126,7 +130,15 @@ class AppMenubar(gtk.MenuBar):
 		for item in items:
 			if item is None:
 				parent.append(gtk.SeparatorMenuItem())
+			elif type(item)is types.TupleType:
+				action = self.actions[item[0]]
+				menuitem = gtk.CheckMenuItem(action.tooltip)
+				action.connect_proxy(menuitem)
+				action.menuitem = menuitem
+				menuitem.set_active(False)
+				parent.append(menuitem)
 			else:
 				action = self.actions[item]
 				menuitem = action.create_menu_item()
+				action.menuitem = menuitem
 				parent.append(menuitem)
