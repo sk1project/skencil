@@ -22,6 +22,8 @@ class AppProxy:
 
 	app = None
 	mw = None
+	stroke_view_flag = False
+	draft_view_flag = False
 
 	def __init__(self, app):
 		self.app = app
@@ -88,6 +90,44 @@ class AppProxy:
 
 	def deselect(self, *args):
 		self.app.current_doc.selection.clear()
+
+	def stroke_view(self, action=None):
+		if self.stroke_view_flag:
+			self.stroke_view_flag = False
+			return
+		if not action is None:
+			canvas = self.app.current_doc.canvas
+			if canvas.stroke_view:
+				canvas.stroke_view = False
+				canvas.force_redraw()
+				if action.menuitem.get_active():
+					self.stroke_view_flag = True
+					action.menuitem.set_active(False)
+			else:
+				canvas.stroke_view = True
+				canvas.force_redraw()
+				if not action.menuitem.get_active():
+					self.stroke_view_flag = True
+					action.menuitem.set_active(True)
+
+	def draft_view(self, action=None):
+		if self.draft_view_flag:
+			self.draft_view_flag = False
+			return
+		if not action is None:
+			canvas = self.app.current_doc.canvas
+			if canvas.draft_view:
+				canvas.draft_view = False
+				canvas.force_redraw()
+				if action.menuitem.get_active():
+					self.draft_view_flag = True
+					action.menuitem.set_active(False)
+			else:
+				canvas.draft_view = True
+				canvas.force_redraw()
+				if not action.menuitem.get_active():
+					self.draft_view_flag = True
+					action.menuitem.set_active(True)
 
 	def zoom_in(self, *args):
 		self.app.current_doc.canvas.zoom_in()

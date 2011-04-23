@@ -15,6 +15,8 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from copy import deepcopy
+
 import cairo
 
 from uc2.sk1doc import model
@@ -32,6 +34,8 @@ class CairoRenderer:
 	surface = None
 	presenter = None
 	doc = None
+	current_layer = None
+	stroke_style = None
 
 	def __init__(self, canvas):
 
@@ -214,11 +218,21 @@ class CairoRenderer:
 
 
 	def render_doc(self):
-		self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
+		if self.canvas.draft_view:
+			self.ctx.set_antialias(cairo.ANTIALIAS_NONE)
+		else:
+			self.ctx.set_antialias(cairo.ANTIALIAS_DEFAULT)
 		page = self.presenter.active_page
 		for layer in page.childs:
+			self.current_layer = layer
+			if self.canvas.stroke_view:
+				self.stroke_style = deepcopy(layer.style)
+				stroke = self.stroke_style[1]
+				stroke[1] = 1.0 / self.canvas.zoom
 			for object in layer.childs:
 				self.render_object(object)
+		self.stroke_style = None
+		self.current_layer = None
 
 	def render_object(self, object):
 		if object.cid > model.PRIMITIVE_CLASS:
@@ -230,16 +244,22 @@ class CairoRenderer:
 	def render_primitives(self, object):
 		if object.cache_cpath is None:
 			object.update()
-		if object.style[0]:
+		if self.canvas.stroke_view:
 			self.ctx.new_path()
-			self.process_fill(object.style)
-			self.ctx.append_path(object.cache_cpath)
-			self.ctx.fill()
-		if object.style[1]:
-			self.ctx.new_path()
-			self.process_stroke(object.style)
+			self.process_stroke(self.stroke_style)
 			self.ctx.append_path(object.cache_cpath)
 			self.ctx.stroke()
+		else:
+			if object.style[0]:
+				self.ctx.new_path()
+				self.process_fill(object.style)
+				self.ctx.append_path(object.cache_cpath)
+				self.ctx.fill()
+			if object.style[1]:
+				self.ctx.new_path()
+				self.process_stroke(object.style)
+				self.ctx.append_path(object.cache_cpath)
+				self.ctx.stroke()
 
 	def process_fill(self, style):
 		fill = style[0]

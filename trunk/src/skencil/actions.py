@@ -29,6 +29,7 @@ class AppAction(gtk.Action):
 				 callable, channels, validator, args=[]):
 
 		gtk.Action.__init__(self, name, label, tooltip, icon)
+		self.menuitem = None
 		self.tooltip = tooltip
 		self.shortcut = shortcut
 		self.callable = callable
@@ -150,6 +151,11 @@ def create_actions(app):
 	['DESELECT', _('_Deselect'), _('Deselect'), None, '<Control><Shift>A',
 	 proxy.deselect, [events.NO_DOCS, events.DOC_CHANGED,
 	events.SELECTION_CHANGED], insp.is_selection],
+
+	['STROKE_VIEW', _('Stroke View'), _('Stroke View'), None, '<Shift>F9',
+	 proxy.stroke_view, [NO_DOCS, DOC_CHANGED], insp.is_doc],
+	['DRAFT_VIEW', _('Draft View'), _('Draft View'), None, None,
+	 proxy.draft_view, [NO_DOCS, DOC_CHANGED], insp.is_doc],
 
 	['ZOOM_IN', _('Zoom in'), _('Zoom in'), gtk.STOCK_ZOOM_IN, '<Control>equal',
 	 proxy.zoom_in, [NO_DOCS, DOC_CHANGED], insp.is_doc],

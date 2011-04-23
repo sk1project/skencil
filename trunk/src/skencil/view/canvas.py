@@ -51,6 +51,8 @@ class AppCanvas(gtk.DrawingArea):
 	orig_cursor = None
 	current_cursor = None
 	resize_marker = 0
+	stroke_view = False
+	draft_view = False
 
 	def __init__(self, parent):
 
