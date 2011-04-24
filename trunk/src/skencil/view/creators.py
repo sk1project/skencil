@@ -28,5 +28,7 @@ class RectangleCreator(AbstractController):
 
 	def do_action(self, event):
 		if self.start and self.end:
-			rect = self.start + self.end
-			self.presenter.api.create_rectangle(rect)
+			if abs(self.end[0] - self.start[0]) > 2 and \
+			abs(self.end[1] - self.start[1]) > 2:
+				rect = self.start + self.end
+				self.presenter.api.create_rectangle(rect)
