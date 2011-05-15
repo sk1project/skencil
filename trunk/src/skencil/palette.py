@@ -18,7 +18,7 @@
 import os
 import gtk
 
-from skencil import config
+from skencil import config, _
 from skencil.widgets.palette_widget import PaletteWidget
 
 class Palette(gtk.HBox):
@@ -99,6 +99,7 @@ class NoColorButton(gtk.EventBox):
 		image.set_from_pixbuf(pixbuf)
 		self.add(image)
 		self.connect('button-press-event', self.button_press)
+		self.set_tooltip_markup('<b>' + _('Empthy pattern') + '</b>')
 
 	def button_press(self, *args):
 		event = args[1]

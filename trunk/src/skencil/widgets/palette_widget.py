@@ -15,6 +15,8 @@
 #	You should have received a copy of the GNU General Public License
 #	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
+
 import gtk
 import cairo
 
@@ -46,6 +48,17 @@ class PaletteWidget(gtk.DrawingArea):
 		self.connect('button-release-event', self.button_release)
 		self.connect('scroll-event', self.scroll_event)
 
+		self.set_property('has-tooltip', True)
+		self.connect('query-tooltip', self.update_tooltip)
+		self.tooltip = None
+		self.cmyk_icon = self.load_icon('cmyk_color.png')
+		self.rgb_icon = self.load_icon('rgb_color.png')
+
+	def load_icon(self, file_name):
+		image_dir = os.path.join(config.resource_dir, 'icons', 'palette')
+		loader = gtk.gdk.pixbuf_new_from_file
+		return loader(os.path.join(image_dir, file_name))
+
 	def max_position(self):
 		x, y, w, h = self.allocation
 		if w and h:
@@ -63,6 +76,38 @@ class PaletteWidget(gtk.DrawingArea):
 		if self.position > 0: self.position = 0
 		if self.position < -self.max_pos: self.position = -self.max_pos
 		self.queue_draw()
+
+	def update_tooltip(self, *args):
+		x = args[1]
+		tooltip = args[4]
+		offset = config.palette_cell_horizontal
+		cell = int(float(x) / float(offset) - self.position)
+		if cell > len(self.pal): return False
+		color = self.pal[cell]
+		if not color == self.tooltip:
+			self.tooltip = color
+			return False
+		markup = ''
+		if color[3]:
+			markup += '<b> ' + color[3] + '</b>\n'
+		if color[0] == 'CMYK':
+			val = color[1]
+			tooltip.set_icon(self.cmyk_icon)
+			markup += ' C-%i%% M-%i%% Y-%i%% K-%i%%' % (val[0] * 100,
+													val[1] * 100,
+													val[2] * 100,
+													val[3] * 100)
+		if color[0] == 'RGB':
+			val = color[1]
+			tooltip.set_icon(self.rgb_icon)
+			markup += ' R-%i G-%i B-%i' % (val[0] * 255,
+											val[1] * 255,
+											val[2] * 255)
+		if markup:
+			tooltip.set_markup(markup)
+			return True
+		else:
+			return False
 
 
 	def button_press(self, *args):
