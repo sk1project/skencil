@@ -112,7 +112,7 @@ class ProgramDefaults(connector.Publisher):
         if not hasattr(self, attr) or getattr(self, attr) != value:
             self.__dict__[attr] = value
             self.issue(CHANGED, attr, value)
-    
+
     #
     #	Undo settings
     #
@@ -273,8 +273,8 @@ class ProgramDefaults(connector.Publisher):
     #
     #
     #
-    autoscroll_interval = 0   # ms, 0 disables auto scrolling
-    autoscroll_amount = 3	# no. of scroll units
+    autoscroll_interval = 0# ms, 0 disables auto scrolling
+    autoscroll_amount = 3# no. of scroll units
 
     #
     #	Images
@@ -300,7 +300,7 @@ class ProgramDefaults(connector.Publisher):
     #
     #	Whether to print internal warning messages. Useful for
     #	debugging.
-    print_internal_warnings = 1
+    print_internal_warnings = 0
 
     #	print additional messages. these are usually only interesting
     #	for development purposes.
@@ -382,7 +382,7 @@ class ProgramDefaults(connector.Publisher):
     #ruler_font = '-*-helvetica-medium-r-*-*-10-*-*-*-*-*-iso8859-1'
     ruler_font = '-misc-fixed-medium-*-*-*-11-*-*-*-*-*-iso8859-1'
     #ruler_font = '-*-lucida-medium-r-*-*-11-*-*-*-*-*-iso8859-1'
-    ruler_text_type = 'rotated' # can be 'rotated', 'horizontal' or 'vertical'
+    ruler_text_type = 'rotated'# can be 'rotated', 'horizontal' or 'vertical'
     #ruler_text_type = 'horizontal'
     #ruler_font_rotated = '-*-helvetica-medium-r-*-*-[0 10 ~10 0]-*-*-*-*-*-iso8859-1'
     ruler_font_rotated = '-misc-fixed-medium-*-*-*-[0 11 ~11 0]-*-*-*-*-*-iso8859-1'
