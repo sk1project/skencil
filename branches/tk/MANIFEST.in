@@ -1,0 +1,14 @@
+include MANIFEST.in setup.cfg 
+
+include src/skencil
+include src/skencil.png
+include src/skencil.xpm
+include src/skencil.desktop
+include src/Sketch/VERSION
+
+recursive-include src/extensions *.*
+recursive-include po/ *.*
+recursive-include DEBIAN/ *
+
+recursive-include src/Resources *.*
+include src/Resources/Misc/tkdefaults

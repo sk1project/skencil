@@ -1,0 +1,9 @@
+# optional ghostscript fonts
+Utopia-Bold,Utopia,Bold,-adobe-Utopia-bold-r-normal,iso8859-1,putb
+Utopia-BoldItalic,Utopia,Bold Italic,-adobe-Utopia-bold-i-normal,iso8859-1,putbi
+Utopia-Regular,Utopia,Regular,-adobe-Utopia-regular-r-normal,iso8859-1,putr
+Utopia-Italic,Utopia,Italic,-adobe-Utopia-regular-i-normal,iso8859-1,putri
+CharterBT-Bold,Bitstream Charter,Bold,-bitstream-Charter-bold-r-normal,iso8859-1,bchb
+CharterBT-BoldItalic,Bitstream Charter,Bold Italic,-bitstream-Charter-bold-i-normal,iso8859-1,bchbi
+CharterBT-Roman,Bitstream Charter,Roman,-bitstream-Charter-normal-r-normal,iso8859-1,bchr
+CharterBT-Italic,Bitstream Charter,Italic,-bitstream-Charter-normal-i-normal,iso8859-1,bchri

@@ -1,0 +1,33 @@
+##Sketch Dashes 0 0
+
+# In Sketch, dashes are represented by tuples containing an even number
+# of numbers. A number at an even index (the first index is 0) is the
+# length of a dash, a number at an odd index is the length of a gap.
+
+# Lengths are measured in line widths. This means that the dash pattern
+# (5, 5) produces dashes and gaps of 5pt length for a 1pt line and 10mm
+# dashes for a 2mm line. For a width of 0pt, 1pt is assumed.
+
+
+# solid line
+dashes(())
+
+# longer and shorter dashes
+dashes((5, 5))
+dashes((4, 4))
+dashes((3, 3))
+dashes((2, 2))
+
+# dotted
+dashes((1, 1))
+dashes((0.1, 1.0))
+
+# dash short gap
+dashes((5, 1))
+# dash-dot
+dashes((5, 1, 1, 1))
+# dash-dot-dot
+dashes((5, 1, 1, 1, 1, 1))
+# dash-dot-dot-dot
+dashes((5, 1, 1, 1, 1, 1, 1, 1))
+

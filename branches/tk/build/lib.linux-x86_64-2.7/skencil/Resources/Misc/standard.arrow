@@ -1,0 +1,12 @@
+##Sketch Arrow 0 0
+
+# a filled triangular arrow
+arrow([(-4, 3), (2, 0), (-4, -3), (-4, 3)], 1)
+
+# a stroked V-arrow
+arrow([(-6, 3), (1, 0), (-6, -3)], 0)
+
+# a curved arrow
+arrow([(-6, 3), (-5, 0,  0, 0,  1, 0), (0, 0,  -5, 0,  -6, -3)], 0)
+
+

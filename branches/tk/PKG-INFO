@@ -1,0 +1,28 @@
+Metadata-Version: 1.0
+Name: skencil
+Version: 1.0alpha
+Summary: Interactive vector drawing program
+Home-page: http://www.skencil.org
+Author: Igor E.Novikov
+Author-email: igor.e.novikov@gmail.com
+License: LGPL v2.0
+Description: 
+        Skencil is an interactive vector drawing program for GNU/Linux and
+        other UNIX compatible systems. Skencil is implemented almost completely
+        in Python, a very high-level, object oriented, interpreted language,
+        with the rest written in C for speed.
+        Copyright (C) 1996-2005 by Bernhard Herzog
+        Copyright (C) 2010 by Igor E. Novikov. sK1 Team (http://sk1project.org) 
+                    
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Stable
+Classifier: Environment :: Desktop
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: LGPL v2
+Classifier: License :: OSI Approved :: GPL v2
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Tcl
+Classifier: Programming Language :: C
+Classifier: Topic :: Multimedia :: Graphics :: Editors :: Vector-Based

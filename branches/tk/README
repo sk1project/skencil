@@ -1,0 +1,213 @@
+
+What Is Skencil?
+===============
+
+Skencil is an interactive vector drawing program for X (similar to XFig
+or tgif). It is written almost completely in Python, an object oriented
+interpreted programming language.
+
+This is a stable release. It is quite featureful and usable, but there
+are still things missing that I want in a 1.0 release, hence the low
+version number.
+
+To compile and run Skencil, you need some additional software. Have a look
+at the file INSTALL to see what you need and how to install Skencil.
+
+Skencil was originally named "Sketch" (it was renamed with release
+0.6.16) and the name "Sketch" is still used is many places.
+
+
+Resources:
+==========
+
+Change-Log:
+
+	See the file NEWS and Plugins/ChangeLog for plugin specific
+	changes
+
+Website:
+
+	http://www.skencil.org
+
+Mailing Lists:
+
+        Users:
+
+	http://lists.sourceforge.net/mailman/listinfo/sketch-list
+
+	Subscription through the web interface or by sending a mail with
+	the word subscribe in the subject to
+	<sketch-list-request@lists.sourceforge.net>
+
+	Developers:
+
+	http://mail.nongnu.org/mailman/listinfo/sketch-devel
+
+Bugs and Patches:
+
+	https://savannah.nongnu.org/projects/skencil/
+
+	Please report bugs to one of the mailing lists or through the
+	bug-tracker
+
+
+Features
+========
+
+Skencil already has the following features:
+
+	o Drawing primitives:
+		o Rectangles, with optional round corners
+		o Ellipses (full ellipses, arcs, pie slices, chords)
+		o Bezier curves (single and multi path)
+		o External images:
+			o Raster images: JPEG, GIF,...
+			  (all types the Python Imaging Library can read)
+			o Encapsulated PostScript (EPS)
+		o Text
+
+	o All objects, including images and text, can be rotated,
+	  scaled, sheared, etc. (all affine transformations are
+	  possible)
+
+	o Primitives can usually have fill and line properties:
+
+		o Fill properties are patterns like solid colors,
+		  gradients, tiled images and hatching.
+
+		o Line properties are currently a (solid) color, width,
+		  dashes, cap and join styles and arrow heads. Patterns
+		  instead of a single color are planned for the future.
+
+	o Special Effects and Features:
+
+		o Bezier curves, rectangles and ellipses can be used as
+		  guides in addition to the standard vertical and
+		  horizontal guide lines.
+
+		o Blend Groups: Automatically updated interpolations of
+		  arbitrary objects
+
+		o Text can be converted to bezier objects. (This only
+		  works if skencil has access to the PostScript Type 1
+		  font files (pfa or pfb)).
+
+		o Text along a Path
+
+	o Export file-formats:
+
+		o Encapsulated PostScript
+
+		o Adobe Illustrator files
+
+		o Scalable Vector Graphics (SVG)
+
+	o Import file-formats:
+
+		o XFig files (.fig) (incomplete)
+
+		o Adobe Illustrator files (.ai)
+
+		o Windows Meta File (WMF, Windows 3.1)
+
+		o Corel's CMX
+
+		o Scalable Vector Graphics (SVG)
+
+	o Unlimited undo history
+
+	o User scripts
+
+
+Limitations
+===========
+
+o Currently, only TrueColor visuals with depths of 15, 16, 24 or 32 bits
+  and 8-bit PseudoColor visuals are supported.
+
+o Rotated and otherwise transformed text requires (as far as I know) at
+  least X11R6. See below for more information on fonts.
+
+
+License
+=======
+
+Most of Skencil is released under the GNU Library General Public License
+(see the file COPYING for details). The only exceptions are the module
+Pax (in the Pax directory) and the stream filters (in the Filter
+directory). See the respective READMEs for details.
+
+
+Problems
+========
+
+There are some problems you may run into which can be solved by changing
+Skencil's configuration or the X-server's configuration.
+
+
+ImportError: No module named Image
+----------------------------------
+
+This message means that the Python Imaging Library (PIL) is not
+installed correctly. Follow the instrctions in the PIL README.
+
+
+
+Font Problems
+-------------
+
+
+Exception TclError: font "..." doesn't exist
+--------------------------------------------
+If you get a message like
+
+     Exception TclError: font "[some text with lots of hyphens]" doesn't
+     exist
+
+when browsing fonts in the font dialog, the reason is probably that
+Skencil tries to use fonts that are not installed in the X-server or the
+font server (if you use one). Refer to the ``User's Guide'' on how to
+install fonts and configure Skencil.
+
+
+
+Cannot load '[...]'
+-------------------
+When Skencil tries to display the drawing, you get messages like
+
+     Cannot load 'MyFont-Bold':
+     no such font
+
+This can have two reasons:
+
+1. Skencil tries to use fonts that are not installed in the X-server.
+   Refer to the ``User's Guide'' on how to install fonts and configure
+   Skencil.
+
+2. Your server cannot handle transformed fonts or maybe not even scaled
+   fonts. See the next section for details.
+
+
+
+Transformed Fonts
+-----------------
+
+To rotate, shear or otherwise transform fonts, Skencil relies on the
+capabilities of the server. This means, that the server has to be able
+to understand X font names of the form 
+	`-*-*-*-*-*--[0 0 0 0]-*-*-*-*-0-*-*'. 
+
+The `[0 0 0 0]' stands for a matrix describing the transformation (the
+zeros are replaced by the coefficients of that matrix). Not all servers
+support this. To find out if a server supports this run xlsfonts(1) like
+this:
+
+     $ xlsfonts -fn '-*-*-*-*-*--[0 0 0 0]-*-*-*-*-0-*-*'
+
+If your server supports this feature, a list of font names should be
+printed. You will probably get an error message otherwise.
+
+As far as I know, this syntax for transformed fonts was introduced in
+X11R6.
+
+

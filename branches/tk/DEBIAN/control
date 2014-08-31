@@ -1,0 +1,18 @@
+Package: python-skencil
+Version: <VERSION>
+Architecture: <PLATFORM>
+Maintainer: Igor Novikov <igor.e.novikov@gmail.com>
+Depends: libc6, libx11-6, libxext6, tcl8.5 (>= 8.5.0), tk8.5 (>= 8.5.0), python (>=2.4), python (<<3.0), python-tk, python-gtk2, python-reportlab, python-imaging, python-imaging-tk
+Section: graphics
+Priority: extra
+Description: Interactive vector drawing program
+ .
+ Skencil is an interactive vector drawing program. It currently support drawing
+ primitives like rectangles, ellipses, Bezier curves, bitmap (ppm, png, jpg,
+ tiff etc.) and EPS images and text. All objects can be rotated, scaled and
+ sheared. Primitives can have fill and line properties. A number of special
+ effects like blend groups, text to Bezier and text along a path are provided.
+ Skencil supports an unlimited undo history. Import of XFig, AI (up to version 8),
+ WMF, CMX and SVG files. Exports to EPS, AI, PDF (with reportlab) and SVG.
+ .
+

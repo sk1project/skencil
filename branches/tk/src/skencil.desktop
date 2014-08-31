@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Skencil
+GenericName=Skencil
+Comment=Interactive vector drawing program
+Exec=skencil
+Icon=skencil.png
+Terminal=false
+Type=Application
+Categories=Application;Graphics;
+MimeType=image/svg

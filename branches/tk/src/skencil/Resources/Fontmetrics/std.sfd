@@ -1,0 +1,36 @@
+# standard postscript fonts
+AvantGarde-DemiOblique,ITC Avant Garde Gothic,Demi Oblique,-adobe-ITC Avant Garde Gothic-demi-o-normal,iso8859-1,pagdo
+AvantGarde-Book,ITC Avant Garde Gothic,Book,-adobe-ITC Avant Garde Gothic-book-r-normal,iso8859-1,pagk
+AvantGarde-BookOblique,ITC Avant Garde Gothic,Book Oblique,-adobe-ITC Avant Garde Gothic-book-o-normal,iso8859-1,pagko
+Bookman-Demi,ITC Bookman,Demi,-adobe-ITC Bookman-demi-r-normal,iso8859-1,pbkd
+Bookman-DemiItalic,ITC Bookman,Demi Italic,-adobe-ITC Bookman-demi-i-normal,iso8859-1,pbkdi
+Bookman-Light,ITC Bookman,Light,-adobe-ITC Bookman-light-r-normal,iso8859-1,pbkl
+Bookman-LightItalic,ITC Bookman,Light Italic,-adobe-ITC Bookman-light-i-normal,iso8859-1,pbkli
+Courier-Bold,Courier,Bold,-adobe-Courier-bold-r-normal,iso8859-1,pcrb
+Courier-BoldOblique,Courier,Bold Oblique,-adobe-Courier-bold-o-normal,iso8859-1,pcrbo
+Courier,Courier,Roman,-adobe-Courier-medium-r-normal,iso8859-1,pcrr
+Courier-Oblique,Courier,Oblique,-adobe-Courier-medium-o-normal,iso8859-1,pcrro
+Helvetica-Bold,Helvetica,Bold,-adobe-Helvetica-bold-r-normal,iso8859-1,phvb
+Helvetica-Narrow-Bold,Helvetica,Narrow Bold,-adobe-Helvetica-bold-r-narrow,iso8859-1,phvbn
+Helvetica-BoldOblique,Helvetica,Bold Oblique,-adobe-Helvetica-bold-o-normal,iso8859-1,phvbo
+Helvetica-Narrow-BoldOblique,Helvetica,Narrow Bold Oblique,-adobe-Helvetica-bold-o-narrow,iso8859-1,phvbon
+Helvetica,Helvetica,Roman,-adobe-Helvetica-medium-r-normal,iso8859-1,phvr
+Helvetica-Narrow,Helvetica,Narrow,-adobe-Helvetica-medium-r-narrow,iso8859-1,phvrn
+Helvetica-Oblique,Helvetica,Oblique,-adobe-Helvetica-medium-o-normal,iso8859-1,phvro
+Helvetica-Narrow-Oblique,Helvetica,Narrow Oblique,-adobe-Helvetica-medium-o-narrow,iso8859-1,phvron
+NewCenturySchlbk-Bold,New Century Schoolbook,Bold,-adobe-New Century Schoolbook-bold-r-normal,iso8859-1,pncb
+NewCenturySchlbk-BoldItalic,New Century Schoolbook,Bold Italic,-adobe-New Century Schoolbook-bold-i-normal,iso8859-1,pncbi
+NewCenturySchlbk-Roman,New Century Schoolbook,Roman,-adobe-New Century Schoolbook-medium-r-normal,iso8859-1,pncr
+NewCenturySchlbk-Italic,New Century Schoolbook,Italic,-adobe-New Century Schoolbook-medium-i-normal,iso8859-1,pncri
+Palatino-Bold,Palatino,Bold,-adobe-Palatino-bold-r-normal,iso8859-1,pplb
+Palatino-BoldItalic,Palatino,Bold Italic,-adobe-Palatino-bold-i-normal,iso8859-1,pplbi
+Palatino-Roman,Palatino,Roman,-adobe-Palatino-medium-r-normal,iso8859-1,pplr
+Palatino-Italic,Palatino,Italic,-adobe-Palatino-medium-i-normal,iso8859-1,pplri
+Times-Bold,Times,Bold,-adobe-Times-bold-r-normal,iso8859-1,ptmb
+Times-BoldItalic,Times,Bold Italic,-adobe-Times-bold-i-normal,iso8859-1,ptmbi
+Times-Roman,Times,Roman,-adobe-Times-medium-r-normal,iso8859-1,ptmr
+Symbol,Symbol,Roman,-adobe-Symbol-medium-r-normal,adobe-fontspecific,psyr
+Times-Italic,Times,Italic,-adobe-Times-medium-i-normal,iso8859-1,ptmri
+ZapfChancery-MediumItalic,ITC Zapf Chancery,Medium Italic,-adobe-ITC Zapf Chancery-medium-i-normal,iso8859-1,pzcmi
+ZapfDingbats,ITC Zapf Dingbats,Roman,-adobe-ITC Zapf Dingbats-medium-r-normal,adobe-fontspecific,pzdr
+AvantGarde-Demi,ITC Avant Garde Gothic,Demi,-adobe-ITC Avant Garde Gothic-demi-r-normal,iso8859-1,pagd

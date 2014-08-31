@@ -1,0 +1,36 @@
+# The free versions of the standard postscript fonts shipped with ghostscript.
+URWGothicL-Book,URW Gothic L,Book,-urw-URW Gothic L-book-r-normal,iso8859-1,a010013l
+URWGothicL-Demi,URW Gothic L,Demi,-urw-URW Gothic L-demi-r-normal,iso8859-1,a010015l
+URWGothicL-BookObli,URW Gothic L,Book Oblique,-urw-URW Gothic L-book-o-normal,iso8859-1,a010033l
+URWGothicL-DemiObli,URW Gothic L,Demi Oblique,-urw-URW Gothic L-demi-o-normal,iso8859-1,a010035l
+URWBookmanL-Ligh,URW Bookman L,Light,-urw-URW Bookman L-regular-r-normal,iso8859-1,b018012l
+URWBookmanL-DemiBold,URW Bookman L,Demi Bold,-urw-URW Bookman L-bold-r-normal,iso8859-1,b018015l
+URWBookmanL-LighItal,URW Bookman L,Light Italic,-urw-URW Bookman L-regular-i-normal,iso8859-1,b018032l
+URWBookmanL-DemiBoldItal,URW Bookman L,Demi Bold Italic,-urw-URW Bookman L-bold-i-normal,iso8859-1,b018035l
+CenturySchL-Roma,Century Schoolbook L,Roman,-urw-Century Schoolbook L-medium-r-normal,iso8859-1,c059013l
+CenturySchL-Bold,Century Schoolbook L,Bold,-urw-Century Schoolbook L-bold-r-normal,iso8859-1,c059016l
+CenturySchL-Ital,Century Schoolbook L,Italic,-urw-Century Schoolbook L-regular-i-normal,iso8859-1,c059033l
+CenturySchL-BoldItal,Century Schoolbook L,Bold Italic,-urw-Century Schoolbook L-bold-i-normal,iso8859-1,c059036l
+Dingbats,Dingbats,Roman,-urw-Dingbats-regular-r-normal,adobe-fontspecific,d050000l
+NimbusSanL-Regu,Nimbus Sans L,Regular,-urw-Nimbus Sans L-regular-r-normal,iso8859-1,n019003l
+NimbusSanL-Bold,Nimbus Sans L,Bold,-urw-Nimbus Sans L-bold-r-normal,iso8859-1,n019004l
+NimbusSanL-ReguItal,Nimbus Sans L,Regular Italic,-urw-Nimbus Sans L-regular-i-normal,iso8859-1,n019023l
+NimbusSanL-BoldItal,Nimbus Sans L,Bold Italic,-urw-Nimbus Sans L-bold-i-normal,iso8859-1,n019024l
+NimbusSanL-ReguCond,Nimbus Sans L,Regular Condensed,-urw-Nimbus Sans L-regular-r-condensed,iso8859-1,n019043l
+NimbusSanL-BoldCond,Nimbus Sans L,Bold Condensed,-urw-Nimbus Sans L-bold-r-condensed,iso8859-1,n019044l
+NimbusSanL-ReguCondItal,Nimbus Sans L,Regular Condensed Italic,-urw-Nimbus Sans L-regular-i-condensed,iso8859-1,n019063l
+NimbusSanL-BoldCondItal,Nimbus Sans L,Bold Condensed Italic,-urw-Nimbus Sans L-bold-i-condensed,iso8859-1,n019064l
+NimbusRomNo9L-Regu,Nimbus Roman No9 L,Regular,-urw-Nimbus Roman No9 L-regular-r-normal,iso8859-1,n021003l
+NimbusRomNo9L-Medi,Nimbus Roman No9 L,Medium,-urw-Nimbus Roman No9 L-bold-r-normal,iso8859-1,n021004l
+NimbusRomNo9L-ReguItal,Nimbus Roman No9 L,Regular Italic,-urw-Nimbus Roman No9 L-regular-i-normal,iso8859-1,n021023l
+NimbusRomNo9L-MediItal,Nimbus Roman No9 L,Medium Italic,-urw-Nimbus Roman No9 L-bold-i-normal,iso8859-1,n021024l
+NimbusMonL-Regu,Nimbus Mono L,Regular,-urw-Nimbus Mono L-regular-r-normal,iso8859-1,n022003l
+NimbusMonL-Bold,Nimbus Mono L,Bold,-urw-Nimbus Mono L-bold-r-normal,iso8859-1,n022004l
+NimbusMonL-ReguObli,Nimbus Mono L,Regular Oblique,-urw-Nimbus Mono L-regular-o-normal,iso8859-1,n022023l
+NimbusMonL-BoldObli,Nimbus Mono L,Bold Oblique,-urw-Nimbus Mono L-bold-o-normal,iso8859-1,n022024l
+URWPalladioL-Roma,URW Palladio L,Roman,-urw-URW Palladio L-medium-r-normal,iso8859-1,p052003l
+URWPalladioL-Bold,URW Palladio L,Bold,-urw-URW Palladio L-bold-r-normal,iso8859-1,p052004l
+URWPalladioL-Ital,URW Palladio L,Italic,-urw-URW Palladio L-regular-i-normal,iso8859-1,p052023l
+URWPalladioL-BoldItal,URW Palladio L,Bold Italic,-urw-URW Palladio L-bold-i-normal,iso8859-1,p052024l
+StandardSymL,Standard Symbols L,Roman,-urw-Standard Symbols L-regular-r-normal,adobe-fontspecific,s050000l
+URWChanceryL-MediItal,URW Chancery L,Medium Italic,-urw-URW Chancery L-medium-i-normal,iso8859-1,z003034l
