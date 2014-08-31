@@ -184,7 +184,6 @@ def init_lib():
 def init_ui():
     # workaround for a threaded _tkinter in Python 1.5.2
     if sys.version[:5] >= '1.5.2':
-    	print 'CHANGED'
         import paxtkinter
         sys.modules['_tkinter'] = paxtkinter
 
