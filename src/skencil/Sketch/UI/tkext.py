@@ -15,7 +15,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307	USA
 
-
+import os
 from types import TupleType, ListType, InstanceType, StringType
 
 import pax
@@ -28,6 +28,7 @@ from Sketch.warn import warn_tb, INTERNAL
 from Tkinter import Widget, Menu, Menubutton, Frame
 from Tkinter import LEFT, DISABLED, NORMAL, END, RAISED, Y, X, TOP
 import Tkinter
+import tkFileDialog
 
 import command
 from skpixmaps import PixmapTk
@@ -46,8 +47,8 @@ class AutoUpdate:
     updatecb = None
     sensitivecb = None
 
-    def __init__(self, sensitivecb = None, updatecb = None,
-                 update_field = None, kw = None):
+    def __init__(self, sensitivecb=None, updatecb=None,
+                 update_field=None, kw=None):
         if kw is None:
             kw = {}
 
@@ -105,7 +106,7 @@ class WidgetWithCommand(Publisher):
         Publisher.Destroy(self)
         pax.unregister_object(self)
 
-    def set_command(self, command, args = ()):
+    def set_command(self, command, args=()):
         if self.tk_widget_has_command and not self['command']:
             self['command'] = MakeMethodCommand(self._call_cmd)
         if type(args) != TupleType:
@@ -171,8 +172,8 @@ class MenuCommand(AutoUpdate, WidgetWithCommand, MenuEntry):
     tk_entry_type = 'command'
     update_field = 'label'
 
-    def __init__(self, text = '', command = None, args = (),
-                 sensitivecb = None, updatecb = None, bitmap = None,
+    def __init__(self, text='', command=None, args=(),
+                 sensitivecb=None, updatecb=None, bitmap=None,
                  **rest):
         AutoUpdate.__init__(self, sensitivecb, updatecb)
         WidgetWithCommand.__init__(self)
@@ -201,7 +202,7 @@ class MenuCommand2(MenuEntry):
         command.Subscribe(CHANGED, self._update)
         self._update()
 
-    def add_kw_args(self, dict, no_active = 0):
+    def add_kw_args(self, dict, no_active=0):
         cmd = self.command
         dict['label'] = cmd.menu_name
         dict['state'] = cmd.sensitive and NORMAL or DISABLED
@@ -228,8 +229,8 @@ class MenuCheck(AutoUpdate, WidgetWithCommand, MenuEntry):
     tk_entry_type = 'checkbutton'
     update_field = ''
 
-    def __init__(self, text = '', command = None, args = (),
-                 sensitivecb = None, updatecb = None, bitmap = None,
+    def __init__(self, text='', command=None, args=(),
+                 sensitivecb=None, updatecb=None, bitmap=None,
                  **rest):
         self.var_on = Tkinter.IntVar()
         rest['variable'] = self.var_on
@@ -295,7 +296,7 @@ class UpdatedMenu:
 
     rebuild_func = None
 
-    def __init__(self, master, entries, auto_update = 1, auto_rebuild = None,
+    def __init__(self, master, entries, auto_update=1, auto_rebuild=None,
                  **rest):
         if auto_update:
             rest['postcommand'] = MakeMethodCommand(self.Update)
@@ -396,14 +397,14 @@ class MenuCascade(MenuEntry):
 
     def AddToMenu(self, menu):
         if menu:
-            self.submenu = apply(UpdatedMenu, (menu, self.entries),self.kwargs)
-            menu.add('cascade', label = self.label, menu = self.submenu.menu)
+            self.submenu = apply(UpdatedMenu, (menu, self.entries), self.kwargs)
+            menu.add('cascade', label=self.label, menu=self.submenu.menu)
         self.menu = menu
 
 
 def AppendMenu(mbar, text, menu_list):
-    button = Menubutton(mbar, text = text)
-    button.pack(side = LEFT)
+    button = Menubutton(mbar, text=text)
+    button.pack(side=LEFT)
 
     menu = UpdatedMenu(button, menu_list)
     button.menu = menu
@@ -418,7 +419,7 @@ def AppendMenu(mbar, text, menu_list):
 
 cmd_classes = (command.Command, command.ObjectCommand)
 
-def MakeCommand(label, func = None, args = (), sensitive = None, update =None):
+def MakeCommand(label, func=None, args=(), sensitive=None, update=None):
     if label:
         if type(label) == TupleType:
             return apply(MakeCommand, label)
@@ -442,10 +443,10 @@ def MakeCommand(label, func = None, args = (), sensitive = None, update =None):
                 return label
         elif label[0] == '*':
             return MenuCheck(label[1:], func, args,
-                             sensitivecb = sensitive, updatecb = update)
+                             sensitivecb=sensitive, updatecb=update)
         else:
             return MenuCommand(label, func, args,
-                               sensitivecb = sensitive, updatecb = update)
+                               sensitivecb=sensitive, updatecb=update)
     else:
         return MenuSeparator()
 
@@ -453,7 +454,7 @@ def MakeCommand(label, func = None, args = (), sensitive = None, update =None):
 class UpdatedLabel(Tkinter.Label, AutoUpdate):
 
     def __init__(self, master, **kw):
-        AutoUpdate.__init__(self, kw = kw)
+        AutoUpdate.__init__(self, kw=kw)
         apply(Tkinter.Label.__init__, (self, master), kw)
 
     def destroy(self):
@@ -463,8 +464,8 @@ class UpdatedLabel(Tkinter.Label, AutoUpdate):
 
 class UpdatedButton(Tkinter.Button, AutoUpdate, WidgetWithCommand):
 
-    def __init__(self, master, command = None, args = (), **kw):
-        AutoUpdate.__init__(self, kw = kw)
+    def __init__(self, master, command=None, args=(), **kw):
+        AutoUpdate.__init__(self, kw=kw)
         WidgetWithCommand.__init__(self)
         apply(Tkinter.Button.__init__, (self, master), kw)
         if command:
@@ -508,7 +509,7 @@ import tooltips
 
 class CommandButton(Tkinter.Button):
 
-    def __init__(self, master, command = None, args = (), **kw):
+    def __init__(self, master, command=None, args=(), **kw):
         self.command = command
         if type(args) != TupleType:
             args = (args,)
@@ -532,11 +533,11 @@ class CommandButton(Tkinter.Button):
         if self.command.bitmap:
             bitmap = PixmapTk.load_image(self.command.bitmap)
             if type(bitmap) == StringType:
-                self.configure(bitmap = bitmap, state = state)
+                self.configure(bitmap=bitmap, state=state)
             else:
-                self.configure(image = bitmap, state = state)
+                self.configure(image=bitmap, state=state)
         else:
-            self.configure(text = self.command.button_name, state = state)
+            self.configure(text=self.command.button_name, state=state)
         tooltips.AddDescription(self, self.command.menu_name)
 
     def destroy(self):
@@ -548,23 +549,23 @@ class CommandButton(Tkinter.Button):
 
 class CommandCheckbutton(CommandButton):
 
-    def __init__(self, master, command = None, args = (), **kw):
+    def __init__(self, master, command=None, args=(), **kw):
         if not command.is_check:
             raise TypeError, ("command %s is not a check-command" % command)
         apply(CommandButton.__init__, (self, master, command, args), kw)
 
     def _update(self):
         if self.command.IsOn():
-            self.configure(relief = 'sunken')
+            self.configure(relief='sunken')
         else:
-            self.configure(relief = self.option_get('relief', 'Relief'))
+            self.configure(relief=self.option_get('relief', 'Relief'))
         CommandButton._update(self)
 
 
 class UpdatedCheckbutton(Tkinter.Checkbutton, AutoUpdate, WidgetWithCommand):
 
-    def __init__(self, master, command = None, args = (), **kw):
-        AutoUpdate.__init__(self, kw = kw)
+    def __init__(self, master, command=None, args=(), **kw):
+        AutoUpdate.__init__(self, kw=kw)
         WidgetWithCommand.__init__(self)
         apply(Tkinter.Checkbutton.__init__, (self, master), kw)
         if command:
@@ -577,8 +578,8 @@ class UpdatedCheckbutton(Tkinter.Checkbutton, AutoUpdate, WidgetWithCommand):
 
 class UpdatedRadiobutton(Tkinter.Radiobutton, AutoUpdate, WidgetWithCommand):
 
-    def __init__(self, master, command = None, args = (), **kw):
-        AutoUpdate.__init__(self, kw = kw)
+    def __init__(self, master, command=None, args=(), **kw):
+        AutoUpdate.__init__(self, kw=kw)
         WidgetWithCommand.__init__(self)
         apply(Tkinter.Radiobutton.__init__, (self, master), kw)
         if command:
@@ -597,8 +598,8 @@ class UpdatedListbox(Tkinter.Listbox, AutoUpdate, WidgetWithCommand):
     tk_select_event = '<ButtonRelease-1>'
     tk_event_bound = 0
 
-    def __init__(self, master, command = None, args = (), **kw):
-        AutoUpdate.__init__(self, kw = kw)
+    def __init__(self, master, command=None, args=(), **kw):
+        AutoUpdate.__init__(self, kw=kw)
         apply(Tkinter.Listbox.__init__, (self, master), kw)
         WidgetWithCommand.__init__(self)
         if command:
@@ -611,7 +612,7 @@ class UpdatedListbox(Tkinter.Listbox, AutoUpdate, WidgetWithCommand):
         WidgetWithCommand.clean_up(self)
         Tkinter.Listbox.destroy(self)
 
-    def set_command(self, command, args = ()):
+    def set_command(self, command, args=()):
         WidgetWithCommand.set_command(self, command, args)
 
     def SetList(self, list):
@@ -622,7 +623,7 @@ class UpdatedListbox(Tkinter.Listbox, AutoUpdate, WidgetWithCommand):
     def SelectNone(self):
         self.select_clear(0, END)
 
-    def Select(self, idx, view = 0):
+    def Select(self, idx, view=0):
         self.select_clear(0, END)
         self.select_set(idx)
         if view:
@@ -640,7 +641,7 @@ class MyEntry(Tkinter.Entry, WidgetWithCommand):
     tk_command_event = '<Return>'
     tk_event_bound = 0
 
-    def __init__(self, master, command = None, args = (), **kw):
+    def __init__(self, master, command=None, args=(), **kw):
         apply(Tkinter.Entry.__init__, (self, master), kw)
         WidgetWithCommand.__init__(self)
         if command:
@@ -654,7 +655,7 @@ class MyEntry(Tkinter.Entry, WidgetWithCommand):
         self.delete(0, END)
         self.insert(0, text)
 
-    def set_command(self, command, args = ()):
+    def set_command(self, command, args=()):
         WidgetWithCommand.set_command(self, command, args)
         if command and not self.tk_event_bound:
             self.bind(self.tk_command_event, self._call_cmd)
@@ -670,7 +671,7 @@ class PyWidget(Widget, SketchDropTarget):
         key = pax.register_object(self)
         kw['pyobject'] = key
         kw['class'] = self.__class__.__name__
-        Widget.__init__(self, master, 'paxwidget', kw = kw)
+        Widget.__init__(self, master, 'paxwidget', kw=kw)
         self.InitTkWinObject(pax.name_to_window(self._w, self.tk.interpaddr()))
 
     def DestroyMethod(self):
@@ -681,7 +682,7 @@ class PyWidget(Widget, SketchDropTarget):
     def MapMethod(self):
         pass
 
-    def RedrawMethod(self, region = None):
+    def RedrawMethod(self, region=None):
         pass
 
     def ResizedMethod(self, width, height):
@@ -699,16 +700,26 @@ class PyWidget(Widget, SketchDropTarget):
 
 
 def GetOpenFilename(master, **kw):
-    filename = apply(master.tk.call,
-                     ('tk_getOpenFile', '-parent', master._w)
-                     + master._options(kw))
-    return master.tk.utf8_to_system(filename)
+    cmd = "kdialog --getopenfilename"
+    if 'initialdir' in kw:
+        cmd += " " + kw['initialdir']
+    filename = os.popen(cmd).read().strip()
+#     filename = apply(master.tk.call,
+#                      ('tk_getOpenFile', '-parent', master._w)
+#                      + master._options(kw))
+    return filename
+#     return master.tk.utf8_to_system(filename)
 
 def GetSaveFilename(master, **kw):
-    filename = apply(master.tk.call,
-                     ('tk_getSaveFile', '-parent', master._w)
-                     + master._options(kw))
-    return master.tk.utf8_to_system(filename)
+    cmd = "kdialog --getsavefilename"
+    if 'initialdir' in kw:
+        cmd += " " + kw['initialdir']
+    filename = os.popen(cmd).read().strip()
+#     filename = apply(master.tk.call,
+#                      ('tk_getSaveFile', '-parent', master._w)
+#                      + master._options(kw))
+    return filename
+#     return master.tk.utf8_to_system(filename)
 
 # NLS:
 #
@@ -717,13 +728,13 @@ def GetSaveFilename(master, **kw):
 Ok = _("Ok")
 Yes = _("Yes")
 No = _("No")
-Cancel	=_("Cancel")
+Cancel	 = _("Cancel")
 OkCancel = (Ok, Cancel)
 YesNo = (Yes, No)
 YesNoCancel = (Yes, No, Cancel)
 
-def MessageDialog(master, title, message, buttons = Ok, default = 0,
-                  icon = 'warning'):
+def MessageDialog(master, title, message, buttons=Ok, default=0,
+                  icon='warning'):
     if type(buttons) != TupleType:
         buttons = (buttons,)
     from sketchdlg import MessageDialog
@@ -744,8 +755,8 @@ class ColorButton(WidgetWithCommand, Tkinter.Button, SketchDropTarget):
     color_option = 'bg'
     accept_drop = (DROP_COLOR,)
 
-    def __init__(self, master, command = None, args = (),
-                 color = None, dialog_master = None, **kw):
+    def __init__(self, master, command=None, args=(),
+                 color=None, dialog_master=None, **kw):
         WidgetWithCommand.__init__(self)
         apply(Tkinter.Button.__init__, (self, master), kw)
         if color is None:
@@ -800,23 +811,23 @@ class MyOptionMenu(WidgetWithCommand, Menubutton):
 
     tk_widget_has_command = 0
 
-    def __init__(self, master, values, command = None, args = (),
-                 variable = None):
+    def __init__(self, master, values, command=None, args=(),
+                 variable=None):
         kw = option_menu_defaults.copy()
         if variable is not None:
             kw['textvariable'] = variable
         self.variable = variable
         WidgetWithCommand.__init__(self)
         Widget.__init__(self, master, "menubutton", kw)
-        #self.widgetName = 'tk_optionMenu'
+        # self.widgetName = 'tk_optionMenu'
         if command:
             self.set_command(command, args)
 
         entries = []
         for value in values:
-            entries.append(MenuCommand(value, command = self.choose_opt,
-                                       args = value))
-        self.__menu = UpdatedMenu(self, entries, auto_update = 0,
+            entries.append(MenuCommand(value, command=self.choose_opt,
+                                       args=value))
+        self.__menu = UpdatedMenu(self, entries, auto_update=0,
                                   name="menu", tearoff=0)
         menu = self.__menu.menu
         self.menuname = menu._w
@@ -841,8 +852,8 @@ class MyOptionMenu2(WidgetWithCommand, Menubutton):
 
     tk_widget_has_command = 0
 
-    def __init__(self, master, values, command = None, args = (),
-                 entry_type = 'text', **rest):
+    def __init__(self, master, values, command=None, args=(),
+                 entry_type='text', **rest):
         kw = option_menu_defaults.copy()
         kw.update(rest)
         WidgetWithCommand.__init__(self)
@@ -867,7 +878,7 @@ class MyOptionMenu2(WidgetWithCommand, Menubutton):
             cfg['args'] = (value,)
             entries.append(apply(MenuCommand, (), cfg))
 
-        self.__menu = UpdatedMenu(self, entries, auto_update = 0,
+        self.__menu = UpdatedMenu(self, entries, auto_update=0,
                                   name="menu", tearoff=0)
         menu = self.__menu.menu
         self.menuname = menu._w
@@ -886,7 +897,7 @@ class MyOptionMenu2(WidgetWithCommand, Menubutton):
         self.SetValue(value)
         self._call_cmd(value)
 
-    def SetValue(self, value, text = None):
+    def SetValue(self, value, text=None):
         try:
             text = self.value_dict[value]
         except KeyError:
@@ -902,32 +913,32 @@ class MyOptionMenu2(WidgetWithCommand, Menubutton):
         if name == 'menu':
             return self.__menu.menu
         return Widget.__getitem__(self, name)
-    
+
 class VSeparator(Frame):
-    
+
     def __init__(self, master, **kw):
         kw['width'] = 2
         apply(Frame.__init__, (self, master), kw)
-        darkline = Frame(self, class_ = 'Darkline', width = 1)
-        darkline.pack(side = LEFT, fill = Y)
-        lightline = Frame(self,  class_ = 'Lightline', width = 1)
-        lightline.pack(side = LEFT, fill = Y)
-        
+        darkline = Frame(self, class_='Darkline', width=1)
+        darkline.pack(side=LEFT, fill=Y)
+        lightline = Frame(self, class_='Lightline', width=1)
+        lightline.pack(side=LEFT, fill=Y)
+
 class HSeparator(Frame):
-    
+
     def __init__(self, master, **kw):
         kw['height'] = 2
         apply(Frame.__init__, (self, master), kw)
-        darkline = Frame(self,  class_ = 'Darkline', height = 1)
-        darkline.pack(side = TOP, fill = X)
-        lightline = Frame(self,  class_ = 'Lightline', height = 1)
-        lightline.pack(side = TOP, fill = X)
+        darkline = Frame(self, class_='Darkline', height=1)
+        darkline.pack(side=TOP, fill=X)
+        lightline = Frame(self, class_='Lightline', height=1)
+        lightline.pack(side=TOP, fill=X)
 
 
 def MakeMethodCommand(method, *args):
     obj = method.im_self
     name = method.__name__
-    key = pax.register_object(obj) # assuming that obj unregisters itself
+    key = pax.register_object(obj)  # assuming that obj unregisters itself
     return ('call_py_method', key, name) + args
 
 
@@ -940,5 +951,5 @@ def InitFromTkapp(tk):
             pax.create_tcl_commands(tk.interpaddr())
         else:
             pax.create_tcl_commands(tk)
-        #tk.call('load', pax.__file__, 'paxwidget')
+        # tk.call('load', pax.__file__, 'paxwidget')
     _tcl_commands_created = 1
